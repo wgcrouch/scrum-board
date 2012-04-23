@@ -1,0 +1,116 @@
+{% extends 'itsallagileBootstrapBundle::base.html.twig' %}
+
+{% block styles %}
+    {{ parent() }}
+    {% stylesheets
+        '@itsallagileScrumboardBundle/Resources/public/css/board.css'
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+    <div id="board">
+        <div id="templates">
+            <div class="template task"><p class="note-content"></p><textarea class="note-input"></textarea></div>
+            <div class="template test"><p class="note-content"></p><textarea class="note-input"></textarea></div>
+            <div class="template bug"><p class="note-content"></p><textarea class="note-input"></textarea></div>
+            <div class="template defect"><p class="note-content"></p><textarea class="note-input"></textarea></div>
+            <div class="template design"><p class="note-content"></p><textarea class="note-input"></textarea></div>
+            <div id="trash">TRASH</div>
+
+        </div>
+        <div id="story" class="column">
+            <h1>Story</h1>
+        </div>
+        <div id="todo" class="column">
+            <h1>Todo</h1>
+        </div>
+        <div id="assigned" class="column">
+            <h1>Assigned</h1>
+        </div>
+        <div id="done" class="column">
+            <h1>Done</h1>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block endscript %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function(){
+
+            $( ".template" ).draggable({
+                containment: "#board",
+                opacity: 0.7,
+                helper: "clone",
+                stop: createFromTemplate
+
+            });
+
+            $( "#trash" ).droppable({
+                drop: function( event, ui ) {
+                    ui.draggable.remove();
+                },
+                accept: ".note"
+            });
+
+
+            $( ".column" ).droppable({
+                drop: function( event, ui ) {
+
+                }
+
+            });
+
+            $('.note').live('dblclick', function() {
+                var note =  $(this);
+                var textarea = $(this).children('textarea');
+                var content = $(this).children('p');
+                content.hide();
+                textarea.show();
+                textarea.focus();
+
+            });
+
+            $('.note textarea').live('blur', function() {
+                var textarea = $(this);
+                var content = $(this).siblings('p');
+
+                content.html(textarea.val());
+                textarea.hide();
+                content.show();
+            });
+
+
+        });
+
+
+        createFromTemplate = function(event, ui) {
+            var newElement = $(ui.helper).clone();
+            newElement.removeClass('template').addClass('note').removeClass('ui-draggable').removeClass('ui-draggable-dragging');
+            $('#board').append(newElement);
+            initBehaviours(newElement);
+
+        };
+
+        initBehaviours = function(element) {
+            element.draggable({ containment: "#board", stack: '#board div' });
+            element.resizable();
+            element.droppable({
+                drop: joinElements,
+                    accept: ".note"
+               });
+            };
+
+            joinElements = function(event, ui) {
+                target = $(this);
+                child = ui.draggable;
+                child.offset({left:0, top:80});
+                target.append(child);
+            }
+        </script>
+
+{% endblock %}
+

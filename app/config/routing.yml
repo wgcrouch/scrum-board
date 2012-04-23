@@ -1,3 +1,7 @@
+itsallagileScrumboardBundle:
+    resource: "@itsallagileScrumboardBundle/Resources/config/routing.yml"
+    prefix:   /
+
 WayneCBudgetBundle:
     resource: "@itsallagileCoreBundle/Resources/config/routing.yml"
     prefix:   /

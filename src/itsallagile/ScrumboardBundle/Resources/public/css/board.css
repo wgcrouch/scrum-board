@@ -1,0 +1,103 @@
+
+#board {
+    width:1400px;
+    height:900px;
+    border: 1px solid black;
+    margin: auto;
+}
+
+#templates {
+    border: 1px solid black;
+    height: 60px;
+}
+
+.note {
+    width:100px;
+    height:100px;
+    margin:5px;
+    border: 1px solid #888;
+    box-shadow: 5px 5px 5px  rgba(200,200,200,0.5);
+}
+
+.template {
+    width:50px;
+    height:50px;
+    margin:5px;
+    float: left;
+}
+
+.note .ui-selecting {
+    border: 1px solid grey;
+}
+
+.note .ui-selected {
+    border: 1px solid black;
+}
+
+.task {
+    background-color: yellow;
+}
+
+.test {
+    background-color: cornflowerblue;
+}
+
+.bug {
+    background-color: purple;
+}
+
+.defect {
+    background-color: hotpink;
+}
+
+.design {
+    background-color: greenyellow;
+}
+
+.column {
+    border-right:5px solid #aaa;
+    text-align: center;
+    float:left;
+    height:800px;
+}
+
+#story {
+
+    width:200px;
+}
+
+
+#todo {
+    width:480px;
+}
+
+
+#assigned {
+    width:300px;
+}
+
+#done {
+    width:400px;
+    border-right:none;
+}
+
+.note-input {
+    background: none;
+    border:none;
+    width:80px;
+    height:80px;
+    resize: none;
+    display:none;
+}
+
+.template .note-input .note-content {
+    display: none;
+}
+
+#trash {
+    float:right;
+    width:70px;
+    text-align: center;
+    border-left: 1px solid red;
+    height:60px;
+}
