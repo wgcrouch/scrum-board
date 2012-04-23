@@ -80,7 +80,7 @@ ENGINE = InnoDB;
 CREATE  TABLE IF NOT EXISTS `agile`.`backlog` (
   `backlogId` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT ,
   `teamId` INT(11) UNSIGNED NOT NULL ,
-  `owner` INT(11) UNSIGNED NOT NULL ,
+  `owner` INT(11) UNSIGNED NULL,
   `name` VARCHAR(255) NOT NULL ,
   PRIMARY KEY (`backlogId`) ,
   INDEX `fk_backlog_teamId` (`teamId` ASC) ,
