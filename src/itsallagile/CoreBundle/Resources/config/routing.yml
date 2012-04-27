@@ -1,3 +1,8 @@
 homepage:
     pattern:  /home/{name}
     defaults: { _controller: itsallagileCoreBundle:Home:index }
+login:
+    pattern: /login
+    defaults: { _controller: itsallagileCoreBundle:Security:login }
+login_check:
+    pattern: /login_check
