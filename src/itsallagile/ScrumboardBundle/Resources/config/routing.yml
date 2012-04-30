@@ -1,3 +1,10 @@
 itsallagileScrumboardBundle_homepage:
     pattern:  /scrumboard
     defaults: { _controller: itsallagileScrumboardBundle:Board:index }
+
+itsallagileScrumboardBundle_task:
+    pattern: /task.{_format}
+    defaults: { _controller: itsallagileScrumboardBundle:Task:index, _format: json }
+    requirements:
+        _method: GET|POST|PUT
+        format: JSON
