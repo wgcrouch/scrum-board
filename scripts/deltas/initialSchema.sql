@@ -235,6 +235,7 @@
     `ticketId` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT ,
     `colour` VARCHAR(45) NULL ,
     `cssHash` VARCHAR(6) NULL ,
+    `content` TEXT null,
     PRIMARY KEY (`ticketId`) )
     ENGINE = InnoDB;
 

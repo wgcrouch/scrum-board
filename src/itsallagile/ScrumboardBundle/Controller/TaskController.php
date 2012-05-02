@@ -2,23 +2,34 @@
 
 namespace itsallagile\ScrumboardBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller,
-    Symfony\Component\HttpFoundation\Response,
-    Symfony\Component\Serializer\Serializer,
-    Symfony\Component\Serializer\Encoder;
+use itsallagile\CoreBundle\Controller\RestController,
+    itsallagile\CoreBundle\Entity\Ticket;
 
-class TaskController extends Controller
+class TaskController extends RestController
 {
     
-    public function indexAction()
+    public function getAction()
     { 
-        $data = array('status'=> 'success');
+        $data = array('status'=> 'get');
 
-        $serializer = new Serializer(array(), array(
-            'json' => new Encoder\JsonEncoder(),
-            'xml' => new Encoder\XmlEncoder()
-        ));
+        return $this->restResponse($data);
+    }
+    
+    public function postAction()
+    {
+        $ticket = new Ticket();
+        $ticket->setColour('colour');
+        $ticket->setContent('Content Goes here');
+        $ticket->setCssHash('aabbcc');
+        $ticket->setX(100);
+        $ticket->setY(200);
+        $ticket->setParent('3');
 
-        return new Response($serializer->encode($data, $this->getRequest()->get('_format')));
+        $em = $this->getDoctrine()->getEntityManager();
+        $em->persist($ticket);
+        $em->flush();       
+
+        $data = (array)$ticket;
+        return $this->restResponse($data, 201);
     }
 }
