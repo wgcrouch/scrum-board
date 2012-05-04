@@ -68,4 +68,4 @@
 [DoctrineMigrationsBundle]
     git=http://github.com/symfony/DoctrineMigrationsBundle.git
     target=/bundles/Symfony/Bundle/DoctrineMigrationsBundle
-    version=origin/2.0
+    version=origin/2.0.x
