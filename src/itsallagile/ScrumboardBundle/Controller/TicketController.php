@@ -5,12 +5,13 @@ namespace itsallagile\ScrumboardBundle\Controller;
 use itsallagile\CoreBundle\Controller\RestController,
     itsallagile\CoreBundle\Entity\Ticket;
 
-class TaskController extends RestController
+class TicketController extends RestController
 {
     
-    public function getAction()
+    public function getAction($ticketId)
     { 
-        $data = array('status'=> 'get');
+        
+        $data = array('ticketID'=> $ticketId);
 
         return $this->restResponse($data);
     }

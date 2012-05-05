@@ -3,15 +3,15 @@ itsallagileScrumboardBundle_homepage:
     defaults: { _controller: itsallagileScrumboardBundle:Board:index }
 
 itsallagileScrumboardBundle_taskGet:
-    pattern: /task.{_format}
-    defaults: { _controller: itsallagileScrumboardBundle:Task:get, _format: json }
+    pattern: /ticket/{ticketId}
+    defaults: { _controller: itsallagileScrumboardBundle:Ticket:get, _format: json }
     requirements:
         _method: GET
         format: JSON
         
 itsallagileScrumboardBundle_post:
-    pattern: /task.{_format}
-    defaults: { _controller: itsallagileScrumboardBundle:Task:post, _format: json }
+    pattern: /ticket
+    defaults: { _controller: itsallagileScrumboardBundle:Ticket:post, _format: json }
     requirements:
         _method: POST
         format: JSON

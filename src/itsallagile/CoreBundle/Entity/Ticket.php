@@ -35,15 +35,15 @@ class Ticket {
     /**
      * @ORM\Column(type="integer")
      */
-    protected $x;
+    protected $x = 1;
     
     /**
      * @ORM\Column(type="integer")
      */
-    protected $y;
+    protected $y = 1;
     
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     protected $parent;
 
