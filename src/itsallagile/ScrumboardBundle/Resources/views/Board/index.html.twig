@@ -12,13 +12,9 @@
 {% block body %}
     <div id="board">
         <div id="templates">
-            <div class="template task"><p class="note-content"></p><textarea class="note-input"></textarea></div>
-            <div class="template test"><p class="note-content"></p><textarea class="note-input"></textarea></div>
-            <div class="template bug"><p class="note-content"></p><textarea class="note-input"></textarea></div>
-            <div class="template defect"><p class="note-content"></p><textarea class="note-input"></textarea></div>
-            <div class="template design"><p class="note-content"></p><textarea class="note-input"></textarea></div>
+            
+            
             <div id="trash">TRASH</div>
-
         </div>
         <div id="story" class="column">
             <h1>Story</h1>
@@ -42,8 +38,20 @@
         {% javascripts
             '@itsallagileScrumboardBundle/Resources/public/js/*'
         %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
+        <script src="{{ asset_url }}"></script>
         {% endjavascripts %}
+        <script>
+            $(document).ready(function() {
+                var board = itsallagile.board.extend();
+                board.addTemplate(itsallagile.template.extend({type: 'task'}));
+                board.addTemplate(itsallagile.template.extend({type: 'test'}));
+                board.addTemplate(itsallagile.template.extend({type: 'bug'}));
+                board.addTemplate(itsallagile.template.extend({type: 'defect'}));
+                board.addTemplate(itsallagile.template.extend({type: 'design'}));
+
+                board.render();
+            });
+        </script>
 
 {% endblock %}
 
