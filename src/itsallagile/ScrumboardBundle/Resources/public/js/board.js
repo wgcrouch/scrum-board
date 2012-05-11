@@ -7,18 +7,44 @@ itsallagile.board = itsallagile.baseObject.extend({
     id: 'board',
     columns: [],
     templates: [],
-    
+    trashId : '#trash' ,
+    tickets : {},
     render:  function() {
         var board = $('#' +  this.id);
         var templatesDiv = $('#templates');
         for (var x in this.templates) {
             this.templates[x].render(templatesDiv);
-        }        
-        
+        } 
+        for (var c in this.columns) {
+            this.columns[c].render(board);
+        } 
+    },
+    init: function() {
+        var self = this;
+        $(this.trashId).droppable({
+            drop: function(event, ui) {
+                var ticketElement = ui.draggable;
+                self.removeTicket(ticketElement.attr('id'));
+                ui.draggable.remove();
+            },
+            accept: ".note"
+      });  
     },
         
     addTemplate: function(template) {
+        template.board = this;
         this.templates.push(template);
+    },
+    
+    removeTicket: function(ticketId) {
+        var element = $('#' . ticketId);
+        delete this.tickets[ticketId];
+    },
+    addColumn: function(column) {
+        this.columns.push(column);
+    },
+    addTicket: function(ticket) {
+        this.tickets[ticket.id] = ticket;
     }
 });
 //

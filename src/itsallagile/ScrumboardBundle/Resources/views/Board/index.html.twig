@@ -12,22 +12,9 @@
 {% block body %}
     <div id="board">
         <div id="templates">
-            
-            
             <div id="trash">TRASH</div>
         </div>
-        <div id="story" class="column">
-            <h1>Story</h1>
-        </div>
-        <div id="todo" class="column">
-            <h1>Todo</h1>
-        </div>
-        <div id="assigned" class="column">
-            <h1>Assigned</h1>
-        </div>
-        <div id="done" class="column">
-            <h1>Done</h1>
-        </div>
+        
     </div>
 {% endblock %}
 
@@ -43,12 +30,16 @@
         <script>
             $(document).ready(function() {
                 var board = itsallagile.board.extend();
+                board.init();
                 board.addTemplate(itsallagile.template.extend({type: 'task'}));
                 board.addTemplate(itsallagile.template.extend({type: 'test'}));
                 board.addTemplate(itsallagile.template.extend({type: 'bug'}));
                 board.addTemplate(itsallagile.template.extend({type: 'defect'}));
                 board.addTemplate(itsallagile.template.extend({type: 'design'}));
-
+                board.addColumn(itsallagile.column.extend({id : 'story', type: 'story', title: 'Story'}));
+                board.addColumn(itsallagile.column.extend({id : 'todo', type: 'todo', title: 'Todo'}));
+                board.addColumn(itsallagile.column.extend({id : 'assigned', type: 'assigned', title: 'Assigned'}));
+                board.addColumn(itsallagile.column.extend({id : 'done', type: 'done', title: 'Done'}));
                 board.render();
             });
         </script>

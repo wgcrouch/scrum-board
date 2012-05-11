@@ -23,6 +23,7 @@ itsallagile.column = itsallagile.baseObject.extend({
         var h = $('<h1>').html(this.title);
         div.append(h);
         container.append(div);
+        this.init();
     },
     
     /**

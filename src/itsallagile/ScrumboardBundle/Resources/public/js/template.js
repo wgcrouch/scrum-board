@@ -3,6 +3,7 @@
  */
 itsallagile.template = itsallagile.baseObject.extend({
     type: null,
+    board:null,
     
     /**
      * Render a template in a container
@@ -34,5 +35,6 @@ itsallagile.template = itsallagile.baseObject.extend({
         var ticket = itsallagile.ticket.createFromDroppedTemplate(this, event, ui);
         ticket.init();
         ticket.render($('#board'));
+        this.board.addTicket(ticket);
     }
 });
