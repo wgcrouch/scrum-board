@@ -14,8 +14,8 @@ itsallagile.ticket = itsallagile.baseObject.extend({
      */
     createFromDroppedTemplate: function(template, event, ui) {
         var newTicket = this.extend({type:  template.type});
-        newTicket.x = ui.offset.left;
-        newTicket.y = ui.offset.top;
+        newTicket.x = ui.position.left;
+        newTicket.y = ui.position.top;
         newTicket.id = new Date().getTime();
         return newTicket;
     },
@@ -55,8 +55,8 @@ itsallagile.ticket = itsallagile.baseObject.extend({
     },
     
     handleDrop: function(event, ui) {
-        this.x = ui.offset.left;
-        this.y = ui.offset.top;
+        this.x = ui.position.left;
+        this.y = ui.position.top;
         this.update();
     },
 
@@ -74,7 +74,7 @@ itsallagile.ticket = itsallagile.baseObject.extend({
         div.data('id', this.id);
         
         container.append(div);
-        div.offset({left: this.x, top: this.y});
+
         this.init();
     },
     
