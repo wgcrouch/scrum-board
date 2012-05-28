@@ -33,7 +33,7 @@ itsallagile.template = itsallagile.baseObject.extend({
     
     handleDrop: function(event, ui) {  
         var ticket = itsallagile.ticket.createFromDroppedTemplate(this, event, ui);
-        ticket.init();
+        ticket.create();
         ticket.render($('#board'));
         this.board.addTicket(ticket);
     }

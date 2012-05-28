@@ -29,7 +29,7 @@
         {% endjavascripts %}
         <script>
             $(document).ready(function() {
-                var board = itsallagile.board.extend();
+                var board = itsallagile.board;
                 board.init();
                 board.addTemplate(itsallagile.template.extend({type: 'task'}));
                 board.addTemplate(itsallagile.template.extend({type: 'test'}));

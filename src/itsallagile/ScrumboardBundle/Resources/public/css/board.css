@@ -16,6 +16,7 @@
     margin:5px;
     border: 1px solid #888;
     box-shadow: 5px 5px 5px  rgba(200,200,200,0.5);
+    position: absolute;
 }
 
 .template {

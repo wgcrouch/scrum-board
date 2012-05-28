@@ -16,34 +16,62 @@ itsallagile.ticket = itsallagile.baseObject.extend({
         var newTicket = this.extend({type:  template.type});
         newTicket.x = ui.offset.left;
         newTicket.y = ui.offset.top;
-        newTicket.id = 'ticket' + new Date().getTime();
+        newTicket.id = new Date().getTime();
         return newTicket;
     },
     
     init: function() {
-        $('#' + this.id).draggable({ 
+        var self = this;
+        var element = this.getElement();
+
+        element.draggable({ 
             containment: "#board", 
             stack: '#board div',
-            stop: this.handleDrop
+            stop: function(event, ui) {
+                self.handleDrop(event, ui);
+            } 
         });
-        $('#' + this.id).resizable();
+        element.resizable();
+        
+        element.dblclick(function() {
+            var note =  $(this);
+            var textarea = $(this).children('textarea');
+            var content = $(this).children('p');
+            content.hide();
+            textarea.show();
+            textarea.focus();
+        });
+        
+        var textarea = $(this.getCssId() + ' textarea');            
+        textarea.blur(function() {
+            var textarea = $(this);
+            var content = $(this).siblings('p');
+            self.content = textarea.val();
+            content.html(self.content);
+            textarea.hide();
+            content.show();
+            self.update();
+        });
     },
     
     handleDrop: function(event, ui) {
-        
+        this.x = ui.offset.left;
+        this.y = ui.offset.top;
+        this.update();
     },
 
     /**
      * Render a ticket in a container
      */
     render: function(container) {
-        var div = $('<div>').attr('id', this.id)
+        var div = $('<div>').attr('id', 'ticket-' + this.id)
             .addClass('note').addClass(this.type);
-        var p = $('<p>').addClass('note-content');
-        var text = $('<textarea>').addClass('note-input');        
+        var p = $('<p>').addClass('note-content').html(this.content);
+        var text = $('<textarea>').addClass('note-input').html(this.content);        
         div.append(p).append(text);
         div.css('left', this.x);
         div.css('top', this.y);
+        div.data('id', this.id);
         
         container.append(div);
         div.offset({left: this.x, top: this.y});
@@ -55,11 +83,59 @@ itsallagile.ticket = itsallagile.baseObject.extend({
      */
     update: function()
     {
+        var self = this;
+        var data = this.getSimple();        
+        $.ajax({
+            type: 'PUT',
+            url: '/ticket/' + this.id,
+            data: data,
+            success: function(data, textStatus, jqXHR) {},
+            dataType: 'json'
+        });
     },
-
+    
+    erase: function()
+    {
+        var self = this;     
+        $.ajax({
+            type: 'DELETE',
+            url: '/ticket/' + this.id,
+            success: function(data, textStatus, jqXHR) {},
+            dataType: 'json'
+        });
+    },
+    
+    /**
+     * Create the ticket on the server by posting to the REST API
+     */
+    create: function()
+    {        
+        var self = this;
+        var data = this.getSimple();
+        $.post('/ticket', data, function(data, textStatus, jqXHR) {
+            
+            $(self.getCssId()).attr('id', 'ticket-' + data.id).data('id', data.id);
+            delete itsallagile.board.tickets[this.id];
+            self.id = data.id;                      
+            itsallagile.board.addTicket(self);
+        }, 'json');
+        
+    },
+    
+    getElement: function()
+    {
+        return $(this.getCssId());
+    },
+    
+    getCssId: function()
+    {
+        return '#ticket-' + this.id;
+    },
+  
     /**
      * Join a ticket onto another ticket
      */
     join: function(parent) {
     }
+
 });

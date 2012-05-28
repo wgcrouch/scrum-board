@@ -11,20 +11,21 @@ itsallagile.board = itsallagile.baseObject.extend({
     tickets : {},
     render:  function() {
         var board = $('#' +  this.id);
-        var templatesDiv = $('#templates');
+        var templatesDiv = $('#templates');        
         for (var x in this.templates) {
             this.templates[x].render(templatesDiv);
         } 
         for (var c in this.columns) {
             this.columns[c].render(board);
         } 
+        this.loadTickets();
     },
     init: function() {
         var self = this;
         $(this.trashId).droppable({
             drop: function(event, ui) {
                 var ticketElement = ui.draggable;
-                self.removeTicket(ticketElement.attr('id'));
+                self.removeTicket(ticketElement.data('id'));
                 ui.draggable.remove();
             },
             accept: ".note"
@@ -38,6 +39,7 @@ itsallagile.board = itsallagile.baseObject.extend({
     
     removeTicket: function(ticketId) {
         var element = $('#' . ticketId);
+        this.tickets[ticketId].erase();
         delete this.tickets[ticketId];
     },
     addColumn: function(column) {
@@ -45,6 +47,19 @@ itsallagile.board = itsallagile.baseObject.extend({
     },
     addTicket: function(ticket) {
         this.tickets[ticket.id] = ticket;
+    },
+    
+    loadTickets:function() {
+        var self = this;
+        $.get('/tickets', null, function(data, textStatus, jqXHR) {
+            for(var ticketId in data) {
+                if (data.hasOwnProperty(ticketId)) {
+                    var ticket = itsallagile.ticket.extend(data[ticketId]);
+                    self.addTicket(ticket);
+                    ticket.render($('#' +  self.id));
+                }
+            }
+        }, 'json');
     }
 });
 //

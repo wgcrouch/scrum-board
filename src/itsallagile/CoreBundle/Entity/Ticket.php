@@ -20,15 +20,10 @@ class Ticket {
     /**
      * @ORM\Column(type="string", length=45)
      */
-    protected $colour;
+    protected $type;
     
     /**
-     * @ORM\Column(type="string", length=6)
-     */
-    protected $cssHash;
-    
-    /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     protected $content;
     
@@ -58,43 +53,23 @@ class Ticket {
     }
 
     /**
-     * Set colour
+     * Set type
      *
-     * @param string $colour
+     * @param string $type
      */
-    public function setColour($colour)
+    public function setType($type)
     {
-        $this->colour = $colour;
+        $this->type = $type;
     }
 
     /**
-     * Get colour
+     * Get type
      *
      * @return string 
      */
-    public function getColour()
+    public function getType()
     {
-        return $this->colour;
-    }
-
-    /**
-     * Set cssHash
-     *
-     * @param string $cssHash
-     */
-    public function setCssHash($cssHash)
-    {
-        $this->cssHash = $cssHash;
-    }
-
-    /**
-     * Get cssHash
-     *
-     * @return string 
-     */
-    public function getCssHash()
-    {
-        return $this->cssHash;
+        return $this->type;
     }
 
     /**
@@ -175,5 +150,18 @@ class Ticket {
     public function getParent()
     {
         return $this->parent;
+    }
+    
+    public function getArray()
+    {
+        $data = array(
+            'id' => $this->ticketId,
+            'type' => $this->type,
+            'x' => $this->x,
+            'y' => $this->y,
+            'content' => $this->content,
+            'parent' => $this->parent
+        );
+        return $data;
     }
 }
