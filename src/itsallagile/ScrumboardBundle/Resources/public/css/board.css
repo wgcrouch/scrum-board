@@ -3,6 +3,7 @@
     width:1400px;
     height:900px;
     border: 1px solid black;
+    position:relative;
 }
 
 #templates {
