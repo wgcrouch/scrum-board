@@ -30,7 +30,7 @@
         {% endjavascripts %}
         <script>
             $(document).ready(function() {
-                itsallagile.socket = io.connect('http://scrum.localhost:8080'); 
+                itsallagile.socket = io.connect(window.location.hostname + ':8080'); 
                 var board = itsallagile.board;
                 board.init();
                 board.addTemplate(itsallagile.storytemplate);
