@@ -1,11 +1,14 @@
 <?php
 namespace itsallagile\CoreBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping as ORM,
+    Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity,
+    Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="user") 
+ * @UniqueEntity("email")
  */
 class User
 {
@@ -17,12 +20,8 @@ class User
     protected $userId;
     
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    protected $username;
-    
-    /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, unique=true)
+     * @Assert\Email()
      */
     protected $email;
     
@@ -31,10 +30,10 @@ class User
      */
     protected $fullName;
     
-    /** 
-     * ORM\Column(type="varchar", columnDefinition="ENUM('awaitingVerification', 'Active', 'Disabled')") 
+    /**
+     * @ORM\Column(type="string", length=255) 
      */
-    protected $status;
+    protected $password;
 
     /**
      * Get userId
@@ -44,26 +43,6 @@ class User
     public function getUserId()
     {
         return $this->userId;
-    }
-
-    /**
-     * Set username
-     *
-     * @param string $username
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-    }
-
-    /**
-     * Get username
-     *
-     * @return string 
-     */
-    public function getUsername()
-    {
-        return $this->username;
     }
 
     /**
@@ -104,5 +83,26 @@ class User
     public function getFullName()
     {
         return $this->fullName;
+    }
+    
+    /**
+     * Set password
+     *
+     * @todo Make the encryption not shit.
+     * @param string $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = sha1($password);
+    }
+    
+    /**
+     * Get password
+     *
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
     }
 }

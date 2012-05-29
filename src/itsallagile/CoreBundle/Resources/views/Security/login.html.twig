@@ -6,11 +6,12 @@
 	{% endif %}
 
 	<form action="{{ path('login_check') }}" method="post" class="well">
-		<label for="username">Username:</label>
-		<input type="text" id="username" name="_username" value="{{ lastUsername }}" class="span3" placeholder="Username"/>
-
+		<label for="email">Email:</label>
+		<input type="text" id="email" name="_email" value="{{ lastEmail }}" class="span3" placeholder="Email"/>
 		<label for="password">Password:</label>
 		<input type="password" id="password" name="_password" class="span3" placeholder="Password"/>
-		<button type="submit" class="btn">Submit</button>	
+		<br />
+                <button type="submit" class="btn">Submit</button>	
 	</form>
+        <p>Don't have an account? why not <a href="{{ path('register')}}">Register?</a></p>
 {% endblock %}

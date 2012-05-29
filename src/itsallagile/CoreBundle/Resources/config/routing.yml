@@ -6,3 +6,6 @@ login:
     defaults: { _controller: itsallagileCoreBundle:Security:login }
 login_check:
     pattern: /login_check
+register:
+    pattern: /register
+    defaults: {_controller: itsallagileCoreBundle:Security:register}
