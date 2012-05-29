@@ -20,8 +20,9 @@
 
 
 {% block endscript %}
+    <script src="/js/socket.io/socket.io.min.js"></script>
+    <script>var WEB_SOCKET_SWF_LOCATION = '/js/socket.io/WebSocketMain.swf';</script>
     {{ parent() }}
-    
         {% javascripts
             '@itsallagileScrumboardBundle/Resources/public/js/*'
         %}
@@ -29,6 +30,7 @@
         {% endjavascripts %}
         <script>
             $(document).ready(function() {
+                itsallagile.socket = io.connect('http://scrum.localhost:8080'); 
                 var board = itsallagile.board;
                 board.init();
                 board.addTemplate(itsallagile.storytemplate);
@@ -41,7 +43,7 @@
                 board.addColumn(itsallagile.column.extend({id : 'todo', type: 'todo', title: 'Todo'}));
                 board.addColumn(itsallagile.column.extend({id : 'assigned', type: 'assigned', title: 'Assigned'}));
                 board.addColumn(itsallagile.column.extend({id : 'done', type: 'done', title: 'Done'}));
-                board.render();
+                board.render();   
             });
         </script>
 

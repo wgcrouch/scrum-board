@@ -89,7 +89,9 @@ itsallagile.ticket = itsallagile.baseObject.extend({
             type: 'PUT',
             url: '/tickets/' + this.id,
             data: data,
-            success: function(data, textStatus, jqXHR) {},
+            success: function(data, textStatus, jqXHR) {
+                itsallagile.socket.emit('ticket:change', data);
+            },
             dataType: 'json'
         });
     },
@@ -105,6 +107,18 @@ itsallagile.ticket = itsallagile.baseObject.extend({
         });
     },
     
+    refresh: function(container)
+    {
+        this.getElement().remove();
+        this.render(container);
+    },
+    
+    set: function(data) {
+        for (prop in data) {
+            this[prop] = data[prop];
+        }
+    },
+    
     /**
      * Create the ticket on the server by posting to the REST API
      */
@@ -118,6 +132,7 @@ itsallagile.ticket = itsallagile.baseObject.extend({
             delete itsallagile.board.tickets[this.id];
             self.id = data.id;                      
             itsallagile.board.addTicket(self);
+            itsallagile.socket.emit('ticket:create', data);
         }, 'json');
         
     },

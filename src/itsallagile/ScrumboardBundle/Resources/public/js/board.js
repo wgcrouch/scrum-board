@@ -31,9 +31,29 @@ itsallagile.board = itsallagile.baseObject.extend({
                 ui.draggable.remove();
             },
             accept: ".note"
-        });  
+        }); 
+        itsallagile.socket.on('ticket:change', function(data) {
+            self.refreshTicket(data);
+        });
+        
+        itsallagile.socket.on('ticket:create', function(data) {
+            self.addCreatedTicket(data);
+        });
     },
         
+    refreshTicket: function(changedTicket) {
+        var id = changedTicket.id;
+        var ticket = this.tickets[id];
+        ticket.set(changedTicket);
+        ticket.refresh($('#' +  this.id));
+    },
+    
+    addCreatedTicket: function(newTicket) {
+        var ticket = itsallagile.ticket.extend(newTicket);
+        this.addTicket(ticket);
+        ticket.render($('#' +  this.id));
+    },
+    
     addTemplate: function(template) {
         template.board = this;
         this.templates.push(template);
@@ -57,7 +77,6 @@ itsallagile.board = itsallagile.baseObject.extend({
     },
     
     removeStory: function(storyId) {
-        var element = $('#' . storyId);
         this.stories[storyId].erase();
         delete this.stories[storyId];
     },
