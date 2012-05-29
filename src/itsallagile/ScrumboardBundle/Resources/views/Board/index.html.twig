@@ -31,11 +31,12 @@
             $(document).ready(function() {
                 var board = itsallagile.board;
                 board.init();
+                board.addTemplate(itsallagile.storytemplate);
                 board.addTemplate(itsallagile.template.extend({type: 'task'}));
                 board.addTemplate(itsallagile.template.extend({type: 'test'}));
                 board.addTemplate(itsallagile.template.extend({type: 'bug'}));
                 board.addTemplate(itsallagile.template.extend({type: 'defect'}));
-                board.addTemplate(itsallagile.template.extend({type: 'design'}));
+                board.addTemplate(itsallagile.template.extend({type: 'design'}));                
                 board.addColumn(itsallagile.column.extend({id : 'story', type: 'story', title: 'Story'}));
                 board.addColumn(itsallagile.column.extend({id : 'todo', type: 'todo', title: 'Todo'}));
                 board.addColumn(itsallagile.column.extend({id : 'assigned', type: 'assigned', title: 'Assigned'}));

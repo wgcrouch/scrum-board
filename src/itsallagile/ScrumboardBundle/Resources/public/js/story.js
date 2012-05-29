@@ -1,23 +1,22 @@
 /**
  * TIcket object
  */
-itsallagile.ticket = itsallagile.baseObject.extend({
+itsallagile.story = itsallagile.baseObject.extend({
     id: null,
-    type: null,
-    content: 'New Ticket',
+    content: 'New Story',
+    
     x: 10,
     y: 10,
-    parent: null,
     
     /**
-     * Given a template object, create a new ticket object with the templates type
+     * Given a template object, create a new story object
      */
     createFromDroppedTemplate: function(template, event, ui) {
-        var newTicket = this.extend({type:  template.type});
-        newTicket.x = ui.position.left;
-        newTicket.y = ui.position.top;
-        newTicket.id = new Date().getTime();
-        return newTicket;
+        var newStory = this.extend();
+        newStory.x = ui.position.left;
+        newStory.y = ui.position.top;
+        newStory.id = new Date().getTime();
+        return newStory;
     },
     
     init: function() {
@@ -34,7 +33,6 @@ itsallagile.ticket = itsallagile.baseObject.extend({
         element.resizable();
         
         element.dblclick(function() {
-            var note =  $(this);
             var textarea = $(this).children('textarea');
             var content = $(this).children('p');
             content.hide();
@@ -64,8 +62,8 @@ itsallagile.ticket = itsallagile.baseObject.extend({
      * Render a ticket in a container
      */
     render: function(container) {
-        var div = $('<div>').attr('id', 'ticket-' + this.id)
-            .addClass('note').addClass(this.type);
+        var div = $('<div>').attr('id', 'story-' + this.id)
+            .addClass('note').addClass('story');
         var p = $('<p>').addClass('note-content').html(this.content);
         var text = $('<textarea>').addClass('note-input').html(this.content);        
         div.append(p).append(text);
@@ -87,7 +85,7 @@ itsallagile.ticket = itsallagile.baseObject.extend({
         var data = this.getSimple();        
         $.ajax({
             type: 'PUT',
-            url: '/tickets/' + this.id,
+            url: '/stories/' + this.id,
             data: data,
             success: function(data, textStatus, jqXHR) {},
             dataType: 'json'
@@ -99,7 +97,7 @@ itsallagile.ticket = itsallagile.baseObject.extend({
         var self = this;     
         $.ajax({
             type: 'DELETE',
-            url: '/tickets/' + this.id,
+            url: '/stories/' + this.id,
             success: function(data, textStatus, jqXHR) {},
             dataType: 'json'
         });
@@ -112,12 +110,12 @@ itsallagile.ticket = itsallagile.baseObject.extend({
     {        
         var self = this;
         var data = this.getSimple();
-        $.post('/tickets', data, function(data, textStatus, jqXHR) {
+        $.post('/stories', data, function(data, textStatus, jqXHR) {
             
             $(self.getCssId()).attr('id', 'ticket-' + data.id).data('id', data.id);
-            delete itsallagile.board.tickets[this.id];
+            delete itsallagile.board.stories[this.id];
             self.id = data.id;                      
-            itsallagile.board.addTicket(self);
+            itsallagile.board.addStory(self);
         }, 'json');
         
     },
@@ -129,7 +127,7 @@ itsallagile.ticket = itsallagile.baseObject.extend({
     
     getCssId: function()
     {
-        return '#ticket-' + this.id;
+        return '#story-' + this.id;
     },
   
     /**
