@@ -39,6 +39,12 @@ itsallagile.board = itsallagile.baseObject.extend({
         itsallagile.socket.on('ticket:create', function(data) {
             self.addCreatedTicket(data);
         });
+        
+        itsallagile.socket.on('ticket:delete', function(ticketId) {
+            var ticket = self.tickets[ticketId];
+            ticket.getElement().fadeOut();
+            self.removeTicket(ticketId);
+        });
     },
         
     refreshTicket: function(changedTicket) {

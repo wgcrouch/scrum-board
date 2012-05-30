@@ -12,4 +12,8 @@ io.sockets.on('connection', function (socket) {
   socket.on('ticket:create', function (ticket) {
      socket.broadcast.emit('ticket:create', ticket);
   });
+  
+  socket.on('ticket:delete', function (ticketId) {
+     socket.broadcast.emit('ticket:delete', ticketId);
+  });
 });

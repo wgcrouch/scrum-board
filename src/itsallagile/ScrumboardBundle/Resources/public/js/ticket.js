@@ -34,7 +34,6 @@ itsallagile.ticket = itsallagile.baseObject.extend({
         element.resizable();
         
         element.dblclick(function() {
-            var note =  $(this);
             var textarea = $(this).children('textarea');
             var content = $(this).children('p');
             content.hide();
@@ -75,7 +74,25 @@ itsallagile.ticket = itsallagile.baseObject.extend({
         
         container.append(div);
 
+        div.animate({
+            left: this.x,
+            top: this.y
+        }, 500);
+        
         this.init();
+    },
+    
+    refresh: function()
+    {
+        var element = this.getElement();
+        
+        element.animate({
+            left: this.x,
+            top: this.y
+        }, 500);
+        
+        $('p', element).html(this.content);
+        $('textarea', element).html(this.content);
     },
     
     /**
@@ -102,17 +119,13 @@ itsallagile.ticket = itsallagile.baseObject.extend({
         $.ajax({
             type: 'DELETE',
             url: '/tickets/' + this.id,
-            success: function(data, textStatus, jqXHR) {},
+            success: function(data, textStatus, jqXHR) {
+                itsallagile.socket.emit('ticket:delete', self.id);
+            },
             dataType: 'json'
         });
     },
-    
-    refresh: function(container)
-    {
-        this.getElement().remove();
-        this.render(container);
-    },
-    
+        
     set: function(data) {
         for (prop in data) {
             this[prop] = data[prop];
