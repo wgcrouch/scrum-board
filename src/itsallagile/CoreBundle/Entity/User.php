@@ -93,7 +93,7 @@ class User
      */
     public function setPassword($password)
     {
-        $this->password = sha1($password);
+        $this->password = $password;
     }
     
     /**
