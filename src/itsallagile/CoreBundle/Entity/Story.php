@@ -120,6 +120,7 @@ class Story {
             'x' => $this->x,
             'y' => $this->y,
             'content' => $this->content,
+            'boardId' => $this->board->getBoardId()
         );
         return $data;
     }
