@@ -10,11 +10,11 @@
 {% endblock %}
 
 {% block body %}
-    <div id="board">
+    <div id="boardTitle"><h1>{{ board.name }}</h1></div>
+    <div id="board-{{ board.boardId}}" class="board">
         <div id="templates">
             <div id="trash">TRASH</div>
-        </div>
-        
+        </div>        
     </div>
 {% endblock %}
 
@@ -29,10 +29,11 @@
         <script src="{{ asset_url }}"></script>
         {% endjavascripts %}
         <script>
-            $(document).ready(function() {
+            $(document).ready(function() {                
                 itsallagile.socket = io.connect(window.location.hostname + ':8080'); 
                 var board = itsallagile.board;
                 board.init();
+                board.id = {{ board.boardId }};
                 board.addTemplate(itsallagile.storytemplate);
                 board.addTemplate(itsallagile.template.extend({type: 'task'}));
                 board.addTemplate(itsallagile.template.extend({type: 'test'}));

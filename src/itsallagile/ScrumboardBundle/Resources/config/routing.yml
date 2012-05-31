@@ -1,10 +1,10 @@
 itsallagileScrumboardBundle_homepage:
-    pattern:  /scrumboard
+    pattern:  /scrumboard/{slug}
     defaults: { _controller: itsallagileScrumboardBundle:Board:index }
 
 itsallagileScrumboardBundle_ticketsGetAll:
     pattern: /tickets
-    defaults: { _controller: itsallagileScrumboardBundle:Tickets:get, _format: json, ticketId: null}
+    defaults: { _controller: itsallagileScrumboardBundle:Tickets:getAll, _format: json}
     requirements:
         _method: GET
         format: JSON
@@ -16,7 +16,14 @@ itsallagileScrumboardBundle_ticketsGetOne:
         _method: GET
         format: JSON
         
-itsallagileScrumboardBundle_ticketspost:
+itsallagileScrumboardBundle_ticketsGetBoard:
+    pattern: /tickets/board/{boardId}
+    defaults: { _controller: itsallagileScrumboardBundle:Tickets:getForBoard, _format: json}
+    requirements:
+        _method: GET
+        format: JSON
+        
+itsallagileScrumboardBundle_ticketsPost:
     pattern: /tickets
     defaults: { _controller: itsallagileScrumboardBundle:Tickets:post, _format: json }
     requirements:
@@ -40,7 +47,7 @@ itsallagileScrumboardBundle_ticketsDelete:
             
 itsallagileScrumboardBundle_storiesGetAll:
     pattern: /stories
-    defaults: { _controller: itsallagileScrumboardBundle:Stories:get, _format: json, storyId: null}
+    defaults: { _controller: itsallagileScrumboardBundle:Stories:getAll, _format: json}
     requirements:
         _method: GET
         format: JSON
@@ -48,6 +55,14 @@ itsallagileScrumboardBundle_storiesGetAll:
 itsallagileScrumboardBundle_storiesGetOne:
     pattern: /stories/{storyId}
     defaults: { _controller: itsallagileScrumboardBundle:Stories:get, _format: json}
+    requirements:
+        _method: GET
+        format: JSON
+        
+                
+itsallagileScrumboardBundle_storiesGetBoard:
+    pattern: /stories/board/{boardId}
+    defaults: { _controller: itsallagileScrumboardBundle:Stories:getForBoard, _format: json}
     requirements:
         _method: GET
         format: JSON

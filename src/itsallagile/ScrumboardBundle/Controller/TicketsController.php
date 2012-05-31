@@ -6,34 +6,78 @@ use itsallagile\CoreBundle\Controller\RestController,
     itsallagile\CoreBundle\Entity\Ticket,
     Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Rest controller for tickets 
+ */
 class TicketsController extends RestController
 {
     
-    public function getAction($ticketId = null)
+    /**
+     * Get a single ticket
+     * 
+     * @param integer $ticketId     
+     */
+    public function getAction($ticketId)
     { 
         $repository = $this->getDoctrine()->getRepository('itsallagileCoreBundle:Ticket');
         
-        if (!empty($ticketId))  {       
-            $ticket = $repository->find($ticketId);
+        $ticket = $repository->find($ticketId);
 
-            if (!$ticket) {
-                throw $this->createNotFoundException('No product found for id '.$id);
-            }
-            $data = $ticket->getArray();
-        } else {
-            $data = array();
-            $tickets = $repository->findAll();
-            
-            foreach($tickets as $ticket) {
-                $data[$ticket->getTicketId()] = $ticket->getArray();
-            }
-
+        if (!$ticket) {
+            throw $this->createNotFoundException('No ticket found for id '. $ticketId);
         }
+        $data = $ticket->getArray();
      
         return $this->restResponse($data, 201);
         
     }
     
+    /**
+     * Get all tickets     
+     */
+    public function getAllAction()
+    {
+        $repository = $this->getDoctrine()->getRepository('itsallagileCoreBundle:Ticket');
+        $data = array();
+        $tickets = $repository->findAll();
+
+        foreach($tickets as $ticket) {
+            $data[$ticket->getTicketId()] = $ticket->getArray();
+        }
+     
+        return $this->restResponse($data, 201);
+    }
+    
+    /**
+     * Get all tickets for a board
+     * 
+     * @param integer $boardId     
+     */
+    public function getForBoardAction($boardId)
+    {
+        
+        $repository = $this->getDoctrine()->getRepository('itsallagileCoreBundle:Board');
+        
+        $board = $repository->find($boardId);
+        
+        if (!$board) {
+            throw $this->createNotFoundException('No board found for id ' . $boardId);
+        }
+        $data = array();
+        $tickets = $board->getTickets();
+
+        foreach($tickets as $ticket) {
+            $data[$ticket->getTicketId()] = $ticket->getArray();
+        }
+     
+        return $this->restResponse($data, 201);
+    }
+    
+    /**
+     * Create a new ticket
+     * 
+     * @param Request $request     
+     */
     public function postAction(Request $request)
     {        
         $ticket = new Ticket();
@@ -44,6 +88,9 @@ class TicketsController extends RestController
         $ticket->setParent($request->get('parent'));        
         $ticket->setType($request->get('type'));
         
+        $board = $this->getDoctrine()->getRepository('itsallagileCoreBundle:Board')->find($request->get('boardId'));
+        $ticket->setBoard($board);
+        
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($ticket);  
         $em->flush();       
@@ -51,6 +98,12 @@ class TicketsController extends RestController
         return $this->restResponse($ticket->getArray(), 201);
     }
     
+    /**
+     * Update an existing ticket
+     * 
+     * @param integer $ticketId
+     * @param Request $request     
+     */
     public function putAction($ticketId, Request $request)
     {       
         $repo = $this->getDoctrine()->getRepository('itsallagileCoreBundle:Ticket');
@@ -67,6 +120,9 @@ class TicketsController extends RestController
         $ticket->setY($request->get('y'));
         $ticket->setParent($request->get('parent'));        
         $ticket->setType($request->get('type'));
+        
+        $board = $this->getDoctrine()->getRepository('itsallagileCoreBundle:Board')->find($request->get('boardId'));
+        $ticket->setBoard($board);
 
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($ticket);  
@@ -75,6 +131,11 @@ class TicketsController extends RestController
         return $this->restResponse($ticket->getArray(), 201);
     }
     
+    /**
+     * Delete a ticket
+     * @param integer $ticketId
+     * @return type     
+     */
     public function deleteAction($ticketId)
     { 
         

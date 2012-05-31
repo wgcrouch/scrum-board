@@ -32,6 +32,12 @@ class Story {
      */
     protected $y = 1;
     
+    /**
+     * @ORM\ManyToOne(targetEntity="Board", inversedBy="stories")
+     * @ORM\JoinColumn(name="boardId", referencedColumnName="boardId")
+     */
+    protected $board;
+    
 
     /**
      * Get storyId
@@ -116,5 +122,25 @@ class Story {
             'content' => $this->content,
         );
         return $data;
+    }
+
+    /**
+     * Set board
+     *
+     * @param itsallagile\CoreBundle\Entity\Board $board
+     */
+    public function setBoard(\itsallagile\CoreBundle\Entity\Board $board)
+    {
+        $this->board = $board;
+    }
+
+    /**
+     * Get board
+     *
+     * @return itsallagile\CoreBundle\Entity\Board 
+     */
+    public function getBoard()
+    {
+        return $this->board;
     }
 }

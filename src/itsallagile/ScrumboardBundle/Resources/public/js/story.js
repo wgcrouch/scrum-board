@@ -7,6 +7,7 @@ itsallagile.story = itsallagile.baseObject.extend({
     
     x: 10,
     y: 10,
+    boardId: null,
     
     /**
      * Given a template object, create a new story object
@@ -16,6 +17,7 @@ itsallagile.story = itsallagile.baseObject.extend({
         newStory.x = ui.position.left;
         newStory.y = ui.position.top;
         newStory.id = new Date().getTime();
+        newStory.boardId = itsallagile.board.id;
         return newStory;
     },
     
@@ -24,7 +26,7 @@ itsallagile.story = itsallagile.baseObject.extend({
         var element = this.getElement();
 
         element.draggable({ 
-            containment: "#board", 
+            containment: itsallagile.board.getCssId(), 
             stack: '#board div',
             stop: function(event, ui) {
                 self.handleDrop(event, ui);

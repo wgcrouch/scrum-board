@@ -8,8 +8,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class BoardController extends Controller
 {
     
-    public function indexAction()
+    public function indexAction($slug)
     {
-        return $this->render('itsallagileScrumboardBundle:Board:index.html.twig');
+             
+        $em = $this->getDoctrine()->getEntityManager();
+        $query = $em->createQuery(
+            'SELECT b FROM itsallagileCoreBundle:Board b WHERE b.boardId = :slug OR b.slug = :slug'
+        )->setParameter('slug', $slug);
+
+        $board = $query->getSingleResult();
+
+        if (!$board) {
+            throw $this->createNotFoundException('No board found for slug ' . $slug);
+        }        
+        
+        $viewData = array('board' => $board);
+        return $this->render('itsallagileScrumboardBundle:Board:index.html.twig', $viewData);
     }
 }

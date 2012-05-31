@@ -8,6 +8,7 @@ itsallagile.ticket = itsallagile.baseObject.extend({
     x: 10,
     y: 10,
     parent: null,
+    boardId: null,
     
     /**
      * Given a template object, create a new ticket object with the templates type
@@ -17,6 +18,7 @@ itsallagile.ticket = itsallagile.baseObject.extend({
         newTicket.x = ui.position.left;
         newTicket.y = ui.position.top;
         newTicket.id = new Date().getTime();
+        newTicket.boardId = itsallagile.board.id;
         return newTicket;
     },
     
@@ -25,7 +27,7 @@ itsallagile.ticket = itsallagile.baseObject.extend({
         var element = this.getElement();
 
         element.draggable({ 
-            containment: "#board", 
+            containment: itsallagile.board.getCssId(), 
             stack: '#board div',
             stop: function(event, ui) {
                 self.handleDrop(event, ui);

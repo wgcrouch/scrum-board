@@ -18,7 +18,7 @@ itsallagile.storytemplate = itsallagile.template.extend({
         //Store this as self, for use inside callbacks
         var self = this;
         $('#storytemplate').draggable({
-            containment: "#board",
+            containment: itsallagile.board.getCssId(),
             opacity: 0.7,
             helper: "clone",
             //Using an anonymous function here allows us to call the method 
@@ -33,7 +33,7 @@ itsallagile.storytemplate = itsallagile.template.extend({
     handleDrop: function(event, ui) {  
         var story = itsallagile.story.createFromDroppedTemplate(this, event, ui);
         story.create();
-        story.render($('#board'));
+        story.render(itsallagile.board.getElement());
         this.board.addStory(story);
     }
 });

@@ -41,6 +41,12 @@ class Ticket {
      * @ORM\Column(type="integer", nullable=true)
      */
     protected $parent;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Board", inversedBy="tickets")
+     * @ORM\JoinColumn(name="boardId", referencedColumnName="boardId")
+     */
+    protected $board;
 
     /**
      * Get ticketId
@@ -160,8 +166,29 @@ class Ticket {
             'x' => $this->x,
             'y' => $this->y,
             'content' => $this->content,
-            'parent' => $this->parent
+            'parent' => $this->parent,
+            'boardId' => $this->board->getBoardId()
         );
         return $data;
+    }
+
+    /**
+     * Set board
+     *
+     * @param itsallagile\CoreBundle\Entity\Board $board
+     */
+    public function setBoard(\itsallagile\CoreBundle\Entity\Board $board)
+    {
+        $this->board = $board;
+    }
+
+    /**
+     * Get board
+     *
+     * @return itsallagile\CoreBundle\Entity\Board 
+     */
+    public function getBoard()
+    {
+        return $this->board;
     }
 }

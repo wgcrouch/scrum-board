@@ -4,14 +4,14 @@
  */
 
 itsallagile.board = itsallagile.baseObject.extend({
-    id: 'board',
+    id: null,
     columns: [],
     templates: [],
     trashId : '#trash' ,
     tickets : {},
     stories : {},
     render:  function() {
-        var board = $('#' +  this.id);
+        var board = this.getElement();
         var templatesDiv = $('#templates');        
         for (var x in this.templates) {
             this.templates[x].render(templatesDiv);
@@ -21,6 +21,14 @@ itsallagile.board = itsallagile.baseObject.extend({
         } 
         this.loadTickets();
         this.loadStories();
+    },
+    
+    getElement: function() {
+        return $(this.getCssId());
+    },
+    
+    getCssId: function() {
+        return '#board-' + this.id;
     },
     init: function() {
         var self = this;
@@ -51,13 +59,13 @@ itsallagile.board = itsallagile.baseObject.extend({
         var id = changedTicket.id;
         var ticket = this.tickets[id];
         ticket.set(changedTicket);
-        ticket.refresh($('#' +  this.id));
+        ticket.refresh(this.getElement());
     },
     
     addCreatedTicket: function(newTicket) {
         var ticket = itsallagile.ticket.extend(newTicket);
         this.addTicket(ticket);
-        ticket.render($('#' +  this.id));
+        ticket.render(this.getElement());
     },
     
     addTemplate: function(template) {
@@ -66,7 +74,6 @@ itsallagile.board = itsallagile.baseObject.extend({
     },
     
     removeTicket: function(ticketId) {
-        var element = $('#' . ticketId);
         this.tickets[ticketId].erase();
         delete this.tickets[ticketId];
     },
@@ -89,12 +96,12 @@ itsallagile.board = itsallagile.baseObject.extend({
     
     loadTickets:function() {
         var self = this;
-        $.get('/tickets', null, function(data, textStatus, jqXHR) {
+        $.get('/tickets/board/' + this.id, null, function(data, textStatus, jqXHR) {
             for(var ticketId in data) {
                 if (data.hasOwnProperty(ticketId)) {
                     var ticket = itsallagile.ticket.extend(data[ticketId]);
                     self.addTicket(ticket);
-                    ticket.render($('#' +  self.id));
+                    ticket.render(self.getElement());
                 }
             }
         }, 'json');
@@ -102,12 +109,12 @@ itsallagile.board = itsallagile.baseObject.extend({
     
     loadStories:function() {
         var self = this;
-        $.get('/stories', null, function(data, textStatus, jqXHR) {
+        $.get('/stories/board/' + this.id, null, function(data, textStatus, jqXHR) {
             for(var storyId in data) {
                 if (data.hasOwnProperty(storyId)) {
                     var story = itsallagile.story.extend(data[storyId]);
                     self.addStory(story);
-                    story.render($('#' +  self.id));
+                    story.render(self.getElement());
                 }
             }
         }, 'json');
