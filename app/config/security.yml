@@ -1,11 +1,12 @@
 security:
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
-
+        Symfony\Component\Security\Core\User\User:
+            algorithm: sha1
+            iterations: 1
+            encode_as_base64: false
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
-
     providers:
         main:
             entity: { class: itsallagile\CoreBundle\Entity\User, property: email}
@@ -26,5 +27,5 @@ security:
     access_control:
          - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-         - { path: ^/foobar, roles: ROLE_USER }
+         - { path: ^/, roles: ROLE_USER }
          
