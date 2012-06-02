@@ -1,4 +1,4 @@
-itsallagileScrumboardBundle_homepage:
+itsallagileScrumboardBundle_viewboard:
     pattern:  /scrumboard/{slug}
     defaults: { _controller: itsallagileScrumboardBundle:Board:index }
 

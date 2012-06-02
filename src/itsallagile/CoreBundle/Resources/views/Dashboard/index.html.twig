@@ -1,0 +1,31 @@
+{% extends 'itsallagileBootstrapBundle::base.html.twig' %}
+
+{% block body %}
+	<h1>Dashboard</h1>
+    
+    <div class="span8">
+    <h2>Available Boards</h2>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Slug</th>
+                    <th>Stories</th>
+                    <th>Tickets</th>
+                    <th></th>
+                </tr>
+            <thead>
+            <tbody>
+            {% for board in boards %}
+                <tr>
+                    <td>{{ board.name }}</td>
+                    <td>{{ board.slug }}</td>
+                    <td>{{ board.stories.count }}</td>
+                    <td>{{ board.tickets.count }}</td>
+                    <td><a href="{{ path('itsallagileScrumboardBundle_viewboard', { 'slug': board.slug }) }}">View</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    <div>
+{% endblock %}

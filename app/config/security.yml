@@ -30,5 +30,6 @@ security:
          - { path: ^/scrumboard, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/tickets, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/stories, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/dashboard, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/, roles: ROLE_USER }
          
