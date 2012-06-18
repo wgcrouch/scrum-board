@@ -31,5 +31,6 @@ security:
          - { path: ^/tickets, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/stories, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/dashboard, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/bundles, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/, roles: ROLE_USER }
          
