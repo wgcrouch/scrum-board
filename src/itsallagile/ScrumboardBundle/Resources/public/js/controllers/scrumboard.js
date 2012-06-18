@@ -23,7 +23,8 @@ itsallagile.scrumboardController = itsallagile.baseObject.extend({
         board.addColumn(itsallagile.column.extend({id : 'todo', type: 'todo', title: 'Todo'}));
         board.addColumn(itsallagile.column.extend({id : 'assigned', type: 'assigned', title: 'Assigned'}));
         board.addColumn(itsallagile.column.extend({id : 'done', type: 'done', title: 'Done'}));
-        board.render();     
+        board.render();   
+        itsallagile.socket.emit('subscribe', board.getRoomId());
         
         this.bindEvents();
     },

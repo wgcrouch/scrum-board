@@ -109,7 +109,7 @@ itsallagile.ticket = itsallagile.baseObject.extend({
             url: '/tickets/' + this.id,
             data: data,
             success: function(data, textStatus, jqXHR) {
-                itsallagile.socket.emit('ticket:change', data);
+                itsallagile.socket.emit('ticket:change', itsallagile.board.getRoomId(), data);
             },
             dataType: 'json'
         });
@@ -122,7 +122,7 @@ itsallagile.ticket = itsallagile.baseObject.extend({
             type: 'DELETE',
             url: '/tickets/' + this.id,
             success: function(data, textStatus, jqXHR) {
-                itsallagile.socket.emit('ticket:delete', self.id);
+                itsallagile.socket.emit('ticket:delete',itsallagile.board.getRoomId(), self.id);
             },
             dataType: 'json'
         });
@@ -147,7 +147,7 @@ itsallagile.ticket = itsallagile.baseObject.extend({
             delete itsallagile.board.tickets[this.id];
             self.id = data.id;                      
             itsallagile.board.addTicket(self);
-            itsallagile.socket.emit('ticket:create', data);
+            itsallagile.socket.emit('ticket:create', itsallagile.board.getRoomId(), data);
         }, 'json');
         
     },

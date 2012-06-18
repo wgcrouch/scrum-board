@@ -30,6 +30,9 @@ itsallagile.board = itsallagile.baseObject.extend({
     getCssId: function() {
         return '#board-' + this.id;
     },
+    getRoomId: function() {
+        return 'board:' + this.id;
+    },
     init: function() {
         var self = this;
         $(this.trashId).droppable({
@@ -64,8 +67,10 @@ itsallagile.board = itsallagile.baseObject.extend({
     
     addCreatedTicket: function(newTicket) {
         var ticket = itsallagile.ticket.extend(newTicket);
-        this.addTicket(ticket);
-        ticket.render(this.getElement());
+        if (!(ticket.id in this.tickets)) {
+            this.addTicket(ticket);
+            ticket.render(this.getElement());
+        }
     },
     
     addTemplate: function(template) {
