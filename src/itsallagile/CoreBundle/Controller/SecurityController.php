@@ -39,6 +39,14 @@ class SecurityController extends Controller
             $form->bindRequest($request);
             
             if ($form->isValid()) {
+                $factory = $this->get('security.encoder_factory');
+
+                $encoder = $factory->getEncoder($user);
+                
+                $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
+                
+                $user->setPassword($password);
+                
                 $em->persist($user);
                 $em->flush();
                 

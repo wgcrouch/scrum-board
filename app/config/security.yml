@@ -1,9 +1,6 @@
 security:
     encoders:
-        Symfony\Component\Security\Core\User\User:
-            algorithm: sha1
-            iterations: 1
-            encode_as_base64: false
+        itsallagile\CoreBundle\Entity\User: sha512
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
@@ -27,7 +24,7 @@ security:
     access_control:
          - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-         - { path: ^/scrumboard, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/scrumboard, roles: IS_AUTHENTICATED_ANONYMOUSLY }  
          - { path: ^/tickets, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/stories, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/dashboard, roles: IS_AUTHENTICATED_ANONYMOUSLY }

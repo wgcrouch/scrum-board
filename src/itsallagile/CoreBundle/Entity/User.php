@@ -2,6 +2,7 @@
 namespace itsallagile\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM,
+    Symfony\Component\Security\Core\User\UserInterface,
     Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity,
     Symfony\Component\Validator\Constraints as Assert;
 
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM,
  * @ORM\Table(name="user") 
  * @UniqueEntity("email")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id
@@ -34,6 +35,16 @@ class User
      * @ORM\Column(type="string", length=255) 
      */
     protected $password;
+    
+    /**
+     * @ORM\Column(type="string", length=32)
+     */
+    protected $salt;
+    
+    public function __construct()
+    {
+        $this->salt = md5(uniqid(null, true));
+    }
 
     /**
      * Get userId
@@ -43,6 +54,27 @@ class User
     public function getUserId()
     {
         return $this->userId;
+    }
+    
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function getSalt()
+    {
+        return $this->salt;
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function getRoles()
+    {
+        return array('ROLE_USER');
     }
 
     /**
@@ -74,6 +106,14 @@ class User
     {
         $this->fullName = $fullName;
     }
+    
+    /**
+     * @inheritDoc
+     */
+    public function getUsername()
+    {
+        return $this->email;
+    }
 
     /**
      * Get fullName
@@ -88,7 +128,6 @@ class User
     /**
      * Set password
      *
-     * @todo Make the encryption not shit.
      * @param string $password
      */
     public function setPassword($password)
@@ -104,5 +143,20 @@ class User
     public function getPassword()
     {
         return $this->password;
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function eraseCredentials()
+    {
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function equals(UserInterface $user)
+    {
+        return $this->getUsername() === $user->getUsername();
     }
 }
