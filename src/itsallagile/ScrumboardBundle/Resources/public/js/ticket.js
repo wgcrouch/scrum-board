@@ -43,6 +43,8 @@ itsallagile.ticket = itsallagile.baseObject.extend({
             textarea.focus();
         });
         
+        element.click($.proxy(this.select, this));
+        
         var textarea = $(this.getCssId() + ' textarea');            
         textarea.blur(function() {
             var textarea = $(this);
@@ -53,6 +55,19 @@ itsallagile.ticket = itsallagile.baseObject.extend({
             content.show();
             self.update();
         });
+        textarea.keyup(function(event) {
+            return false;
+        });
+    },
+    
+    select : function()
+    {
+        itsallagile.board.setSelected(this);
+        this.getElement().addClass('selected');
+    },
+    deselect: function()
+    {
+        this.getElement().removeClass('selected');
     },
     
     handleDrop: function(event, ui) {
@@ -66,7 +81,7 @@ itsallagile.ticket = itsallagile.baseObject.extend({
      */
     render: function(container) {
         var div = $('<div>').attr('id', 'ticket-' + this.id)
-            .addClass('note').addClass(this.type);
+            .addClass('note').addClass('ticket').addClass(this.type);
         var p = $('<p>').addClass('note-content').html(this.content);
         var text = $('<textarea>').addClass('note-input').html(this.content);        
         div.append(p).append(text);

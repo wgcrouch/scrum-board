@@ -10,6 +10,8 @@ itsallagile.board = itsallagile.baseObject.extend({
     trashId : '#trash' ,
     tickets : {},
     stories : {},
+    selected : null,
+    
     render:  function() {
         var board = this.getElement();
         var templatesDiv = $('#templates');        
@@ -35,14 +37,7 @@ itsallagile.board = itsallagile.baseObject.extend({
     },
     init: function() {
         var self = this;
-        $(this.trashId).droppable({
-            drop: function(event, ui) {
-                var ticketElement = ui.draggable;
-                self.removeTicket(ticketElement.data('id'));
-                ui.draggable.remove();
-            },
-            accept: ".note"
-        }); 
+        
         itsallagile.socket.on('ticket:change', function(data) {
             self.refreshTicket(data);
         });
@@ -123,5 +118,20 @@ itsallagile.board = itsallagile.baseObject.extend({
                 }
             }
         }, 'json');
+    },
+
+    setSelected : function(item) {
+      if (this.selected !== null) {
+          this.selected.deselect();
+      } 
+      this.selected = item;
+    },
+    
+    deleteSelected : function() {
+        if (this.selected !== null) {
+            this.selected.erase();
+            this.selected.getElement().fadeOut();
+            this.selected = null;
+        }      
     }
 });

@@ -42,6 +42,8 @@ itsallagile.story = itsallagile.baseObject.extend({
             textarea.focus();
         });
         
+        element.click($.proxy(this.select, this));
+        
         var textarea = $(this.getCssId() + ' textarea');            
         textarea.blur(function() {
             var textarea = $(this);
@@ -114,7 +116,7 @@ itsallagile.story = itsallagile.baseObject.extend({
         var data = this.getSimple();
         $.post('/stories', data, function(data, textStatus, jqXHR) {
             
-            $(self.getCssId()).attr('id', 'ticket-' + data.id).data('id', data.id);
+            $(self.getCssId()).attr('id', 'story-' + data.id).data('id', data.id);
             delete itsallagile.board.stories[this.id];
             self.id = data.id;                      
             itsallagile.board.addStory(self);
@@ -132,10 +134,14 @@ itsallagile.story = itsallagile.baseObject.extend({
         return '#story-' + this.id;
     },
   
-    /**
-     * Join a ticket onto another ticket
-     */
-    join: function(parent) {
+    select : function()
+    {
+        itsallagile.board.setSelected(this);
+        this.getElement().addClass('selected');
+    },
+    deselect: function()
+    {
+        this.getElement().removeClass('selected');
     }
 
 });

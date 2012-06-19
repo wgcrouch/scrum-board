@@ -29,6 +29,11 @@
     position: absolute;
 }
 
+.selected {
+    border: 2px dotted blue;
+    box-shadow: 5px 5px 5px  rgba(0,0,200,0.5);
+}
+
 .template {
     width:50px;
     height:50px;
@@ -41,14 +46,6 @@
     height:48px;
     margin:5px;
     float: left;
-    border: 1px solid black;
-}
-
-.note .ui-selecting {
-    border: 1px solid grey;
-}
-
-.note .ui-selected {
     border: 1px solid black;
 }
 
@@ -103,20 +100,12 @@
 .note-input {
     background: none;
     border:none;
-    width:80px;
-    height:80px;
+    width:95%;
+    height:95%;
     resize: none;
     display:none;
 }
 
 .template .note-input .note-content {
     display: none;
-}
-
-#trash {
-    float:right;
-    width:70px;
-    text-align: center;
-    border-left: 1px solid red;
-    height:60px;
 }

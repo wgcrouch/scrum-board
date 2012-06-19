@@ -24,15 +24,19 @@ itsallagile.scrumboardController = itsallagile.baseObject.extend({
         board.addColumn(itsallagile.column.extend({id : 'assigned', type: 'assigned', title: 'Assigned'}));
         board.addColumn(itsallagile.column.extend({id : 'done', type: 'done', title: 'Done'}));
         board.render();   
-        itsallagile.socket.emit('subscribe', board.getRoomId());
-        
-        this.bindEvents();
+        itsallagile.socket.emit('subscribe', board.getRoomId());  
+        this.initHandlers();
     },
     
-    bindEvents: function() {
-        this.board.getElement().click(function() {
-            console.log(this);
+    initHandlers: function()
+    {
+        self = this;
+        $(document).keyup(function(event) {
+            if (event.which == 46) {
+                self.board.deleteSelected();
+            }
         });
+        
     }
     
 });
