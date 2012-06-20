@@ -50,7 +50,7 @@ itsallagile.ticket = itsallagile.baseObject.extend({
             var textarea = $(this);
             var content = $(this).siblings('p');
             self.content = textarea.val();
-            content.html(self.content);
+            content.html(self.renderText(self.content));
             textarea.hide();
             content.show();
             self.update();
@@ -82,7 +82,7 @@ itsallagile.ticket = itsallagile.baseObject.extend({
     render: function(container) {
         var div = $('<div>').attr('id', 'ticket-' + this.id)
             .addClass('note').addClass('ticket').addClass(this.type);
-        var p = $('<p>').addClass('note-content').html(this.content);
+        var p = $('<p>').addClass('note-content').html(this.renderText(this.content));
         var text = $('<textarea>').addClass('note-input').html(this.content);        
         div.append(p).append(text);
         div.css('left', this.x);
@@ -99,6 +99,15 @@ itsallagile.ticket = itsallagile.baseObject.extend({
         this.init();
     },
     
+    renderText: function(text) {
+        if (text !== null) {
+            text = text.replace(/#(\d+)/g, '<a href="http://dtrac.affiliatewindow.com/ticket/$1">#$1</a>');
+            text = text.replace(/(\r\n|\n\r|\r|\n)/g, "<br/>");
+        }
+        return text;
+        
+    },
+    
     refresh: function()
     {
         var element = this.getElement();
@@ -108,7 +117,7 @@ itsallagile.ticket = itsallagile.baseObject.extend({
             top: this.y
         }, 500);
         
-        $('p', element).html(this.content);
+        $('p', element).html(this.renderText(this.content));
         $('textarea', element).html(this.content);
     },
     
