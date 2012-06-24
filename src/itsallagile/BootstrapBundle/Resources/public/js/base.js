@@ -11,6 +11,10 @@ if (typeof Object.create !== "function") {
 
 var itsallagile = itsallagile || {};
 
+itsallagile.Controller = {};
+itsallagile.Model = {};
+itsallagile.View = {};
+
 itsallagile.baseObject = {
     extend: function(props) {
         var prop, obj;

@@ -1,6 +1,41 @@
 itsallagileScrumboardBundle_viewboard:
     pattern:  /scrumboard/{slug}
-    defaults: { _controller: itsallagileScrumboardBundle:Board:index }
+    defaults: { _controller: itsallagileScrumboardBundle:Scrumboard:index }
+    
+itsallagileScrumboardBundle_boardsGetAll:
+    pattern: /boards
+    defaults: { _controller: itsallagileScrumboardBundle:Boards:getAll, _format: json}
+    requirements:
+        _method: GET
+        format: JSON
+        
+itsallagileScrumboardBundle_boardsGetOne:
+    pattern: /boards/{boardId}
+    defaults: { _controller: itsallagileScrumboardBundle:Boards:get, _format: json}
+    requirements:
+        _method: GET
+        format: JSON
+        
+itsallagileScrumboardBundle_boardsPost:
+    pattern: /boards
+    defaults: { _controller: itsallagileScrumboardBundle:Boards:post, _format: json }
+    requirements:
+        _method: POST
+        format: JSON
+        
+itsallagileScrumboardBundle_boardsPut:
+    pattern: /boards/{boardId}
+    defaults: { _controller: itsallagileScrumboardBundle:Boards:put, _format: json }
+    requirements:
+        _method: PUT
+        format: JSON
+        
+itsallagileScrumboardBundle_boardsDelete:
+    pattern: /boards/{boardId}
+    defaults: { _controller: itsallagileScrumboardBundle:Boards:delete, _format: json }
+    requirements:
+        _method: DELETE
+        format: JSON    
 
 itsallagileScrumboardBundle_ticketsGetAll:
     pattern: /tickets

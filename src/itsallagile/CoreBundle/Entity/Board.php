@@ -76,15 +76,6 @@ class Board {
         return $this->name;
     }
 
-    public function getArray()
-    {
-        $data = array(
-            'id' => $this->boardId,            
-            'name' => $this->name,
-        );
-        return $data;
-    }
-
     /**
      * Add tickets
      *
@@ -143,5 +134,23 @@ class Board {
     public function getSlug()
     {
         return $this->slug;
+    }
+    
+    public function getArray()
+    {
+        $data = array(
+            'id' => $this->boardId,
+            'name' => $this->name,
+            'slug' => $this->slug
+        );
+        
+        foreach ($this->getTickets() as $ticket) {
+            $data['tickets'][$ticket->getTicketId()] = $ticket->getArray(); 
+        }
+        
+        foreach ($this->getStories() as $story) {
+            $data['stories'][$story->getStoryId()] = $story->getArray(); 
+        }
+        return $data;
     }
 }

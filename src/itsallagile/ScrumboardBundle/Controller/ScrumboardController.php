@@ -5,7 +5,7 @@ namespace itsallagile\ScrumboardBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 
-class BoardController extends Controller
+class ScrumboardController extends Controller
 {
     
     public function indexAction($slug)

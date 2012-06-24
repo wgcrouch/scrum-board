@@ -10,11 +10,13 @@
 {% endblock %}
 
 {% block body %}
-    <div id="boardTitle"><h1>{{ board.name }}</h1></div>
+    <div id="board-container">
+        <!--div id="boardTitle"><h1>{{ board.name }}</h1></div>
     <div id="board-{{ board.boardId}}" class="board">
         <div id="templates">
 
         </div>        
+    </div-->
     </div>
 {% endblock %}
 
@@ -24,14 +26,15 @@
     <script>var WEB_SOCKET_SWF_LOCATION = '/js/socket.io/WebSocketMain.swf';</script>
     {{ parent() }}
     {% javascripts
-        '@itsallagileScrumboardBundle/Resources/public/js/*.js'
+        '@itsallagileScrumboardBundle/Resources/public/js/models/*.js'
+        '@itsallagileScrumboardBundle/Resources/public/js/views/*.js'
     %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
     <script src="/bundles/itsallagilescrumboard/js/controllers/scrumboard.js"></script>
     <script>
         jQuery(function($) {                
-            itsallagile.scrumboardController.load({{ board.boardId }});   
+            itsallagile.Controller.Scrumboard.load({{ board.boardId }});   
         });
     </script>
 
