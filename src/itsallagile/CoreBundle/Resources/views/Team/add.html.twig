@@ -3,11 +3,11 @@
 {% block body %}
         <div class="span6">
             <div class="page-header">
-                <h1>Register</h1>
+                <h1>Add a team</h1>
             </div>
-            <form action="{{ path('core_register') }}" method="post" class="well">
+            <form action="{{ path('core_teams_add') }}" method="post" class="well">
                     {{ form_widget(form) }}
-                    <button type="submit" class="btn">Register</button>	
+                    <button type="submit" class="btn">Add</button>	
             </form>
         </div>
 {% endblock %}

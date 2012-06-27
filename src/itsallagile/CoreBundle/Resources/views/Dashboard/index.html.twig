@@ -4,6 +4,30 @@
 	<h1>Dashboard</h1>
     
     <div class="span8">
+    <h2>Teams</h2>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Velocity</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if app.user.teams.count == 0 %}
+                <tr>
+                    <td colspan="2">No teams at the minute, why not <a href="{{ path('core_teams_add') }}">add one</a>?</td>
+                </tr>
+            {% else %}
+                {% for team in app.user.teams %}
+                    <tr>
+                        <td>{{ team.name }}</td>
+                        <td>{{ team.velocity }}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            
+        </tbody>
+    </table>
     <h2>Available Boards</h2>
         <table class="table table-bordered table-striped">
             <thead>

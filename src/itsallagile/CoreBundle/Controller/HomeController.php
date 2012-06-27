@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class HomeController extends Controller
 {
-    
     public function indexAction($name)
     {
         return $this->render('itsallagileCoreBundle:Home:index.html.twig', array('name' => $name));

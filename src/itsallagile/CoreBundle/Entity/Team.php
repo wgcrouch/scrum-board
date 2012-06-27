@@ -1,7 +1,8 @@
 <?php
 namespace itsallagile\CoreBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping as ORM,
+    Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
@@ -30,6 +31,17 @@ class Team
      * @ORM\Column(type="integer", length=11) 
      */
     protected $velocity;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="teams") 
+     * 
+     */
+    protected $users;
+    
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
     
     /**
      * Get teamId
@@ -92,5 +104,10 @@ class Team
     public function getVelocity()
     {
         return $this->velocity;
+    }
+    
+    public function getUsers()
+    {
+        return $this->users;
     }
 }

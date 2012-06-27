@@ -4,7 +4,8 @@ namespace itsallagile\CoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM,
     Symfony\Component\Security\Core\User\UserInterface,
     Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity,
-    Symfony\Component\Validator\Constraints as Assert;
+    Symfony\Component\Validator\Constraints as Assert,
+    Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
@@ -41,9 +42,19 @@ class User implements UserInterface
      */
     protected $salt;
     
+    /**
+     * @ORM\ManyToMany(targetEntity="Team", inversedBy="users") 
+     * @ORM\JoinTable(name="teamUser", 
+     *     joinColumns={@ORM\JoinColumn(name="userId", referencedColumnName="userId")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="teamId", referencedColumnName="teamId")})
+     */
+    protected $teams;
+    
     public function __construct()
     {
         $this->salt = md5(uniqid(null, true));
+        
+        $this->teams = new ArrayCollection();
     }
 
     /**
@@ -158,5 +169,10 @@ class User implements UserInterface
     public function equals(UserInterface $user)
     {
         return $this->getUsername() === $user->getUsername();
+    }
+    
+    public function getTeams()
+    {
+        return $this->teams;
     }
 }

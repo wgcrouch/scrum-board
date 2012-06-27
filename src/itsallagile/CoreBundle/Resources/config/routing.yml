@@ -6,10 +6,15 @@ login:
     defaults: { _controller: itsallagileCoreBundle:Security:login }
 login_check:
     pattern: /login_check
-register:
+core_register:
     pattern: /register
     defaults: {_controller: itsallagileCoreBundle:Security:register}
-    
-dashboard:
+core_dashboard:
     pattern: /dashboard
     defaults: { _controller: itsallagileCoreBundle:Dashboard:index }
+core_teams:
+    pattern: /teams
+    defaults: { _controller: itsallagileCoreBundle:Team:index }
+core_teams_add:
+    pattern: /teams/add
+    defaults: { _controller: itsallagileCoreBundle:Team:add }
