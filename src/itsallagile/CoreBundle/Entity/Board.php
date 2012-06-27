@@ -144,12 +144,12 @@ class Board {
             'slug' => $this->slug
         );
         
-        foreach ($this->getTickets() as $ticket) {
-            $data['tickets'][$ticket->getTicketId()] = $ticket->getArray(); 
-        }
-        
+//        foreach ($this->getTickets() as $ticket) {
+//            $data['tickets'][$ticket->getTicketId()] = $ticket->getArray(); 
+//        }
+//        
         foreach ($this->getStories() as $story) {
-            $data['stories'][$story->getStoryId()] = $story->getArray(); 
+            $data['stories'][] = $story->getArray(); 
         }
         return $data;
     }

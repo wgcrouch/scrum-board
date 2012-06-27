@@ -12,6 +12,7 @@ if (typeof Object.create !== "function") {
 var itsallagile = itsallagile || {};
 
 itsallagile.Controller = {};
+itsallagile.Collection = {};
 itsallagile.Model = {};
 itsallagile.View = {};
 

@@ -13,10 +13,21 @@ itsallagile.View.Board = Backbone.View.extend({
                 new itsallagile.View.Template({type: 'design'}),
             ]
         });
+        this.model.bind('change', this.render, this);
+        return this;
     },
     
     render: function() {
         this.$el.append(this.toolbarView.render().el);
+        
+        var stories = this.model.get('stories');
+        if (stories !== null) {
+            stories.forEach(function(story, key) {
+                var storyView = new itsallagile.View.Story({model: story});
+                this.$el.append(storyView.render().el);
+            }, this);
+        }
+        
         return this;
     }
     
