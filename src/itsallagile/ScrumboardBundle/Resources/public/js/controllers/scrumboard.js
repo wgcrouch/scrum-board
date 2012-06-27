@@ -10,11 +10,11 @@ itsallagile.Controller.Scrumboard = itsallagile.baseObject.extend({
     load: function(boardId) {
         
         this.board = board = new itsallagile.Model.Board({id : boardId});
-        this.board.fetch();
-        
+        board.fetch();  
+
         this.boardView = new itsallagile.View.Board({
-            model: this.board,
-            id: 'board-' + this.board.id
+            model: board,
+            id: 'board-' + board.get("id")
         });
         
         $('#board-container').html(this.boardView.render().el);

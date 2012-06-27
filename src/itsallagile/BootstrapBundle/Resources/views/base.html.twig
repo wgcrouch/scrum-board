@@ -61,7 +61,13 @@
     
     {% block endscript %}
         {% javascripts
-            '@itsallagileBootstrapBundle/Resources/public/js/*'
+            '@itsallagileBootstrapBundle/Resources/public/js/jquery.min.js'
+            '@itsallagileBootstrapBundle/Resources/public/js/jquery-ui.min.js'
+            '@itsallagileBootstrapBundle/Resources/public/js/bootstrap.js'
+            '@itsallagileBootstrapBundle/Resources/public/js/json2.js'
+            '@itsallagileBootstrapBundle/Resources/public/js/underscore.js'
+            '@itsallagileBootstrapBundle/Resources/public/js/backbone.js'
+            '@itsallagileBootstrapBundle/Resources/public/js/base.js'
         %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}

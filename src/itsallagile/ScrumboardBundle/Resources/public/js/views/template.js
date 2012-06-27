@@ -11,6 +11,8 @@ itsallagile.View.Template = Backbone.View.extend({
     
     render: function() {
         this.$el.addClass(this.type);
+        
+        
         return this;
     }
 });
