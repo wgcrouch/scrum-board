@@ -25,11 +25,6 @@ class Board {
     protected $name;
     
     /**
-     * @ORM\OneToMany(targetEntity="Ticket", mappedBy="board")
-     */
-    protected $tickets;
-    
-    /**
      * @ORM\OneToMany(targetEntity="Story", mappedBy="board")
      */
     protected $stories;
@@ -41,7 +36,6 @@ class Board {
     
     public function __construct()
     {
-        $this->tickets = new ArrayCollection();
         $this->stories = new ArrayCollection();
     }
     
@@ -74,26 +68,6 @@ class Board {
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Add tickets
-     *
-     * @param itsallagile\CoreBundle\Entity\Ticket $tickets
-     */
-    public function addTicket(\itsallagile\CoreBundle\Entity\Ticket $tickets)
-    {
-        $this->tickets[] = $tickets;
-    }
-
-    /**
-     * Get tickets
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getTickets()
-    {
-        return $this->tickets;
     }
 
     /**
@@ -144,10 +118,6 @@ class Board {
             'slug' => $this->slug
         );
         
-//        foreach ($this->getTickets() as $ticket) {
-//            $data['tickets'][$ticket->getTicketId()] = $ticket->getArray(); 
-//        }
-//        
         foreach ($this->getStories() as $story) {
             $data['stories'][] = $story->getArray(); 
         }

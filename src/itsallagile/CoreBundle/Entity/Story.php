@@ -25,18 +25,23 @@ class Story {
     /**
      * @ORM\Column(type="integer")
      */
-    protected $x = 1;
-    
-    /**
-     * @ORM\Column(type="integer")
-     */
-    protected $y = 1;
+    protected $sort;
     
     /**
      * @ORM\ManyToOne(targetEntity="Board", inversedBy="stories")
      * @ORM\JoinColumn(name="boardId", referencedColumnName="boardId")
      */
     protected $board;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Ticket", mappedBy="story")
+     */
+    protected $tickets;
+    
+    public function __construct()
+    {
+        $this->tickets = new ArrayCollection();
+    }
     
 
     /**
@@ -48,7 +53,6 @@ class Story {
     {
         return $this->storyId;
     }
-
     
 
     /**
@@ -72,56 +76,38 @@ class Story {
     }
 
     /**
-     * Set x
+     * Set sort
      *
-     * @param integer $x
+     * @param integer $sort
      */
-    public function setX($x)
+    public function setOrder($sort)
     {
-        $this->x = $x;
+        $this->sort = $sort;
     }
 
     /**
-     * Get x
+     * Get sort
      *
      * @return integer 
      */
-    public function getX()
+    public function getSort()
     {
-        return $this->x;
+        return $this->sort;
     }
-
-    /**
-     * Set y
-     *
-     * @param integer $y
-     */
-    public function setY($y)
-    {
-        $this->y = $y;
-    }
-
-    /**
-     * Get y
-     *
-     * @return integer 
-     */
-    public function getY()
-    {
-        return $this->y;
-    }
-
-    
     
     public function getArray()
     {
         $data = array(
             'id' => $this->storyId,
-            'x' => $this->x,
-            'y' => $this->y,
+            'sort' => $this->sort,
             'content' => $this->content,
             'boardId' => $this->board->getBoardId()
         );
+        
+        foreach ($this->getTickets() as $ticket) {
+            $data['tickets'][] = $ticket->getArray(); 
+        }
+        
         return $data;
     }
 
@@ -143,5 +129,25 @@ class Story {
     public function getBoard()
     {
         return $this->board;
+    }
+    
+    /**
+     * Add tickets
+     *
+     * @param itsallagile\CoreBundle\Entity\Ticket $tickets
+     */
+    public function addTicket(\itsallagile\CoreBundle\Entity\Ticket $tickets)
+    {
+        $this->tickets[] = $tickets;
+    }
+
+    /**
+     * Get tickets
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getTickets()
+    {
+        return $this->tickets;
     }
 }
