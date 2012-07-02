@@ -2,7 +2,12 @@ itsallagile.Model.Board = Backbone.Model.extend({
     urlRoot: '/boards',
     
     defaults: {
-        stories: null
+        stories: null,
+        statuses: [
+            'New',
+            'Assigned',
+            'Done'
+        ]        
     },   
     
     initialize: function(options) {
