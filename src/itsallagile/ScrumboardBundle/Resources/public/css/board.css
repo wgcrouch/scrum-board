@@ -1,6 +1,6 @@
 
 .board {
-    width:1300px;
+    min-width: 1280px;
     height:3000px;
     border: 1px solid black;
     position:relative;
@@ -16,15 +16,6 @@
     height:100px;
     margin:5px;
     border: 1px solid #888;
-    box-shadow: 5px 5px 5px  rgba(200,200,200,0.5);
-    position: absolute;
-}
-
-.story {
-    width:160px;
-    height:120px;
-    margin:5px;
-    border: 1px dashed #888;
     box-shadow: 5px 5px 5px  rgba(200,200,200,0.5);
     position: absolute;
 }
@@ -77,12 +68,6 @@
     height:9000px;
 }
 
-#story {
-
-    width:200px;
-}
-
-
 #todo {
     width:480px;
 }
@@ -97,7 +82,38 @@
     border-right:none;
 }
 
-.note-input {
+/* STATUS HEADERS */
+.status-header {
+    padding-left:1px;
+    width:100%;  
+    clear: both;
+    height:40px;    
+    vertical-align: central;
+}
+
+.status-header-column {
+    height:40px; 
+    padding:5px;   
+    text-align: center;
+    border-left: 2px solid grey;
+    width: 300px;
+    font-size: 2em;
+    float: left;
+}
+
+
+/* STORY ELEMENT */
+
+.story {
+    width:100%;
+    min-height:120px;
+    border: 1px dashed #888;
+    box-shadow: 0px 5px 5px  rgba(200,200,200,0.5);
+    clear:both;
+    
+}
+
+.story-input {
     background: none;
     border:none;
     width:95%;
@@ -108,4 +124,22 @@
 
 .template .note-input .note-content {
     display: none;
+}
+
+.story-detail-column {
+    border-left: 2px solid grey;
+    padding: 5px;
+    width: 300px;
+    height:100%;
+    min-height:120px;
+    float: left;
+}
+
+.story-status-column {
+    float:left;
+    padding: 5px;
+    width:300px;
+    height:100%;
+    min-height:120px;
+    border-left: 2px solid grey;
 }
