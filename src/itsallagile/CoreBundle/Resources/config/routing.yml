@@ -18,3 +18,7 @@ core_teams:
 core_teams_add:
     pattern: /teams/add
     defaults: { _controller: itsallagileCoreBundle:Team:add }
+    
+core_boards_add:
+    pattern: /boards/add
+    defaults: { _controller: itsallagileCoreBundle:Board:add }
