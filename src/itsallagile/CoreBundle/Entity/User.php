@@ -175,4 +175,14 @@ class User implements UserInterface
     {
         return $this->teams;
     }
+
+    /**
+     * Add teams
+     *
+     * @param itsallagile\CoreBundle\Entity\Team $teams
+     */
+    public function addTeam(\itsallagile\CoreBundle\Entity\Team $teams)
+    {
+        $this->teams[] = $teams;
+    }
 }

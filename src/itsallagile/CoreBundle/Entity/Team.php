@@ -110,4 +110,14 @@ class Team
     {
         return $this->users;
     }
+
+    /**
+     * Add users
+     *
+     * @param itsallagile\CoreBundle\Entity\User $users
+     */
+    public function addUser(\itsallagile\CoreBundle\Entity\User $users)
+    {
+        $this->users[] = $users;
+    }
 }

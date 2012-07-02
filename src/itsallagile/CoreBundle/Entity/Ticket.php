@@ -41,12 +41,18 @@ class Ticket {
      * @ORM\Column(type="integer", nullable=true)
      */
     protected $parent;
+       
+    /**
+     * @ORM\ManyToOne(targetEntity="Story", inversedBy="tickets")
+     * @ORM\JoinColumn(name="storyId", referencedColumnName="storyId")
+     */
+    protected $story;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Board", inversedBy="tickets")
-     * @ORM\JoinColumn(name="boardId", referencedColumnName="boardId")
+     * @ORM\ManyToOne(targetEntity="Status", inversedBy="tickets")
+     * @ORM\JoinColumn(name="statusId", referencedColumnName="statusId")
      */
-    protected $board;
+    protected $status;
 
     /**
      * Get ticketId
@@ -167,6 +173,8 @@ class Ticket {
             'y' => $this->y,
             'content' => $this->content,
             'parent' => $this->parent,
+            'status' => $this->getStatus()->getStatusId(),
+            'story' => $this->getStory()->getStoryId(),
             'boardId' => $this->board->getBoardId()
         );
         return $data;
@@ -190,5 +198,45 @@ class Ticket {
     public function getBoard()
     {
         return $this->board;
+    }
+
+    /**
+     * Set story
+     *
+     * @param itsallagile\CoreBundle\Entity\Story $story
+     */
+    public function setStory(\itsallagile\CoreBundle\Entity\Story $story)
+    {
+        $this->story = $story;
+    }
+
+    /**
+     * Get story
+     *
+     * @return itsallagile\CoreBundle\Entity\Story 
+     */
+    public function getStory()
+    {
+        return $this->story;
+    }
+
+    /**
+     * Set status
+     *
+     * @param itsallagile\CoreBundle\Entity\Status $status
+     */
+    public function setStatus(\itsallagile\CoreBundle\Entity\Status $status)
+    {
+        $this->status = $status;
+    }
+
+    /**
+     * Get status
+     *
+     * @return itsallagile\CoreBundle\Entity\Status 
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }
