@@ -2,13 +2,16 @@
 
 namespace itsallagile\CoreBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM, 
+    Doctrine\Common\Collections\ArrayCollection,
+    Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity,
+    Symfony\Component\Validator\Constraints as Assert;
+;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="board") 
+ * @UniqueEntity(fields={"slug"})
  */
 class Board {
     
@@ -25,14 +28,14 @@ class Board {
     protected $name;
     
     /**
-     * @ORM\OneToMany(targetEntity="Story", mappedBy="board")
-     */
-    protected $stories;
-    
-    /**
      * @ORM\Column("string", length="255", nullable=false, unique=true)
      */
     protected $slug;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Story", mappedBy="board")
+     */
+    protected $stories;
     
     public function __construct()
     {
