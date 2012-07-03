@@ -175,7 +175,7 @@ class Ticket {
             'parent' => $this->parent,
             'status' => $this->getStatus()->getStatusId(),
             'story' => $this->getStory()->getStoryId(),
-            'boardId' => $this->board->getBoardId()
+            
         );
         return $data;
     }
