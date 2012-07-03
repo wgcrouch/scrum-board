@@ -1,4 +1,4 @@
 itsallagile.Model.Ticket = Backbone.Model.extend({
-    urlRoot: '/tickets'
+    urlRoot: '/api/tickets'
 });
 

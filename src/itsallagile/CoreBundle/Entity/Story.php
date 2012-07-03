@@ -2,7 +2,8 @@
 
 namespace itsallagile\CoreBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping as ORM,
+    Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity

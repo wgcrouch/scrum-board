@@ -1,5 +1,5 @@
 itsallagile.Model.Board = Backbone.Model.extend({
-    urlRoot: '/boards',
+    urlRoot: '/api/boards',
     
     defaults: {
         stories: null,

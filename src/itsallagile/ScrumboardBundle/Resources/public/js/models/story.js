@@ -1,4 +1,4 @@
 itsallagile.Model.Story = Backbone.Model.extend({
-    urlRoot: '/stories'
+    urlRoot: '/api/stories'
     
 });
