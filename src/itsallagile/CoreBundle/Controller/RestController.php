@@ -27,4 +27,21 @@ class RestController extends Controller
         return new Response($serializer->encode($data, $this->getRequest()->get('_format')), $code);
     }
     
+    /**
+     * Get the put data and decode according to the request format
+     * @return array
+     */
+    protected function getPutData()
+    {
+        $serializer = new Serializer(array(), array(
+            'json' => new Encoder\JsonEncoder(),
+            'xml' => new Encoder\XmlEncoder()
+        ));
+        
+        $data = $this->getRequest()->getContent();
+        
+        $values = $serializer->decode($data, $this->getRequest()->get('_format'));
+        return $values;
+    }
+    
 }

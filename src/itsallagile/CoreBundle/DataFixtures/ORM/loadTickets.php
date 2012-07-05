@@ -14,10 +14,19 @@ class LoadTickets extends AbstractFixture implements OrderedFixtureInterface
         $ticket = new Ticket();
         $ticket->setStory($manager->merge($this->getReference('init-story')));
         $ticket->setStatus($manager->merge($this->getReference('status-New')));
-        $ticket->setContent('Example Ticket');
+        $ticket->setContent('New Ticket');
         $ticket->setType('task');
         
         $manager->persist($ticket);
+        
+        $ticket2 = new Ticket();
+        $ticket2->setStory($manager->merge($this->getReference('init-story')));
+        $ticket2->setStatus($manager->merge($this->getReference('status-Assigned')));
+        $ticket2->setContent('Assigned Ticket');
+        $ticket2->setType('defect');
+        
+        $manager->persist($ticket2);
+        
         $manager->flush();
 
     }

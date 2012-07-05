@@ -122,3 +122,18 @@ itsallagileScrumboardBundle_storiesDelete:
     requirements:
         _method: DELETE
         format: JSON
+        
+        
+itsallagileScrumboardBundle_statusesGetAll:
+    pattern: /api/statuses
+    defaults: { _controller: itsallagileScrumboardBundle:Statuses:getAll, _format: json}
+    requirements:
+        _method: GET
+        format: JSON
+        
+itsallagileScrumboardBundle_statusesGetOne:
+    pattern: /api/statuses/{statusId}
+    defaults: { _controller: itsallagileScrumboardBundle:Statuses:get, _format: json}
+    requirements:
+        _method: GET
+        format: JSON
