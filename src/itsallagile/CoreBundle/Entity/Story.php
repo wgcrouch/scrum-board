@@ -81,7 +81,7 @@ class Story {
      *
      * @param integer $sort
      */
-    public function setOrder($sort)
+    public function setSort($sort)
     {
         $this->sort = $sort;
     }
