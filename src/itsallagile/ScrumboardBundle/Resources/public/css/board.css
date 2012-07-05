@@ -37,6 +37,8 @@
 
 
 .ticket-input {
+    width: 90%;
+    height: 90%;
     display: none;
 }
 
