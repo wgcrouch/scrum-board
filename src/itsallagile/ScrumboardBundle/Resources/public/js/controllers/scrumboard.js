@@ -1,20 +1,18 @@
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Controller for viewing a scrum board
+ * 
+ * Initializes the board view and board model
  */
-
 itsallagile.Controller.Scrumboard = itsallagile.baseObject.extend({
     
     board : null,
     
-    load: function(boardId) {
+    load: function() {
         
-        this.board = board = new itsallagile.Model.Board({id : boardId});
-        board.fetch();  
-
         this.boardView = new itsallagile.View.Board({
-            model: board,
-            id: 'board-' + board.get("id")
+            model: this.board,
+            statuses: this.statuses,
+            id: 'board-' + this.board.get("id")
         });
         
         $('#board-container').html(this.boardView.render().el);

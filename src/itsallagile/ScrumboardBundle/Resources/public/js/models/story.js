@@ -1,4 +1,23 @@
+/**
+ * Story Model
+ */
 itsallagile.Model.Story = Backbone.Model.extend({
-    urlRoot: '/api/stories'
+    urlRoot: '/api/stories',
+    
+    defaults: {
+        tickets: []
+    },   
+    
+    initialize: function(options) {
+
+    },
+    
+    /**
+     * When we get a response from the server, that contains tickets put those into a collection
+     */
+    parse: function(response) {
+        response.tickets = new itsallagile.Collection.Tickets(response.tickets);        
+        return response;
+    }
     
 });

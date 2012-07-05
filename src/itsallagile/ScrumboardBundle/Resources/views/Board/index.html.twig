@@ -11,17 +11,12 @@
 
 {% block body %}
     <div id="board-container">
-        <!--div id="boardTitle"><h1>{{ board.name }}</h1></div>
-    <div id="board-{{ board.boardId}}" class="board">
-        <div id="templates">
-
-        </div>        
-    </div-->
+        
     </div>
 {% endblock %}
 
 
-{% block endscript %}
+{% block endscript %}    
     <script src="/js/socket.io/socket.io.min.js"></script>
     <script>var WEB_SOCKET_SWF_LOCATION = '/js/socket.io/WebSocketMain.swf';</script>
     {{ parent() }}
@@ -33,9 +28,16 @@
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
     <script src="/bundles/itsallagilescrumboard/js/controllers/scrumboard.js"></script>
+    <!-- PrePopulate Data -->
+    <script>
+        {% autoescape false %}
+        itsallagile.Controller.Scrumboard.board = new itsallagile.Model.Board({{ board|json_encode() }}, {parse:true});
+        itsallagile.Controller.Scrumboard.statuses = new itsallagile.Collection.Statuses({{ statuses|json_encode()}});
+        {% endautoescape %}
+    </script>
     <script>
         jQuery(function($) {                
-            itsallagile.Controller.Scrumboard.load({{ board.boardId }});   
+            itsallagile.Controller.Scrumboard.load();   
         });
     </script>
 

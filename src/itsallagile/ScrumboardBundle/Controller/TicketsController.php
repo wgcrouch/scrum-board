@@ -49,31 +49,6 @@ class TicketsController extends RestController
     }
     
     /**
-     * Get all tickets for a board
-     * 
-     * @param integer $boardId     
-     */
-    public function getForBoardAction($boardId)
-    {
-        
-        $repository = $this->getDoctrine()->getRepository('itsallagileCoreBundle:Board');
-        
-        $board = $repository->find($boardId);
-        
-        if (!$board) {
-            throw $this->createNotFoundException('No board found for id ' . $boardId);
-        }
-        $data = array();
-        $tickets = $board->getTickets();
-
-        foreach($tickets as $ticket) {
-            $data[$ticket->getTicketId()] = $ticket->getArray();
-        }
-     
-        return $this->restResponse($data, 201);
-    }
-    
-    /**
      * Create a new ticket
      * 
      * @param Request $request     
@@ -88,8 +63,8 @@ class TicketsController extends RestController
         $ticket->setParent($request->get('parent'));        
         $ticket->setType($request->get('type'));
         
-        $board = $this->getDoctrine()->getRepository('itsallagileCoreBundle:Board')->find($request->get('boardId'));
-        $ticket->setBoard($board);
+        $story = $this->getDoctrine()->getRepository('itsallagileCoreBundle:Story')->find($request->get('story'));
+        $ticket->setStory($story);
         
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($ticket);  
@@ -114,15 +89,17 @@ class TicketsController extends RestController
             throw $this->createNotFoundException('No ticket found for id '. $ticketId);
         }
         
-        $ticket->setContent($request->get('content'));
+        $data = $this->getPutData();
+        $ticket->setContent($data['content']);
 
-        $ticket->setX($request->get('x'));
-        $ticket->setY($request->get('y'));
-        $ticket->setParent($request->get('parent'));        
-        $ticket->setType($request->get('type'));
-        
-        $board = $this->getDoctrine()->getRepository('itsallagileCoreBundle:Board')->find($request->get('boardId'));
-        $ticket->setBoard($board);
+        $ticket->setX($data['x']);
+        $ticket->setY($data['y']);
+        $ticket->setParent($data['parent']);        
+        $ticket->setType($data['type']);
+
+        $story = $this->getDoctrine()->getRepository('itsallagileCoreBundle:Story')->find($data['story']);
+    
+        $ticket->setStory($story);
 
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($ticket);  

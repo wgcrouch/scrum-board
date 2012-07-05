@@ -1,5 +1,5 @@
 /**
- * TIcket object
+ * Story object
  */
 itsallagile.story = itsallagile.baseObject.extend({
     id: null,

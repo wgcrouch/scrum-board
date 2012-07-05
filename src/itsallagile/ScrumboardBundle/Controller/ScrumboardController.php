@@ -20,9 +20,17 @@ class ScrumboardController extends Controller
 
         if (!$board) {
             throw $this->createNotFoundException('No board found for slug ' . $slug);
-        }        
+        }       
         
-        $viewData = array('board' => $board);
+        $repository = $this->getDoctrine()->getRepository('itsallagileCoreBundle:Status');
+        $statusArray = array();
+        $statuses = $repository->findAll();
+        foreach($statuses as $status) {
+            $statusArray[] = $status->getArray();
+        }
+        
+        $viewData = array('board' => $board->getArray(), 'statuses' => $statusArray);
+
         return $this->render('itsallagileScrumboardBundle:Board:index.html.twig', $viewData);
     }
 }
