@@ -1,9 +1,7 @@
 
 .board {
     min-width: 1280px;
-    height:3000px;
     border: 1px solid black;
-    position:relative;
 }
 
 #templates {
@@ -27,8 +25,8 @@
 /* TICKETS */
 
 .ticket {
-    width:100px;
-    height:100px;
+    width:90px;
+    height:90px;
     margin:5px;
     border: 1px solid #888;
     box-shadow: 5px 5px 5px  rgba(200,200,200,0.5);
@@ -77,9 +75,13 @@
     padding:5px;   
     text-align: center;
     border-left: 2px solid grey;
-    width: 300px;
+    width: 310px;
     font-size: 2em;
     float: left;
+}
+
+.status-header-undefined {
+    width:250px;
 }
 
 
@@ -91,11 +93,9 @@
 
 .story {
     width:100%;
-    min-height:120px;
     border: 1px dashed #888;
     box-shadow: 0px 5px 5px  rgba(200,200,200,0.5);
     clear:both;
-    
 }
 
 .story-input {
@@ -110,17 +110,27 @@
 .story-detail-cell {
     border-left: 2px solid grey;
     padding: 5px;
-    width: 300px;
+    width: 250px;
     height:100%;
-    min-height:120px;
     float: left;
+    margin:auto;
 }
 
 .story-status-cell {
     float:left;
     padding: 5px;
-    width:300px;
+    width:310px;
     height:100%;
-    min-height:120px;
+    min-height:130px;
     border-left: 2px solid grey;
+    margin:auto;
+}
+
+.drop-active {
+    background-color: #eee;
+}
+
+.drop-hover {
+    background-color: #ccf;
+    border: 1px solid #22f;
 }

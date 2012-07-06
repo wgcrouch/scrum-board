@@ -28,16 +28,6 @@ class Ticket {
     protected $content;
     
     /**
-     * @ORM\Column(type="integer")
-     */
-    protected $x = 1;
-    
-    /**
-     * @ORM\Column(type="integer")
-     */
-    protected $y = 1;
-    
-    /**
      * @ORM\Column(type="integer", nullable=true)
      */
     protected $parent;
@@ -105,46 +95,6 @@ class Ticket {
     }
 
     /**
-     * Set x
-     *
-     * @param integer $x
-     */
-    public function setX($x)
-    {
-        $this->x = $x;
-    }
-
-    /**
-     * Get x
-     *
-     * @return integer 
-     */
-    public function getX()
-    {
-        return $this->x;
-    }
-
-    /**
-     * Set y
-     *
-     * @param integer $y
-     */
-    public function setY($y)
-    {
-        $this->y = $y;
-    }
-
-    /**
-     * Get y
-     *
-     * @return integer 
-     */
-    public function getY()
-    {
-        return $this->y;
-    }
-
-    /**
      * Set parent
      *
      * @param integer $parent
@@ -169,8 +119,6 @@ class Ticket {
         $data = array(
             'id' => $this->ticketId,
             'type' => $this->type,
-            'x' => $this->x,
-            'y' => $this->y,
             'content' => $this->content,
             'parent' => $this->parent,
             'status' => $this->getStatus()->getStatusId(),

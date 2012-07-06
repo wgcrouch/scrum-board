@@ -12,6 +12,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller,
  */
 class RestController extends Controller
 {
+    protected $responseContent = null;
+    
     /**
      * Create a response with the correct data format and response code
      * @param array $data
@@ -28,10 +30,10 @@ class RestController extends Controller
     }
     
     /**
-     * Get the put data and decode according to the request format
+     * Get the put/post data and decode according to the request format
      * @return array
      */
-    protected function getPutData()
+    protected function decodeResponseContent()
     {
         $serializer = new Serializer(array(), array(
             'json' => new Encoder\JsonEncoder(),
@@ -42,6 +44,20 @@ class RestController extends Controller
         
         $values = $serializer->decode($data, $this->getRequest()->get('_format'));
         return $values;
+    }
+    
+    protected function getParam($param)
+    {
+        if (empty($this->responseContent)) {
+            $this->responseContent = $this->decodeResponseContent();
+        }
+        
+        if (is_array($this->responseContent) 
+            && array_key_exists($param, $this->responseContent)
+        ) {
+            return $this->responseContent[$param];
+        }
+        return null;
     }
     
 }

@@ -56,15 +56,18 @@ class TicketsController extends RestController
     public function postAction(Request $request)
     {        
         $ticket = new Ticket();
-        $ticket->setContent($request->get('content'));
 
-        $ticket->setX($request->get('x'));
-        $ticket->setY($request->get('y'));
-        $ticket->setParent($request->get('parent'));        
-        $ticket->setType($request->get('type'));
-        
-        $story = $this->getDoctrine()->getRepository('itsallagileCoreBundle:Story')->find($request->get('story'));
+        $ticket->setContent($this->getParam('content'));
+        $ticket->setParent($this->getParam('parent'));        
+        $ticket->setType($this->getParam('type'));
+
+        $story = $this->getDoctrine()->getRepository('itsallagileCoreBundle:Story')
+            ->find($this->getParam('story'));
         $ticket->setStory($story);
+        
+        $status = $this->getDoctrine()->getRepository('itsallagileCoreBundle:Status')
+            ->find($this->getParam('status'));
+        $ticket->setStatus($status);
         
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($ticket);  
@@ -89,17 +92,17 @@ class TicketsController extends RestController
             throw $this->createNotFoundException('No ticket found for id '. $ticketId);
         }
         
-        $data = $this->getPutData();
-        $ticket->setContent($data['content']);
+        $ticket->setContent($this->getParam('content'));
+        $ticket->setParent($this->getParam('parent'));        
+        $ticket->setType($this->getParam('type'));
 
-        $ticket->setX($data['x']);
-        $ticket->setY($data['y']);
-        $ticket->setParent($data['parent']);        
-        $ticket->setType($data['type']);
-
-        $story = $this->getDoctrine()->getRepository('itsallagileCoreBundle:Story')->find($data['story']);
-    
+        $story = $this->getDoctrine()->getRepository('itsallagileCoreBundle:Story')
+            ->find($this->getParam('story'));
         $ticket->setStory($story);
+        
+        $status = $this->getDoctrine()->getRepository('itsallagileCoreBundle:Status')
+            ->find($this->getParam('status'));
+        $ticket->setStatus($status);
 
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($ticket);  

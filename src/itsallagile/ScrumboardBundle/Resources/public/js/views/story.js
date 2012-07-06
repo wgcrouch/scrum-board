@@ -9,6 +9,7 @@ itsallagile.View.Story = Backbone.View.extend({
     initialize: function(options) {
         this.statuses = options.statuses;
         this.model.bind('change', this.render, this);
+        this.model.get('tickets').bind('add', this.render, this);
     },
     
     render: function() {
@@ -17,7 +18,7 @@ itsallagile.View.Story = Backbone.View.extend({
         
 
         this.statuses.forEach(function(status, key) {
-            this.statusViews[status.get('id')] = new itsallagile.View.StoryStatusCell({status: status});
+            this.statusViews[status.get('id')] = new itsallagile.View.StoryStatusCell({status: status, storyView: this});
             this.$el.append(this.statusViews[status.get('id')].render().el);
         }, this);
         

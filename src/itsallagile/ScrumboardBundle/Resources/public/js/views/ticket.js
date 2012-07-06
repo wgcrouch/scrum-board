@@ -8,14 +8,14 @@ itsallagile.View.Ticket = Backbone.View.extend({
     },
     
     initialize: function(options) {
-
+        this.model.bind('change', this.refresh);
+        this.model.bind('sync', this.refresh);
     },
     
     render: function() {
         this.id = this.model.get('id');
         this.$el.addClass(this.model.get('type'));
         this.$el.append(_.template(this.template, {content : this.model.get("content")}));        
-                
         return this;
     },
     
