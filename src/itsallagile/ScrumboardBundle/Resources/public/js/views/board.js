@@ -7,6 +7,7 @@ itsallagile.View.Board = Backbone.View.extend({
     toolbarView: null,
     statuses: [],
     statusHeaderView: null,
+    storyViews: {},
     
     
     /**
@@ -44,11 +45,32 @@ itsallagile.View.Board = Backbone.View.extend({
         if (stories !== null) {
             stories.forEach(function(story, key) {
                 var storyView = new itsallagile.View.Story({model: story, statuses: this.statuses});
+                storyView.on('moveTicket', this.onMoveTicket, this);
+                this.storyViews[story.get('id')] = storyView;
                 this.$el.append(storyView.render().el);
             }, this);
         }
         
         return this;
+    }, 
+    
+    //Handle moving a ticket between stories
+    //Looks at bit hacky, but I couldnt find an easier way
+    //of moving an object between collections
+    onMoveTicket: function(ticketCid, originStoryId, status, newStoryId) {
+        var stories = this.model.get('stories');
+        var originStory = stories.get(originStoryId);
+        var newStory = stories.get(newStoryId);
+        var oldTicket = originStory.get('tickets').getByCid(ticketCid);
+        var newTicket = new itsallagile.Model.Ticket(oldTicket.toJSON());
+        
+        newTicket.set('story', newStoryId);
+        newTicket.set('status', status);
+        newTicket.save();
+        newStory.get('tickets').add(newTicket);
+        originStory.get('tickets').remove(oldTicket);
+       
+
     }
     
 });
