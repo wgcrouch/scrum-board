@@ -5,12 +5,10 @@ itsallagile.View.StoryStatusCell = Backbone.View.extend({
     tagName: 'div',
     className: 'story-status-cell',
     status: null,    
-    storyView: null,
     
     //Set the values passed in
     initialize: function(options) {
         this.status = options.status;
-        this.storyView = options.storyView;
     },    
     
     events: {

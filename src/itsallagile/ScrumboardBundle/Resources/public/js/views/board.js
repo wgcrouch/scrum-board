@@ -70,7 +70,6 @@ itsallagile.View.Board = Backbone.View.extend({
         newStory.get('tickets').add(newTicket);
         originStory.get('tickets').remove(oldTicket);
        
-
     }
     
 });

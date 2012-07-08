@@ -36,11 +36,10 @@ itsallagile.View.Story = Backbone.View.extend({
        
         tickets.forEach(function(ticket) {
             var status = ticket.get('status');
-            var ticketView = new itsallagile.View.Ticket({model: ticket, storyView: this});
+            var ticketView = new itsallagile.View.Ticket({model: ticket});
             this.statusViews[status].$el.append(ticketView.render().el);
         }, this);
-        
-        
+               
         return this;
     },
     
