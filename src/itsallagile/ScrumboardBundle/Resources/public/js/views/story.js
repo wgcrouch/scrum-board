@@ -24,7 +24,7 @@ itsallagile.View.Story = Backbone.View.extend({
         
 
         this.statuses.forEach(function(status, key) {
-            var statusView = new itsallagile.View.StoryStatusCell({status: status, storyView: this});          
+            var statusView = new itsallagile.View.StoryStatusCell({status: status, story: this.model});          
             statusView.on('moveTicket', this.onMoveTicket, this);
             statusView.on('createTicket', this.onCreateTicket, this);
             

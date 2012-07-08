@@ -5,10 +5,12 @@ itsallagile.View.StoryStatusCell = Backbone.View.extend({
     tagName: 'div',
     className: 'story-status-cell',
     status: null,    
+    story: null,
     
     //Set the values passed in
     initialize: function(options) {
         this.status = options.status;
+        this.story = options.story;
     },    
     
     events: {
@@ -36,8 +38,13 @@ itsallagile.View.StoryStatusCell = Backbone.View.extend({
         }
         
         if (ui.draggable.hasClass('ticket')) {
-            var storyId = ui.draggable.data('storyId');
+            var storyId = ui.draggable.data('story');
+            var status = ui.draggable.data('status');
             var cid = ui.draggable.data('cid');
+            //if nothing has changed then do nothing
+            if (storyId == this.story.get('id') &&  status == this.status.get('id')) {
+                return false;
+            }
             ui.draggable.remove();
             event.stopPropagation();
             this.trigger('moveTicket', cid, storyId, this.status.get('id'));
