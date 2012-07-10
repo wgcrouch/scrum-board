@@ -1,9 +1,9 @@
 //View class for the story row
 itsallagile.View.Story = Backbone.View.extend({
-    tagName: 'div',
+    tagName: 'tr',
     id: 'story',
     className: 'story',
-    template: '<div class="story-detail-cell"><p class="story-content"><%= content %></p><p class="story-input"><%= content %></p></div>',
+    template: '<td class="story-detail-cell"><p class="story-content"><%= content %></p><p class="story-input"><%= content %></p></td>',
     statuses: null,
     statusViews: [],
     

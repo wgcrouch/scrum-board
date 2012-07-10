@@ -2,7 +2,7 @@
  * View class for a story status cell
  */
 itsallagile.View.StoryStatusCell = Backbone.View.extend({
-    tagName: 'div',
+    tagName: 'td',
     className: 'story-status-cell',
     status: null,    
     story: null,
@@ -13,6 +13,7 @@ itsallagile.View.StoryStatusCell = Backbone.View.extend({
         this.story = options.story;
     },    
     
+    //Bind events to methods
     events: {
       "drop": "drop"    
     },

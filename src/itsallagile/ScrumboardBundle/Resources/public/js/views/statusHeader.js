@@ -4,7 +4,7 @@
  * Container div for the status column headers
  */
 itsallagile.View.StatusHeader = Backbone.View.extend({
-    tagName: 'div',
+    tagName: 'tr',
     id: 'status-header',
     className: 'status-header',
     cellTemplates: [],
