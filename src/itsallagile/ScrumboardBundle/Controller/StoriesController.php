@@ -78,12 +78,12 @@ class StoriesController extends RestController
     public function postAction(Request $request)
     {        
         $story = new Story();
-        $story->setContent($request->get('content'));
+        $story->setContent($this->getParam('content'));
 
-        $story->setX($request->get('x'));
-        $story->setY($request->get('y'));
+        $story->setSort($this->getParam('sort'));
+        $story->setPoints($this->getParam('points'));
         
-        $board = $this->getDoctrine()->getRepository('itsallagileCoreBundle:Board')->find($request->get('boardId'));
+        $board = $this->getDoctrine()->getRepository('itsallagileCoreBundle:Board')->find($this->getParam('boardId'));
         $story->setBoard($board);
         
         $em = $this->getDoctrine()->getEntityManager();
@@ -109,12 +109,12 @@ class StoriesController extends RestController
             throw $this->createNotFoundException('No story found for id '. $storyId);
         }
         
-        $story->setContent($request->get('content'));
+        $story->setContent($this->getParam('content'));
 
-        $story->setX($request->get('x'));
-        $story->setY($request->get('y'));
+        $story->setSort($this->getParam('sort'));
+        $story->setPoints($this->getParam('points'));
 
-        $board = $this->getDoctrine()->getRepository('itsallagileCoreBundle:Board')->find($request->get('boardId'));
+        $board = $this->getDoctrine()->getRepository('itsallagileCoreBundle:Board')->find($this->getParam('boardId'));
         $story->setBoard($board);
 
         $em = $this->getDoctrine()->getEntityManager();

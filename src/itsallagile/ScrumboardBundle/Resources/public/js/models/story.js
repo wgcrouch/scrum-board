@@ -4,9 +4,11 @@
 itsallagile.Model.Story = Backbone.Model.extend({
     urlRoot: '/api/stories',
     
-    defaults: {
-        tickets: []
-    },   
+    defaults: function() {
+        return {
+            tickets: new itsallagile.Collection.Tickets()       
+        };
+    },
     
     initialize: function(options) {
         

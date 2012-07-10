@@ -9,13 +9,37 @@
     position:relative;
 }
 
-#templates {
+#toolbar {
     border: 1px solid black;
     height: 60px;
     position:fixed;
     top:50px;
     z-index: 9000;
     background-color: white;
+    vertical-align: middle;
+}
+
+#templates {
+    float: left;
+}
+
+#actions {
+    float: right;
+}
+
+.action {
+    vertical-align: middle;
+    padding: 2px;
+    float: right;
+    border: 1px solid #aaa;
+    border-right: 3px solid #aaa;
+    border-bottom: 3px solid #aaa;
+    height:30px;
+    margin:5px;
+}
+
+.action:hover{
+    cursor:pointer;
 }
 
 .selected {
@@ -42,6 +66,13 @@
     float:left;
 }
 
+.delete-ticket {
+    display: none;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+}
 
 .ticket-input {
     width: 90%;
@@ -94,25 +125,61 @@
 
 /* STORY ELEMENT */
 
-.story-content {
-    width:100%;
-}
-
 .story {
     width:100%;
     border: 1px dashed #888;
     box-shadow: 0px 5px 5px  rgba(200,200,200,0.5);
     clear:both;
-    vertical-align: top;
+    vertical-align: top;    
+}
+
+.story-content {
+    width:80%;
+    min-height: 100px;
 }
 
 .story-input {
     background: none;
     border:none;
-    width:95%;
+    width:80%;
     height:95%;
+    min-height: 100px;
     resize: none;
     display:none;
+}
+
+.story-points {
+    font-weight: bold;
+    font-size: 2em;
+    width: 40px;
+    height: 30px;
+    bottom: 5px;
+    right: 5px;
+    position: absolute;
+    border: 1px solid #aaa;
+    padding: 5px;
+    padding-top:15px;
+    text-align: center;
+}
+
+.delete-story {
+    display: none;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+}
+
+.story-points p {
+    font-size: 1.3em;
+    vertical-align: middle;
+}
+
+.story-points-input {
+    width: 80%;
+    height:80%;
+    resize: none;
+    display: none;
 }
 
 .story-detail-cell {

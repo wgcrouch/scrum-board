@@ -17,7 +17,10 @@ itsallagile.View.Board = Backbone.View.extend({
         this.statuses = options.statuses;
         this.statusHeaderView = new itsallagile.View.StatusHeader({statuses : this.statuses});
         this.model.bind('change', this.render, this);
-
+        var stories = this.model.get('stories')
+        stories.bind('add', this.render, this);
+        stories.bind('remove', this.render, this);
+        stories.bind('reset', this.render, this);
         return this;
     },
     
@@ -26,14 +29,15 @@ itsallagile.View.Board = Backbone.View.extend({
      * and calling render on all stories
      */
     render: function() {      
-        
-        this.$el.append(this.statusHeaderView.render().el);
+        this.$el.html('');
+        this.$el.append($('<thead>').append(this.statusHeaderView.render().el));
         var stories = this.model.get('stories');
         if (stories !== null) {
             stories.forEach(function(story, key) {
                 var storyView = new itsallagile.View.Story({model: story, statuses: this.statuses});
                 storyView.on('moveTicket', this.onMoveTicket, this);
-                this.storyViews[story.get('id')] = storyView;
+                storyView.on('deleteStory', this.onDeleteStory, this);
+                this.storyViews[story.get('id')] = storyView;                
                 this.$el.append(storyView.render().el);
             }, this);
         }
@@ -58,7 +62,7 @@ itsallagile.View.Board = Backbone.View.extend({
         originStory.get('tickets').remove(oldTicket);
        
     }
-    
+        
 });
 
 

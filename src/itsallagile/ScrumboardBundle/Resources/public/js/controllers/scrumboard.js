@@ -11,7 +11,9 @@ itsallagile.Controller.Scrumboard = itsallagile.baseObject.extend({
     
     load: function() {
         var container = $('#board-container');
+        
         this.toolbarView = new itsallagile.View.Toolbar({
+            model: this.board,
             templates: [
                 new itsallagile.View.Template({type: 'task'}),
                 new itsallagile.View.Template({type: 'test'}),

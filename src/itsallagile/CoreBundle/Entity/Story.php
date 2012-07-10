@@ -24,7 +24,7 @@ class Story {
     protected $content;
     
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     protected $sort;
     
@@ -38,6 +38,11 @@ class Story {
      * @ORM\OneToMany(targetEntity="Ticket", mappedBy="story")
      */
     protected $tickets;
+    
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    protected $points;
     
     public function __construct()
     {
@@ -87,6 +92,26 @@ class Story {
     }
 
     /**
+     * Get points
+     *
+     * @return integer 
+     */
+    public function getPoints()
+    {
+        return $this->points;
+    }
+    
+    /**
+     * Set points
+     *
+     * @param integer $points
+     */
+    public function setPoints($points)
+    {
+        $this->points = $points;
+    }
+
+    /**
      * Get sort
      *
      * @return integer 
@@ -101,6 +126,7 @@ class Story {
         $data = array(
             'id' => $this->storyId,
             'sort' => $this->sort,
+            'points' => $this->points,
             'content' => $this->content,
             'boardId' => $this->board->getBoardId()
         );

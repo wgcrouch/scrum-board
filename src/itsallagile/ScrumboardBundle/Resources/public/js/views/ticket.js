@@ -4,10 +4,13 @@
 itsallagile.View.Ticket = Backbone.View.extend({
     tagName: 'div',
     className: 'ticket',
-    template: '<p class="ticket-content"><%= content %></p><textarea class="ticket-input"><%= content %>',
+    template: '<p class="ticket-content"><%= content %></p><textarea class="ticket-input"><%= content %></textarea><i class="icon-remove delete-ticket"></i>',
     events: {
         "dblclick": "startEdit",
-        "blur textarea": "endEdit"
+        "blur textarea": "endEdit",
+        'hover' : 'toggleShowDelete',
+        'mouseOut' : 'toggleShowDelete',
+        'click .delete-ticket' : 'deleteConfirm'
     },
     storyView: null,
     
@@ -46,6 +49,20 @@ itsallagile.View.Ticket = Backbone.View.extend({
         this.model.set('content', text.val());
         this.model.save();
        
+    },
+    
+    toggleShowDelete: function() {
+        $('.delete-ticket', this.$el).fadeToggle('fast');
+    },
+    
+    deleteConfirm: function(event) {
+        if (confirm('Are you sure you want to delete this ticket?')) {
+            this.model.destroy({silent: true});
+            this.$el.fadeOut();
+        } else {
+            event.preventDefault();
+            event.stopPropagation();
+        }
     }
     
 });
