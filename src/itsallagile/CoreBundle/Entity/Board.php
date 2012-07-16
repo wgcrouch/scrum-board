@@ -23,12 +23,12 @@ class Board {
     protected $boardId;
     
     /**
-     * @ORM\Column(type="string", length="255", nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=false)
      */
     protected $name;
     
     /**
-     * @ORM\Column("string", length="255", nullable=false, unique=true)
+     * @ORM\Column(type="string", length=255, nullable=false, unique=true)
      */
     protected $slug;
     

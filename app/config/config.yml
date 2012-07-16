@@ -1,21 +1,22 @@
 imports:
-    - { resource: parameters.ini }
+    - { resource: parameters.yml }
     - { resource: security.yml }
 
 framework:
     #esi:             ~
     #translator:      { fallback: %locale% }
     secret:          %secret%
-    charset:         UTF-8
-    router:          { resource: "%kernel.root_dir%/config/routing.yml" }
+    router:          
+      resource: "%kernel.root_dir%/config/routing.yml"
+      strict_parameters: %kernel.debug%
     form:            true
     csrf_protection: true
     validation:      { enable_annotations: true }
     templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
     translator:      { fallback: en }
-    session:
-        default_locale: %locale%
-        auto_start:     true
+    default_locale: %locale%
+    session: ~
+    trust_proxy_headers: false
 
 # Twig Configuration
 twig:
@@ -26,6 +27,7 @@ twig:
 assetic:
     debug:          %kernel.debug%
     use_controller: false
+    bundles: [ itsallagileBootstrapBundle, itsallagileScrumboardBundle, itsallagileScrumboardBundle ]
     # java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -55,7 +57,5 @@ swiftmailer:
     host:      %mailer_host%
     username:  %mailer_user%
     password:  %mailer_password%
+    spool: { type: memory }
 
-jms_security_extra:
-    secure_controllers:  true
-    secure_all_services: false

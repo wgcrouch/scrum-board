@@ -3,6 +3,7 @@ namespace itsallagile\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM,
     Symfony\Component\Security\Core\User\UserInterface,
+    Symfony\Component\Security\Core\User\EquatableInterface,
     Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity,
     Symfony\Component\Validator\Constraints as Assert,
     Doctrine\Common\Collections\ArrayCollection;
@@ -12,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM,
  * @ORM\Table(name="user") 
  * @UniqueEntity("email")
  */
-class User implements UserInterface
+class User implements UserInterface, EquatableInterface
 {
     /**
      * @ORM\Id
@@ -166,7 +167,7 @@ class User implements UserInterface
     /**
      * @inheritDoc
      */
-    public function equals(UserInterface $user)
+    public function isEqualTo(UserInterface $user)
     {
         return $this->getUsername() === $user->getUsername();
     }
