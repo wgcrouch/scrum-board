@@ -23,16 +23,16 @@ itsallagile.View.Story = Backbone.View.extend({
     //Set up the statuses and bind on changes to models
     initialize: function(options) {
         this.statuses = options.statuses;
-    },
-    
-    //Render function
-    //Renders the status cells and tickets within those cells
-    render: function() {
         this.model.bind('change', this.render, this);
         this.model.get('tickets').bind('add', this.render, this);
         this.model.get('tickets').bind('remove', this.render, this);
         this.model.get('tickets').bind('change', this.render, this);
         this.model.get('tickets').bind('reset', this.render, this);
+    },
+    
+    //Render function
+    //Renders the status cells and tickets within those cells
+    render: function() {
         this.id = this.model.get('id');
         this.$el.html(_.template(
             this.template, {content : this.model.get("content"), points: this.model.get("points")}));
