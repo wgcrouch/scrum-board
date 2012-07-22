@@ -3,11 +3,11 @@ namespace itsallagile\CoreBundle\Form\Type\Team;
 
 use Symfony\Component\Form\AbstractType,
     Symfony\Component\Form\Extension\Core\Type\RepeatedType,
-    Symfony\Component\Form\FormBuilder;
+    Symfony\Component\Form\FormBuilderInterface;
 
 class Add extends AbstractType
 {
-    public function buildForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name', 'text');
     }
