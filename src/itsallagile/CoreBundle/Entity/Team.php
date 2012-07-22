@@ -38,9 +38,15 @@ class Team
      */
     protected $users;
     
+    /**
+     * @ORM\OneToMany(targetEntity="Invitation", mappedBy="team")
+     */
+    protected $invitations;
+    
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->invitations = new ArrayCollection();
     }
     
     /**
@@ -109,6 +115,21 @@ class Team
     public function getUsers()
     {
         return $this->users;
+    }
+    
+    public function getInvitations()
+    {
+        return $this->invitations;
+    }
+    
+    public function setInvitations(ArrayCollection $invitations)
+    {
+        $this->invitations = $invitations;
+    }
+    
+    public function addInvitation(\itsallagile\CoreBundle\Entity\Invitation $invitation)
+    {
+        $this->getInvitations()->add($invitation);
     }
 
     /**
