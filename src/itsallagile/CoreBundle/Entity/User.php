@@ -49,7 +49,7 @@ class User implements UserInterface, EquatableInterface
      *     joinColumns={@ORM\JoinColumn(name="userId", referencedColumnName="userId")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="teamId", referencedColumnName="teamId")})
      */
-    protected $teams;
+    protected $teams; 
     
     public function __construct()
     {
