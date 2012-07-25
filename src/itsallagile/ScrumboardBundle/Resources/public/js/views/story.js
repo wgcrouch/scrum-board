@@ -28,6 +28,7 @@ itsallagile.View.Story = Backbone.View.extend({
         this.model.get('tickets').bind('remove', this.render, this);
         this.model.get('tickets').bind('change', this.render, this);
         this.model.get('tickets').bind('reset', this.render, this);
+        _.bindAll(this);
     },
     
     //Render function
@@ -70,7 +71,13 @@ itsallagile.View.Story = Backbone.View.extend({
         var ticket = this.model.get('tickets').getByCid(ticketCid);
         ticket.set('story', this.model.get('id'));
         ticket.set('status', status);
-        ticket.save();
+        ticket.save(null, {success: this.onMoveSuccess});
+    },
+    
+    onMoveSuccess: function(model, response) {
+        if (typeof itsallagile.socket !== 'undefined') {
+            itsallagile.socket.emit('ticket:change', itsallagile.roomId, response);
+        }
     },
     
     //Event handler for creating a ticket from a template

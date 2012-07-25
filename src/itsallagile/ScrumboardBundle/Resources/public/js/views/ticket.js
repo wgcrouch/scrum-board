@@ -19,6 +19,7 @@ itsallagile.View.Ticket = Backbone.View.extend({
         this.model.bind('change', this.refresh);
         this.model.bind('sync', this.refresh);
         this.storyView = options.storyView;
+        _.bindAll(this);
     },
     
     //Render a ticket
@@ -41,14 +42,21 @@ itsallagile.View.Ticket = Backbone.View.extend({
     
     //Save the ticket when editing has finished
     endEdit: function() {
-        var p = $('p',this.$el);
+        var p = $('p', this.$el);
         var text = $('textarea', this.$el);
         p.html(text.val());
         text.hide();
         p.show();
         this.model.set('content', text.val());
-        this.model.save();
+        this.model.save(null, {success: this.changeSuccess});
        
+    },
+    
+    //Callback function for successfully changing a tickets contents
+    changeSuccess: function(model, response) {
+        if (typeof itsallagile.socket !== 'undefined') {
+            itsallagile.socket.emit('ticket:change', itsallagile.roomId, response);
+        }
     },
     
     toggleShowDelete: function() {

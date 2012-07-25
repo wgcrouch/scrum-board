@@ -9,7 +9,7 @@ itsallagile.Controller.Scrumboard = itsallagile.baseObject.extend({
     boardView: null,
     toolbarView: null,
     
-    load: function() {
+    load: function() {        
         var container = $('#board-container');
         
         this.toolbarView = new itsallagile.View.Toolbar({
@@ -32,10 +32,21 @@ itsallagile.Controller.Scrumboard = itsallagile.baseObject.extend({
         container.append(this.toolbarView.render().el);
         container.append(this.boardView.render().el);
         
-//        itsallagile.socket = io.connect(window.location.hostname + ':8080'); 
-//        board.render();   
-//        itsallagile.socket.emit('subscribe', board.getRoomId());  
-//        this.initHandlers();
+        //Open a socket connection with the /board namespace
+        itsallagile.socket = io.connect(window.location.hostname + ':8080'); 
+
+        itsallagile.roomId = 'board:' +  this.board.get("id");
+        itsallagile.socket.on('connect', _.bind(this.onSocketConnect, this));
+               
+    },
+    
+    //Handler for socket connections and reconnections
+    onSocketConnect: function() {
+        //Join the room for this scrumboard
+        itsallagile.socket.emit('subscribe', itsallagile.roomId); 
+
+        //We now have a socket so bind on events from it
+        this.boardView.bindSocketEvents();
     }
     
     

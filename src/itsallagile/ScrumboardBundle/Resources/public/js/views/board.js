@@ -20,8 +20,24 @@ itsallagile.View.Board = Backbone.View.extend({
         var stories = this.model.get('stories')
         stories.bind('add', this.render, this);
         stories.bind('remove', this.render, this);
-        stories.bind('reset', this.render, this);
+        stories.bind('reset', this.render, this);        
+
+        _.bindAll(this);
+        
         return this;
+    },
+    
+    /**
+     * Bind to events coming in from the socket connection
+     * We do this at board level as it has the easiest access
+     * to sub objects
+     */
+    bindSocketEvents: function() {
+        var socket = itsallagile.socket;        
+        if (typeof socket !== 'undefined') {
+            socket.on('ticket:change', this.onRemoteTicketChange);
+            socket.on('ticket:move', this.onRemoteTicketMove);
+        }
     },
     
     /**
@@ -57,11 +73,37 @@ itsallagile.View.Board = Backbone.View.extend({
         
         newTicket.set('story', newStoryId);
         newTicket.set('status', status);
-        newTicket.save();
+        newTicket.save(null, {success: this.onMoveSuccess});
         newStory.get('tickets').add(newTicket);
-        originStory.get('tickets').remove(oldTicket);
-       
-    }
+        originStory.get('tickets').remove(oldTicket);    
+        if (typeof itsallagile.socket !== 'undefined') {
+            itsallagile.socket.emit('ticket:move', itsallagile.roomId, newTicket, originStoryId);
+        }
+    },
+    
+    //Handle a ticket moved between stories by another user
+    onRemoteTicketMove: function(ticket, originStoryId) {
+        console.log(ticket);
+        var stories = this.model.get('stories');
+        var originStory = stories.get(originStoryId);
+        var newStory = stories.get(ticket.story);
+        var oldTicket = originStory.get('tickets').get(ticket.id);
+        var newTicket = new itsallagile.Model.Ticket(ticket);
+        
+        newStory.get('tickets').add(newTicket);
+        originStory.get('tickets').remove(oldTicket);    
+    },
+        
+    //Handle ticket change from a different user
+    onRemoteTicketChange: function(ticketData) {
+        var ticketId = ticketData.id;
+        var storyId = ticketData.story;
+        
+        var stories = this.model.get('stories');
+        var story = stories.get(storyId);
+        var ticket = story.get('tickets').get(ticketId);        
+        ticket.set(ticketData);
+    }    
         
 });
 
