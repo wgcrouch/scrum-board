@@ -15,7 +15,7 @@ Create an empty database
 
 Update parameters.ini with your database config
 
-From the root folder run "php bin/vendors install" to pull in all deps
+From the root folder run "php bin/composer.phar install" to pull in all deps
 
 Then run "php app/console doctrine:migrations:migrate"
 
