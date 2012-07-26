@@ -5,16 +5,32 @@
 
 var io = require('socket.io').listen(8080);
 
+var clients = {};
+var users = {};
+
 io.sockets.on('connection', function (socket) {
-  
+    
     //Allow clients to subscribe to a specific board
-    socket.on('subscribe', function(data) { 
-        socket.join(data);     
+    socket.on('subscribe', function(room, username) { 
+        socket.join(room);   
+        if (typeof(users[room]) == 'undefined') {
+            users[room] = [];
+            clients[room] = {};
+        }
+        clients[room][socket.id] = username;
+        users[room].push(username);
+        
+        io.sockets.in(room).emit('user:change', users[room]);
     });
   
     //Allow clients to unsubscribe from a board
-    socket.on('unsubscribe', function(data) { 
-        socket.leave(data); 
+    socket.on('unsubscribe', function(room) { 
+        socket.leave(room); 
+        
+        users.splice(clients.indexOf(clients[room][socket.id]), 1);
+        delete clients[room][socket.id];
+        
+        io.sockets.in(room).emit('user:change', users[room]);
     });
      
     //Editing a ticket

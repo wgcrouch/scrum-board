@@ -33,6 +33,7 @@
         {% autoescape false %}
         itsallagile.Controller.Scrumboard.board = new itsallagile.Model.Board({{ board|json_encode() }}, {parse:true});
         itsallagile.Controller.Scrumboard.statuses = new itsallagile.Collection.Statuses({{ statuses|json_encode()}});
+        itsallagile.Controller.Scrumboard.user = '{{ app.user.email }}';
         {% endautoescape %}
     </script>
     <script>

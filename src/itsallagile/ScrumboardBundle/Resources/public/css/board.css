@@ -23,6 +23,37 @@
     float: left;
 }
 
+#connected-users {
+    padding:5px;
+    border: 0px;
+    position:fixed;
+    bottom:40px;
+    right: 20px;
+    z-index: 9000;
+}
+
+#connected-users p {
+    background-color: blue;
+    cursor: pointer;
+    color: white;
+    margin:0;
+    padding:5px;
+}
+
+#connected-users #users-list {
+    display: none;
+    border: 1px solid black;
+    background-color: #eee;
+    list-style:none;
+    padding: 5px;
+    margin:0;
+}
+
+
+#connected-users #users-list li {
+    padding-left: 0px;
+}
+
 #actions {
     float: right;
 }
