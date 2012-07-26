@@ -91,7 +91,13 @@ itsallagile.View.Story = Backbone.View.extend({
         var ticket = new itsallagile.Model.Ticket(data);
         var tickets = this.model.get('tickets');
         tickets.add(ticket);
-        ticket.save();
+        ticket.save(null, {success: this.onCreateSuccess});
+    },
+    
+    onCreateSuccess: function(model, response) {
+        if (typeof itsallagile.socket !== 'undefined') {
+            itsallagile.socket.emit('ticket:create', itsallagile.roomId, response);
+        }
     },
     
     //Show the edit box when story content is double clicked

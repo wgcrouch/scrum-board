@@ -1,5 +1,6 @@
 /**
  * Simple socket server for the scrum board, passes events on to all connected clients on a board
+ * excluding the originator
  */
 
 var io = require('socket.io').listen(8080);

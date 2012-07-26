@@ -67,6 +67,9 @@ itsallagile.View.Ticket = Backbone.View.extend({
         if (confirm('Are you sure you want to delete this ticket?')) {
             this.model.destroy({silent: true});
             this.$el.fadeOut();
+            if (typeof itsallagile.socket !== 'undefined') {
+                itsallagile.socket.emit('ticket:delete', itsallagile.roomId, this.model.toJSON());
+            }
         } else {
             event.preventDefault();
             event.stopPropagation();
