@@ -37,7 +37,9 @@ itsallagile.View.Story = Backbone.View.extend({
         this.id = this.model.get('id');
         this.$el.html(_.template(
             this.template, {content : this.model.get("content"), points: this.model.get("points")}));
+        var contentP = $('p.story-content', this.$el);
         
+        contentP.html(this.formatText(contentP.html()));
 
         this.statuses.forEach(function(status, key) {
             var statusView = new itsallagile.View.StoryStatusCell({status: status, story: this.model});          
@@ -110,7 +112,7 @@ itsallagile.View.Story = Backbone.View.extend({
     endEditContent: function() {
         var p = $('p.story-content',this.$el);
         var text = $('textarea.story-input', this.$el);
-        p.html(text.val());
+        p.html(this.formatText(text.val()));
         text.hide();
         p.show();
         this.model.set('content', text.val());
@@ -146,6 +148,11 @@ itsallagile.View.Story = Backbone.View.extend({
             event.preventDefault();
             event.stopPropagation();
         }
+    }, 
+    
+    formatText: function(text) {
+        var breakTag = '<br/>'; 
+        return (text + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
     }
 });
 

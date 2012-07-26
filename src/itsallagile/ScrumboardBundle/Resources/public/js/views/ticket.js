@@ -33,7 +33,8 @@ itsallagile.View.Ticket = Backbone.View.extend({
     render: function() {
         this.id = this.model.get('id');
         this.$el.addClass(this.model.get('type'));
-        this.$el.append(_.template(this.template, {content : this.model.get("content")}));    
+        this.$el.append(_.template(this.template, {content : this.model.get("content")}));
+        $('p', this.$el).html(this.formatText($('p', this.$el).html()));
         this.$el.data('cid', this.model.cid);
         this.$el.data('story', this.model.get('story'));
         this.$el.data('status', this.model.get('status'));
@@ -55,12 +56,11 @@ itsallagile.View.Ticket = Backbone.View.extend({
     endEdit: function() {
         var p = $('p', this.$el);
         var text = $('textarea', this.$el);
-        p.html(text.val());
+        p.html(this.formatText(text.val()));
         text.hide();
         p.show();
         this.model.set('content', text.val());
-        this.model.save(null, {success: this.changeSuccess});
-       
+        this.model.save(null, {success: this.changeSuccess});       
     },
     
     /**
@@ -83,14 +83,15 @@ itsallagile.View.Ticket = Backbone.View.extend({
     /**
      * Zoom in/out of a ticket
      */
-    zoomToggle: function() {        
+    zoomToggle: function() {       
+        var speed = 300;
         if (this.$el.hasClass('zoomed')) {
             this.$el.removeClass('zoomed');
-            this.$el.animate({width:90, height:90});
+            this.$el.animate({width:90, height:90}, speed);
             $('.zoom-ticket', this.$el).removeClass('icon-zoom-out').addClass('icon-zoom-in');
         } else {
             this.$el.addClass('zoomed');
-            this.$el.animate({width:190, height:190});
+            this.$el.animate({width:190, height:190}, speed);
             $('.zoom-ticket', this.$el).removeClass('icon-zoom-in').addClass('icon-zoom-out');
         }
     },
@@ -109,7 +110,13 @@ itsallagile.View.Ticket = Backbone.View.extend({
             event.preventDefault();
             event.stopPropagation();
         }
+    },
+    
+    formatText: function(text) {
+        var breakTag = '<br/>'; 
+        return (text + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
     }
+    
     
 });
 
