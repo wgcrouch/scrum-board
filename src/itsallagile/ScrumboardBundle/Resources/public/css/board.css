@@ -64,6 +64,7 @@
     border: 1px solid #888;
     box-shadow: 5px 5px 5px  rgba(200,200,200,0.5);
     float:left;
+    overflow: hidden;
 }
 
 .delete-ticket {
@@ -71,6 +72,14 @@
     position: absolute;
     top: 5px;
     right: 5px;
+    cursor: pointer;
+}
+
+.zoom-ticket {
+    display: none;
+    position: absolute;
+    top: 5px;
+    right: 25px;
     cursor: pointer;
 }
 
