@@ -5,51 +5,77 @@
 
 var io = require('socket.io').listen(8080);
 
-var clients = {};
-var users = {};
+/**
+ * Map of client IDs to usernames
+ * TODO: add a way of pruning old clientIds
+ */
+var usernames = {};
 
 io.sockets.on('connection', function (socket) {
     
-    //Allow clients to subscribe to a specific board
+    /**
+     * Get the list of usernames connected to a room
+     */
+    var getCurrentUsers = function(room) {   
+        var currentClients = io.sockets.clients(room);
+        var returnClients = [];
+        
+        for (var i = 0; i < currentClients.length; i++) {
+            var client = currentClients[i];
+            if (usernames[room][client.id] !== 'undefined') {
+                returnClients.push(usernames[room][client.id]);
+            }
+        }
+        return returnClients;
+    }     
+        
+    /**
+     * Allow clients to subscribe to a specific board
+     */
     socket.on('subscribe', function(room, username) { 
         socket.join(room);   
-        if (typeof(users[room]) == 'undefined') {
-            users[room] = [];
-            clients[room] = {};
+        if (typeof(usernames[room]) == 'undefined') {
+            usernames[room] = {};
         }
-        clients[room][socket.id] = username;
-        users[room].push(username);
-        
-        io.sockets.in(room).emit('user:change', users[room]);
+        usernames[room][socket.id] = username;        
+        io.sockets.in(room).emit('user:change', getCurrentUsers(room));
     });
   
-    //Allow clients to unsubscribe from a board
+    /**
+     * Allow clients to unsubscribe from a board
+     */
     socket.on('unsubscribe', function(room) { 
-        socket.leave(room); 
+        socket.leave(room);         
+        delete usernames[room][socket.id];
         
-        users.splice(clients.indexOf(clients[room][socket.id]), 1);
-        delete clients[room][socket.id];
-        
-        io.sockets.in(room).emit('user:change', users[room]);
-    });
+        io.sockets.in(room).emit('user:change', getCurrentUsers(room));
+    });          
      
-    //Editing a ticket
+    /**
+     * Editing a ticket
+     */
     socket.on('ticket:change', function (room, ticket) {
         io.sockets.in(room).except(socket.id).emit('ticket:change', ticket);
     });
     
-    //Moving a ticket between stories
+    /**
+     * Moving a ticket between stories
+     */
     socket.on('ticket:move', function (room, ticket, originStoryId) {
         io.sockets.in(room).except(socket.id).emit('ticket:move', ticket, originStoryId);
     });
   
-    //Adding a new ticket
+    /**
+     * Adding a new ticket
+     */
     socket.on('ticket:create', function (room, ticket) {
         io.sockets.in(room).except(socket.id).emit('ticket:create', ticket);
     });
   
-    //Deleting a ticket
+    /**
+     * Deleting a ticket
+     */
     socket.on('ticket:delete', function (room, ticketId) {
         io.sockets.in(room).except(socket.id).emit('ticket:delete', ticketId);
-    });
+    });    
 });
