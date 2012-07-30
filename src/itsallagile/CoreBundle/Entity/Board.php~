@@ -132,36 +132,4 @@ class Board {
         }
         return $data;
     }
-
-    /**
-     * Add chatMessages
-     *
-     * @param itsallagile\CoreBundle\Entity\ChatMessage $chatMessages
-     * @return Board
-     */
-    public function addChatMessage(\itsallagile\CoreBundle\Entity\ChatMessage $chatMessages)
-    {
-        $this->chatMessages[] = $chatMessages;
-        return $this;
-    }
-
-    /**
-     * Remove chatMessages
-     *
-     * @param <variableType$chatMessages
-     */
-    public function removeChatMessage(\itsallagile\CoreBundle\Entity\ChatMessage $chatMessages)
-    {
-        $this->chatMessages->removeElement($chatMessages);
-    }
-
-    /**
-     * Get chatMessages
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getChatMessages()
-    {
-        return $this->chatMessages;
-    }
 }
