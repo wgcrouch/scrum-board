@@ -9,11 +9,11 @@ Setup instructions:
 
 Clone
 
-Copy app/config/parameters.ini.dist to app/config/parameters.ini
+Copy app/config/parameters.yml.dist to app/config/parameters.yml
 
 Create an empty database
 
-Update parameters.ini with your database config
+Update parameters.yml with your database config
 
 From the root folder run "php bin/composer.phar install" to pull in all deps
 
