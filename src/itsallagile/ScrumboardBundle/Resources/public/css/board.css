@@ -153,29 +153,43 @@
 /* TICKETS */
 
 .ticket {
-    width:90px;
-    height:90px;
+    width:80px;
+    height:80px;
+    padding: 5px;
     margin:5px;
     border: 1px solid #888;
-    box-shadow: 5px 5px 5px  rgba(200,200,200,0.5);
     float:left;
     overflow: hidden;
+    border-radius: 3px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background-image: -webkit-radial-gradient(center, cover, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.1) 90%);
+    background-image: -moz-radial-gradient(center, cover, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.1) 90%);
+    background-image: -o-radial-gradient(center, cover, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.1) 90%);
 }
 
-.delete-ticket {
-    display: none;
+.ticket-actions {
     position: absolute;
-    top: 5px;
-    right: 5px;
-    cursor: pointer;
+    top: 0;
+    right: 0;
+    background: #eeeeee; /* Old browsers */
+    background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
+    box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.35);
+    height: 20px;
+    width: 40px;
+    display: none;
+    border-radius: 0 0 0 3px;
 }
-
-.zoom-ticket {
-    display: none;
-    position: absolute;
-    top: 5px;
-    right: 25px;
+.ticket-action {
     cursor: pointer;
+    margin: 2px 0 0 5px;
 }
 
 .ticket-input {
@@ -185,7 +199,7 @@
 }
 
 .task {
-    background-color: yellow;
+    background-color: #FFFF84;
 }
 
 .test {
@@ -194,28 +208,29 @@
 }
 
 .bug {
-    background-color: purple;
+    background-color: #BC2EBC;
+    color: white;
 }
 
 .defect {
-    background-color: hotpink;
+    background-color: #FF68DD;
 }
 
 .design {
-    background-color: greenyellow;
+    background-color: #4BFE78;
 }
 
 /* STATUS HEADERS */
 .status-header {
     padding-left:1px;
     clear: both;
-    height:40px;    
+    height:40px;
     vertical-align: central;
 }
 
 .status-header-cell {
-    height:40px; 
-    padding:5px;   
+    height:40px;
+    padding:5px;
     text-align: center;
     border-left: 2px solid grey;
     min-width: 310px;
@@ -233,7 +248,7 @@
     width:100%;
     border: 1px dashed #888;
     clear:both;
-    vertical-align: top;    
+    vertical-align: top;
 }
 
 .story-content {
