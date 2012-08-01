@@ -1,6 +1,9 @@
+/**
+ * Simple view to render chat messages in the chatBox
+ */
 itsallagile.View.ChatMessage = Backbone.View.extend({
     tagName: 'div',
-    template: '<p class="message-head"><%= user.email %>:</p><p class="message-content"><%= content %></p>',
+    template: '<label class="message-head" title="<%= datetime %>"><%= user.email %>:</label><p class="message-content"><%= content %></p>',
     className: 'chat-message',
     
     

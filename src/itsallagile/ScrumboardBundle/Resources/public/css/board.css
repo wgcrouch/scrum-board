@@ -23,6 +23,39 @@
     float: left;
 }
 
+#actions {
+    float: right;
+}
+
+.action {
+    vertical-align: middle;
+    padding: 2px;
+    float: right;
+    border: 1px solid #aaa;
+    border-right: 3px solid #aaa;
+    border-bottom: 3px solid #aaa;
+    height:30px;
+    margin:5px;
+}
+
+.action:hover{
+    cursor:pointer;
+}
+
+.selected {
+    border: 2px dotted blue;
+    box-shadow: 5px 5px 5px  rgba(0,0,200,0.5);
+}
+
+.template {
+    width:50px;
+    height:50px;
+    margin:5px;
+    float: left;
+}
+
+/* Connected users box */
+
 #connected-users {
     padding:5px;
     border: 0px;
@@ -32,7 +65,7 @@
     z-index: 9000;
 }
 
-#connected-users p {
+#user-handle {
     background-color: blue;
     cursor: pointer;
     color: white;
@@ -40,20 +73,20 @@
     padding:5px;
 }
 
-#connected-users #users-list {
+#users-list {
     display: none;
     border: 1px solid black;
-    background-color: #eee;
+    background-color: #white;
     list-style:none;
     padding: 5px;
     margin:0;
 }
 
-
-#connected-users #users-list li {
+#users-list li {
     padding-left: 0px;
 }
 
+/* Chat Box */
 
 #chatbox {
     padding:5px;
@@ -64,7 +97,7 @@
     z-index: 9000;
 }
 
-#chatbox #chat-handle {
+#chat-handle {
     background-color: green;
     cursor: pointer;
     color: white;
@@ -72,6 +105,10 @@
     padding:5px;
     border:1px solid green;
     width:250px;
+}
+
+.new-message {
+    background-color: red !important;
 }
 
 #chat-window {
@@ -112,38 +149,6 @@
     font-weight: bold;
     margin-bottom: 1px;
 }
-
-#actions {
-    float: right;
-}
-
-.action {
-    vertical-align: middle;
-    padding: 2px;
-    float: right;
-    border: 1px solid #aaa;
-    border-right: 3px solid #aaa;
-    border-bottom: 3px solid #aaa;
-    height:30px;
-    margin:5px;
-}
-
-.action:hover{
-    cursor:pointer;
-}
-
-.selected {
-    border: 2px dotted blue;
-    box-shadow: 5px 5px 5px  rgba(0,0,200,0.5);
-}
-
-.template {
-    width:50px;
-    height:50px;
-    margin:5px;
-    float: left;
-}
-
 
 /* TICKETS */
 

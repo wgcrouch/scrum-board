@@ -1,3 +1,6 @@
+/**
+ * View object for the chat box
+ */
 itsallagile.View.ChatBox = Backbone.View.extend({
     tagName: 'div',
     template: '<div id="chat-handle">Chat</div>' +
@@ -11,12 +14,18 @@ itsallagile.View.ChatBox = Backbone.View.extend({
     board: null,
     messages: null,
     
+    /**
+     * Initialize params and bind on collection events
+     */
     initialize: function(options) { 
         this.board = options.board;
         this.messages = options.messages;
         this.messages.bind('add', this.renderNewMessage, this);
     },
     
+    /**
+     * Render the chat box, and render any messages using the sub view
+     **/
     render: function() {
         this.$el.html(_.template(this.template));
         
@@ -41,10 +50,27 @@ itsallagile.View.ChatBox = Backbone.View.extend({
         }
     },
     
+    /**
+     * Show/hide the chat box when the title bar is clicked
+     */
     toggleShowChat: function() {
-        $('#chat-window', this.$el).slideToggle();
+        
+        var window = $('#chat-window', this.$el);
+        window.slideToggle();
+        var handle = $('#chat-handle', this.$el);
+        handle.removeClass('new-message');
+        //Scroll to the latest message
+        var messageBox = $('#chat-messages', this.$el);
+        messageBox.prop('scrollTop', messageBox.prop('scrollHeight'));       
+        if (window.is(':visible')) {
+            $('#message-input', window).focus();
+        }
+        
     },
     
+    /**
+     * When the user submits a new chat message, save it and add it to the collection
+     */
     newMessage: function(event) {
         event.preventDefault();
         event.stopPropagation();
@@ -60,6 +86,9 @@ itsallagile.View.ChatBox = Backbone.View.extend({
         }
     },
    
+   /**
+    * Send a socket message when a new ticket is created
+    */
     onCreateSuccess: function(message) {
         this.renderNewMessage(message);
         if (typeof itsallagile.socket !== 'undefined') {
@@ -67,14 +96,22 @@ itsallagile.View.ChatBox = Backbone.View.extend({
         }
     },
     
+    /**
+     * Handler for a message created by a different user
+     */
     remoteCreate: function(message) {
         var newMessage = new itsallagile.Model.ChatMessage(message);
         this.messages.add(newMessage);
+        $('#chat-handle', this.$el).addClass('new-message');
     },
     
+    /**
+     * When a message is added to the collection, render the new message
+     * so we don't need to rerender the whole chat box
+     */
     renderNewMessage: function(message) {
         var view = new itsallagile.View.ChatMessage({model: message});
-        var messageBox = $('#chat-messages', this.$el)
+        var messageBox = $('#chat-messages', this.$el);
         messageBox.append(view.render().el);    
         messageBox.prop('scrollTop', messageBox.prop('scrollHeight'));
     }

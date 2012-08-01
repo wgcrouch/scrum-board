@@ -5,10 +5,11 @@ itsallagile.View.ConnectedUsers = Backbone.View.extend({
     
     tagName: 'div',
     id: 'connected-users',
-    template: '<ul id="users-list"></ul><p><%= connectedCount %> Connected Users</p>',
+    template: '<div id="user-handle"><%= connectedCount %> Connected Users</div>' +
+        '<ul id="users-list"></ul>',
     users: [],
     events: {
-        'click p' : 'toggleShowUsers'
+        'click #user-handle' : 'toggleShowUsers'
     },
     
     /**
