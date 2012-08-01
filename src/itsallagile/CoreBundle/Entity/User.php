@@ -196,4 +196,17 @@ class User implements UserInterface, EquatableInterface
     {
         $this->teams->removeElement($teams);
     }
+    
+    
+    public function getArray()
+    {
+        $data = array(
+            'id' => $this->userId,
+            'fullName' => $this->fullName,
+            'email' => $this->email
+        );
+        
+        return $data;
+    }
+    
 }

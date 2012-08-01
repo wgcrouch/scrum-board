@@ -130,6 +130,10 @@ class Board {
         foreach ($this->getStories() as $story) {
             $data['stories'][] = $story->getArray(); 
         }
+        
+        foreach ($this->getChatMessages() as $message) {
+            $data['chatMessages'][] = $message->getArray(); 
+        }
         return $data;
     }
 

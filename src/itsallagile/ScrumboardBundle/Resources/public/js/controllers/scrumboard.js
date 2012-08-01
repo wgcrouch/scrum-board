@@ -9,6 +9,7 @@ itsallagile.Controller.Scrumboard = itsallagile.baseObject.extend({
     boardView: null,
     toolbarView: null,
     connectedUsersView: null,
+    messagesView: null,
     
     load: function() {        
         var container = $('#board-container');
@@ -26,6 +27,7 @@ itsallagile.Controller.Scrumboard = itsallagile.baseObject.extend({
         
         this.connectedUsersView = new itsallagile.View.ConnectedUsers();
         
+        this.messagesView = new itsallagile.View.ChatBox({messages: this.board.get('chatMessages'), board: this.board});
         this.boardView = new itsallagile.View.Board({
             model: this.board,
             statuses: this.statuses,
@@ -35,6 +37,7 @@ itsallagile.Controller.Scrumboard = itsallagile.baseObject.extend({
         container.append(this.toolbarView.render().el);
         container.append(this.boardView.render().el);
         container.append(this.connectedUsersView.render().el);
+        container.append(this.messagesView.render().el);
         
         //Open a socket connection with the /board namespace
         itsallagile.socket = io.connect(window.location.hostname + ':8080'); 
@@ -51,6 +54,7 @@ itsallagile.Controller.Scrumboard = itsallagile.baseObject.extend({
         //We now have a socket so bind on events from it
         this.boardView.bindSocketEvents();
         this.connectedUsersView.bindSocketEvents();
+        this.messagesView.bindSocketEvents();
     }    
     
 });

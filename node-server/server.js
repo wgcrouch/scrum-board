@@ -77,5 +77,12 @@ io.sockets.on('connection', function (socket) {
      */
     socket.on('ticket:delete', function (room, ticketId) {
         io.sockets.in(room).except(socket.id).emit('ticket:delete', ticketId);
-    });    
+    });  
+    
+    /**
+     * new chat message
+     */
+    socket.on('chatMessage:create', function (room, message) {
+        io.sockets.in(room).except(socket.id).emit('chatMessage:create', message);
+    }); 
 });

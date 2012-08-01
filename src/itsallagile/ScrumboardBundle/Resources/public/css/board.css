@@ -28,7 +28,7 @@
     border: 0px;
     position:fixed;
     bottom:40px;
-    right: 20px;
+    right: 350px;
     z-index: 9000;
 }
 
@@ -52,6 +52,65 @@
 
 #connected-users #users-list li {
     padding-left: 0px;
+}
+
+
+#chatbox {
+    padding:5px;
+    border: 0px;
+    position:fixed;
+    bottom:40px;
+    right: 20px;
+    z-index: 9000;
+}
+
+#chatbox #chat-handle {
+    background-color: green;
+    cursor: pointer;
+    color: white;
+    margin:0;
+    padding:5px;
+    border:1px solid green;
+    width:250px;
+}
+
+#chat-window {
+    display: none;
+    border: 1px solid green;
+    width:260px;
+    background-color: white;
+}
+
+#chat-messages {
+    border: none;
+    width:250px;
+    height:300px;
+    overflow-y: scroll;
+    padding: 5px;
+}
+
+#message-input-area {
+    border-top: 1px solid black;
+    width: 260px;
+}
+
+#message-input-area { 
+    margin:0;
+}
+
+#message-input {
+    border:none;
+    width:230px;
+    margin:0;
+}
+
+#message-submit {
+    float: right;
+}
+
+.message-head{
+    font-weight: bold;
+    margin-bottom: 1px;
 }
 
 #actions {

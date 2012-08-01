@@ -52,7 +52,8 @@ class ChatMessage {
             'id' => $this->chatMessageId,
             'content' => $this->content,
             'boardId' => $this->board->getBoardId(),
-            'userId' => $this->user->getUserId()
+            'user' => $this->user->getArray(),
+            'datetime' => $this->datetime->format('Y-m-d H:i:s')
         );
 
         return $data;
