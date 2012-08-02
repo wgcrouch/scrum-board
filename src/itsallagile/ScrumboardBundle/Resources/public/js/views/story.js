@@ -3,13 +3,15 @@ itsallagile.View.Story = Backbone.View.extend({
     tagName: 'tr',
     id: 'story',
     className: 'story',
-    template: '<td class="story-detail-cell">' + 
-        '<p class="story-content"><%= content %></p><textarea class="story-input"><%= content %></textarea>' + 
+    template: '<td class="story-detail-cell">' +
+        '<div class="notepaper">' +
+        '<p class="story-content"><%= content %></p><textarea class="story-input"><%= content %></textarea>' +
         '<div class="story-points"><p><%= points %></p><textarea class="story-points-input"><%= points %></textarea></div>' +
-        '<i class="icon-remove delete-story"></i></td>',
+        '<i class="icon-remove delete-story"></i></td>' +
+        '</div>',
     statuses: null,
     statusViews: [],
-    
+
     events: {
         "dblclick .story-content": "startEditContent",
         "blur .story-input": "endEditContent",
@@ -19,7 +21,7 @@ itsallagile.View.Story = Backbone.View.extend({
         'mouseOut .story-detail-cell' : 'toggleShowDelete',
         'click .delete-story' : 'deleteConfirm'
     },
-    
+
     //Set up the statuses and bind on changes to models
     initialize: function(options) {
         this.statuses = options.statuses;
@@ -30,7 +32,7 @@ itsallagile.View.Story = Backbone.View.extend({
         this.model.get('tickets').bind('reset', this.render, this);
         _.bindAll(this);
     },
-    
+
     //Render function
     //Renders the status cells and tickets within those cells
     render: function() {
@@ -38,20 +40,20 @@ itsallagile.View.Story = Backbone.View.extend({
         this.$el.html(_.template(
             this.template, {content : this.model.get("content"), points: this.model.get("points")}));
         var contentP = $('p.story-content', this.$el);
-        
+
         contentP.html(this.formatText(contentP.html()));
 
         this.statuses.forEach(function(status, key) {
-            var statusView = new itsallagile.View.StoryStatusCell({status: status, story: this.model});          
+            var statusView = new itsallagile.View.StoryStatusCell({status: status, story: this.model});
             statusView.on('moveTicket', this.onMoveTicket, this);
             statusView.on('createTicket', this.onCreateTicket, this);
-            
+
             this.$el.append(statusView.render().el);
             this.statusViews[status.get('id')] = statusView;
         }, this);
-        
+
         var tickets = this.model.get('tickets');
-       
+
         tickets.forEach(function(ticket) {
             var status = ticket.get('status');
             if (typeof status !== 'undefined') {
@@ -59,29 +61,29 @@ itsallagile.View.Story = Backbone.View.extend({
                 this.statusViews[status].$el.append(ticketView.render().el);
             }
         }, this);
-              
+
         return this;
     },
-    
+
     //Event handler for moving a ticket
     onMoveTicket: function(ticketCid, originStoryId, status) {
         if (this.model.get('id') !== originStoryId) {
             this.trigger('moveTicket', ticketCid, originStoryId, status, this.model.get('id'));
             return
         }
-        
+
         var ticket = this.model.get('tickets').getByCid(ticketCid);
         ticket.set('story', this.model.get('id'));
         ticket.set('status', status);
         ticket.save(null, {success: this.onMoveSuccess});
     },
-    
+
     onMoveSuccess: function(model, response) {
         if (typeof itsallagile.socket !== 'undefined') {
             itsallagile.socket.emit('ticket:change', itsallagile.roomId, response);
         }
     },
-    
+
     //Event handler for creating a ticket from a template
     onCreateTicket: function(status, type) {
         var data = {
@@ -95,19 +97,19 @@ itsallagile.View.Story = Backbone.View.extend({
         tickets.add(ticket);
         ticket.save(null, {success: this.onCreateSuccess});
     },
-    
+
     onCreateSuccess: function(model, response) {
         if (typeof itsallagile.socket !== 'undefined') {
             itsallagile.socket.emit('ticket:create', itsallagile.roomId, response);
         }
     },
-    
+
     //Show the edit box when story content is double clicked
     startEditContent: function() {
         $('p.story-content',this.$el).hide();
         $('textarea.story-input', this.$el).show().focus();
     },
-    
+
     //Save the story when editing content has finished
     endEditContent: function() {
         var p = $('p.story-content',this.$el);
@@ -118,13 +120,13 @@ itsallagile.View.Story = Backbone.View.extend({
         this.model.set('content', text.val());
         this.model.save();
     },
-    
+
     //Show the edit box when story content is double clicked
     startEditPoints: function() {
         $('.story-points p',this.$el).hide();
         $('.story-points-input', this.$el).show().focus();
     },
-    
+
     //Save the story when editing content has finished
     endEditPoints: function() {
         var p = $('.story-points p',this.$el);
@@ -135,11 +137,11 @@ itsallagile.View.Story = Backbone.View.extend({
         this.model.set('points', text.val());
         this.model.save();
     },
-    
+
     toggleShowDelete: function() {
         $('.delete-story', this.$el).fadeToggle('fast');
     },
-    
+
     deleteConfirm: function(event) {
         if (confirm('Are you sure you want to delete this story?')) {
             this.model.destroy({silent: true});
@@ -148,10 +150,10 @@ itsallagile.View.Story = Backbone.View.extend({
             event.preventDefault();
             event.stopPropagation();
         }
-    }, 
-    
+    },
+
     formatText: function(text) {
-        var breakTag = '<br/>'; 
+        var breakTag = '<br/>';
         return (text + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
     }
 });
