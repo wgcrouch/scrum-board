@@ -146,6 +146,11 @@ itsallagile.View.Story = Backbone.View.extend({
         if (confirm('Are you sure you want to delete this story?')) {
             this.model.destroy({silent: true});
             this.$el.fadeOut();
+            var notification = new itsallagile.View.Notification({
+                message: 'Story deleted successfully',
+                type: 'success'
+            });
+            notification.render();
         } else {
             event.preventDefault();
             event.stopPropagation();

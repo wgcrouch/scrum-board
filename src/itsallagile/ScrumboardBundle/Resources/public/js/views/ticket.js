@@ -108,18 +108,24 @@ itsallagile.View.Ticket = Backbone.View.extend({
             if (typeof itsallagile.socket !== 'undefined') {
                 itsallagile.socket.emit('ticket:delete', itsallagile.roomId, this.model.toJSON());
             }
+
+            var notification = new itsallagile.View.Notification({
+                message: 'Ticket deleted successfully',
+                type: 'success'
+            });
+            notification.render();
         } else {
             event.preventDefault();
             event.stopPropagation();
         }
     },
-    
+
     formatText: function(text) {
-        var breakTag = '<br/>'; 
+        var breakTag = '<br/>';
         return (text + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
     }
-    
-    
+
+
 });
 
 
