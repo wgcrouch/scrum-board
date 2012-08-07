@@ -5,44 +5,21 @@ body {
 .board {
     min-width: 1280px;
     border: none;
+    float: left;
+    margin-left: 114px;
 }
 
 #board-container {
-    padding-top:70px;
     position:relative;
+    overflow: hidden; /* To clear floats */
 }
 
 #toolbar {
-    border: 1px solid black;
-    height: 60px;
-    position:fixed;
-    top:50px;
-    z-index: 9000;
-    background-color: white;
-    vertical-align: middle;
-}
-
-#templates {
+    border: 1px solid #888888;
     float: left;
-}
-
-#actions {
-    float: right;
-}
-
-.action {
     vertical-align: middle;
-    padding: 2px;
-    float: right;
-    border: 1px solid #aaa;
-    border-right: 3px solid #aaa;
-    border-bottom: 3px solid #aaa;
-    height:30px;
-    margin:5px;
-}
-
-.action:hover{
-    cursor:pointer;
+    padding: 10px 5px;
+    position: fixed;
 }
 
 .selected {
@@ -51,10 +28,12 @@ body {
 }
 
 .template {
-    width:50px;
-    height:50px;
-    margin:5px;
-    float: left;
+    width:70px;
+    height:70px;
+    margin: 10px auto 0;
+    cursor: move;
+    border: 1px solid #888888;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 /* Notification container */
@@ -324,7 +303,6 @@ body {
     height:100%;
     position:relative;
     border: 1px solid #888888;
-    border-left: 0;
     min-width: 365px;
 }
 
