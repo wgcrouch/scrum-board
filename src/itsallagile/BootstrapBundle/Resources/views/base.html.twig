@@ -2,14 +2,14 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>>{% block title %}Test Application{% endblock %}</title>
+    <title>{% block title %}Scrumboard{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     {% block styles %}
         <!-- Le styles -->
         {% stylesheets filter='cssrewrite'
             'bundles/itsallagilebootstrap/css/*'
-            
+
         %}
         <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
@@ -58,7 +58,7 @@
  	{% block body %}{% endblock %}
 
     </div> <!-- /container -->
-    
+
     {% block endscript %}
         {% javascripts
             '@itsallagileBootstrapBundle/Resources/public/js/jquery.min.js'

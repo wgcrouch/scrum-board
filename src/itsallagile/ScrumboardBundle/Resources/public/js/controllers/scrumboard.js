@@ -23,29 +23,30 @@ itsallagile.Controller.Scrumboard = itsallagile.baseObject.extend({
                 new itsallagile.View.Template({type: 'defect'}),
                 new itsallagile.View.Template({type: 'design'}),
             ]
-        });  
-        
+        });
+
         this.connectedUsersView = new itsallagile.View.ConnectedUsers();
-        
+
         this.messagesView = new itsallagile.View.ChatBox({messages: this.board.get('chatMessages'), board: this.board});
         this.boardView = new itsallagile.View.Board({
             model: this.board,
             statuses: this.statuses,
             id: 'board-' + this.board.get("id")
         });
-        
+
         container.append(this.toolbarView.render().el);
         container.append(this.boardView.render().el);
         container.append(this.connectedUsersView.render().el);
         container.append(this.messagesView.render().el);
-        
+        container.append('<div id="notification-container"></div>');
+
         //Open a socket connection with the /board namespace
-        itsallagile.socket = io.connect(window.location.hostname + ':8080'); 
+        itsallagile.socket = io.connect(window.location.hostname + ':8080');
 
         itsallagile.roomId = 'board:' +  this.board.get("id");
         itsallagile.socket.on('connect', _.bind(this.onSocketConnect, this));
     },
-    
+
     //Handler for socket connections and reconnections
     onSocketConnect: function() {
         //Join the room for this scrumboard

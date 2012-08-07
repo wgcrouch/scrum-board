@@ -2,7 +2,7 @@ itsallagile.View.Toolbar = Backbone.View.extend({
     tagName: 'div',
     id: 'toolbar',
     templates: [],
-    template: "<div id='templates'></div><div id='actions'><div id='addStory' class='action'>New Story</div></div>",
+    template: "<button id='addStory' class='btn'>New Story</button><div id='templates'></div>",
     
     events: {
         'click #addStory' : 'onClickAddStory'
