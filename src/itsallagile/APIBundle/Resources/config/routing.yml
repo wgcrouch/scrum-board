@@ -1,0 +1,11 @@
+itsallagileAPIBundle_boards:
+    type:     rest
+    resource: itsallagile\APIBundle\Controller\BoardsController
+    name_prefix: itsallagileAPIBundle_
+    
+itsallagileAPIBundle_tickets:
+    type:     rest
+    resource: itsallagile\APIBundle\Controller\TicketsController
+    name_prefix: itsallagileAPIBundle_
+    
+

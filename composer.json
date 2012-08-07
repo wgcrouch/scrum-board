@@ -20,7 +20,7 @@
         
         "doctrine/doctrine-fixtures-bundle": "dev-master",
         "doctrine/doctrine-migrations-bundle": "dev-master",
-        
+      
         "behat/behat":  "2.4.*@stable",
         "behat/mink":   "1.4.*@stable",
 
@@ -28,7 +28,11 @@
         "behat/mink-extension":          "*",
         "behat/mink-browserkit-driver":  "*",
         "behat/mink-selenium2-driver":   "*",
-        "vipsoft/doctrine-data-fixtures-extension": "*"
+        "vipsoft/doctrine-data-fixtures-extension": "*",
+        
+        "friendsofsymfony/rest-bundle" : "dev-master",
+        "jms/serializer-bundle": "dev-master"
+
     },
     "scripts": {
         "post-install-cmd": [

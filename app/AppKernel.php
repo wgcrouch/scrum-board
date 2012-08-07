@@ -24,6 +24,9 @@ class AppKernel extends Kernel
             new itsallagile\ScrumboardBundle\itsallagileScrumboardBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle($this),
+            new FOS\RestBundle\FOSRestBundle(),
+            new itsallagile\APIBundle\itsallagileAPIBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -1,77 +1,14 @@
 itsallagileScrumboardBundle_viewboard:
     pattern:  /scrumboard/{slug}
     defaults: { _controller: itsallagileScrumboardBundle:Scrumboard:index }
-    
-itsallagileScrumboardBundle_boardsGetAll:
-    pattern: /api/boards
-    defaults: { _controller: itsallagileScrumboardBundle:Boards:getAll, _format: json}
-    requirements:
-        _method: GET
-        format: JSON
-        
-itsallagileScrumboardBundle_boardsGetOne:
-    pattern: /api/boards/{boardId}
-    defaults: { _controller: itsallagileScrumboardBundle:Boards:get, _format: json}
-    requirements:
-        _method: GET
-        format: JSON
-        
-itsallagileScrumboardBundle_boardsPost:
-    pattern: /api/boards
-    defaults: { _controller: itsallagileScrumboardBundle:Boards:post, _format: json }
-    requirements:
-        _method: POST
-        format: JSON
-        
-itsallagileScrumboardBundle_boardsPut:
-    pattern: /api/boards/{boardId}
-    defaults: { _controller: itsallagileScrumboardBundle:Boards:put, _format: json }
-    requirements:
-        _method: PUT
-        format: JSON
-        
-itsallagileScrumboardBundle_boardsDelete:
-    pattern: /api/boards/{boardId}
-    defaults: { _controller: itsallagileScrumboardBundle:Boards:delete, _format: json }
-    requirements:
-        _method: DELETE
-        format: JSON    
 
-itsallagileScrumboardBundle_ticketsGetAll:
-    pattern: /api/tickets
-    defaults: { _controller: itsallagileScrumboardBundle:Tickets:getAll, _format: json}
-    requirements:
-        _method: GET
-        format: JSON
-        
-itsallagileScrumboardBundle_ticketsGetOne:
-    pattern: /api/tickets/{ticketId}
-    defaults: { _controller: itsallagileScrumboardBundle:Tickets:get, _format: json}
-    requirements:
-        _method: GET
-        format: JSON
-        
 itsallagileScrumboardBundle_ticketsGetBoard:
     pattern: /api/tickets/board/{boardId}
     defaults: { _controller: itsallagileScrumboardBundle:Tickets:getForBoard, _format: json}
     requirements:
         _method: GET
         format: JSON
-        
-itsallagileScrumboardBundle_ticketsPost:
-    pattern: /api/tickets
-    defaults: { _controller: itsallagileScrumboardBundle:Tickets:post, _format: json }
-    requirements:
-        _method: POST
-        format: JSON
-        
-itsallagileScrumboardBundle_ticketsPut:
-    pattern: /api/tickets/{ticketId}
-    defaults: { _controller: itsallagileScrumboardBundle:Tickets:put, _format: json }
-    requirements:
-        _method: PUT
-        format: JSON
-        
+
 itsallagileScrumboardBundle_ticketsDelete:
     pattern: /api/tickets/{ticketId}
     defaults: { _controller: itsallagileScrumboardBundle:Tickets:delete, _format: json }
