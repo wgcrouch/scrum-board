@@ -6,7 +6,9 @@ itsallagile.Model.Story = Backbone.Model.extend({
     
     defaults: function() {
         return {
-            tickets: new itsallagile.Collection.Tickets()       
+            tickets: new itsallagile.Collection.Tickets(),
+            content: '',
+            points: 0
         };
     },
     

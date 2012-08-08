@@ -89,7 +89,7 @@ itsallagile.View.Ticket = Backbone.View.extend({
         var speed = 300;
         if (this.$el.hasClass('zoomed')) {
             this.$el.removeClass('zoomed');
-            this.$el.animate({width:80, height:80}, speed);
+            this.$el.animate({width:90, height:90}, speed);
             $('.zoom-ticket', this.$el).removeClass('icon-zoom-out').addClass('icon-zoom-in');
         } else {
             this.$el.addClass('zoomed');
