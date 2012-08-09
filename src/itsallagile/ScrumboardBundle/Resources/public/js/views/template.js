@@ -2,7 +2,7 @@
  * View for a ticket template in the toolbox
  */
 itsallagile.View.Template = Backbone.View.extend({
-    tagName: 'div',
+    tagName: 'li',
     templates: [],
     className: 'template',
     type: null,
