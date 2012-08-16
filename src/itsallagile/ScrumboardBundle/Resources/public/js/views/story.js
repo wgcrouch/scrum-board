@@ -69,7 +69,7 @@ itsallagile.View.Story = Backbone.View.extend({
     onMoveTicket: function(ticketCid, originStoryId, status) {
         if (this.model.get('id') !== originStoryId) {
             this.trigger('moveTicket', ticketCid, originStoryId, status, this.model.get('id'));
-            return
+            return;
         }
 
         var ticket = this.model.get('tickets').getByCid(ticketCid);

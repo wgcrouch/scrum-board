@@ -49,8 +49,8 @@ itsallagile.View.StoryStatusCell = Backbone.View.extend({
             ui.draggable.remove();
             event.stopPropagation();
             this.trigger('moveTicket', cid, storyId, this.status.get('id'));
-            return;
         }
+        return;
     }
     
 });

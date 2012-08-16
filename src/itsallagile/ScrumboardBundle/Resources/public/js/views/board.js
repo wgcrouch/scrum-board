@@ -19,7 +19,7 @@ itsallagile.View.Board = Backbone.View.extend({
         this.statusHeaderView = new itsallagile.View.StatusHeader({statuses : this.statuses});
         this.model.bind('change', this.render, this);
         var stories = this.model.get('stories')
-        stories.bind('add', this.render, this);
+        stories.bind('add', this.renderStory, this);
         stories.bind('remove', this.render, this);
         stories.bind('reset', this.render, this);        
 
@@ -52,17 +52,22 @@ itsallagile.View.Board = Backbone.View.extend({
         this.$el.append($('<thead>').append(this.statusHeaderView.render().el));
         var stories = this.model.get('stories');
         if (stories !== null) {
-            stories.forEach(function(story, key) {
-                var storyView = new itsallagile.View.Story({model: story, statuses: this.statuses});
-                storyView.on('moveTicket', this.onMoveTicket, this);
-                storyView.on('deleteStory', this.onDeleteStory, this);
-                this.storyViews[story.get('id')] = storyView;                
-                this.$el.append(storyView.render().el);
-            }, this);
+            stories.forEach(this.renderStory, this);
         }
         
         return this;
     }, 
+    
+    /**
+     * Render a single story view
+     */
+    renderStory: function(story) {
+        var storyView = new itsallagile.View.Story({model: story, statuses: this.statuses});
+            storyView.on('moveTicket', this.onMoveTicket, this);
+            storyView.on('deleteStory', this.onDeleteStory, this);
+            this.storyViews[story.get('id')] = storyView;                
+            this.$el.append(storyView.render().el);
+    },
     
     /**
      * Handle moving a ticket between stories
