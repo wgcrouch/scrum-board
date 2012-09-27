@@ -62,9 +62,9 @@ body {
 #connected-users {
     border: 0;
     position:fixed;
-    bottom: 40px;
+    bottom: 0;
     right: 350px;
-    z-index: 9000;
+    z-index: 6000001;
 }
 
 #user-handle {
@@ -91,9 +91,9 @@ body {
 #chatbox {
     border: 0px;
     position:fixed;
-    bottom: 40px;
+    bottom: 0;
     right: 20px;
-    z-index: 9000;
+    z-index: 6000001;
 }
 
 #chat-handle {
