@@ -5,3 +5,5 @@
 /vendor/
 /app/config/parameters.yml
 /node_modules
+/web/js
+/web/css
