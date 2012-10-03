@@ -49,6 +49,9 @@ itsallagile.View.Ticket = Backbone.View.extend({
      * Show the edit box when ticket is double clicked
      */
     startEdit: function() {
+        if (!$('p', this.$el).is(':hidden') && !this.$el.hasClass('zoomed')) {
+            this.zoomToggle();
+        }
         $('p',this.$el).hide();
         $('textarea', this.$el).show().focus();
     },
@@ -64,6 +67,9 @@ itsallagile.View.Ticket = Backbone.View.extend({
         p.show();
         this.model.set('content', text.val());
         this.model.save(null, {success: this.changeSuccess});       
+        if (this.$el.hasClass('zoomed')) {
+            this.zoomToggle();
+        }
     },
     
     /**
