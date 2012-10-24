@@ -17,3 +17,13 @@ monolog:
             type:  stream
             path:  %kernel.logs_dir%/%kernel.environment%.log
             level: debug
+
+assetic:
+    filters:
+        cssrewrite: ~
+        yui_css:
+            jar: %yui_jar%
+            apply_to: "\.css$"
+        yui_js:
+            jar: %yui_jar%
+            apply_to: "\.js$"
