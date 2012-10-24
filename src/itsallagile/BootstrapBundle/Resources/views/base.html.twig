@@ -8,8 +8,9 @@
     {% block styles %}
         <!-- Le styles -->
         {% stylesheets filter='cssrewrite'
-            'bundles/itsallagilebootstrap/css/*'
-
+            'bundles/itsallagilebootstrap/css/bootstrap.css'
+            'bundles/itsallagilebootstrap/css/responsive-bootstrap.css'
+            'bundles/itsallagilebootstrap/css/itsallagile.css'
         %}
         <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
