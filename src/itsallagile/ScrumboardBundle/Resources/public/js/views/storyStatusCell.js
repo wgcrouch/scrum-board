@@ -4,14 +4,17 @@
 itsallagile.View.StoryStatusCell = Backbone.View.extend({
     tagName: 'td',
     className: 'story-status-cell',
-    status: null,    
-    story: null,
     
     //Set the values passed in
     initialize: function(options) {
         this.status = options.status;
         this.story = options.story;
-    },    
+        this.tickets = options.tickets;
+        this.tickets.bind('add', this.render, this);
+        this.tickets.bind('remove', this.render, this);
+        this.tickets.bind('change', this.render, this);
+        this.tickets.bind('reset', this.render, this);
+    },
     
     //Bind events to methods
     events: {
@@ -19,12 +22,18 @@ itsallagile.View.StoryStatusCell = Backbone.View.extend({
     },
     
     //Render the status cell and make it a droppable
-    render: function() {      
+    render: function() {    
+        this.$el.html('');
         this.$el.addClass('story-status-' + this.status.get("id"));
         this.$el.droppable({
             hoverClass: 'drop-hover',
             activeClass: 'drop-active'
         });
+        
+        this.tickets.forEach(function(ticket) {
+            var ticketView = new itsallagile.View.Ticket({model: ticket});
+            this.$el.append(ticketView.render().el);
+        }, this);
         
         return this;
     },  
@@ -34,10 +43,12 @@ itsallagile.View.StoryStatusCell = Backbone.View.extend({
         
         if (ui.draggable.hasClass('template')) {
             var type = ui.helper.data('type');
-            this.trigger('createTicket',this.status.get('id'), type);
+            this.createTicket(type);
             return;
         }
         
+        //If we are moving ticket find out the details and 
+        //fire an event to handle the change at the story level
         if (ui.draggable.hasClass('ticket')) {
             var storyId = ui.draggable.data('story');
             var status = ui.draggable.data('status');
@@ -48,9 +59,39 @@ itsallagile.View.StoryStatusCell = Backbone.View.extend({
             }
             ui.draggable.remove();
             event.stopPropagation();
+            
             this.trigger('moveTicket', cid, storyId, this.status.get('id'));
         }
         return;
+    },
+    
+     //Event handler for creating a ticket from a template
+    createTicket: function(type) {
+        var data = {
+            status: this.status.get('id'),
+            type: type,
+            story: this.story.get('id')
+        }
+        var ticket = new itsallagile.Model.Ticket(data);
+        
+        this.story.get('tickets').add(ticket, {silent: true});
+        ticket.save(null, {success: this.onCreateSuccess, silent:true});
+        this.addTicket(ticket);
+    },
+
+    onCreateSuccess: function(model, response) {
+        if (typeof itsallagile.socket !== 'undefined') {
+            itsallagile.socket.emit('ticket:create', itsallagile.roomId, response);
+        }
+    },
+    
+    addTicket: function(ticket) {
+        this.tickets.add(ticket, {silent:true});
+        var ticketView = new itsallagile.View.Ticket({model: ticket});
+        this.$el.append(ticketView.render().el);
+    },
+    removeTicket: function(ticket) {
+        this.tickets.remove(ticket);        
     }
     
 });

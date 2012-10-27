@@ -80,10 +80,8 @@ itsallagile.View.Board = Backbone.View.extend({
         var newStory = stories.get(newStoryId);
         var oldTicket = originStory.get('tickets').getByCid(ticketCid);
         var newTicket = new itsallagile.Model.Ticket(oldTicket.toJSON());
-        
-        newTicket.set('story', newStoryId);
-        newTicket.set('status', status);
-        newTicket.save(null, {success: this.onMoveSuccess});
+
+        newTicket.save({story: newStoryId, status: status});
         newStory.get('tickets').add(newTicket);
         originStory.get('tickets').remove(oldTicket);    
         if (typeof itsallagile.socket !== 'undefined') {
