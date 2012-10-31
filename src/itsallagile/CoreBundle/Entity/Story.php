@@ -11,7 +11,6 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Story
 {
-
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -45,6 +44,12 @@ class Story
      */
     protected $points;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="StoryStatus", inversedBy="stories")
+     * @ORM\JoinColumn(name="statusId", referencedColumnName="statusId")
+     */
+    protected $status;
+    
     public function __construct()
     {
         $this->tickets = new ArrayCollection();
@@ -107,6 +112,26 @@ class Story
      * @param integer $points
      */
     public function setPoints($points)
+    {
+        $this->points = $points;
+    }
+
+    /**
+     * Get Status
+     *
+     * @return itsallagile\CoreBundle\Entity\StoryStatus 
+     */
+    public function getStatus()
+    {
+        return $this->points;
+    }
+    
+    /**
+     * Set status
+     *
+     * @param itsallagile\CoreBundle\Entity\StoryStatus $status
+     */
+    public function setStatus($status)
     {
         $this->points = $points;
     }
