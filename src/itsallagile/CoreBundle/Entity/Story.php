@@ -123,7 +123,7 @@ class Story
      */
     public function getStatus()
     {
-        return $this->points;
+        return $this->status;
     }
     
     /**
@@ -133,7 +133,7 @@ class Story
      */
     public function setStatus($status)
     {
-        $this->points = $points;
+        $this->status = $status;
     }
 
     /**
@@ -152,6 +152,7 @@ class Story
             'id' => $this->storyId,
             'sort' => $this->sort,
             'points' => $this->points,
+            'status' => $this->status->getStatusId(),
             'content' => $this->content,
             'boardId' => $this->board->getBoardId()
         );

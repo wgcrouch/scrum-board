@@ -8,24 +8,40 @@ itsallagile.View.Story = Backbone.View.extend({
         '<div class="notepaper">' +
         '<p class="story-content"><%= content %></p><textarea class="story-input"><%= content %></textarea>' +
         '<div class="story-points"><p><%= points %></p><textarea class="story-points-input"><%= points %></textarea></div>' +
+        '<div class="modal hide fade">' + 
+        '<div class="modal-header">' +
+            '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
+            '<h3>Set Status</h3>' +
+        '</div>' +
+        '<div class="modal-body"></div>' +
+        '<div class="modal-footer">' +
+            '<a href="#" class="btn" data-dismiss="modal">Close</a>' +
+            '<a href="#" class="btn btn-primary story-status-save">Save changes</a>' +
+        '</div>' +
+        '</div>' +
+        '<a href="#" class="story-status-show">Set Status</a>' +
         '<i class="icon-remove delete-story"></i></td>' +
         '</div>',
-    
     statuses: null,
-    
+    storyStatuses: null,
+    statusViews: [],
+
     events: {
         "dblclick .story-content": "startEditContent",
         "blur .story-input": "endEditContent",
         "click .story-points": "startEditPoints",
         "blur .story-points-input": "endEditPoints",
-        'hover .story-detail-cell' : 'toggleShowDelete',
-        'mouseOut .story-detail-cell' : 'toggleShowDelete',
-        'click .delete-story' : 'deleteConfirm'
+        'hover .story-detail-cell' : 'toggleShowActions',
+        'mouseOut .story-detail-cell' : 'toggleShowActions',
+        'click .delete-story' : 'deleteConfirm',
+        'click .story-status-show' : 'showStatusModal',
+        'click .story-status-save' : 'saveStatus'
     },
 
     //Set up the statuses and bind on changes to models
     initialize: function(options) {
         this.statuses = options.statuses;
+        this.storyStatuses = options.storyStatuses;
         this.model.bind('change', this.render, this);
         this.model.get('tickets').bind('add', this.addTicket, this);
         this.model.get('tickets').bind('remove', this.removeTicket, this);
@@ -39,11 +55,18 @@ itsallagile.View.Story = Backbone.View.extend({
         this.id = this.model.get('id');
         this.$el.attr('id', 'story' + '-' + this.id);
         this.$el.html(_.template(
-            this.template, {content : this.model.get("content"), points: this.model.get("points")}));
+            this.template, {content : this.model.get("content"), points: this.model.get("points")}
+        ));
         var contentP = $('p.story-content', this.$el);
 
         contentP.html(this.formatText(contentP.html()));
-        
+
+        var storyStatusView = new itsallagile.View.StoryStatus({
+            statuses: this.storyStatuses,
+            status: this.model.get("status")
+        });
+        $('.modal-body', this.$el).html(storyStatusView.render().el);
+
         this.statusViews = {};
         this.statuses.forEach(function(status, key) {
             var statusTickets = new itsallagile.Collection.Tickets();
@@ -62,9 +85,15 @@ itsallagile.View.Story = Backbone.View.extend({
             if (typeof status !== 'undefined') {
                 this.statusViews[status].addTicket(ticket);
             }
-        }, this);               
-        
-        return this;    
+        }, this);
+
+        this.storyStatuses.forEach(function(status) {
+            if (status.get('id') == this.model.get('status')) {
+                this.setStatusClass(status.get('name'));
+            }
+        }, this);
+
+        return this;
     },
 
     /**
@@ -134,8 +163,8 @@ itsallagile.View.Story = Backbone.View.extend({
     /**
      * Show/hide the delete icon
      */
-    toggleShowDelete: function() {
-        $('.delete-story', this.$el).fadeToggle('fast');
+    toggleShowActions: function() {
+        $('.delete-story, .story-status-show', this.$el).fadeToggle('fast');
     },
 
     /**
@@ -154,6 +183,22 @@ itsallagile.View.Story = Backbone.View.extend({
             event.preventDefault();
             event.stopPropagation();
         }
+    },
+
+    showStatusModal: function() {
+        this.$el.find('.modal').modal('show');
+    },
+
+    saveStatus: function() {
+        this.$el.find('.modal').modal('hide');
+        var statusId = this.$el.find('.story-status').val();
+        this.model.set('status', statusId);
+        this.setStatusClass(this.$el.find('.story-status[value="' + statusId + '"]').text());
+        this.model.save();
+    },
+
+    setStatusClass: function(statusName) {
+        this.$el.find('.notepaper').addClass(statusName.replace(' ', '-').toLowerCase());
     },
 
     /**

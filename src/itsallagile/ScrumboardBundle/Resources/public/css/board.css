@@ -287,9 +287,16 @@
 .delete-story {
     display: none;
     position: absolute;
-    top: 5px;
+    top: 7px;
     right: 5px;
     cursor: pointer;
+}
+.story-status-show {
+    display: none;
+    position: absolute;
+    line-height: 1em;
+    top: 7px;
+    right: 30px;
 }
 
 .story-points-input {
@@ -370,4 +377,9 @@
     -o-transform: rotate(2deg);
     transform: rotate(2deg);
 }
-
+.notepaper.testable {
+    background: red;
+}
+.notepaper.done {
+    background: green;
+}

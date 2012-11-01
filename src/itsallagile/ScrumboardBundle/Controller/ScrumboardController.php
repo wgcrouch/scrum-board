@@ -36,7 +36,18 @@ class ScrumboardController extends Controller
             $statusArray[] = $status->getArray();
         }
 
-        $viewData = array('board' => $board->getArray(), 'statuses' => $statusArray);
+        $storyStatusRepository = $this->getDoctrine()->getRepository('itsallagileCoreBundle:StoryStatus');
+        $storyStatusArray = array();
+        $storyStatuses = $storyStatusRepository->findAll();
+        foreach ($storyStatuses as $storyStatus) {
+            $storyStatusArray[] = $storyStatus->getArray();
+        }
+        
+        $viewData = array(
+            'board' => $board->getArray(),
+            'statuses' => $statusArray,
+            'storyStatuses' => $storyStatusArray
+        );
 
         return $this->render('itsallagileScrumboardBundle:Board:index.html.twig', $viewData);
     }
