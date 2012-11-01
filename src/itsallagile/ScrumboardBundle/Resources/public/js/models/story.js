@@ -12,15 +12,11 @@ itsallagile.Model.Story = Backbone.Model.extend({
         };
     },
     
-    initialize: function(options) {
-        
-    },
-    
     /**
      * When we get a response from the server, that contains tickets put those into a collection
      */
     parse: function(response) {
-        response.tickets = new itsallagile.Collection.Tickets(response.tickets);        
+        response.tickets = this.get('tickets').reset(response.tickets);       
         return response;
     }
     

@@ -23,8 +23,9 @@ itsallagile.View.Toolbar = Backbone.View.extend({
     
     onClickAddStory: function() {
         var story = new itsallagile.Model.Story({boardId: this.model.get('id')});
-        story.save();
-        this.model.get('stories').add(story);
+        story.save(null, {silent:true, success: _.bind(function() {
+            this.model.get('stories').add(story);
+        }, this)});            
     }
 });
 

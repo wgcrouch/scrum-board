@@ -6,7 +6,7 @@ itsallagile.Model.Board = Backbone.Model.extend({
     
     defaults: {
         stories: null,
-        chatMessages: null,
+        chatMessages: null
     },   
     
     initialize: function(options) {

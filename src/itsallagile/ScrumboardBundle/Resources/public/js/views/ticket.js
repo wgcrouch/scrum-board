@@ -38,7 +38,7 @@ itsallagile.View.Ticket = Backbone.View.extend({
         this.$el.addClass(this.model.get('type'));
         this.$el.append(_.template(this.template, {content : this.model.get("content")}));
         $('p', this.$el).html(this.formatText($('p', this.$el).html()));
-        this.$el.data('cid', this.model.cid);
+        this.$el.data('ticketId', this.model.get('id'));
         this.$el.data('story', this.model.get('story'));
         this.$el.data('status', this.model.get('status'));
         this.$el.draggable({revert: true});

@@ -52,15 +52,15 @@ itsallagile.View.StoryStatusCell = Backbone.View.extend({
         if (ui.draggable.hasClass('ticket')) {
             var storyId = ui.draggable.data('story');
             var status = ui.draggable.data('status');
-            var cid = ui.draggable.data('cid');
+            var ticketId = ui.draggable.data('ticketId');
             //if nothing has changed then do nothing
             if (storyId == this.story.get('id') &&  status == this.status.get('id')) {
-                return false;
+                return false;   
             }
             ui.draggable.remove();
             event.stopPropagation();
             
-            this.trigger('moveTicket', cid, storyId, this.status.get('id'));
+            this.trigger('moveTicket', ticketId, storyId, this.status.get('id'));
         }
         return;
     },

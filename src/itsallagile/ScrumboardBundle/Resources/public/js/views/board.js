@@ -63,10 +63,10 @@ itsallagile.View.Board = Backbone.View.extend({
      */
     renderStory: function(story) {
         var storyView = new itsallagile.View.Story({model: story, statuses: this.statuses});
-            storyView.on('moveTicket', this.onMoveTicket, this);
-            storyView.on('deleteStory', this.onDeleteStory, this);
-            this.storyViews[story.get('id')] = storyView;                
-            this.$el.append(storyView.render().el);
+        storyView.on('moveTicket', this.onMoveTicket, this);
+        storyView.on('deleteStory', this.onDeleteStory, this);
+        this.storyViews[story.get('id')] = storyView;                
+        this.$el.append(storyView.render().el);
     },
     
     /**
@@ -74,18 +74,18 @@ itsallagile.View.Board = Backbone.View.extend({
      * Looks at bit hacky, but I couldnt find an easier way
      * of moving an object between collections
      */
-    onMoveTicket: function(ticketCid, originStoryId, status, newStoryId) {
+    onMoveTicket: function(ticketId, originStoryId, status, newStoryId) {
         var stories = this.model.get('stories');
         var originStory = stories.get(originStoryId);
         var newStory = stories.get(newStoryId);
-        var oldTicket = originStory.get('tickets').getByCid(ticketCid);
-        var newTicket = new itsallagile.Model.Ticket(oldTicket.toJSON());
+        var ticket = originStory.get('tickets').get(ticketId);
 
-        newTicket.save({story: newStoryId, status: status});
-        newStory.get('tickets').add(newTicket);
-        originStory.get('tickets').remove(oldTicket);    
+        originStory.get('tickets').remove(ticket);
+        ticket.save({story: newStoryId, status: status}, {silent:true});
+        newStory.get('tickets').add(ticket);
+ 
         if (typeof itsallagile.socket !== 'undefined') {
-            itsallagile.socket.emit('ticket:move', itsallagile.roomId, newTicket, originStoryId);
+            itsallagile.socket.emit('ticket:move', itsallagile.roomId, ticket, originStoryId);
         }
     },
     

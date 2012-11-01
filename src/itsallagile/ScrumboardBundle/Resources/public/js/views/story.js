@@ -32,8 +32,8 @@ itsallagile.View.Story = Backbone.View.extend({
     //Render function
     //Renders the status cells and tickets within those cells
     render: function() {
-        console.log("render");
         this.id = this.model.get('id');
+        this.$el.attr('id', 'story' + '-' + this.id);
         this.$el.html(_.template(
             this.template, {content : this.model.get("content"), points: this.model.get("points")}));
         var contentP = $('p.story-content', this.$el);
@@ -62,15 +62,15 @@ itsallagile.View.Story = Backbone.View.extend({
     },
 
     //Event handler for moving a ticket
-    onMoveTicket: function(ticketCid, originStoryId, status) {
+    onMoveTicket: function(ticketId, originStoryId, status) {
         //If this ticket is not from this story, then fire an event
         //We need to handle it at the board level
         if (this.model.get('id') !== originStoryId) {
-            this.trigger('moveTicket', ticketCid, originStoryId, status, this.model.get('id'));
+            this.trigger('moveTicket', ticketId, originStoryId, status, this.model.get('id'));
             return;
         }
 
-        var ticket = this.model.get('tickets').getByCid(ticketCid);
+        var ticket = this.model.get('tickets').get(ticketId);
         this.statusViews[ticket.get('status')].tickets.remove(ticket, {silent:true});
         ticket.save(
             {story: this.model.get('id'), status: status},
