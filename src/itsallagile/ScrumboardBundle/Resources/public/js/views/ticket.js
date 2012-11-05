@@ -126,6 +126,9 @@ itsallagile.View.Ticket = Backbone.View.extend({
         }
     },
 
+    /**
+     * Dodgy formatter for text in tickets, should be refactored into a different view or helper
+     */
     formatText: function(text) {
         var breakTag = '<br/>';
         return (text + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');

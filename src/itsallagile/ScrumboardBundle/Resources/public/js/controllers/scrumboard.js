@@ -40,7 +40,7 @@ itsallagile.Controller.Scrumboard = itsallagile.baseObject.extend({
         container.append(this.messagesView.render().el);
         container.append('<div id="notification-container"></div>');
 
-        //Open a socket connection with the /board namespace
+        //Open a socket 
         itsallagile.socket = io.connect(window.location.hostname + ':8080');
 
         itsallagile.roomId = 'board:' +  this.board.get("id");

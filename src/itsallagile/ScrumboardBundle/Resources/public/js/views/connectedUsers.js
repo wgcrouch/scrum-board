@@ -43,13 +43,19 @@ itsallagile.View.ConnectedUsers = Backbone.View.extend({
         })
         return this;
     }, 
-            
+          
+    /**
+     * When there is a change to a user from the server re render
+     */
     onUserChange: function(users) {
         this.users = _.unique(users, false);
         
         this.render();
     },
     
+    /**
+     * Show/hide the connected users
+     */
     toggleShowUsers: function() {
         $('#users-list', this.$el).slideToggle();
     }

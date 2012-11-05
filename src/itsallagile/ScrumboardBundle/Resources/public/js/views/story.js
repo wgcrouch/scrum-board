@@ -3,13 +3,16 @@ itsallagile.View.Story = Backbone.View.extend({
     tagName: 'tr',
     id: 'story',
     className: 'story',
+    
     template: '<td class="story-detail-cell">' +
         '<div class="notepaper">' +
         '<p class="story-content"><%= content %></p><textarea class="story-input"><%= content %></textarea>' +
         '<div class="story-points"><p><%= points %></p><textarea class="story-points-input"><%= points %></textarea></div>' +
         '<i class="icon-remove delete-story"></i></td>' +
         '</div>',
+    
     statuses: null,
+    
     events: {
         "dblclick .story-content": "startEditContent",
         "blur .story-input": "endEditContent",
@@ -29,8 +32,9 @@ itsallagile.View.Story = Backbone.View.extend({
         _.bindAll(this);
     },
 
-    //Render function
-    //Renders the status cells and tickets within those cells
+    /**
+     * Render the story row and create and render views for each status cell
+     */
     render: function() {
         this.id = this.model.get('id');
         this.$el.attr('id', 'story' + '-' + this.id);
@@ -39,6 +43,7 @@ itsallagile.View.Story = Backbone.View.extend({
         var contentP = $('p.story-content', this.$el);
 
         contentP.html(this.formatText(contentP.html()));
+        
         this.statusViews = {};
         this.statuses.forEach(function(status, key) {
             var statusTickets = new itsallagile.Collection.Tickets();
@@ -50,7 +55,8 @@ itsallagile.View.Story = Backbone.View.extend({
             this.$el.append(statusView.render().el);  
         }, this);
 
-        var tickets = this.model.get('tickets');
+        //Assign tickets to the appropriate status view
+        var tickets = this.model.get('tickets');        
         tickets.forEach(function(ticket) {
             var status = ticket.get('status');
             if (typeof status !== 'undefined') {
@@ -61,7 +67,9 @@ itsallagile.View.Story = Backbone.View.extend({
         return this;    
     },
 
-    //Event handler for moving a ticket
+    /**
+     * Event handler for moving a ticket
+     */
     onMoveTicket: function(ticketId, originStoryId, status) {
         //If this ticket is not from this story, then fire an event
         //We need to handle it at the board level
@@ -83,13 +91,17 @@ itsallagile.View.Story = Backbone.View.extend({
         }        
     },
 
-    //Show the edit box when story content is double clicked
+    /**
+     * Show the edit box when story content is double clicked
+     */
     startEditContent: function() {
         $('p.story-content',this.$el).hide();
         $('textarea.story-input', this.$el).show().focus();
     },
 
-    //Save the story when editing content has finished
+    /**
+     * Save the story when editing content has finished
+     */    
     endEditContent: function() {
         var p = $('p.story-content',this.$el);
         var text = $('textarea.story-input', this.$el);
@@ -99,13 +111,17 @@ itsallagile.View.Story = Backbone.View.extend({
         this.model.save({'content': text.val()}, {silent: true});
     },
 
-    //Show the edit box when story content is double clicked
+    /**
+     * Show the edit box when story content is double clicked
+     */
     startEditPoints: function() {
         $('.story-points p',this.$el).hide();
         $('.story-points-input', this.$el).show().focus();
     },
 
-    //Save the story when editing content has finished
+    /**
+     * Save the story when editing content has finished
+     */
     endEditPoints: function() {
         var p = $('.story-points p',this.$el);
         var text = $('.story-points-input', this.$el);
@@ -115,10 +131,16 @@ itsallagile.View.Story = Backbone.View.extend({
         this.model.save({'points': text.val()}, {silent:true});
     },
 
+    /**
+     * Show/hide the delete icon
+     */
     toggleShowDelete: function() {
         $('.delete-story', this.$el).fadeToggle('fast');
     },
 
+    /**
+     * Show a confirmation dialog when trying to delete a story
+     */
     deleteConfirm: function(event) {
         if (confirm('Are you sure you want to delete this story?')) {
             this.model.destroy({silent: true});
@@ -134,15 +156,24 @@ itsallagile.View.Story = Backbone.View.extend({
         }
     },
 
+    /**
+     * Hacky formatting for text in stories, currently only does nl2br
+     */
     formatText: function(text) {
         var breakTag = '<br/>';
         return (text + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
     },
     
+    /**
+     * Add a ticket to this story and make sure the status view also gets it
+     */
     addTicket: function(ticket) {
         this.statusViews[ticket.get('status')].addTicket(ticket);
     },
     
+    /**
+     * Remove a ticket from this story and the approriate status view
+     */
     removeTicket: function(ticket) {
         this.statusViews[ticket.get('status')].removeTicket(ticket);
     }

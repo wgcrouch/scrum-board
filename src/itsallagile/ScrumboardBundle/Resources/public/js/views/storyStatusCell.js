@@ -4,8 +4,7 @@
 itsallagile.View.StoryStatusCell = Backbone.View.extend({
     tagName: 'td',
     className: 'story-status-cell',
-    
-    //Set the values passed in
+        
     initialize: function(options) {
         this.status = options.status;
         this.story = options.story;
@@ -16,12 +15,13 @@ itsallagile.View.StoryStatusCell = Backbone.View.extend({
         this.tickets.bind('reset', this.render, this);
     },
     
-    //Bind events to methods
     events: {
       "drop": "drop"    
     },
     
-    //Render the status cell and make it a droppable
+    /**
+     * Render the status cell and make it a droppable and create an render the ticket views
+     */
     render: function() {    
         this.$el.html('');
         this.$el.addClass('story-status-' + this.status.get("id"));
@@ -38,7 +38,9 @@ itsallagile.View.StoryStatusCell = Backbone.View.extend({
         return this;
     },  
     
-    //Handle drop events for templates or tickets
+    /**
+     * Handle drop events for templates or tickets
+     */
     drop: function(event, ui) {
         
         if (ui.draggable.hasClass('template')) {
@@ -65,7 +67,9 @@ itsallagile.View.StoryStatusCell = Backbone.View.extend({
         return;
     },
     
-     //Event handler for creating a ticket from a template
+    /**
+     * Event handler for creating a ticket from a template
+     */
     createTicket: function(type) {
         var data = {
             status: this.status.get('id'),
@@ -79,17 +83,27 @@ itsallagile.View.StoryStatusCell = Backbone.View.extend({
         this.addTicket(ticket);
     },
 
+    /**
+     * Fire a remote event when the ticket is created successfully
+     */
     onCreateSuccess: function(model, response) {
         if (typeof itsallagile.socket !== 'undefined') {
             itsallagile.socket.emit('boardEvent', itsallagile.roomId, 'ticket:create', response);
         }
     },
     
+    /**
+     * Add a ticket to this status cell
+     */
     addTicket: function(ticket) {
         this.tickets.add(ticket, {silent:true});
         var ticketView = new itsallagile.View.Ticket({model: ticket});
         this.$el.append(ticketView.render().el);
     },
+    
+    /**
+     * Remove a ticket from this status cell
+     */
     removeTicket: function(ticket) {
         this.tickets.remove(ticket);        
     }

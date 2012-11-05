@@ -7,10 +7,12 @@ itsallagile.View.ChatBox = Backbone.View.extend({
         '<div id="chat-window"><div id="chat-messages"></div>' + 
         '<form name="chat-input"><div id="message-input-area"><input id="message-input" value=""/><input id="message-submit" type="submit" value="&gt;" class="btn"/></form></div></div>',
     id: 'chatbox',
+    
     events: {
         'click #chat-handle' : 'toggleShowChat',
         'submit form': 'newMessage'
     },
+    
     board: null,
     messages: null,
     

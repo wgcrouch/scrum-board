@@ -1,3 +1,6 @@
+/**
+ * View for the side toolbar
+ */
 itsallagile.View.Toolbar = Backbone.View.extend({
     tagName: 'div',
     id: 'toolbar',
@@ -21,6 +24,9 @@ itsallagile.View.Toolbar = Backbone.View.extend({
         return this;
     },
     
+    /**
+     * Event handler for the new story button
+     */
     onClickAddStory: function() {
         var story = new itsallagile.Model.Story({boardId: this.model.get('id')});
         story.save(null, {silent:true, success: _.bind(function() {

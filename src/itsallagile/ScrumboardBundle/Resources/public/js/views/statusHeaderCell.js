@@ -9,6 +9,7 @@ itsallagile.View.StatusHeaderCell = Backbone.View.extend({
         this.id = 'status-header' + options.status;
         this.status = options.status;
     },    
+      
     render: function() {
         this.$el.addClass('status-header-' + this.status.get('id')).html(this.status.get('name'));
         return this;

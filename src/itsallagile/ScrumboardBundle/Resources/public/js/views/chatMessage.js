@@ -9,6 +9,9 @@ itsallagile.View.ChatMessage = Backbone.View.extend({
     initialize: function(options) { 
     },
     
+    /**
+     * Render a singe chat message
+     */
     render: function() {
         this.$el.html(_.template(this.template, this.model.toJSON()));
         return this;

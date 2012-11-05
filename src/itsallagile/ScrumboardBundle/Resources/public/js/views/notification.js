@@ -12,6 +12,9 @@ itsallagile.View.Notification = Backbone.View.extend({
         this.type = options.type;
     },
 
+    /**
+     * Render a notification
+     */
     render: function() {
         var el = this.$el;
         el.text(this.message);
