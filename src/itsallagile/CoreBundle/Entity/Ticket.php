@@ -6,38 +6,39 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="ticket") 
+ * @ORM\Table(name="ticket")
  */
-class Ticket {
-    
+class Ticket
+{
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $ticketId;
-    
+
     /**
      * @ORM\Column(type="string", length=45)
      */
     protected $type;
-    
+
     /**
      * @ORM\Column(type="text", nullable=true)
      */
     protected $content;
-    
+
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
     protected $parent;
-       
+
     /**
      * @ORM\ManyToOne(targetEntity="Story", inversedBy="tickets")
      * @ORM\JoinColumn(name="storyId", referencedColumnName="storyId")
      */
     protected $story;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Status", inversedBy="tickets")
      * @ORM\JoinColumn(name="statusId", referencedColumnName="statusId")
@@ -47,7 +48,7 @@ class Ticket {
     /**
      * Get ticketId
      *
-     * @return integer 
+     * @return integer
      */
     public function getTicketId()
     {
@@ -67,7 +68,7 @@ class Ticket {
     /**
      * Get type
      *
-     * @return string 
+     * @return string
      */
     public function getType()
     {
@@ -87,7 +88,7 @@ class Ticket {
     /**
      * Get content
      *
-     * @return text 
+     * @return text
      */
     public function getContent()
     {
@@ -107,13 +108,13 @@ class Ticket {
     /**
      * Get parent
      *
-     * @return integer 
+     * @return integer
      */
     public function getParent()
     {
         return $this->parent;
     }
-    
+
     public function getArray()
     {
         $data = array(
@@ -123,7 +124,7 @@ class Ticket {
             'parent' => $this->parent,
             'status' => $this->getStatus()->getStatusId(),
             'story' => $this->getStory()->getStoryId(),
-            
+
         );
         return $data;
     }
@@ -141,7 +142,7 @@ class Ticket {
     /**
      * Get board
      *
-     * @return itsallagile\CoreBundle\Entity\Board 
+     * @return itsallagile\CoreBundle\Entity\Board
      */
     public function getBoard()
     {
@@ -161,7 +162,7 @@ class Ticket {
     /**
      * Get story
      *
-     * @return itsallagile\CoreBundle\Entity\Story 
+     * @return itsallagile\CoreBundle\Entity\Story
      */
     public function getStory()
     {
@@ -181,7 +182,7 @@ class Ticket {
     /**
      * Get status
      *
-     * @return itsallagile\CoreBundle\Entity\Status 
+     * @return itsallagile\CoreBundle\Entity\Status
      */
     public function getStatus()
     {

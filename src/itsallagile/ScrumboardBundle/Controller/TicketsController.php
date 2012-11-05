@@ -41,7 +41,7 @@ class TicketsController extends RestController
         $data = array();
         $tickets = $repository->findAll();
 
-        foreach($tickets as $ticket) {
+        foreach ($tickets as $ticket) {
             $data[$ticket->getTicketId()] = $ticket->getArray();
         }
      

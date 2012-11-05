@@ -1,5 +1,4 @@
 <?php
-
 namespace itsallagile\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -8,42 +7,42 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="status") 
+ * @ORM\Table(name="status")
  */
-class Status {
-    
+class Status
+{
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $statusId;
-    
+
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
      */
     protected $name;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="Ticket", mappedBy="status")
      */
     protected $tickets;
-    
+
     public function __construct()
     {
         $this->tickets = new ArrayCollection();
     }
-    
-    
+
     /**
      * Get statusId
      *
-     * @return integer 
+     * @return integer
      */
     public function getStatusId()
     {
         return $this->statusId;
-    }   
+    }
 
     /**
      * Set name
@@ -58,7 +57,7 @@ class Status {
     /**
      * Get name
      *
-     * @return text 
+     * @return text
      */
     public function getName()
     {
@@ -78,7 +77,7 @@ class Status {
     /**
      * Get tickets
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getTickets()
     {
@@ -91,7 +90,7 @@ class Status {
             'id' => $this->statusId,
             'name' => $this->name,
         );
-        
+
         return $data;
     }
 
@@ -103,5 +102,10 @@ class Status {
     public function removeTicket(\itsallagile\CoreBundle\Entity\Ticket $tickets)
     {
         $this->tickets->removeElement($tickets);
+    }
+
+    public function __toString()
+    {
+        return (string)$this->statusId;
     }
 }

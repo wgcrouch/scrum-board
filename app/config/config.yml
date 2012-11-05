@@ -61,8 +61,10 @@ sensio_framework_extra:
         annotations: false
 
 fos_rest:
-    format_listener:
-        default_priorities: ['json', html, '*/*']
-        fallback_format: json
+    param_fetcher_listener: true
+    body_listener: true
+    format_listener: true
+    view:
+        view_response_listener: 'force'
     routing_loader:
         default_format: json

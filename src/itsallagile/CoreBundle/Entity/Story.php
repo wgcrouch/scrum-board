@@ -65,7 +65,6 @@ class Story
         return $this->storyId;
     }
 
-
     /**
      * Set content
      *
@@ -212,5 +211,10 @@ class Story
     public function removeTicket(\itsallagile\CoreBundle\Entity\Ticket $tickets)
     {
         $this->tickets->removeElement($tickets);
+    }
+
+    public function __toString()
+    {
+        return (string)$this->storyId;
     }
 }

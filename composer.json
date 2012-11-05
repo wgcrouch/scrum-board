@@ -31,7 +31,7 @@
         "vipsoft/doctrine-data-fixtures-extension": "*",
         
         "friendsofsymfony/rest-bundle" : "dev-master",
-        "jms/serializer-bundle": "dev-master"
+        "jms/serializer-bundle": "0.9.*"
 
     },
     "scripts": {
