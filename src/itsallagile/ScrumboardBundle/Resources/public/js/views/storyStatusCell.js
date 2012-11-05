@@ -81,7 +81,7 @@ itsallagile.View.StoryStatusCell = Backbone.View.extend({
 
     onCreateSuccess: function(model, response) {
         if (typeof itsallagile.socket !== 'undefined') {
-            itsallagile.socket.emit('ticket:create', itsallagile.roomId, response);
+            itsallagile.socket.emit('boardEvent', itsallagile.roomId, 'ticket:create', response);
         }
     },
     
@@ -95,7 +95,3 @@ itsallagile.View.StoryStatusCell = Backbone.View.extend({
     }
     
 });
-
-
-
-

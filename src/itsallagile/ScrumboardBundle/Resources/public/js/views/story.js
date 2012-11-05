@@ -74,15 +74,14 @@ itsallagile.View.Story = Backbone.View.extend({
         this.statusViews[ticket.get('status')].tickets.remove(ticket, {silent:true});
         ticket.save(
             {story: this.model.get('id'), status: status},
-            {success: this.onMoveSuccess, silent:true});
-        this.statusViews[status].addTicket(ticket);            
-    },
-
-    onMoveSuccess: function(model, response) {
+            {silent:true});
+        this.statusViews[status].addTicket(ticket);    
+        
         if (typeof itsallagile.socket !== 'undefined') {
-            itsallagile.socket.emit('ticket:change', itsallagile.roomId, response);
-        }
-    },  
+            itsallagile.socket.emit('boardEvent', itsallagile.roomId, 'ticket:move', 
+                {ticket: ticket, originStoryId: originStoryId});
+        }        
+    },
 
     //Show the edit box when story content is double clicked
     startEditContent: function() {
@@ -148,7 +147,3 @@ itsallagile.View.Story = Backbone.View.extend({
         this.statusViews[ticket.get('status')].removeTicket(ticket);
     }
 });
-
-
-
-

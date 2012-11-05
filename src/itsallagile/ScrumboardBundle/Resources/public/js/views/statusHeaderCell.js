@@ -14,7 +14,3 @@ itsallagile.View.StatusHeaderCell = Backbone.View.extend({
         return this;
     }
 });
-
-
-
-

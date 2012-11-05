@@ -4,8 +4,7 @@
 itsallagile.View.ChatMessage = Backbone.View.extend({
     tagName: 'div',
     template: '<label class="message-head" title="<%= datetime %>"><%= user.email %>:</label><p class="message-content"><%= content %></p>',
-    className: 'chat-message',
-    
+    className: 'chat-message',    
     
     initialize: function(options) { 
     },

@@ -77,7 +77,7 @@ itsallagile.View.Ticket = Backbone.View.extend({
      */
     changeSuccess: function(model, response) {
         if (typeof itsallagile.socket !== 'undefined') {
-            itsallagile.socket.emit('ticket:change', itsallagile.roomId, response);
+            itsallagile.socket.emit('boardEvent', itsallagile.roomId, 'ticket:change', response);
         }
     },
 
@@ -112,7 +112,7 @@ itsallagile.View.Ticket = Backbone.View.extend({
             this.model.destroy({silent: true});
             this.$el.fadeOut();
             if (typeof itsallagile.socket !== 'undefined') {
-                itsallagile.socket.emit('ticket:delete', itsallagile.roomId, this.model.toJSON());
+                itsallagile.socket.emit('boardEvent', itsallagile.roomId, 'ticket:delete', this.model.toJSON());
             }
 
             var notification = new itsallagile.View.Notification({
@@ -131,9 +131,4 @@ itsallagile.View.Ticket = Backbone.View.extend({
         return (text + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
     }
 
-
 });
-
-
-
-

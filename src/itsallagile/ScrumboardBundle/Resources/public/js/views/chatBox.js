@@ -92,15 +92,15 @@ itsallagile.View.ChatBox = Backbone.View.extend({
     onCreateSuccess: function(message) {
         this.renderNewMessage(message);
         if (typeof itsallagile.socket !== 'undefined') {
-            itsallagile.socket.emit('chatMessage:create', itsallagile.roomId, message);
+            itsallagile.socket.emit('boardEvent', itsallagile.roomId, 'chatMessage:create', {message: message});
         }
     },
     
     /**
      * Handler for a message created by a different user
      */
-    remoteCreate: function(message) {
-        var newMessage = new itsallagile.Model.ChatMessage(message);
+    remoteCreate: function(params) {        
+        var newMessage = new itsallagile.Model.ChatMessage(params.message);
         this.messages.add(newMessage);
         $('#chat-handle', this.$el).addClass('new-message');
     },

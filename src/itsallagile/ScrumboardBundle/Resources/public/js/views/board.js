@@ -85,10 +85,10 @@ itsallagile.View.Board = Backbone.View.extend({
         newStory.get('tickets').add(ticket);
  
         if (typeof itsallagile.socket !== 'undefined') {
-            itsallagile.socket.emit('ticket:move', itsallagile.roomId, ticket, originStoryId);
+            itsallagile.socket.emit('boardEvent', itsallagile.roomId, 'ticket:move', 
+                {ticket: ticket, originStoryId: originStoryId});
         }
-    },
-    
+    },    
     
     //REMOTE EVENTS
     //--------------------------------------------------------
@@ -96,16 +96,23 @@ itsallagile.View.Board = Backbone.View.extend({
     /**
      * Handle a ticket moved between stories by another user
      */
-    onRemoteTicketMove: function(ticket, originStoryId) {
-        console.log(ticket);
+    onRemoteTicketMove: function(params) {
+        var ticketData = params.ticket;
+        var originStoryId = params.originStoryId;
+        
         var stories = this.model.get('stories');
         var originStory = stories.get(originStoryId);
-        var newStory = stories.get(ticket.story);
-        var oldTicket = originStory.get('tickets').get(ticket.id);
-        var newTicket = new itsallagile.Model.Ticket(ticket);
+        var newStory = stories.get(ticketData.story);
         
-        newStory.get('tickets').add(newTicket);
-        originStory.get('tickets').remove(oldTicket);    
+        var ticket = originStory.get('tickets').get(ticketData.id);
+        originStory.get('tickets').remove(ticket);  
+        
+        ticket.set('story', newStory.id);
+        ticket.set('status', ticketData.status);
+        
+        newStory.get('tickets').add(ticket);
+
+
     },
         
     /**

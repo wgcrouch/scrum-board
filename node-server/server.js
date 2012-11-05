@@ -49,40 +49,10 @@ io.sockets.on('connection', function (socket) {
         delete usernames[room][socket.id];
         
         io.sockets.in(room).emit('user:change', getCurrentUsers(room));
-    });          
-     
-    /**
-     * Editing a ticket
-     */
-    socket.on('ticket:change', function (room, ticket) {
-        io.sockets.in(room).except(socket.id).emit('ticket:change', ticket);
-    });
+    });      
+
+    socket.on('boardEvent', function(room, eventType, params) {
+        io.sockets.in(room).except(socket.id).emit(eventType, params);
+    });     
     
-    /**
-     * Moving a ticket between stories
-     */
-    socket.on('ticket:move', function (room, ticket, originStoryId) {
-        io.sockets.in(room).except(socket.id).emit('ticket:move', ticket, originStoryId);
-    });
-  
-    /**
-     * Adding a new ticket
-     */
-    socket.on('ticket:create', function (room, ticket) {
-        io.sockets.in(room).except(socket.id).emit('ticket:create', ticket);
-    });
-  
-    /**
-     * Deleting a ticket
-     */
-    socket.on('ticket:delete', function (room, ticketId) {
-        io.sockets.in(room).except(socket.id).emit('ticket:delete', ticketId);
-    });  
-    
-    /**
-     * new chat message
-     */
-    socket.on('chatMessage:create', function (room, message) {
-        io.sockets.in(room).except(socket.id).emit('chatMessage:create', message);
-    }); 
 });

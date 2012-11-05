@@ -13,12 +13,11 @@ itsallagile.View.ConnectedUsers = Backbone.View.extend({
     },
     
     /**
-     * Load the fixed elements on the board
+     * Load the fixed elements on the bard
      * and do initial bindings
      */
     initialize: function(options) { 
-        _.bindAll(this);
-        
+        _.bindAll(this);        
         return this;
     },
 
@@ -44,10 +43,9 @@ itsallagile.View.ConnectedUsers = Backbone.View.extend({
         })
         return this;
     }, 
-    
-        
+            
     onUserChange: function(users) {
-        this.users =_.unique(users, false);
+        this.users = _.unique(users, false);
         
         this.render();
     },
@@ -57,6 +55,3 @@ itsallagile.View.ConnectedUsers = Backbone.View.extend({
     }
         
 });
-
-
-
