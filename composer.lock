@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
     "hash": "80209fcd450a74ef8de5dea0149ab2d2",
+=======
+    "hash": "628cd99d1561bbc71098cc020b6dbd5f",
+>>>>>>> Added back composer lock file
     "packages": [
         {
             "name": "behat/behat",
@@ -226,12 +230,21 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/Behat/MinkExtension.git",
+<<<<<<< HEAD
                 "reference": "94e3eac4e6aa89725199eb39d46f7bed8d7cf5f9"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://github.com/Behat/MinkExtension/archive/94e3eac4e6aa89725199eb39d46f7bed8d7cf5f9.zip",
                 "reference": "94e3eac4e6aa89725199eb39d46f7bed8d7cf5f9",
+=======
+                "reference": "0f92203531851a014f7e5bac89b6bfbb42519594"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/Behat/MinkExtension/zipball/0f92203531851a014f7e5bac89b6bfbb42519594",
+                "reference": "0f92203531851a014f7e5bac89b6bfbb42519594",
+>>>>>>> Added back composer lock file
                 "shasum": ""
             },
             "require": {
@@ -242,7 +255,11 @@
             "require-dev": {
                 "behat/mink-goutte-driver": "*"
             },
+<<<<<<< HEAD
             "time": "1352140856",
+=======
+            "time": "1351090772",
+>>>>>>> Added back composer lock file
             "type": "behat-extension",
             "installation-source": "source",
             "autoload": {
@@ -288,6 +305,10 @@
                 "instaclick/php-webdriver": "@dev",
                 "behat/mink": "1.4.*"
             },
+<<<<<<< HEAD
+=======
+            "time": "1349625948",
+>>>>>>> Added back composer lock file
             "type": "mink-driver",
             "installation-source": "source",
             "autoload": {
@@ -314,8 +335,12 @@
                 "ajax",
                 "selenium",
                 "webdriver"
+<<<<<<< HEAD
             ],
             "time": "1349625948"
+=======
+            ]
+>>>>>>> Added back composer lock file
         },
         {
             "name": "behat/symfony2-extension",
@@ -385,6 +410,10 @@
             "require": {
                 "php": ">=5.3.2"
             },
+<<<<<<< HEAD
+=======
+            "time": "1348120518",
+>>>>>>> Added back composer lock file
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -434,8 +463,12 @@
                 "eventmanager",
                 "annotations",
                 "persistence"
+<<<<<<< HEAD
             ],
             "time": "1348120518"
+=======
+            ]
+>>>>>>> Added back composer lock file
         },
         {
             "name": "doctrine/data-fixtures",
@@ -454,6 +487,10 @@
             "require": {
                 "php": ">=5.3.2"
             },
+<<<<<<< HEAD
+=======
+            "time": "1351735543",
+>>>>>>> Added back composer lock file
             "type": "library",
             "installation-source": "source",
             "autoload": {
@@ -475,8 +512,12 @@
             "homepage": "http://www.doctrine-project.org",
             "keywords": [
                 "database"
+<<<<<<< HEAD
             ],
             "time": "1351735543"
+=======
+            ]
+>>>>>>> Added back composer lock file
         },
         {
             "name": "doctrine/dbal",
@@ -570,6 +611,10 @@
             "suggest": {
                 "doctrine/orm": "The Doctrine ORM integration is optional in the bundle."
             },
+<<<<<<< HEAD
+=======
+            "time": "1350120716",
+>>>>>>> Added back composer lock file
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -606,8 +651,12 @@
                 "orm",
                 "persistence",
                 "dbal"
+<<<<<<< HEAD
             ],
             "time": "1350120716"
+=======
+            ]
+>>>>>>> Added back composer lock file
         },
         {
             "name": "doctrine/doctrine-fixtures-bundle",
@@ -630,6 +679,10 @@
                 "doctrine/doctrine-bundle": "1.0.*",
                 "symfony/doctrine-bridge": ">=2.1.0,<2.3-dev"
             },
+<<<<<<< HEAD
+=======
+            "time": "1350914272",
+>>>>>>> Added back composer lock file
             "type": "symfony-bundle",
             "installation-source": "source",
             "autoload": {
@@ -659,8 +712,12 @@
             "keywords": [
                 "persistence",
                 "Fixture"
+<<<<<<< HEAD
             ],
             "time": "1350914272"
+=======
+            ]
+>>>>>>> Added back composer lock file
         },
         {
             "name": "doctrine/doctrine-migrations-bundle",
@@ -741,6 +798,10 @@
             "suggest": {
                 "symfony/console": "to run the migration from the console"
             },
+<<<<<<< HEAD
+=======
+            "time": "1350643044",
+>>>>>>> Added back composer lock file
             "type": "library",
             "installation-source": "source",
             "autoload": {
@@ -767,8 +828,12 @@
             "keywords": [
                 "database",
                 "migrations"
+<<<<<<< HEAD
             ],
             "time": "1350643044"
+=======
+            ]
+>>>>>>> Added back composer lock file
         },
         {
             "name": "doctrine/orm",
@@ -793,6 +858,10 @@
             "suggest": {
                 "symfony/yaml": "If you want to use YAML Metadata Mapping Driver"
             },
+<<<<<<< HEAD
+=======
+            "time": "1350071385",
+>>>>>>> Added back composer lock file
             "bin": [
                 "bin/doctrine",
                 "bin/doctrine.php"
@@ -837,8 +906,129 @@
             "keywords": [
                 "database",
                 "orm"
+<<<<<<< HEAD
             ],
             "time": "1350071385"
+=======
+            ]
+        },
+        {
+            "name": "friendsofsymfony/rest",
+            "version": "dev-master",
+            "target-dir": "FOS/Rest",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfSymfony/FOSRest",
+                "reference": "b48857315c39715245303fb5bbc1bab98026209e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/FriendsOfSymfony/FOSRest/zipball/b48857315c39715245303fb5bbc1bab98026209e",
+                "reference": "b48857315c39715245303fb5bbc1bab98026209e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/http-foundation": ">=2.0,<2.3-dev"
+            },
+            "time": "1347135166",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.8.x-dev"
+                }
+            },
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "FOS\\Rest": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Lukas Kahwe Smith",
+                    "email": "smith@pooteeweet.org"
+                },
+                {
+                    "name": "FriendsOfSymfony Community",
+                    "homepage": "https://github.com/FriendsOfSymfony/FOSRest/contributors"
+                }
+            ],
+            "description": "This library provides various tools to develop RESTful API's",
+            "homepage": "http://friendsofsymfony.github.com",
+            "keywords": [
+                "rest"
+            ]
+        },
+        {
+            "name": "friendsofsymfony/rest-bundle",
+            "version": "dev-master",
+            "target-dir": "FOS/RestBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfSymfony/FOSRestBundle",
+                "reference": "c94952536a85872e3b168d9e6042a9e081255790"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/FriendsOfSymfony/FOSRestBundle/zipball/c94952536a85872e3b168d9e6042a9e081255790",
+                "reference": "c94952536a85872e3b168d9e6042a9e081255790",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "jms/serializer-bundle": "0.9.*",
+                "symfony/framework-bundle": ">=2.0,<2.3-dev",
+                "friendsofsymfony/rest": ">=0.7.0,<0.9.0-dev"
+            },
+            "require-dev": {
+                "symfony/form": ">=2.0,<2.3-dev",
+                "symfony/yaml": ">=2.0,<2.3-dev",
+                "sensio/framework-extra-bundle": ">=2.0,<2.3-dev"
+            },
+            "suggest": {
+                "sensio/framework-extra-bundle": "Add support for route annotations"
+            },
+            "time": "1350722831",
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.10.x-dev"
+                }
+            },
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "FOS\\RestBundle": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Lukas Kahwe Smith",
+                    "email": "smith@pooteeweet.org"
+                },
+                {
+                    "name": "FriendsOfSymfony Community",
+                    "homepage": "https://github.com/friendsofsymfony/FOSRestBundle/contributors"
+                },
+                {
+                    "name": "Konstantin Kudryashov",
+                    "email": "ever.zet@gmail.com",
+                    "homepage": "http://everzet.com"
+                }
+            ],
+            "description": "This Bundle provides various tools to rapidly develop RESTful API's with Symfony2",
+            "homepage": "http://friendsofsymfony.github.com",
+            "keywords": [
+                "rest"
+            ]
+>>>>>>> Added back composer lock file
         },
         {
             "name": "instaclick/php-webdriver",
@@ -857,6 +1047,10 @@
             "require": {
                 "php": ">=5.3.2"
             },
+<<<<<<< HEAD
+=======
+            "time": "1351218365",
+>>>>>>> Added back composer lock file
             "type": "library",
             "installation-source": "source",
             "autoload": {
@@ -886,8 +1080,12 @@
                 "selenium",
                 "webdriver",
                 "webtest"
+<<<<<<< HEAD
             ],
             "time": "1351218365"
+=======
+            ]
+>>>>>>> Added back composer lock file
         },
         {
             "name": "jms/aop-bundle",
@@ -923,7 +1121,11 @@
                 {
                     "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
+<<<<<<< HEAD
                     "homepage": "http://jmsyst.com",
+=======
+                    "homepage": "https://github.com/schmittjoh",
+>>>>>>> Added back composer lock file
                     "role": null
                 }
             ],
@@ -965,7 +1167,11 @@
                 {
                     "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
+<<<<<<< HEAD
                     "homepage": "http://jmsyst.com",
+=======
+                    "homepage": "https://github.com/schmittjoh",
+>>>>>>> Added back composer lock file
                     "role": null
                 }
             ],
@@ -1009,6 +1215,10 @@
                 "doctrine/doctrine-bundle": "*",
                 "doctrine/orm": "*"
             },
+<<<<<<< HEAD
+=======
+            "time": "1348217792",
+>>>>>>> Added back composer lock file
             "type": "symfony-bundle",
             "installation-source": "source",
             "autoload": {
@@ -1032,8 +1242,12 @@
             "keywords": [
                 "dependency injection",
                 "annotations"
+<<<<<<< HEAD
             ],
             "time": "1348217792"
+=======
+            ]
+>>>>>>> Added back composer lock file
         },
         {
             "name": "jms/metadata",
@@ -1067,7 +1281,11 @@
                 {
                     "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
+<<<<<<< HEAD
                     "homepage": "http://jmsyst.com",
+=======
+                    "homepage": "https://github.com/schmittjoh",
+>>>>>>> Added back composer lock file
                     "role": null
                 }
             ],
@@ -1115,6 +1333,10 @@
                 "symfony/form": "*",
                 "symfony/validator": "*"
             },
+<<<<<<< HEAD
+=======
+            "time": "1346947943",
+>>>>>>> Added back composer lock file
             "type": "symfony-bundle",
             "installation-source": "source",
             "autoload": {
@@ -1141,8 +1363,73 @@
                 "security",
                 "secure",
                 "expression"
+<<<<<<< HEAD
             ],
             "time": "1346947943"
+=======
+            ]
+        },
+        {
+            "name": "jms/serializer-bundle",
+            "version": "0.9.0",
+            "target-dir": "JMS/SerializerBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/schmittjoh/JMSSerializerBundle.git",
+                "reference": "0.9.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/schmittjoh/JMSSerializerBundle/zipball/0.9.0",
+                "reference": "0.9.0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "jms/metadata": ">=1.1.0,<1.3-dev"
+            },
+            "require-dev": {
+                "symfony/framework-bundle": ">=2.0,<2.2-dev",
+                "symfony/yaml": ">=2.0,<2.2-dev",
+                "symfony/form": ">=2.0,<2.2-dev",
+                "symfony/validator": ">=2.0,<2.2-dev",
+                "twig/twig": ">=1.8,<2.0-dev",
+                "doctrine/orm": ">=2.1,<2.4-dev"
+            },
+            "time": "2012-09-20 14:23:52",
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.9.x-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "JMS\\SerializerBundle": ""
+                }
+            },
+            "license": [
+                "Apache2"
+            ],
+            "authors": [
+                {
+                    "name": "Johannes M. Schmitt",
+                    "email": "schmittjoh@gmail.com",
+                    "homepage": "http://jmsyst.com",
+                    "role": "Developer of wrapped JMSSerializerBundle"
+                }
+            ],
+            "description": "Allows you to easily serialize, and deserialize object graphs of any complexity",
+            "homepage": "http://jmsyst.com/bundles/JMSSerializerBundle",
+            "keywords": [
+                "json",
+                "xml",
+                "serialization",
+                "deserialization",
+                "jaxb"
+            ]
+>>>>>>> Added back composer lock file
         },
         {
             "name": "kriswallsmith/assetic",
@@ -1150,12 +1437,21 @@
             "source": {
                 "type": "git",
                 "url": "http://github.com/kriswallsmith/assetic.git",
+<<<<<<< HEAD
                 "reference": "d6203098559cf9fc90e2890c10533d0adad33bd0"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://github.com/kriswallsmith/assetic/archive/d6203098559cf9fc90e2890c10533d0adad33bd0.zip",
                 "reference": "d6203098559cf9fc90e2890c10533d0adad33bd0",
+=======
+                "reference": "685b7381241fb13c47c994fe5d2e8c4964021f40"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/kriswallsmith/assetic/zipball/685b7381241fb13c47c994fe5d2e8c4964021f40",
+                "reference": "685b7381241fb13c47c994fe5d2e8c4964021f40",
+>>>>>>> Added back composer lock file
                 "shasum": ""
             },
             "require": {
@@ -1176,7 +1472,11 @@
                 "ptachoire/cssembed": "Assetic provides the integration with phpcssembed to embed data uris",
                 "leafo/scssphp-compass": "Assetic provides the integration with the SCSS compass plugin"
             },
+<<<<<<< HEAD
             "time": "1352285252",
+=======
+            "time": "1351610079",
+>>>>>>> Added back composer lock file
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1235,6 +1535,10 @@
                 "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
                 "ext-mongo": "Allow sending log messages to a MongoDB server"
             },
+<<<<<<< HEAD
+=======
+            "time": "1352047076",
+>>>>>>> Added back composer lock file
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1263,8 +1567,12 @@
             "keywords": [
                 "log",
                 "logging"
+<<<<<<< HEAD
             ],
             "time": "1352047076"
+=======
+            ]
+>>>>>>> Added back composer lock file
         },
         {
             "name": "sensio/distribution-bundle",
@@ -1284,6 +1592,10 @@
             "require": {
                 "symfony/framework-bundle": "2.1.*"
             },
+<<<<<<< HEAD
+=======
+            "time": "1347340208",
+>>>>>>> Added back composer lock file
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1309,8 +1621,12 @@
             "keywords": [
                 "distribution",
                 "configuration"
+<<<<<<< HEAD
             ],
             "time": "1347340208"
+=======
+            ]
+>>>>>>> Added back composer lock file
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -1323,7 +1639,11 @@
             },
             "dist": {
                 "type": "zip",
+<<<<<<< HEAD
                 "url": "https://github.com/sensio/SensioFrameworkExtraBundle/archive/v2.1.3.zip",
+=======
+                "url": "https://github.com/sensio/SensioFrameworkExtraBundle/zipball/v2.1.3",
+>>>>>>> Added back composer lock file
                 "reference": "v2.1.3",
                 "shasum": ""
             },
@@ -1370,7 +1690,11 @@
             },
             "dist": {
                 "type": "zip",
+<<<<<<< HEAD
                 "url": "https://github.com/sensio/SensioGeneratorBundle/archive/v2.1.3.zip",
+=======
+                "url": "https://github.com/sensio/SensioGeneratorBundle/zipball/v2.1.3",
+>>>>>>> Added back composer lock file
                 "reference": "v2.1.3",
                 "shasum": ""
             },
@@ -1463,12 +1787,21 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/AsseticBundle",
+<<<<<<< HEAD
                 "reference": "30d3841dc9643d352503a72f3cdf93d193c439d2"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://github.com/symfony/AsseticBundle/archive/30d3841dc9643d352503a72f3cdf93d193c439d2.zip",
                 "reference": "30d3841dc9643d352503a72f3cdf93d193c439d2",
+=======
+                "reference": "3aa58aed64e6ddb1ea65176fff7814b212a6ed77"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/symfony/AsseticBundle/zipball/3aa58aed64e6ddb1ea65176fff7814b212a6ed77",
+                "reference": "3aa58aed64e6ddb1ea65176fff7814b212a6ed77",
+>>>>>>> Added back composer lock file
                 "shasum": ""
             },
             "require": {
@@ -1488,7 +1821,11 @@
             "suggest": {
                 "symfony/twig-bundle": ">=2.1.0,<2.3-dev"
             },
+<<<<<<< HEAD
             "time": "1352285268",
+=======
+            "time": "1351619963",
+>>>>>>> Added back composer lock file
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1545,6 +1882,10 @@
                 "symfony/yaml": ">=2.1.0,<2.3-dev",
                 "symfony/config": ">=2.1.0,<2.3-dev"
             },
+<<<<<<< HEAD
+=======
+            "time": "1348137624",
+>>>>>>> Added back composer lock file
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1571,8 +1912,12 @@
                 }
             ],
             "description": "Symfony MonologBundle",
+<<<<<<< HEAD
             "homepage": "http://symfony.com",
             "time": "1348137624"
+=======
+            "homepage": "http://symfony.com"
+>>>>>>> Added back composer lock file
         },
         {
             "name": "symfony/swiftmailer-bundle",
@@ -1635,12 +1980,21 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/symfony/symfony.git",
+<<<<<<< HEAD
                 "reference": "03f1ccc956324215572b9f95744c587861701b09"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://github.com/symfony/symfony/archive/03f1ccc956324215572b9f95744c587861701b09.zip",
                 "reference": "03f1ccc956324215572b9f95744c587861701b09",
+=======
+                "reference": "3d993740142a4cef26336b8d5f20526367dca110"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/symfony/symfony/archive/3d993740142a4cef26336b8d5f20526367dca110.zip",
+                "reference": "3d993740142a4cef26336b8d5f20526367dca110",
+>>>>>>> Added back composer lock file
                 "shasum": ""
             },
             "require": {
@@ -1689,7 +2043,11 @@
                 "propel/propel1": "dev-master",
                 "monolog/monolog": "1.*"
             },
+<<<<<<< HEAD
             "time": "1352270845",
+=======
+            "time": "1352017759",
+>>>>>>> Added back composer lock file
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1739,6 +2097,10 @@
             "require": {
                 "twig/twig": "1.*"
             },
+<<<<<<< HEAD
+=======
+            "time": "1349889206",
+>>>>>>> Added back composer lock file
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1766,8 +2128,12 @@
                 "debug",
                 "i18n",
                 "text"
+<<<<<<< HEAD
             ],
             "time": "1349889206"
+=======
+            ]
+>>>>>>> Added back composer lock file
         },
         {
             "name": "twig/twig",
@@ -1775,18 +2141,31 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/fabpot/Twig.git",
+<<<<<<< HEAD
                 "reference": "5d87c321bf6880b91d19024c53def337ef62a484"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://github.com/fabpot/Twig/archive/5d87c321bf6880b91d19024c53def337ef62a484.zip",
                 "reference": "5d87c321bf6880b91d19024c53def337ef62a484",
+=======
+                "reference": "abec35b833abfce5eb0ac7ce2bf2bf3462a5bebf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/fabpot/Twig/archive/abec35b833abfce5eb0ac7ce2bf2bf3462a5bebf.zip",
+                "reference": "abec35b833abfce5eb0ac7ce2bf2bf3462a5bebf",
+>>>>>>> Added back composer lock file
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.2.4"
             },
+<<<<<<< HEAD
             "time": "1352319081",
+=======
+            "time": "1352101924",
+>>>>>>> Added back composer lock file
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1843,6 +2222,10 @@
             "require-dev": {
                 "symfony/symfony": "dev-master"
             },
+<<<<<<< HEAD
+=======
+            "time": "1351015515",
+>>>>>>> Added back composer lock file
             "type": "library",
             "installation-source": "source",
             "autoload": {
@@ -1867,8 +2250,12 @@
                 "Behat",
                 "doctrine",
                 "Data fixtures"
+<<<<<<< HEAD
             ],
             "time": "1351015515"
+=======
+            ]
+>>>>>>> Added back composer lock file
         }
     ],
     "packages-dev": null,
@@ -1880,6 +2267,11 @@
         "doctrine/doctrine-fixtures-bundle": 20,
         "doctrine/doctrine-migrations-bundle": 20,
         "behat/behat": 0,
+<<<<<<< HEAD
         "behat/mink": 0
+=======
+        "behat/mink": 0,
+        "friendsofsymfony/rest-bundle": 20
+>>>>>>> Added back composer lock file
     }
 }
