@@ -369,7 +369,7 @@
     z-index: -1;
     left: 0;
     right: 0;
-    background: rgba(242, 246, 193, 0.9);
+    background: #f2f6c1;
     border: 1px solid rgba(170, 157, 134, 0.7);
     -webkit-transform: rotate(2deg);
     -moz-transform: rotate(2deg);
@@ -377,9 +377,15 @@
     -o-transform: rotate(2deg);
     transform: rotate(2deg);
 }
-.notepaper.testable {
-    background: red;
+.testable {
+    background: hsl(219, 79%, 90%);
 }
-.notepaper.done {
-    background: green;
+    .testable:after {
+        background: hsl(219, 79%, 90%);   
+    }
+.done {
+    background: #dff0d8;
 }
+    .done:after {
+        background: #dff0d8;
+    }
