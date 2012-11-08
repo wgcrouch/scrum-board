@@ -15,8 +15,8 @@ class BoardController extends Controller
     public function addAction(Request $request)
     {
         $board = new Board();
-
-        $form = $this->createForm(new Add(), $board);
+        $user = $this->get('security.context')->getToken()->getUser();
+        $form = $this->createForm(new Add($user), $board);
 
         if ($request->getMethod() == 'POST') {
             $form->bindRequest($request);
