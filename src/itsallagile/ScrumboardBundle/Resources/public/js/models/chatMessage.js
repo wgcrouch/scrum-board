@@ -2,11 +2,11 @@
  * Model for Chat Messages
  */
 itsallagile.Model.ChatMessage = Backbone.Model.extend({
-    urlRoot: '/api/chatMessages',
-    
-    defaults: {      
-    },   
-    
+    urlRoot: '/api/messages',
+
+    defaults: {
+    },
+
     initialize: function(options) {
 
     }

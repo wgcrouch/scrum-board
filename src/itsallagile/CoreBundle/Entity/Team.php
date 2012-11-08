@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use itsallagile\CoreBundle\Entity\Invitation;
 use itsallagile\CoreBundle\Entity\Team;
 use itsallagile\CoreBundle\Entity\User;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -27,6 +28,7 @@ class Team
     protected $owner;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255)
      */
     protected $name;
@@ -208,5 +210,16 @@ class Team
     public function getBoards()
     {
         return $this->boards;
+    }
+
+    public function getArray()
+    {
+        $data = array(
+            'id' => $this->teamId,
+            'name' => $this->name,
+            'owner' => $this->owner->getArray()
+        );
+
+        return $data;
     }
 }

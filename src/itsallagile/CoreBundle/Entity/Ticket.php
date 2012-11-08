@@ -3,6 +3,7 @@
 namespace itsallagile\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -19,11 +20,13 @@ class Ticket
     protected $ticketId;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=45)
      */
     protected $type;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="text", nullable=true)
      */
     protected $content;
@@ -34,12 +37,14 @@ class Ticket
     protected $parent;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\ManyToOne(targetEntity="Story", inversedBy="tickets")
      * @ORM\JoinColumn(name="storyId", referencedColumnName="storyId")
      */
     protected $story;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\ManyToOne(targetEntity="Status", inversedBy="tickets")
      * @ORM\JoinColumn(name="statusId", referencedColumnName="statusId")
      */

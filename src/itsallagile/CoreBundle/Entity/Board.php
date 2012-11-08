@@ -14,7 +14,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Board
 {
-
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -23,11 +22,13 @@ class Board
     protected $boardId;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255, nullable=false)
      */
     protected $name;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255, nullable=false, unique=true)
      */
     protected $slug;
@@ -38,6 +39,7 @@ class Board
     protected $stories;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\ManyToOne(targetEntity="Team", inversedBy="boards")
      * @ORM\JoinColumn(name="teamId", referencedColumnName="teamId")
      */
@@ -53,7 +55,6 @@ class Board
         $this->stories = new ArrayCollection();
         $this->chatMessages = new ArrayCollection();
     }
-
 
     /**
      * Get boardId
@@ -130,7 +131,8 @@ class Board
         $data = array(
             'id' => $this->boardId,
             'name' => $this->name,
-            'slug' => $this->slug
+            'slug' => $this->slug,
+            'team' => $this->team->getArray()
         );
 
         foreach ($this->getStories() as $story) {
@@ -185,7 +187,7 @@ class Board
     public function addStorie(\itsallagile\CoreBundle\Entity\Story $stories)
     {
         $this->stories[] = $stories;
-    
+
         return $this;
     }
 
@@ -208,14 +210,14 @@ class Board
     public function setTeam(\itsallagile\CoreBundle\Entity\Team $team = null)
     {
         $this->team = $team;
-    
+
         return $this;
     }
 
     /**
      * Get team
      *
-     * @return itsallagile\CoreBundle\Entity\Team 
+     * @return itsallagile\CoreBundle\Entity\Team
      */
     public function getTeam()
     {

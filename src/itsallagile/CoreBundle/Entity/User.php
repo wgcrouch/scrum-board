@@ -24,12 +24,14 @@ class User implements UserInterface, EquatableInterface
     protected $userId;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=100, unique=true)
      * @Assert\Email()
      */
     protected $email;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255)
      */
     protected $fullName;

@@ -2,56 +2,58 @@
 
 namespace itsallagile\CoreBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM,
-    Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="chatMessage") 
+ * @ORM\Table(name="chatMessage")
  */
-class ChatMessage {
-    
+class ChatMessage
+{
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $chatMessageId;
-    
+
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="text", nullable=true)
      */
     protected $content;
-    
+
     /**
+     * @Assert\NotBlank()
      * @ORM\ManyToOne(targetEntity="Board", inversedBy="chatMessages")
      * @ORM\JoinColumn(name="boardId", referencedColumnName="boardId")
      */
     protected $board;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(name="userId", referencedColumnName="userId")
      */
-    protected $user;    
-    
+    protected $user;
+
     /**
      * @ORM\Column(type="datetime", nullable=false)
      */
     protected $datetime;
-    
+
     public function __construct()
     {
-       
+
     }
-    
 
     public function getArray()
     {
         $data = array(
             'id' => $this->chatMessageId,
             'content' => $this->content,
-            'boardId' => $this->board->getBoardId(),
+            'board' => $this->board->getBoardId(),
             'user' => $this->user->getArray(),
             'datetime' => $this->datetime->format('Y-m-d H:i:s')
         );
@@ -72,19 +74,17 @@ class ChatMessage {
     /**
      * Get board
      *
-     * @return itsallagile\CoreBundle\Entity\Board 
+     * @return itsallagile\CoreBundle\Entity\Board
      */
     public function getBoard()
     {
         return $this->board;
     }
-    
-   
 
     /**
      * Get chatMessageId
      *
-     * @return integer 
+     * @return integer
      */
     public function getChatMessageId()
     {
@@ -106,7 +106,7 @@ class ChatMessage {
     /**
      * Get content
      *
-     * @return text 
+     * @return text
      */
     public function getContent()
     {
@@ -128,7 +128,7 @@ class ChatMessage {
     /**
      * Get datetime
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getDatetime()
     {
@@ -150,7 +150,7 @@ class ChatMessage {
     /**
      * Get user
      *
-     * @return itsallagile\CoreBundle\Entity\User 
+     * @return itsallagile\CoreBundle\Entity\User
      */
     public function getUser()
     {

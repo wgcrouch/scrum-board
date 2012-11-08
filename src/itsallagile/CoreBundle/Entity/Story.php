@@ -4,6 +4,7 @@ namespace itsallagile\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -29,6 +30,7 @@ class Story
     protected $sort;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\ManyToOne(targetEntity="Board", inversedBy="stories")
      * @ORM\JoinColumn(name="boardId", referencedColumnName="boardId")
      */
@@ -153,7 +155,7 @@ class Story
             'points' => $this->points,
             'status' => $this->status->getStatusId(),
             'content' => $this->content,
-            'boardId' => $this->board->getBoardId()
+            'board' => $this->board->getBoardId()
         );
 
         foreach ($this->getTickets() as $ticket) {

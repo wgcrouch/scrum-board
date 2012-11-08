@@ -7,33 +7,26 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Form for tickets in the API
+ * Form for stories in the API
  */
-class TicketType extends AbstractType
+class StoryType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('content')
-            ->add('type')
-            ->add('parent')
-            ->add('id', 'hidden', array('mapped' => false));
+            ->add('points')
+            ->add('sort')
+            //These are not handled
+            ->add('id', 'hidden', array('mapped' => false))
+            ->add('tickets', 'hidden', array('mapped' => false));
 
         $builder->add(
-            'status',
+            'board',
             'entity',
             array(
-                'class' => 'itsallagileCoreBundle:Status',
+                'class' => 'itsallagileCoreBundle:Board',
                 'property' => 'name'
-            )
-        );
-
-        $builder->add(
-            'story',
-            'entity',
-            array(
-                'class' => 'itsallagileCoreBundle:Story',
-                'property' => 'storyId'
             )
         );
     }
@@ -42,7 +35,7 @@ class TicketType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'itsallagile\CoreBundle\Entity\Ticket',
+                'data_class' => 'itsallagile\CoreBundle\Entity\Story',
                 'csrf_protection' => false
             )
         );

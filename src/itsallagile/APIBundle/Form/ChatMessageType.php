@@ -7,33 +7,31 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Form for tickets in the API
+ * Form for chatMessages in the API
  */
-class TicketType extends AbstractType
+class ChatMessageType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('content')
-            ->add('type')
-            ->add('parent')
             ->add('id', 'hidden', array('mapped' => false));
 
         $builder->add(
-            'status',
+            'board',
             'entity',
             array(
-                'class' => 'itsallagileCoreBundle:Status',
+                'class' => 'itsallagileCoreBundle:Board',
                 'property' => 'name'
             )
         );
 
         $builder->add(
-            'story',
+            'user',
             'entity',
             array(
-                'class' => 'itsallagileCoreBundle:Story',
-                'property' => 'storyId'
+                'class' => 'itsallagileCoreBundle:User',
+                'property' => 'email'
             )
         );
     }
@@ -42,7 +40,7 @@ class TicketType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'itsallagile\CoreBundle\Entity\Ticket',
+                'data_class' => 'itsallagile\CoreBundle\Entity\ChatMessage',
                 'csrf_protection' => false
             )
         );
