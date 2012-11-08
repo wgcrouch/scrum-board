@@ -9,19 +9,23 @@ use itsallagile\CoreBundle\Entity\Team;
 class LoadTeams extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
-    {        
-        
+    {
+
         $team = new Team();
         $team->setName('A-Team');
         $team->setVelocity(20);
-        $user = $manager->merge($this->getReference('init-user'));
-        $team->setOwner($user->getUserId());
+        $admin = $manager->merge($this->getReference('admin-user'));
+        $team->setOwner($admin);
         $manager->persist($team);
         $manager->flush();
+        $admin->addTeam($team);
+        $manager->persist($admin);
+
+        $user = $manager->merge($this->getReference('normal-user'));
         $user->addTeam($team);
         $manager->persist($user);
         $manager->flush();
-        
+
         $this->addReference('init-team', $team);
     }
 

@@ -2,7 +2,7 @@
 
 namespace itsallagile\CoreBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM, 
+use Doctrine\ORM\Mapping as ORM,
     Doctrine\Common\Collections\ArrayCollection,
     Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity,
     Symfony\Component\Validator\Constraints as Assert;
@@ -10,54 +10,54 @@ use Doctrine\ORM\Mapping as ORM,
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="board") 
+ * @ORM\Table(name="board")
  * @UniqueEntity(fields={"slug"})
  */
 class Board {
-    
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $boardId;
-    
+
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
      */
     protected $name;
-    
+
     /**
      * @ORM\Column(type="string", length=255, nullable=false, unique=true)
      */
     protected $slug;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="Story", mappedBy="board")
      */
     protected $stories;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="ChatMessage", mappedBy="board")
      */
     protected $chatMessages;
-    
+
     public function __construct()
     {
         $this->stories = new ArrayCollection();
         $this->chatMessages = new ArrayCollection();
     }
-    
-    
+
+
     /**
      * Get boardId
      *
-     * @return integer 
+     * @return integer
      */
     public function getBoardId()
     {
         return $this->boardId;
-    }   
+    }
 
     /**
      * Set name
@@ -72,7 +72,7 @@ class Board {
     /**
      * Get name
      *
-     * @return text 
+     * @return text
      */
     public function getName()
     {
@@ -92,7 +92,7 @@ class Board {
     /**
      * Get stories
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getStories()
     {
@@ -112,13 +112,13 @@ class Board {
     /**
      * Get slug
      *
-     * @return text 
+     * @return text
      */
     public function getSlug()
     {
         return $this->slug;
     }
-    
+
     public function getArray()
     {
         $data = array(
@@ -126,13 +126,13 @@ class Board {
             'name' => $this->name,
             'slug' => $this->slug
         );
-        
+
         foreach ($this->getStories() as $story) {
-            $data['stories'][] = $story->getArray(); 
+            $data['stories'][] = $story->getArray();
         }
-        
+
         foreach ($this->getChatMessages() as $message) {
-            $data['chatMessages'][] = $message->getArray(); 
+            $data['chatMessages'][] = $message->getArray();
         }
         return $data;
     }
@@ -162,7 +162,7 @@ class Board {
     /**
      * Get chatMessages
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getChatMessages()
     {

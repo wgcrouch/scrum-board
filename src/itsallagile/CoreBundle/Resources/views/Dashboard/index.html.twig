@@ -2,7 +2,7 @@
 
 {% block body %}
 	<h1>Dashboard</h1>
-    
+
     <div class="span8">
     <h2>Teams</h2>
     <table class="table table-bordered table-striped">
@@ -10,6 +10,7 @@
             <tr>
                 <th>Name</th>
                 <th>Velocity</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -22,10 +23,17 @@
                     <tr>
                         <td>{{ team.name }}</td>
                         <td>{{ team.velocity }}</td>
+                        <td>
+                        {% if app.user == team.owner %}
+                            <a href="{{path('core_teams_edit', {'teamId':team.teamId})}}">
+                            <i class="icon-pencil" title="Manage Team"></i>
+                            </a>
+                        {% endif %}
+                        </td>
                     </tr>
                 {% endfor %}
             {% endif %}
-            
+
         </tbody>
     </table>
     <h2>Available Boards</h2>

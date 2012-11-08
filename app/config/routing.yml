@@ -6,6 +6,9 @@ itsallagileCoreBundle:
     resource: "@itsallagileCoreBundle/Resources/config/routing.yml"
     prefix:   /
 
+logout:
+    pattern:   /logout
+
 # Internal routing configuration to handle ESI
 #_internal:
 #   resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
