@@ -2,18 +2,18 @@
 
 namespace itsallagile\CoreBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM,
-    Doctrine\Common\Collections\ArrayCollection,
-    Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity,
-    Symfony\Component\Validator\Constraints as Assert;
-;
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="board")
  * @UniqueEntity(fields={"slug"})
  */
-class Board {
+class Board
+{
 
     /**
      * @ORM\Id
