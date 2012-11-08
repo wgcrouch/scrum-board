@@ -8,7 +8,7 @@ if (typeof Object.create !== "function") {
     };
 }
 
-
+//Root namespace for our apps classes
 var itsallagile = itsallagile || {};
 
 itsallagile.Controller = {};
@@ -27,7 +27,7 @@ itsallagile.baseObject = {
         }
         return obj;
     },
-    
+
     getSimple: function()
     {
         var simple = {};

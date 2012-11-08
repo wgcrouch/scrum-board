@@ -13,21 +13,6 @@ use itsallagile\APIBundle\Form\TicketType;
  */
 class TicketsController extends FOSRestController
 {
-
-    protected function getRepository()
-    {
-        return $this->getDoctrine()->getRepository('itsallagileCoreBundle:Ticket');
-    }
-
-    protected function getTicket($ticketId)
-    {
-        $ticket = $this->getRepository()->find($ticketId);
-        if (!$ticket) {
-            throw $this->createNotFoundException('No ticket found for id '. $ticketId);
-        }
-        return $ticket;
-    }
-
     /**
      * Get a single ticket
      *
@@ -61,11 +46,10 @@ class TicketsController extends FOSRestController
     }
 
     /**
-     * Post tickets
+     * Create a new ticket
      */
     public function postTicketsAction(Request $request)
     {
-
         $view = View::create();
         $ticket = new Ticket();
         $form = $this->createForm(new TicketType(), $ticket);
@@ -84,7 +68,7 @@ class TicketsController extends FOSRestController
     }
 
     /**
-     * Put ticket
+     * Update a ticket
      */
     public function putTicketAction($ticketId, Request $request)
     {
@@ -97,6 +81,7 @@ class TicketsController extends FOSRestController
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($ticket);
             $em->flush();
+
             $view->setStatusCode(200);
             $view->setData($ticket->getArray());
         } else {
@@ -120,5 +105,19 @@ class TicketsController extends FOSRestController
         $em->flush();
         $view->setStatusCode(200);
         return $view;
+    }
+
+    protected function getRepository()
+    {
+        return $this->getDoctrine()->getRepository('itsallagileCoreBundle:Ticket');
+    }
+
+    protected function getTicket($ticketId)
+    {
+        $ticket = $this->getRepository()->find($ticketId);
+        if (!$ticket) {
+            throw $this->createNotFoundException('No ticket found for id '. $ticketId);
+        }
+        return $ticket;
     }
 }
