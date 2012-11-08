@@ -1,16 +1,17 @@
 <?php
 namespace itsallagile\CoreBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM,
-    Symfony\Component\Security\Core\User\UserInterface,
-    Symfony\Component\Security\Core\User\EquatableInterface,
-    Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity,
-    Symfony\Component\Validator\Constraints as Assert,
-    Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\EquatableInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use itsallagile\CoreBundle\Entity\Team;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="user") 
+ * @ORM\Table(name="user")
  * @UniqueEntity("email")
  */
 class User implements UserInterface, EquatableInterface
@@ -21,58 +22,58 @@ class User implements UserInterface, EquatableInterface
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $userId;
-    
+
     /**
      * @ORM\Column(type="string", length=100, unique=true)
      * @Assert\Email()
      */
     protected $email;
-    
+
     /**
-     * @ORM\Column(type="string", length=255) 
+     * @ORM\Column(type="string", length=255)
      */
     protected $fullName;
-    
+
     /**
-     * @ORM\Column(type="string", length=255) 
+     * @ORM\Column(type="string", length=255)
      */
     protected $password;
-    
+
     /**
      * @ORM\Column(type="string", length=32)
      */
     protected $salt;
-    
+
     /**
-     * @ORM\ManyToMany(targetEntity="Team", inversedBy="users") 
-     * @ORM\JoinTable(name="teamUser", 
+     * @ORM\ManyToMany(targetEntity="Team", inversedBy="users")
+     * @ORM\JoinTable(name="teamUser",
      *     joinColumns={@ORM\JoinColumn(name="userId", referencedColumnName="userId")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="teamId", referencedColumnName="teamId")})
      */
-    protected $teams; 
-    
+    protected $teams;
+
     public function __construct()
     {
         $this->salt = md5(uniqid(null, true));
-        
+
         $this->teams = new ArrayCollection();
     }
 
     /**
      * Get userId
      *
-     * @return integer 
+     * @return integer
      */
     public function getUserId()
     {
         return $this->userId;
     }
-    
+
     public function setSalt($salt)
     {
         $this->salt = $salt;
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -80,7 +81,7 @@ class User implements UserInterface, EquatableInterface
     {
         return $this->salt;
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -102,7 +103,7 @@ class User implements UserInterface, EquatableInterface
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
@@ -118,7 +119,7 @@ class User implements UserInterface, EquatableInterface
     {
         $this->fullName = $fullName;
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -130,13 +131,13 @@ class User implements UserInterface, EquatableInterface
     /**
      * Get fullName
      *
-     * @return string 
+     * @return string
      */
     public function getFullName()
     {
         return $this->fullName;
     }
-    
+
     /**
      * Set password
      *
@@ -146,7 +147,7 @@ class User implements UserInterface, EquatableInterface
     {
         $this->password = $password;
     }
-    
+
     /**
      * Get password
      *
@@ -156,7 +157,7 @@ class User implements UserInterface, EquatableInterface
     {
         return $this->password;
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -171,7 +172,7 @@ class User implements UserInterface, EquatableInterface
     {
         return $this->getUsername() === $user->getUsername();
     }
-    
+
     public function getTeams()
     {
         return $this->teams;
@@ -180,24 +181,33 @@ class User implements UserInterface, EquatableInterface
     /**
      * Add teams
      *
-     * @param itsallagile\CoreBundle\Entity\Team $teams
+     * @param Team $teams
      */
-    public function addTeam(\itsallagile\CoreBundle\Entity\Team $teams)
+    public function addTeam(Team $team)
     {
-        $this->teams[] = $teams;
+        $this->teams[] = $team;
     }
 
     /**
      * Remove teams
      *
-     * @param <variableType$teams
+     * @param Team $teams
      */
-    public function removeTeam(\itsallagile\CoreBundle\Entity\Team $teams)
+    public function removeTeam(Team $team)
     {
-        $this->teams->removeElement($teams);
+        $this->teams->removeElement($team);
     }
-    
-    
+
+    /**
+     *
+     * @param Team $team
+     * @return boolean
+     */
+    public function hasTeam(Team $team)
+    {
+        return $this->teams->contains($team);
+    }
+
     public function getArray()
     {
         $data = array(
@@ -205,8 +215,7 @@ class User implements UserInterface, EquatableInterface
             'fullName' => $this->fullName,
             'email' => $this->email
         );
-        
+
         return $data;
     }
-    
 }
