@@ -26,7 +26,6 @@ class Ticket
     protected $type;
 
     /**
-     * @Assert\NotBlank()
      * @ORM\Column(type="text", nullable=true)
      */
     protected $content;
