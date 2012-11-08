@@ -3,6 +3,6 @@
  */
 itsallagile.Model.Status = Backbone.Model.extend({
     urlRoot: '/api/statuses'
-    
+
 });
 

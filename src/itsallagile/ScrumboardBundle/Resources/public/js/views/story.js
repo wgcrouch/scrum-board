@@ -3,7 +3,7 @@ itsallagile.View.Story = Backbone.View.extend({
     tagName: 'tr',
     id: 'story',
     className: 'story',
-    
+
     template: '<td class="story-detail-cell">' +
         '<div class="notepaper">' +
         '<p class="story-content"><%= content %></p><textarea class="story-input"><%= content %></textarea>' +
@@ -22,9 +22,8 @@ itsallagile.View.Story = Backbone.View.extend({
         '<a href="#" class="story-status-show">Set Status</a>' +
         '<i class="icon-remove delete-story"></i></td>' +
         '</div>',
+
     statuses: null,
-    storyStatuses: null,
-    statusViews: [],
 
     events: {
         "dblclick .story-content": "startEditContent",
@@ -72,14 +71,14 @@ itsallagile.View.Story = Backbone.View.extend({
             var statusTickets = new itsallagile.Collection.Tickets();
             var statusView = new itsallagile.View.StoryStatusCell(
                 {status: status, story: this.model, tickets: statusTickets});
-                
+
             statusView.on('moveTicket', this.onMoveTicket, this);
             this.statusViews[status.get('id')] = statusView;
-            this.$el.append(statusView.render().el);  
+            this.$el.append(statusView.render().el);
         }, this);
 
         //Assign tickets to the appropriate status view
-        var tickets = this.model.get('tickets');        
+        var tickets = this.model.get('tickets');
         tickets.forEach(function(ticket) {
             var status = ticket.get('status');
             if (typeof status !== 'undefined') {
@@ -112,12 +111,12 @@ itsallagile.View.Story = Backbone.View.extend({
         ticket.save(
             {story: this.model.get('id'), status: status},
             {silent:true});
-        this.statusViews[status].addTicket(ticket);    
-        
+        this.statusViews[status].addTicket(ticket);
+
         if (typeof itsallagile.socket !== 'undefined') {
-            itsallagile.socket.emit('boardEvent', itsallagile.roomId, 'ticket:move', 
+            itsallagile.socket.emit('boardEvent', itsallagile.roomId, 'ticket:move',
                 {ticket: ticket, originStoryId: originStoryId});
-        }        
+        }
     },
 
     /**
@@ -130,13 +129,13 @@ itsallagile.View.Story = Backbone.View.extend({
 
     /**
      * Save the story when editing content has finished
-     */    
+     */
     endEditContent: function() {
         var p = $('p.story-content',this.$el);
         var text = $('textarea.story-input', this.$el);
         p.html(this.formatText(text.val()));
         text.hide();
-        p.show();        
+        p.show();
         this.model.save({'content': text.val()}, {silent: true});
     },
 
@@ -208,14 +207,14 @@ itsallagile.View.Story = Backbone.View.extend({
         var breakTag = '<br/>';
         return (text + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
     },
-    
+
     /**
      * Add a ticket to this story and make sure the status view also gets it
      */
     addTicket: function(ticket) {
         this.statusViews[ticket.get('status')].addTicket(ticket);
     },
-    
+
     /**
      * Remove a ticket from this story and the approriate status view
      */

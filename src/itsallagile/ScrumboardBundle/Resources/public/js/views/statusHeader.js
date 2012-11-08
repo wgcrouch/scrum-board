@@ -1,6 +1,6 @@
 /**
  * View for the status header
- * 
+ *
  * Container div for the status column headers
  */
 itsallagile.View.StatusHeader = Backbone.View.extend({
@@ -8,7 +8,7 @@ itsallagile.View.StatusHeader = Backbone.View.extend({
     id: 'status-header',
     className: 'status-header',
     cellTemplates: [],
-    
+
     /**
      * When passed a list of statuses create header templates for each one
      */
@@ -16,9 +16,9 @@ itsallagile.View.StatusHeader = Backbone.View.extend({
         this.cellTemplates.push(new itsallagile.View.StatusHeaderCell({status: new itsallagile.Model.Status({name:'Story'})}));
         options.statuses.forEach(function(status, key) {
             this.cellTemplates.push(new itsallagile.View.StatusHeaderCell({status: status}));
-        }, this);        
+        }, this);
     },
-    
+
     /**
      * Render the header cells
      */

@@ -9,12 +9,12 @@ use itsallagile\CoreBundle\Entity\Status;
 class LoadStatuses extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
-    {        
+    {
         $statuses = array('New', 'Assigned', 'Done');
         foreach ($statuses as $status) {
             $statusObj = new Status();
             $statusObj->setName($status);
-            
+
             $manager->persist($statusObj);
             $this->addReference('status-' . $status, $statusObj);
         }

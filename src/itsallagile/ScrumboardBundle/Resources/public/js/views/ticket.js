@@ -19,7 +19,7 @@ itsallagile.View.Ticket = Backbone.View.extend({
         'click .zoom-ticket' : 'zoomToggle'
     },
     storyView: null,
-    
+
     /**
      * Initialize bindings to changes in the model
      */
@@ -29,7 +29,7 @@ itsallagile.View.Ticket = Backbone.View.extend({
         this.storyView = options.storyView;
         _.bindAll(this);
     },
-    
+
     /**
      * Render a ticket
      */
@@ -44,7 +44,7 @@ itsallagile.View.Ticket = Backbone.View.extend({
         this.$el.draggable({revert: true});
         return this;
     },
-    
+
     /**
      * Show the edit box when ticket is double clicked
      */
@@ -55,7 +55,7 @@ itsallagile.View.Ticket = Backbone.View.extend({
         $('p',this.$el).hide();
         $('textarea', this.$el).show().focus();
     },
-    
+
     /**
      * Save the ticket when editing has finished
      */
@@ -66,12 +66,12 @@ itsallagile.View.Ticket = Backbone.View.extend({
         text.hide();
         p.show();
         this.model.set('content', text.val());
-        this.model.save(null, {success: this.changeSuccess});       
+        this.model.save(null, {success: this.changeSuccess});
         if (this.$el.hasClass('zoomed')) {
             this.zoomToggle();
         }
     },
-    
+
     /**
      * Callback function for successfully changing a tickets contents
      */
@@ -103,7 +103,7 @@ itsallagile.View.Ticket = Backbone.View.extend({
             $('.zoom-ticket', this.$el).removeClass('icon-zoom-in').addClass('icon-zoom-out');
         }
     },
-    
+
     /**
      * Show a dialog to confirm deleting a ticket
      */

@@ -6,14 +6,15 @@ use Symfony\Component\HttpKernel\KernelInterface;
 use Behat\Symfony2Extension\Context\KernelAwareInterface;
 use Behat\MinkExtension\Context\MinkContext;
 
-use Behat\Behat\Context\Step,
-    Behat\Behat\Context\BehatContext,
-    Behat\Behat\Exception\PendingException;
+use Behat\Behat\Context\Step;
+use Behat\Behat\Context\BehatContext;
+use Behat\Behat\Exception\PendingException;
 
-use Behat\Gherkin\Node\PyStringNode,    
-    Behat\Gherkin\Node\TableNode;
+use Behat\Gherkin\Node\PyStringNode;
+use Behat\Gherkin\Node\TableNode;
 
 use itsallagile\CoreBundle\Entity\User;
+
 //
 // Require 3rd-party libraries here:
 //
@@ -24,8 +25,7 @@ use itsallagile\CoreBundle\Entity\User;
 /**
  * Feature context.
  */
-class FeatureContext extends MinkContext //MinkContext if you want to test web
-                  implements KernelAwareInterface
+class FeatureContext extends MinkContext implements KernelAwareInterface
 {
     private $kernel;
     private $parameters;
@@ -50,11 +50,12 @@ class FeatureContext extends MinkContext //MinkContext if you want to test web
     {
         $this->kernel = $kernel;
     }
-    
-    public function getEntityManager() {
+
+    public function getEntityManager()
+    {
         return $this->kernel->getContainer()->get('doctrine.orm.entity_manager');
     }
-    
+
     /**
      * @Given /^I have an account$/
      */
@@ -66,7 +67,7 @@ class FeatureContext extends MinkContext //MinkContext if you want to test web
         if (!$user) {
             $user = new User();
             $user->setEmail($email);
-            $user->setFullName('Behat User');            
+            $user->setFullName('Behat User');
             $factory = $this->kernel->getContainer()->get('security.encoder_factory');
             $encoder = $factory->getEncoder($user);
             $password = $encoder->encodePassword('password', $user->getSalt());
@@ -88,7 +89,7 @@ class FeatureContext extends MinkContext //MinkContext if you want to test web
             new Step\When('I press "Login"'),
         );
     }
-    
+
     /**
      * @Given /^I am an authenticated user$/
      */
@@ -114,18 +115,4 @@ class FeatureContext extends MinkContext //MinkContext if you want to test web
             new Step\When('I press "Add"'),
         );
     }
-
-
-//
-// Place your definition and hook methods here:
-//
-//    /**
-//     * @Given /^I have done something with "([^"]*)"$/
-//     */
-//    public function iHaveDoneSomethingWith($argument)
-//    {
-//        $container = $this->kernel->getContainer();
-//        $container->get('some_service')->doSomethingWith($argument);
-//    }
-//
 }

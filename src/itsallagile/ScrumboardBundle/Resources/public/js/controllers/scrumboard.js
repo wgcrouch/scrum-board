@@ -1,19 +1,19 @@
 /**
  * Controller for viewing a scrum board
- * 
+ *
  * Initializes the board view and board model
  */
 itsallagile.Controller.Scrumboard = itsallagile.baseObject.extend({
-    
+
     board : null,
     boardView: null,
     toolbarView: null,
     connectedUsersView: null,
     messagesView: null,
-    
+
     load: function() {
         var container = $('#board-container');
-        
+
         this.toolbarView = new itsallagile.View.Toolbar({
             model: this.board,
             templates: [
@@ -41,7 +41,7 @@ itsallagile.Controller.Scrumboard = itsallagile.baseObject.extend({
         container.append(this.messagesView.render().el);
         container.append('<div id="notification-container"></div>');
 
-        //Open a socket 
+        //Open a socket
         itsallagile.socket = io.connect(window.location.hostname + ':8080');
 
         itsallagile.roomId = 'board:' +  this.board.get("id");
@@ -57,8 +57,8 @@ itsallagile.Controller.Scrumboard = itsallagile.baseObject.extend({
         this.boardView.bindSocketEvents();
         this.connectedUsersView.bindSocketEvents();
         this.messagesView.bindSocketEvents();
-    }    
-    
+    }
+
 });
 
 
