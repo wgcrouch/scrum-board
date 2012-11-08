@@ -43,6 +43,11 @@ class Team
     protected $users;
 
     /**
+     * @ORM\OneToMany(targetEntity="Board", mappedBy="team")
+     */
+    protected $boards;
+
+    /**
      * @ORM\OneToMany(targetEntity="Invitation", mappedBy="team")
      */
     protected $invitations;
@@ -51,6 +56,7 @@ class Team
     {
         $this->users = new ArrayCollection();
         $this->invitations = new ArrayCollection();
+        $this->boards = new ArrayCollection();
     }
 
     /**
@@ -169,5 +175,38 @@ class Team
     public function getOwner()
     {
         return $this->owner;
+    }
+
+    /**
+     * Add boards
+     *
+     * @param itsallagile\CoreBundle\Entity\Board $boards
+     * @return Team
+     */
+    public function addBoard(\itsallagile\CoreBundle\Entity\Board $boards)
+    {
+        $this->boards[] = $boards;
+
+        return $this;
+    }
+
+    /**
+     * Remove boards
+     *
+     * @param itsallagile\CoreBundle\Entity\Board $boards
+     */
+    public function removeBoard(\itsallagile\CoreBundle\Entity\Board $boards)
+    {
+        $this->boards->removeElement($boards);
+    }
+
+    /**
+     * Get boards
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getBoards()
+    {
+        return $this->boards;
     }
 }

@@ -38,6 +38,12 @@ class Board
     protected $stories;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Team", inversedBy="boards")
+     * @ORM\JoinColumn(name="teamId", referencedColumnName="teamId")
+     */
+    protected $team;
+
+    /**
      * @ORM\OneToMany(targetEntity="ChatMessage", mappedBy="board")
      */
     protected $chatMessages;
@@ -167,5 +173,52 @@ class Board
     public function getChatMessages()
     {
         return $this->chatMessages;
+    }
+
+
+    /**
+     * Add stories
+     *
+     * @param itsallagile\CoreBundle\Entity\Story $stories
+     * @return Board
+     */
+    public function addStorie(\itsallagile\CoreBundle\Entity\Story $stories)
+    {
+        $this->stories[] = $stories;
+    
+        return $this;
+    }
+
+    /**
+     * Remove stories
+     *
+     * @param itsallagile\CoreBundle\Entity\Story $stories
+     */
+    public function removeStorie(\itsallagile\CoreBundle\Entity\Story $stories)
+    {
+        $this->stories->removeElement($stories);
+    }
+
+    /**
+     * Set team
+     *
+     * @param itsallagile\CoreBundle\Entity\Team $team
+     * @return Board
+     */
+    public function setTeam(\itsallagile\CoreBundle\Entity\Team $team = null)
+    {
+        $this->team = $team;
+    
+        return $this;
+    }
+
+    /**
+     * Get team
+     *
+     * @return itsallagile\CoreBundle\Entity\Team 
+     */
+    public function getTeam()
+    {
+        return $this->team;
     }
 }

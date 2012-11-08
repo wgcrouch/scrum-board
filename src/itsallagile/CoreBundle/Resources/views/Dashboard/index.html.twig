@@ -41,15 +41,17 @@
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
+                    <th>Team</th>
                     <th>Name</th>
                     <th>Slug</th>
                     <th>Stories</th>
                     <th></th>
                 </tr>
-            <thead>
+            </thead>
             <tbody>
             {% for board in boards %}
                 <tr>
+                    <td>{{ board.team.name }}</td>
                     <td>{{ board.name }}</td>
                     <td>{{ board.slug }}</td>
                     <td>{{ board.stories.count }}</td>
