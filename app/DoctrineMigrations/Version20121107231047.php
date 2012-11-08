@@ -19,7 +19,7 @@ class Version20121107231047 extends AbstractMigration
         $this->addSql("ALTER TABLE `team`
   ADD CONSTRAINT `FK_C4E0A61FE05EFD25`
   FOREIGN KEY (`ownerId` )
-  REFERENCES ``user` (`userId` );
+  REFERENCES `user` (`userId` );
 ");
         $this->addSql("CREATE INDEX IDX_C4E0A61FE05EFD25 ON team (ownerId)");
     }
