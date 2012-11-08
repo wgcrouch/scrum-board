@@ -2,64 +2,64 @@
 
 namespace itsallagile\CoreBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM,
-    Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="story") 
+ * @ORM\Table(name="story")
  */
-class Story {
-    
+class Story
+{
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $storyId;
-    
+
     /**
      * @ORM\Column(type="text", nullable=true)
      */
     protected $content;
-    
+
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
     protected $sort;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Board", inversedBy="stories")
      * @ORM\JoinColumn(name="boardId", referencedColumnName="boardId")
      */
     protected $board;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="Ticket", mappedBy="story")
      */
     protected $tickets;
-    
+
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
     protected $points;
-    
+
     public function __construct()
     {
         $this->tickets = new ArrayCollection();
     }
-    
 
     /**
      * Get storyId
      *
-     * @return integer 
+     * @return integer
      */
     public function getStoryId()
     {
         return $this->storyId;
     }
-    
+
 
     /**
      * Set content
@@ -74,7 +74,7 @@ class Story {
     /**
      * Get content
      *
-     * @return text 
+     * @return text
      */
     public function getContent()
     {
@@ -94,13 +94,13 @@ class Story {
     /**
      * Get points
      *
-     * @return integer 
+     * @return integer
      */
     public function getPoints()
     {
         return $this->points;
     }
-    
+
     /**
      * Set points
      *
@@ -114,13 +114,13 @@ class Story {
     /**
      * Get sort
      *
-     * @return integer 
+     * @return integer
      */
     public function getSort()
     {
         return $this->sort;
     }
-    
+
     public function getArray()
     {
         $data = array(
@@ -130,11 +130,11 @@ class Story {
             'content' => $this->content,
             'boardId' => $this->board->getBoardId()
         );
-        
+
         foreach ($this->getTickets() as $ticket) {
-            $data['tickets'][] = $ticket->getArray(); 
+            $data['tickets'][] = $ticket->getArray();
         }
-        
+
         return $data;
     }
 
@@ -151,13 +151,13 @@ class Story {
     /**
      * Get board
      *
-     * @return itsallagile\CoreBundle\Entity\Board 
+     * @return itsallagile\CoreBundle\Entity\Board
      */
     public function getBoard()
     {
         return $this->board;
     }
-    
+
     /**
      * Add tickets
      *
@@ -171,7 +171,7 @@ class Story {
     /**
      * Get tickets
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getTickets()
     {
