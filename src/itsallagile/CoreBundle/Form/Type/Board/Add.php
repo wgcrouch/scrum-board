@@ -1,9 +1,9 @@
 <?php
 namespace itsallagile\CoreBundle\Form\Type\Board;
 
-use Symfony\Component\Form\AbstractType,
-    Symfony\Component\Form\Extension\Core\Type\RepeatedType,
-    Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\FormBuilderInterface;
 
 class Add extends AbstractType
 {
