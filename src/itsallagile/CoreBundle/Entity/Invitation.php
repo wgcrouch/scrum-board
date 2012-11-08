@@ -31,7 +31,7 @@ class Invitation
      * @ORM\ManyToOne(targetEntity="Team", inversedBy="invitations")
      * @ORM\JoinColumn(name="teamId", referencedColumnName="teamId")
      */
-    protected $teamId;
+    protected $team;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -94,14 +94,14 @@ class Invitation
         $this->token = $token;
     }
 
-    public function getTeamId()
+    public function getTeam()
     {
-        return $this->teamId;
+        return $this->team;
     }
 
-    public function setTeamId($id)
+    public function setTeam($team)
     {
-        $this->teamId = $id;
+        $this->team = $team;
     }
 
     /**
