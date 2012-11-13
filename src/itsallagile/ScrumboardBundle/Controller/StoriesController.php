@@ -82,6 +82,10 @@ class StoriesController extends RestController
 
         $story->setSort($this->getParam('sort'));
         $story->setPoints($this->getParam('points'));
+
+        $status = $this->getDoctrine()->getRepository('itsallagileCoreBundle:StoryStatus')
+            ->findOneByName('New');
+        $story->setStatus($status);
         
         $board = $this->getDoctrine()->getRepository('itsallagileCoreBundle:Board')->find($this->getParam('boardId'));
         $story->setBoard($board);
@@ -113,6 +117,10 @@ class StoriesController extends RestController
 
         $story->setSort($this->getParam('sort'));
         $story->setPoints($this->getParam('points'));
+
+        $status = $this->getDoctrine()->getRepository('itsallagileCoreBundle:StoryStatus')
+            ->find($this->getParam('status'));
+        $story->setStatus($status);
 
         $board = $this->getDoctrine()->getRepository('itsallagileCoreBundle:Board')->find($this->getParam('boardId'));
         $story->setBoard($board);

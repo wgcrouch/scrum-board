@@ -138,6 +138,20 @@ itsallagileScrumboardBundle_statusesGetOne:
         _method: GET
         format: JSON
         
+itsallagileScrumboardBundle_storyStatusesGetAll:
+    pattern: /api/storyStatuses
+    defaults: { _controller: itsallagileScrumboardBundle:StoryStatuses:getAll, _format: json}
+    requirements:
+        _method: GET
+        format: JSON
+        
+itsallagileScrumboardBundle_storyStatusesGetOne:
+    pattern: /api/storyStatuses/{statusId}
+    defaults: { _controller: itsallagileScrumboardBundle:StoryStatuses:get, _format: json}
+    requirements:
+        _method: GET
+        format: JSON
+
 itsallagileScrumboardBundle_chatMessagesGetOne:
     pattern: /api/chatMessages/{chatMessageId}
     defaults: { _controller: itsallagileScrumboardBundle:ChatMessages:get, _format: json}
