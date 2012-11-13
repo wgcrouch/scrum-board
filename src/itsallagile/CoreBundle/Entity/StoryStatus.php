@@ -34,8 +34,7 @@ class StoryStatus
     {
         $this->stories = new ArrayCollection();
     }
-    
-    
+        
     /**
      * Get statusId
      *

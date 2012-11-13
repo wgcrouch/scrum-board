@@ -35,9 +35,15 @@ class StoriesController extends FOSRestController
         $view = View::create();
         $story = new Story();
         $form = $this->createForm(new StoryType(), $story);
-        $form->bind($request);
-
-        if ($form->isValid()) {
+        $form->bind($request);  
+        
+        if ($form->isValid()) {            
+            
+            if (!$story->getStatus()) {
+                $status = $this->getDoctrine()->getRepository('itsallagileCoreBundle:StoryStatus')
+                    ->findOneByName('New');
+                $story->setStatus($status);
+            }
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($story);
             $em->flush();

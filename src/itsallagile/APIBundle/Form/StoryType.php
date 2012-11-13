@@ -29,6 +29,15 @@ class StoryType extends AbstractType
                 'property' => 'name'
             )
         );
+        
+        $builder->add(
+            'status',
+            'entity',
+            array(
+                'class' => 'itsallagileCoreBundle:StoryStatus',
+                'property' => 'name'
+            )
+        );
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

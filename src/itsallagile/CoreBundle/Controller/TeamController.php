@@ -25,7 +25,7 @@ class TeamController extends Controller
 
             if ($form->isValid()) {
                 $user = $this->get('security.context')->getToken()->getUser();
-                $team->setOwner($user->getUserId());
+                $team->setOwner($user);
                 $team->setVelocity(0);
                 $user->getTeams()->add($team);
 
