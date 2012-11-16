@@ -1,3 +1,5 @@
+[![Build Status](https://secure.travis-ci.org/wgcrouch/scrum-board.png?branch=master)](https://travis-ci.org/wgcrouch/scrum-board)
+
 ItsAllAgile
 ===========
 
