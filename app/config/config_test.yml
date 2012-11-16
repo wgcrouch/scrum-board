@@ -16,4 +16,10 @@ swiftmailer:
 doctrine:
     dbal:
         dbname: agile_test
+        
+        
+security:
+    firewalls:
+        secured_area:
+            http_basic: true
 
