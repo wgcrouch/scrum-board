@@ -4,6 +4,7 @@ php:
   - 5.4
 
 before_script: 
+  - cp app/config/parameters.yml.test app/config/parameters.yml
   - composer install
   - php app/console doctrine:database:create --env=test
   - php app/console doctrine:schema:update --force --env=test
