@@ -42,6 +42,9 @@ itsallagile.View.Board = Backbone.View.extend({
             socket.on('ticket:move', this.onRemoteTicketMove);
             socket.on('ticket:create', this.onRemoteTicketCreate);
             socket.on('ticket:delete', this.onRemoteTicketDelete);
+            socket.on('story:add', this.onRemoteStoryAdd);
+            socket.on('story:delete', this.onRemoteStoryDelete);
+            socket.on('story:update', this.onRemoteStoryUpdate);
         }
     },
 
@@ -158,6 +161,33 @@ itsallagile.View.Board = Backbone.View.extend({
         var story = stories.get(storyId);
         var ticket = story.get('tickets').get(ticketId);
         ticket.destroy();
+    },
+
+    /**
+     * Handle new story added by a different user
+     */
+    onRemoteStoryAdd: function(storyData) {
+        var story = new itsallagile.Model.Story(storyData);
+        story.set('tickets', new itsallagile.Collection.Tickets());
+        this.model.get('stories').add(story);
+    },
+
+    /**
+     * Handle story deleted by a different user
+     */
+    onRemoteStoryDelete: function(storyId) {
+        this.model.get('stories').get(storyId).destroy();
+    },
+
+    /**
+     * Handle story update by different user
+     */
+    onRemoteStoryUpdate: function(storyDetails) {
+        var story = this.model.get('stories').get(storyDetails.id);
+        console.log(this.model.get('stories'));
+        story.set('content', storyDetails.content);
+        story.set('points', storyDetails.points);
+        story.set('status', storyDetails.status);
     }
 
 });
