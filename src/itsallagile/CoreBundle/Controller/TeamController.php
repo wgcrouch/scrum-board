@@ -62,7 +62,8 @@ class TeamController extends Controller
     protected function getTeam($teamId)
     {
         $repository = $this->get('doctrine_mongodb')->getRepository('itsallagileCoreBundle:Team');
-        $team = $repository->find($teamId);
+        $team = $repository->find((float)$teamId);
+        
         if (!$team) {
             throw $this->createNotFoundException('No team found for id '. $teamId);
         }
