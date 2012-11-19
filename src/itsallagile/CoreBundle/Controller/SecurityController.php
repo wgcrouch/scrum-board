@@ -4,7 +4,7 @@ namespace itsallagile\CoreBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpFoundation\Response;
-use itsallagile\CoreBundle\Entity\User;
+use itsallagile\CoreBundle\Document\User;
 use itsallagile\CoreBundle\Form\Type\User\Registration;
 
 class SecurityController extends Controller
@@ -32,7 +32,7 @@ class SecurityController extends Controller
 
     public function registerAction()
     {
-        $em = $this->get('doctrine')->getEntityManager();
+        $dm = $this->get('doctrine_mongodb')->getManager();
         $request = $this->get('request');
 
         $user = new User();
@@ -50,8 +50,8 @@ class SecurityController extends Controller
 
                 $user->setPassword($password);
 
-                $em->persist($user);
-                $em->flush();
+                $dm->persist($user);
+                $dm->flush();
 
                 //creates a token and assigns it, effectively logging the user in with the credentials they just registered
                 //$token = new UsernamePasswordToken($user, null, 'main');

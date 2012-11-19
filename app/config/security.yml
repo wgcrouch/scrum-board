@@ -4,13 +4,13 @@ jms_security_extra:
 
 security:
     encoders:
-        itsallagile\CoreBundle\Entity\User: sha512
+        itsallagile\CoreBundle\Document\User: sha512
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
     providers:
         main:
-            entity: { class: itsallagile\CoreBundle\Entity\User, property: email}
+            mongodb: {class: itsallagile\CoreBundle\Document\User, property: email}
     firewalls:
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/

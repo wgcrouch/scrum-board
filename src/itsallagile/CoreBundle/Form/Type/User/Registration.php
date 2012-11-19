@@ -24,7 +24,7 @@ class Registration extends AbstractType
 
     public function getDefaultOptions(array $options)
     {
-        return array('data_class' => 'itsallagile\CoreBundle\Entity\User');
+        return array('data_class' => 'itsallagile\CoreBundle\Document\User');
     }
 
     public function getName()

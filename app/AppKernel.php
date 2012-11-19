@@ -27,6 +27,7 @@ class AppKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle($this),
             new FOS\RestBundle\FOSRestBundle(),
             new itsallagile\APIBundle\itsallagileAPIBundle(),
+            new Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
