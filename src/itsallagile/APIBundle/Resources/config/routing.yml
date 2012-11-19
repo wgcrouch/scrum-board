@@ -19,3 +19,8 @@ itsallagileAPIBundle_messages:
     name_prefix: itsallagileAPIBundle_
 
 
+itsallagileAPIBundle_auth:
+    type:     rest
+    resource: itsallagile\APIBundle\Controller\AuthController
+    name_prefix: itsallagileAPIBundle_
+

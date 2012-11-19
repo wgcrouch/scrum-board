@@ -39,3 +39,47 @@ itsallagile.baseObject = {
         return simple;
     }
 };
+
+
+/**
+ * Handler for jquery ajax errors
+ */
+(function($) {
+    
+    var _errorTemplate = 
+        '<div class="modal hide fade">' +
+            '<div class="modal-header">' +
+                '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
+                '<h3><%= header %></h3>' +
+            '</div>' +
+            '<div class="modal-body">' +
+                '<p><%= body %></p>' +
+            '</div>' +
+            '<div class="modal-footer">' +
+                '<button class="btn" data-dismiss="modal" aria-hidden="true"><%= buttonText %></button>' +
+            '</div>' +
+        '</div>';
+    
+    $(document).ajaxError(function(e, jqxhr, settings, exception) {
+        var status = jqxhr.status;
+        var data = {
+            header: 'An error has occurred',
+            body: 'An error has occurred with your request. Please try again. If the error persists try refreshing the page',
+            buttonText: 'Close'
+        };
+        var hideAction = function() {
+        };
+        if (status == 403) {
+            data.header = 'Session Expired';
+            data.body = 'Your session has expired, please login again.';
+            data.buttonText = 'Go To Login Page';
+            hideAction = function() {
+                window.location = '/login';
+            }
+        }
+        
+        var modal = $(_.template(_errorTemplate, data));
+        modal.on('hide', hideAction);
+        modal.modal({show: true});
+    });
+}(jQuery))
