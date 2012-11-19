@@ -14,7 +14,7 @@ class Add extends AbstractType
 
     public function getDefaultOptions(array $options)
     {
-        return array('data_class' => 'itsallagile\CoreBundle\Entity\Team');
+        return array('data_class' => 'itsallagile\CoreBundle\Document\Team');
     }
 
     public function getName()
