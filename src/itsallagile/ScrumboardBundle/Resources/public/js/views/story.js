@@ -15,11 +15,11 @@ itsallagile.View.Story = Backbone.View.extend({
         '</div>' +
         '<div class="modal-body"></div>' +
         '<div class="modal-footer">' +
-            '<a href="#" class="btn" data-dismiss="modal">Close</a>' +
-            '<a href="#" class="btn btn-primary story-status-save">Save changes</a>' +
+            '<a class="btn" data-dismiss="modal">Close</a>' +
+            '<a class="btn btn-primary story-status-save">Save changes</a>' +
         '</div>' +
         '</div>' +
-        '<a href="#" class="story-status-show">Set Status</a>' +
+        '<a class="story-status-show">Set Status</a>' +
         '<i class="icon-remove delete-story"></i></td>' +
         '</div>',
 
@@ -137,6 +137,7 @@ itsallagile.View.Story = Backbone.View.extend({
         text.hide();
         p.show();
         this.model.save({'content': text.val()}, {silent: true});
+        this.emitUpdate();
     },
 
     /**
@@ -157,6 +158,7 @@ itsallagile.View.Story = Backbone.View.extend({
         text.hide();
         p.show();
         this.model.save({'points': text.val()}, {silent:true});
+        this.emitUpdate();
     },
 
     /**
@@ -178,6 +180,10 @@ itsallagile.View.Story = Backbone.View.extend({
                 type: 'success'
             });
             notification.render();
+
+            if (typeof itsallagile.socket !== 'undefined') {
+                itsallagile.socket.emit('boardEvent', itsallagile.roomId, 'story:delete', this.id);
+            }
         } else {
             event.preventDefault();
             event.stopPropagation();
@@ -194,6 +200,7 @@ itsallagile.View.Story = Backbone.View.extend({
         this.model.set('status', statusId);
         this.setStatusClass(this.$el.find('.story-status[value="' + statusId + '"]').text());
         this.model.save();
+        this.emitUpdate();
     },
 
     setStatusClass: function(statusName) {
@@ -220,5 +227,21 @@ itsallagile.View.Story = Backbone.View.extend({
      */
     removeTicket: function(ticket) {
         this.statusViews[ticket.get('status')].removeTicket(ticket);
+    },
+
+    emitUpdate: function() {
+        if (typeof itsallagile.socket !== 'undefined') {
+            itsallagile.socket.emit(
+                'boardEvent',
+                itsallagile.roomId,
+                'story:update',
+                {
+                    id: this.model.get('id'),
+                    content: this.model.get('content'),
+                    points: this.model.get('points'),
+                    status: this.model.get('status')
+                }
+            );
+        }
     }
 });
