@@ -15,11 +15,11 @@ itsallagile.View.Story = Backbone.View.extend({
         '</div>' +
         '<div class="modal-body"></div>' +
         '<div class="modal-footer">' +
-            '<a href="#" class="btn" data-dismiss="modal">Close</a>' +
-            '<a href="#" class="btn btn-primary story-status-save">Save changes</a>' +
+            '<a class="btn" data-dismiss="modal">Close</a>' +
+            '<a class="btn btn-primary story-status-save">Save changes</a>' +
         '</div>' +
         '</div>' +
-        '<a href="#" class="story-status-show">Set Status</a>' +
+        '<a class="story-status-show">Set Status</a>' +
         '<i class="icon-remove delete-story"></i></td>' +
         '</div>',
 
