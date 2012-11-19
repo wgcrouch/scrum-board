@@ -11,18 +11,17 @@ class DashboardController extends Controller
     public function indexAction()
     {
         $user = $this->get('security.context')->getToken()->getUser();
-        $em = $this->getDoctrine()->getEntityManager();
-        $query = $em->createQuery(
-            '
-              SELECT b
-              FROM itsallagileCoreBundle:Board b
-              WHERE b.team IN
-                (SELECT t.teamId FROM itsallagileCoreBundle:Team t WHERE :userId MEMBER OF t.users)
-            '
-        )->setParameter('userId', $user->getUserId());
+        $dm = $this->get('doctrine_mongodb')->getManager();
+        
+        $teams = $dm->getRepository('itsallagileCoreBundle:Team')
+            ->findAllByUser($user);
+        
+        $boards = $dm->getRepository('itsallagileCoreBundle:Board')
+            ->findAllByTeams($teams);
 
-        $boards = $query->getResult();
-
-        return $this->render('itsallagileCoreBundle:Dashboard:index.html.twig', array('boards' => $boards));
+        return $this->render(
+            'itsallagileCoreBundle:Dashboard:index.html.twig', 
+            array('boards' => $boards, 'teams' => $teams)
+        );
     }
 }

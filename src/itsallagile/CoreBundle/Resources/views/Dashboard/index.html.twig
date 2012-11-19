@@ -14,18 +14,18 @@
             </tr>
         </thead>
         <tbody>
-            {% if app.user.teams.count == 0 %}
+            {% if teams.count == 0 %}
                 <tr>
                     <td colspan="2">No teams at the minute, why not <a href="{{ path('core_teams_add') }}">add one</a>?</td>
                 </tr>
             {% else %}
-                {% for team in app.user.teams %}
+                {% for team in teams %}
                     <tr>
                         <td>{{ team.name }}</td>
                         <td>{{ team.velocity }}</td>
                         <td>
                         {% if app.user == team.owner %}
-                            <a href="{{path('core_teams_edit', {'teamId':team.teamId})}}">
+                            <a href="{{path('core_teams_edit', {'teamId':team.id})}}">
                             <i class="icon-pencil" title="Manage Team"></i>
                             </a>
                         {% endif %}
@@ -54,7 +54,7 @@
                     <td>{{ board.team.name }}</td>
                     <td>{{ board.name }}</td>
                     <td>{{ board.slug }}</td>
-                    <td>{{ board.stories.count }}</td>
+                    <td></td>
                     <td><a href="{{ path('itsallagileScrumboardBundle_viewboard', { 'slug': board.slug }) }}">View</a></td>
                 </tr>
             {% endfor %}

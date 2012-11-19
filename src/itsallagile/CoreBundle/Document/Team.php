@@ -8,7 +8,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @MongoDB\Document(collection="teams")
+ * @MongoDB\Document(collection="teams", repositoryClass="itsallagile\CoreBundle\Repository\TeamRepository")
  */
 class Team
 {
