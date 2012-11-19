@@ -184,10 +184,11 @@ itsallagile.View.Board = Backbone.View.extend({
      */
     onRemoteStoryUpdate: function(storyDetails) {
         var story = this.model.get('stories').get(storyDetails.id);
-        console.log(this.model.get('stories'));
-        story.set('content', storyDetails.content);
-        story.set('points', storyDetails.points);
-        story.set('status', storyDetails.status);
+        story.set({
+            'content': storyDetails.content,
+            'points': storyDetails.points,
+            'status': storyDetails.status
+        });
     }
 
 });
