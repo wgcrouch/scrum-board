@@ -11,7 +11,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Team
 {
     /**
-     * @MongoDB\Id(strategy="INCREMENT")
+     * @MongoDB\Id
      */
     protected $id;
 
@@ -42,7 +42,7 @@ class Team
     }
 
     /**
-     * Get teamId
+     * Get id
      * @return integer
      */
     public function getId()

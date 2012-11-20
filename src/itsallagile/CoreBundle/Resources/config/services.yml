@@ -1,7 +1,8 @@
 parameters:
-#    wayne_c_budget.example.class: itsallagile\CoreBundle\Example
 
 services:
-#    wayne_c_budget.example:
-#        class: %wayne_c_budget.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    itsallagile_core.converter.doctrine.mongodb:
+        class: Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\DoctrineParamConverter
+        arguments: [@doctrine_mongodb]
+        tags:
+            - { name: request.param_converter }

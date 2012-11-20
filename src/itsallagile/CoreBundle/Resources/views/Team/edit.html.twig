@@ -20,7 +20,7 @@
                         <td>{{ user.email }}</td>
                         <td>
                             {% if user != team.owner %}
-                            <a href="{{ path('core_teams_removeUser', {'teamId': team.teamId,  'userId': user.userId }) }}">
+                            <a href="{{ path('core_teams_removeUser', {'id_team': team.id,  'id_user': user.id }) }}">
                                 <i class="icon-remove" title="Remove from team"></i></a>
                             {% endif %}
                         </td>

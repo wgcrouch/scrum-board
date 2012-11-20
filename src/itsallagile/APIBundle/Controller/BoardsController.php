@@ -6,18 +6,16 @@ use FOS\RestBundle\Controller\FOSRestController;
 use itsallagile\CoreBundle\Document\Board;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\View\View;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class BoardsController extends FOSRestController
 {
     /**
      * Get a single Board
-     *
-     * @param integer $boardId
      */
-    public function getBoardAction($boardId)
+    public function getBoardAction(Board $board)
     {
         $view = View::create();
-        $board = $this->getBoard($boardId);
         $view->setData($board);
         return $view;
     }

@@ -13,6 +13,7 @@ itsallagileAPIBundle_stories:
     resource: itsallagile\APIBundle\Controller\StoriesController
     name_prefix: itsallagileAPIBundle_
 
+
 itsallagileAPIBundle_messages:
     type:     rest
     resource: itsallagile\APIBundle\Controller\MessagesController

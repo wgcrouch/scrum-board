@@ -18,8 +18,9 @@ class TeamRepository extends DocumentRepository
     public function getFindAllByUserQueryBuilder(User $user)
     {
         $query = $this->createQueryBuilder()
-            ->field('users.$id')->equals($user->getId())
+            ->field('users.$id')->equals(new \MongoId($user->getId()))
             ->sort('name', 'ASC');
+
         return $query;
     }
     

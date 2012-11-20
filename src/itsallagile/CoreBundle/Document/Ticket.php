@@ -30,7 +30,7 @@ class Ticket
     }
     
     /**
-     * @MongoDB\Id(strategy="INCREMENT")
+     * @MongoDB\Id
      */
     protected $id;
 

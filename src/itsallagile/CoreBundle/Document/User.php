@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User implements UserInterface
 {
     /**
-     * @MongoDB\Id(strategy="INCREMENT")
+     * @MongoDB\Id
      */
     protected $id;
 
@@ -44,16 +44,6 @@ class User implements UserInterface
     public function __construct()
     {
         $this->salt = md5(uniqid(null, true));
-    }
-
-    /**
-     * Get userId
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     public function setSalt($salt)
@@ -158,5 +148,15 @@ class User implements UserInterface
     public function isEqualTo(UserInterface $user)
     {
         return $this->getUsername() === $user->getUsername();
+    }
+
+    /**
+     * Get id
+     *
+     * @return id $id
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 }

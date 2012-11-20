@@ -14,7 +14,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Board
 {
     /**
-     * @MongoDB\Id(strategy="INCREMENT")
+     * @MongoDB\Id
      */
     protected $id;
 

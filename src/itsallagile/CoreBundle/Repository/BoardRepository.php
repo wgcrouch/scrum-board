@@ -11,7 +11,7 @@ class BoardRepository extends DocumentRepository
         $boards = array();
         $ids = array();
         foreach($teams as $team) {
-            $ids[] = $team->getId();
+            $ids[] = new \MongoId($team->getId());
         }
         $boards = $this->createQueryBuilder()
             ->field('team.$id')->in($ids)

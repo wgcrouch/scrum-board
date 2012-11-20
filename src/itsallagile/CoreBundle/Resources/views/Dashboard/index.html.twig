@@ -25,7 +25,7 @@
                         <td>{{ team.velocity }}</td>
                         <td>
                         {% if app.user == team.owner %}
-                            <a href="{{path('core_teams_edit', {'teamId':team.id})}}">
+                            <a href="{{path('core_teams_edit', {'id':team.id})}}">
                             <i class="icon-pencil" title="Manage Team"></i>
                             </a>
                         {% endif %}

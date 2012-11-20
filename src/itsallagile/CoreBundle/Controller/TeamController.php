@@ -8,6 +8,7 @@ use itsallagile\CoreBundle\Document\User;
 use itsallagile\CoreBundle\Form\Type\Team\Add;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class TeamController extends Controller
 {
@@ -28,7 +29,6 @@ class TeamController extends Controller
                 $team->setOwner($user);
                 $team->setVelocity(0);
                 $team->addUser($user);
-                //$user->getTeams()->add($team);
 
                 $dm->persist($team);
                 $dm->persist($user);
@@ -55,29 +55,11 @@ class TeamController extends Controller
     }
 
     /**
-     * Try to retrieve a team by an id
-     * @param integer $teamId
-     * @return Team
-     */
-    protected function getTeam($teamId)
-    {
-        $repository = $this->get('doctrine_mongodb')->getRepository('itsallagileCoreBundle:Team');
-        $team = $repository->find((float)$teamId);
-        
-        if (!$team) {
-            throw $this->createNotFoundException('No team found for id '. $teamId);
-        }
-        return $team;
-    }
-
-    /**
      * Show the edit screen to manage team members
      *
-     * @param integer $teamId
      */
-    public function editAction($teamId)
-    {
-        $team = $this->getTeam($teamId);
+    public function editAction(Team $team)
+    {        
         $this->checkAdmin($team);
 
         return $this->render('itsallagileCoreBundle:Team:edit.html.twig', array('team' => $team));
@@ -85,30 +67,24 @@ class TeamController extends Controller
 
     /**
      * Remove a user from a team
+     * @ParamConverter("team", class="itsallagile\CoreBundle\Document\Team", options={"id" = "id_team"})
+     * @ParamConverter("user", class="itsallagile\CoreBundle\Document\User", options={"id" = "id_user"})
      */
-    public function removeUserAction($teamId, $userId)
+    public function removeUserAction(Team $team, User $user)
     {
-        $team = $this->getTeam($teamId);
         $this->checkAdmin($team);
 
         $admin = $this->get('security.context')->getToken()->getUser();
-
-        $user = $this->get('doctrine_mongodb')->getRepository('itsallagileCoreBundle:User')
-            ->find($userId);
-
-        if (!$user) {
-            throw $this->createNotFoundException('No user found for id '. $userId);
-        }
 
         if ($admin == $user) {
             throw new AccessDeniedHttpException('You cannot remove an administrator from a team');
         }
 
         $team->removeUser($user);
-        $dm = $this->$this->get('doctrine_mongodb')->getManager();
-        $em->persist($team);
-        $em->flush();
+        $dm = $this->get('doctrine_mongodb')->getManager();
+        $dm->persist($team);
+        $dm->flush();
 
-        return $this->redirect($this->generateUrl('core_teams_edit', array('teamId' => $team->getTeamId())));
+        return $this->redirect($this->generateUrl('core_teams_edit', array('id' => $team->getId())));
     }
 }
