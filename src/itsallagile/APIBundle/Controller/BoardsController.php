@@ -3,7 +3,7 @@
 namespace itsallagile\APIBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
-use itsallagile\CoreBundle\Entity\Board;
+use itsallagile\CoreBundle\Document\Board;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\View\View;
 
@@ -17,8 +17,8 @@ class BoardsController extends FOSRestController
     public function getBoardAction($boardId)
     {
         $view = View::create();
-        $board = $this->getboard($boardId);
-        $view->setData($board->getArray());
+        $board = $this->getBoard($boardId);
+        $view->setData($board);
         return $view;
     }
 
@@ -28,7 +28,7 @@ class BoardsController extends FOSRestController
     public function getBoardsAction()
     {
         $view = View::create();
-        $repository = $this->getDoctrine()->getRepository('itsallagileCoreBundle:Board');
+        $repository = $this->get()->getRepository('itsallagileCoreBundle:Board');
         $data = array();
         $boards = $repository->findAll();
 

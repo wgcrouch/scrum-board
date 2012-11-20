@@ -3,10 +3,9 @@
 namespace itsallagile\CoreBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use itsallagile\CoreBundle\Entity\Team;
-use itsallagile\CoreBundle\Entity\Board;
+use itsallagile\CoreBundle\Document\Board;
 use itsallagile\CoreBundle\Form\Type\Board\Add;
-use Symfony\Component\HttpFoundation\Response;
+
 use Symfony\Component\HttpFoundation\Request;
 
 class BoardController extends Controller
@@ -20,8 +19,8 @@ class BoardController extends Controller
 
         if ($request->getMethod() == 'POST') {
             $form->bindRequest($request);
-            if ($form->isValid()) {
-                $em = $this->getDoctrine()->getEntityManager();
+            if ($form->isValid()) {                
+                $em = $this->get('doctrine_mongodb')->getManager();
                 $em->persist($board);
                 $em->flush();
                 return $this->redirect(

@@ -4,14 +4,13 @@ namespace itsallagile\CoreBundle\Form\Type\Board;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Doctrine\ORM\EntityRepository;
+use Doctrine\ODM\MongoDB\DocumentRepository;
 
 class Add extends AbstractType
 {
-
     protected $user = null;
 
-    public function __construct(\itsallagile\CoreBundle\Entity\User $user)
+    public function __construct(\itsallagile\CoreBundle\Document\User $user)
     {
         $this->user = $user;
     }
@@ -20,19 +19,16 @@ class Add extends AbstractType
     {
         $builder->add('name');
         $builder->add('slug');
-
-        $userId = $this->user->getUserId();
+        
+        $user = $this->user;
         $builder->add(
             'team',
-            'entity',
+            'document',
             array(
                 'class' => 'itsallagileCoreBundle:Team',
                 'property' => 'name',
-                'query_builder' => function (EntityRepository $er) use ($userId) {
-                    return $er->createQueryBuilder('t')
-                        ->where(':userId MEMBER OF t.users')
-                        ->orderBy('t.name', 'ASC')
-                        ->setParameter('userId', $userId);
+                'query_builder' => function (DocumentRepository $dr) use ($user) {
+                    return $dr->getFindAllByUserQueryBuilder($user);
                 }
             )
         );
@@ -40,7 +36,7 @@ class Add extends AbstractType
 
     public function getDefaultOptions(array $options)
     {
-        return array('data_class' => 'itsallagile\CoreBundle\Entity\Board');
+        return array('data_class' => 'itsallagile\CoreBundle\Document\Board');
     }
 
     public function getName()
