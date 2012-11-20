@@ -6,6 +6,10 @@ parameters:
     database_user:     root
     database_password: ~
 
+    mongo_server:      mongodb://localhost:27017
+    mongo_port:        ~
+    mongo_name:        agile_test
+
     mailer_transport:  smtp
     mailer_host:       localhost
     mailer_user:       ~

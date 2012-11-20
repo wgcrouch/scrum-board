@@ -79,9 +79,9 @@ fos_rest:
 doctrine_mongodb:
     connections:
         default:
-            server: mongodb://localhost:27017
+            server: %mongo_server%
             options: {}
-    default_database: agile
+    default_database: %mongo_name%
     document_managers:
         default:
             auto_mapping: true
