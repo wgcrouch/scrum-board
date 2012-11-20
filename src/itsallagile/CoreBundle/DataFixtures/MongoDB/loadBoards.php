@@ -5,6 +5,8 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use itsallagile\CoreBundle\Document\Board;
+use itsallagile\CoreBundle\Document\Story;
+use itsallagile\CoreBundle\Document\Ticket;
 
 class LoadBoards extends AbstractFixture implements OrderedFixtureInterface
 {
@@ -14,6 +16,46 @@ class LoadBoards extends AbstractFixture implements OrderedFixtureInterface
         $board->setName('Example Board');
         $board->setSlug('example');
         $board->setTeam($manager->merge($this->getReference('init-team')));
+        
+        $story = new Story();
+        $story->setContent('Example Story');
+        $story->setSort(0);
+        $story->setPoints(5);  
+        $story->setStatus(Story::STATUS_NEW);
+        $board->addStory($story);
+        
+        $ticket = new Ticket();
+        $ticket->setStatus(Ticket::STATUS_NEW);
+        $ticket->setContent('New Ticket');
+        $ticket->setType('task');
+        $story->addTicket($ticket);
+
+        $ticket2 = new Ticket();
+        $ticket2->setStatus(Ticket::STATUS_ASSIGNED);
+        $ticket2->setContent('Assigned Ticket');
+        $ticket2->setType('defect');
+        $story->addTicket($ticket2);
+
+        $story2 = new Story();
+        $story2->setContent('Second Story');
+        $story2->setSort(1);
+        $story2->setPoints(3);
+        $story2->setStatus(Story::STATUS_NEW);
+        $board->addStory($story2);
+        
+        $ticket3 = new Ticket();
+        $ticket3->setStatus(Ticket::STATUS_DONE);
+        $ticket3->setContent('Done Ticket');
+        $ticket3->setType('bug');
+        $story2->addTicket($ticket3);
+
+        $ticket4 = new Ticket();
+        $ticket4->setStatus(Ticket::STATUS_NEW);
+        $ticket4->setContent('New Ticket in new story');
+        $ticket4->setType('bug');
+        $story2->addTicket($ticket4);
+
+        
         $manager->persist($board);
 
         $this->addReference('init-board', $board);

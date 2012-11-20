@@ -3,8 +3,6 @@ namespace itsallagile\CoreBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Symfony\Component\Validator\Constraints as Assert;
-use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique as MongoDBUnique;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -38,21 +36,9 @@ class Team
      */
     protected $users = array();
 
-//    /**
-//     * @ORM\OneToMany(targetEntity="Board", mappedBy="team")
-//     */
-//    protected $boards;
-//
-//    /**
-//     * @ORM\OneToMany(targetEntity="Invitation", mappedBy="team")
-//     */
-//    protected $invitations;
-
     public function __construct()
     {
         $this->users = new ArrayCollection();
-//        $this->invitations = new ArrayCollection();
-//        $this->boards = new ArrayCollection();
     }
 
     /**
@@ -147,77 +133,6 @@ class Team
     {
         return $this->owner;
     }
-    
-//    public function getInvitations()
-//    {
-//        return $this->invitations;
-//    }
-//
-//    public function setInvitations(ArrayCollection $invitations)
-//    {
-//        $this->invitations = $invitations;
-//    }
-//
-//    public function addInvitation(Invitation $invitation)
-//    {
-//        $this->getInvitations()->add($invitation);
-//    }
-//
-//    /**
-//     * Remove invitations
-//     *
-//     * @param Invitation $invitations
-//     */
-//    public function removeInvitation(Invitation $invitations)
-//    {
-//        $this->invitations->removeElement($invitations);
-//    }
-//
-//    
-//
-//    /**
-//     * Add boards
-//     *
-//     * @param itsallagile\CoreBundle\Entity\Board $boards
-//     * @return Team
-//     */
-//    public function addBoard(\itsallagile\CoreBundle\Entity\Board $boards)
-//    {
-//        $this->boards[] = $boards;
-//
-//        return $this;
-//    }
-//
-//    /**
-//     * Remove boards
-//     *
-//     * @param itsallagile\CoreBundle\Entity\Board $boards
-//     */
-//    public function removeBoard(\itsallagile\CoreBundle\Entity\Board $boards)
-//    {
-//        $this->boards->removeElement($boards);
-//    }
-//
-//    /**
-//     * Get boards
-//     *
-//     * @return Doctrine\Common\Collections\Collection
-//     */
-//    public function getBoards()
-//    {
-//        return $this->boards;
-//    }
-//
-//    public function getArray()
-//    {
-//        $data = array(
-//            'id' => $this->teamId,
-//            'name' => $this->name,
-//            'owner' => $this->owner->getArray()
-//        );
-//
-//        return $data;
-//    }
 
     /**
      * Add users

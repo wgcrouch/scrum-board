@@ -5,11 +5,11 @@ namespace itsallagile\CoreBundle\Document;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique as MongoDBUnique;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @MongoDB\Document(collection="boards", repositoryClass="itsallagile\CoreBundle\Repository\BoardRepository")
+ * @MongoDBUnique(fields="slug")
  */
 class Board
 {
@@ -30,26 +30,26 @@ class Board
      */
     protected $slug;
 
-//    /**
-//     * @ORM\OneToMany(targetEntity="Story", mappedBy="board")
-//     */
-//    protected $stories;
+    /** 
+     * @MongoDB\EmbedMany(targetDocument="Story") 
+     */
+    protected $stories;
 
     /**
      * @MongoDB\ReferenceOne(targetDocument="Team")
      * @Assert\NotBlank()
      */
     protected $team;
-
-//    /**
-//     * @ORM\OneToMany(targetEntity="ChatMessage", mappedBy="board")
-//     */
-//    protected $chatMessages;
+    
+    /**
+     * @MongoDB\EmbedMany(targetDocument="ChatMessage")
+     */
+    protected $chatMessages;
 
     public function __construct()
     {
-//        $this->stories = new ArrayCollection();
-//        $this->chatMessages = new ArrayCollection();
+        $this->stories = new ArrayCollection();
+        $this->chatMessages = new ArrayCollection();
     }
 
     /**
@@ -102,78 +102,6 @@ class Board
         return $this->slug;
     }
 
-//    public function getArray()
-//    {
-//        $data = array(
-//            'id' => $this->boardId,
-//            'name' => $this->name,
-//            'slug' => $this->slug,
-//            'team' => $this->team->getArray()
-//        );
-//
-//        foreach ($this->getStories() as $story) {
-//            $data['stories'][] = $story->getArray();
-//        }
-//
-//        foreach ($this->getChatMessages() as $message) {
-//            $data['chatMessages'][] = $message->getArray();
-//        }
-//        return $data;
-//    }
-//   
-//     /**
-//     * Add stories
-//     *
-//     * @param itsallagile\CoreBundle\Entity\Story $stories
-//     */
-//    public function addStory(\itsallagile\CoreBundle\Entity\Story $stories)
-//    {
-//        $this->stories[] = $stories;
-//    }
-//
-//    /**
-//     * Get stories
-//     *
-//     * @return Doctrine\Common\Collections\Collection
-//     */
-//    public function getStories()
-//    {
-//        return $this->stories;
-//    }
-//
-//    /**
-//     * Add chatMessages
-//     *
-//     * @param itsallagile\CoreBundle\Entity\ChatMessage $chatMessages
-//     * @return Board
-//     */
-//    public function addChatMessage(\itsallagile\CoreBundle\Entity\ChatMessage $chatMessages)
-//    {
-//        $this->chatMessages[] = $chatMessages;
-//        return $this;
-//    }
-//
-//    /**
-//     * Remove chatMessages
-//     *
-//     * @param <variableType$chatMessages
-//     */
-//    public function removeChatMessage(\itsallagile\CoreBundle\Entity\ChatMessage $chatMessages)
-//    {
-//        $this->chatMessages->removeElement($chatMessages);
-//    }
-//
-//    /**
-//     * Get chatMessages
-//     *
-//     * @return Doctrine\Common\Collections\Collection
-//     */
-//    public function getChatMessages()
-//    {
-//        return $this->chatMessages;
-//    }
-
-
     /**
      * Set team
      *
@@ -194,5 +122,45 @@ class Board
     public function getTeam()
     {
         return $this->team;
+    }
+
+    /**
+     * Add story
+     *
+     * @param itsallagile\CoreBundle\Document\Story $story
+     */
+    public function addStory(\itsallagile\CoreBundle\Document\Story $story)
+    {
+        $this->stories[] = $story;
+    }
+
+    /**
+     * Get stories
+     *
+     * @return Doctrine\Common\Collections\Collection $stories
+     */
+    public function getStories()
+    {
+        return $this->stories;
+    }
+
+    /**
+     * Add chatMessage
+     *
+     * @param itsallagile\CoreBundle\Document\ChatMessage $chatMessage
+     */
+    public function addChatMessage(\itsallagile\CoreBundle\Document\ChatMessage $chatMessage)
+    {
+        $this->chatMessages[] = $chatMessage;
+    }
+
+    /**
+     * Get chatMessages
+     *
+     * @return Doctrine\Common\Collections\Collection $chatMessages
+     */
+    public function getChatMessages()
+    {
+        return $this->chatMessages;
     }
 }

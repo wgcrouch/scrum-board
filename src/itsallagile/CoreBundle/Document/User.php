@@ -44,8 +44,6 @@ class User implements UserInterface
     public function __construct()
     {
         $this->salt = md5(uniqid(null, true));
-
-        //$this->teams = new ArrayCollection();
     }
 
     /**
@@ -161,39 +159,4 @@ class User implements UserInterface
     {
         return $this->getUsername() === $user->getUsername();
     }
-
-//    public function getTeams()
-//    {
-//        return $this->teams;
-//    }
-//
-//    /**
-//     * Add teams
-//     *
-//     * @param Team $teams
-//     */
-//    public function addTeam(Team $team)
-//    {
-//        $this->teams[] = $team;
-//    }
-//
-//    /**
-//     * Remove teams
-//     *
-//     * @param Team $teams
-//     */
-//    public function removeTeam(Team $team)
-//    {
-//        $this->teams->removeElement($team);
-//    }
-//
-//    /**
-//     *
-//     * @param Team $team
-//     * @return boolean
-//     */
-//    public function hasTeam(Team $team)
-//    {
-//        return $this->teams->contains($team);
-//    }
 }
