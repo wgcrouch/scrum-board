@@ -17,7 +17,9 @@ doctrine:
     dbal:
         dbname: agile_test
         
-        
+doctrine_mongodb:
+    default_database: agile_test
+
 security:
     firewalls:
         secured_area:

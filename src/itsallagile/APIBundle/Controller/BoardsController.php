@@ -29,7 +29,7 @@ class BoardsController extends FOSRestController
         $boards = $repository->findAll();
         
         foreach ($boards as $board) {
-            $data[$board->getId()] = $board;
+            $data[] = $board;
         }
 
         return $data;
