@@ -17,14 +17,14 @@ itsallagile.View.StoryStatus = Backbone.View.extend({
 
     render: function() {      
         var html = '';
-        this.statuses.forEach(function(status) {
-            var statusId = status.get('id');
-            var data = {value: statusId, displayValue: status.get('name'), selected: ''};
-            if (statusId == this.status) {
+        for (var i = 0; i < this.statuses; i++) {
+            var status = this.statuses[i];
+            var data = {value: status, displayValue: status, selected: ''};
+            if (status == this.status) {
                 data.selected = 'selected="selected"';
             }
             html += _.template(this.template, data);
-        }, this);
+        }
         this.$el.html(html);
 
         return this;

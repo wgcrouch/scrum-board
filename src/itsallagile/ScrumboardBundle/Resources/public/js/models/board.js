@@ -20,7 +20,7 @@ itsallagile.Model.Board = Backbone.Model.extend({
     parse: function(response) {
         response.stories = new itsallagile.Collection.Stories(response.stories);
         response.stories.forEach(function(story) {
-            tickets = story.get('tickets');
+            var tickets = story.get('tickets');
             story.set('tickets', new itsallagile.Collection.Tickets(tickets));
         });
 

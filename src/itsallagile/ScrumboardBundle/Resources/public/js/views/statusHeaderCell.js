@@ -11,7 +11,7 @@ itsallagile.View.StatusHeaderCell = Backbone.View.extend({
     },
 
     render: function() {
-        this.$el.addClass('status-header-' + this.status.get('id')).html(this.status.get('name'));
+        this.$el.addClass('status-header-' + this.status).html(this.status);
         return this;
     }
 });

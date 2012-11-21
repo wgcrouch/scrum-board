@@ -18,7 +18,7 @@ class Ticket
     /**
      * @JMS\Exclude     
      */
-    protected $statuses = array(
+    protected static $statuses = array(
         self::STATUS_NEW,
         self::STATUS_ASSIGNED,
         self::STATUS_DONE
@@ -30,7 +30,7 @@ class Ticket
      */
     public static function getStatuses()
     {
-        return array_combine($this->statuses, $this->statuses);
+        return self::$statuses;
     }
     
     /**

@@ -14,9 +14,9 @@ itsallagile.View.StatusHeader = Backbone.View.extend({
      */
     initialize: function(options) {
         this.cellTemplates.push(new itsallagile.View.StatusHeaderCell({status: new itsallagile.Model.Status({name:'Story'})}));
-        options.statuses.forEach(function(status, key) {
-            this.cellTemplates.push(new itsallagile.View.StatusHeaderCell({status: status}));
-        }, this);
+        for (var i = 0; i < options.statuses.length; i++) {
+            this.cellTemplates.push(new itsallagile.View.StatusHeaderCell({status: options.statuses[i]}));
+        }
     },
 
     /**

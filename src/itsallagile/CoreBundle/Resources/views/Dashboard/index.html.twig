@@ -54,7 +54,7 @@
                     <td>{{ board.team.name }}</td>
                     <td>{{ board.name }}</td>
                     <td>{{ board.slug }}</td>
-                    <td></td>
+                    <td>{{ board.stories.count }}</td>
                     <td><a href="{{ path('itsallagileScrumboardBundle_viewboard', { 'slug': board.slug }) }}">View</a></td>
                 </tr>
             {% endfor %}

@@ -5,7 +5,7 @@ itsallagile.View.Board = Backbone.View.extend({
 
     tagName: 'table',
     className: 'board',
-    statuses: [],
+    ticketStatuses: [],
     storyStatuses: [],
     statusHeaderView: null,
     storyViews: {},
@@ -16,9 +16,9 @@ itsallagile.View.Board = Backbone.View.extend({
      * and do initial bindings
      */
     initialize: function(options) {
-        this.statuses = options.statuses;
+        this.ticketStatuses = options.ticketStatuses;
         this.storyStatuses = options.storyStatuses;
-        this.statusHeaderView = new itsallagile.View.StatusHeader({statuses : this.statuses});
+        this.statusHeaderView = new itsallagile.View.StatusHeader({statuses : this.ticketStatuses});
         this.model.bind('change', this.render, this);
         var stories = this.model.get('stories')
         stories.bind('add', this.renderStory, this);
@@ -69,7 +69,7 @@ itsallagile.View.Board = Backbone.View.extend({
     renderStory: function(story) {
         var storyView = new itsallagile.View.Story({
             model: story,
-            statuses: this.statuses,
+            ticketStatuses: this.ticketStatuses,
             storyStatuses: this.storyStatuses
         });
 

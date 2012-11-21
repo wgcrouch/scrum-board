@@ -23,7 +23,7 @@ itsallagile.View.Story = Backbone.View.extend({
         '<i class="icon-remove delete-story"></i></td>' +
         '</div>',
 
-    statuses: null,
+    ticketStatuses: null,
 
     events: {
         "dblclick .story-content": "startEditContent",
@@ -39,7 +39,7 @@ itsallagile.View.Story = Backbone.View.extend({
 
     //Set up the statuses and bind on changes to models
     initialize: function(options) {
-        this.statuses = options.statuses;
+        this.ticketStatuses = options.ticketStatuses;
         this.storyStatuses = options.storyStatuses;
         this.model.bind('change', this.render, this);
         this.model.get('tickets').bind('add', this.addTicket, this);
@@ -67,15 +67,15 @@ itsallagile.View.Story = Backbone.View.extend({
         $('.modal-body', this.$el).html(storyStatusView.render().el);
 
         this.statusViews = {};
-        this.statuses.forEach(function(status, key) {
+        for (var i = 0; i < this.ticketStatuses.length; i++) {
+            var status = this.ticketStatuses[i];
             var statusTickets = new itsallagile.Collection.Tickets();
             var statusView = new itsallagile.View.StoryStatusCell(
                 {status: status, story: this.model, tickets: statusTickets});
-
             statusView.on('moveTicket', this.onMoveTicket, this);
-            this.statusViews[status.get('id')] = statusView;
+            this.statusViews[status] = statusView;
             this.$el.append(statusView.render().el);
-        }, this);
+        }
 
         //Assign tickets to the appropriate status view
         var tickets = this.model.get('tickets');
@@ -86,11 +86,12 @@ itsallagile.View.Story = Backbone.View.extend({
             }
         }, this);
 
-        this.storyStatuses.forEach(function(status) {
-            if (status.get('id') == this.model.get('status')) {
-                this.setStatusClass(status.get('name'));
+        for (var i = 0; i < this.storyStatuses.length; i++) {
+            var status = this.storyStatuses[i];
+            if ( status == this.model.get('status')) {
+                this.setStatusClass(status);
             }
-        }, this);
+        }
 
         return this;
     },

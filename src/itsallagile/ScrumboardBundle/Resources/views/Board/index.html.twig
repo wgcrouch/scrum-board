@@ -11,7 +11,7 @@
 
 {% block body %}
     <div class="page-header">
-        <h1>{{ board['name'] }}</h1>
+        <h1>{{ board.name }}</h1>
     </div>
     <div id="board-container">
         
@@ -33,9 +33,9 @@
     <!-- PrePopulate Data -->
     <script>
         {% autoescape false %}
-        itsallagile.Controller.Scrumboard.board = new itsallagile.Model.Board({{ board|json_encode() }}, {parse:true});
-        itsallagile.Controller.Scrumboard.statuses = new itsallagile.Collection.Statuses({{ statuses|json_encode()}});
-        itsallagile.Controller.Scrumboard.storyStatuses = new itsallagile.Collection.StoryStatuses({{ storyStatuses|json_encode()}});
+        itsallagile.Controller.Scrumboard.board = new itsallagile.Model.Board({{ board | serialize | raw }}, {parse:true});
+        itsallagile.Controller.Scrumboard.ticketStatuses = {{ ticketStatuses | json_encode()}};
+        itsallagile.Controller.Scrumboard.storyStatuses = {{ storyStatuses | json_encode()}};
         itsallagile.Controller.Scrumboard.user = '{{ app.user.email }}';
         {% endautoescape %}
     </script>

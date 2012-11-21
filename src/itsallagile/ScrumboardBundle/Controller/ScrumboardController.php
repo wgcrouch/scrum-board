@@ -4,49 +4,34 @@ namespace itsallagile\ScrumboardBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use itsallagile\CoreBundle\Document\Board;
+use itsallagile\CoreBundle\Document\Ticket;
+use itsallagile\CoreBundle\Document\Story;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class ScrumboardController extends Controller
 {
-    protected function getBoard($slug)
-    {
-        $em = $this->getDoctrine()->getEntityManager();
-        $query = $em->createQuery(
-            'SELECT b FROM itsallagileCoreBundle:Board b WHERE b.boardId = :slug OR b.slug = :slug'
-        )->setParameter('slug', $slug);
-        $board = $query->getSingleResult();
-        if (!$board) {
-            throw $this->createNotFoundException('No board found for slug ' . $slug);
-        }
-        return $board;
-    }
-
-    public function indexAction($slug)
+    /**
+     * The main scrum board page
+     * 
+     * @param Board $board
+     * @ParamConverter("board", class="itsallagile\CoreBundle\Document\Board")
+     */
+    public function indexAction($board)
     {
         $user = $this->get('security.context')->getToken()->getUser();
-        $board = $this->getBoard($slug);
 
-        if (!$user->hasTeam($board->getTeam())) {
-            throw new AccessDeniedHttpException('You do not have access to this board');
-        }
-
-        $repository = $this->getDoctrine()->getRepository('itsallagileCoreBundle:Status');
-        $statusArray = array();
-        $statuses = $repository->findAll();
-        foreach ($statuses as $status) {
-            $statusArray[] = $status->getArray();
-        }
-
-        $storyStatusRepository = $this->getDoctrine()->getRepository('itsallagileCoreBundle:StoryStatus');
-        $storyStatusArray = array();
-        $storyStatuses = $storyStatusRepository->findAll();
-        foreach ($storyStatuses as $storyStatus) {
-            $storyStatusArray[] = $storyStatus->getArray();
-        }
+//        if (!$user->hasTeam($board->getTeam())) {
+//            throw new AccessDeniedHttpException('You do not have access to this board');
+//        }
         
+        $serializer = $this->get('serializer');
+             
         $viewData = array(
-            'board' => $board->getArray(),
-            'statuses' => $statusArray,
-            'storyStatuses' => $storyStatusArray
+            'board' => $board,
+            'boardJson' => $serializer->serialize($board, 'json'),
+            'ticketStatuses' => Ticket::getStatuses(),
+            'storyStatuses' => Story::getStatuses()
         );
 
         return $this->render('itsallagileScrumboardBundle:Board:index.html.twig', $viewData);

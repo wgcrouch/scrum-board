@@ -20,7 +20,7 @@ class Story
     /**
      * @JMS\Exclude
      */
-    protected $statuses = array(
+    protected static $statuses = array(
         self::STATUS_NEW,
         self::STATUS_IN_PROGRESS,
         self::STATUS_TESTABLE,
@@ -34,7 +34,7 @@ class Story
      */
     public static function getStatuses()
     {
-        return array_combine($this->statuses, $this->statuses);
+        return self::$statuses;
     }
     
     /**
