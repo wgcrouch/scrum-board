@@ -198,4 +198,9 @@ class Board
         }
         return null;
     }
+    
+    public function removeStory(Story $story) 
+    {
+        return $this->stories->removeElement($story);
+    }
 }

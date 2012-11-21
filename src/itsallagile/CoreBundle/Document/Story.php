@@ -12,19 +12,19 @@ use JMS\SerializerBundle\Annotation as JMS;
 class Story
 {
     
-    const STATUS_NEW = 'New';
-    const STATUS_IN_PROGRESS = 'In Progress';
-    const STATUS_TESTABLE = 'Testable';
-    const STATUS_DONE = 'Done';
+    const STATUS_NEW = 'new';
+    const STATUS_IN_PROGRESS = 'in_progress';
+    const STATUS_TESTABLE = 'testable';
+    const STATUS_DONE = 'done';
     
     /**
      * @JMS\Exclude
      */
     protected static $statuses = array(
-        self::STATUS_NEW,
-        self::STATUS_IN_PROGRESS,
-        self::STATUS_TESTABLE,
-        self::STATUS_DONE
+        self::STATUS_NEW => 'New',
+        self::STATUS_IN_PROGRESS => 'In Progress',
+        self::STATUS_TESTABLE => 'Testable',
+        self::STATUS_DONE => 'Done'
     );
     
     /**

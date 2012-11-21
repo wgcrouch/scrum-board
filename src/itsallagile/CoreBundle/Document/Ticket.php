@@ -11,17 +11,17 @@ use JMS\SerializerBundle\Annotation as JMS;
  */
 class Ticket
 {
-    const STATUS_NEW = 'New';
-    const STATUS_ASSIGNED = 'Assigned';
-    const STATUS_DONE = 'Done';
+    const STATUS_NEW = 'new';
+    const STATUS_ASSIGNED = 'assigned';
+    const STATUS_DONE = 'done';
     
     /**
      * @JMS\Exclude     
      */
     protected static $statuses = array(
-        self::STATUS_NEW,
-        self::STATUS_ASSIGNED,
-        self::STATUS_DONE
+        self::STATUS_NEW => 'New',
+        self::STATUS_ASSIGNED => 'Assigned',
+        self::STATUS_DONE => 'Done'
     );
     
     /**

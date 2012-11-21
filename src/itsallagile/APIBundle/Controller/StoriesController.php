@@ -22,6 +22,10 @@ class StoriesController extends FOSRestController
     
     public function getStoryAction(Board $board, $storyId) 
     {
+        return $this->getStory($board, $storyId);
+    }
+    
+    protected function getStory(Board $board, $storyId) {
         $story = $board->getStory($storyId);
         if (!$story) {
             throw $this->createNotFoundException('Story ' . $storyId . ' not found');
@@ -29,85 +33,73 @@ class StoriesController extends FOSRestController
         return $story;
     }
 
-//    /**
-//     * Create a new story
-//     */
-//    public function postStoriesAction(Request $request)
-//    {
-//        $view = View::create();
-//        $story = new Story();
-//        $form = $this->createForm(new StoryType(), $story);
-//        $form->bind($request);  
-//        
-//        if ($form->isValid()) {            
-//            
-//            if (!$story->getStatus()) {
-//                $status = $this->getDoctrine()->getRepository('itsallagileCoreBundle:StoryStatus')
-//                    ->findOneByName('New');
-//                $story->setStatus($status);
-//            }
-//            $em = $this->getDoctrine()->getEntityManager();
-//            $em->persist($story);
-//            $em->flush();
-//            $view->setStatusCode(201);
-//            $view->setData($story->getArray());
-//        } else {
-//            $view->setData($form);
-//        }
-//        return $view;
-//    }
-//
-//    /**
-//     * Update a story
-//     */
-//    public function putStoryAction($storyId, Request $request)
-//    {
-//        $view = View::create();
-//        $story = $this->getStory($storyId);
-//        $form = $this->createForm(new StoryType(), $story);
-//        $form->bind($request);
-//
-//        if ($form->isValid()) {
-//            $em = $this->getDoctrine()->getEntityManager();
-//            $em->persist($story);
-//            $em->flush();
-//
-//            $view->setStatusCode(200);
-//            $view->setData($story->getArray());
-//        } else {
-//            $view->setData($form);
-//        }
-//        return $view;
-//    }
-//
-//    /**
-//     * Delete a Story
-//     * @param integer $storyId
-//     * @return type
-//     */
-//    public function deleteStoryAction($storyId)
-//    {
-//        $view = View::create();
-//        $story = $this->getStory($storyId);
-//
-//        $em = $this->getDoctrine()->getEntityManager();
-//        $em->remove($story);
-//        $em->flush();
-//        $view->setStatusCode(200);
-//        return $view;
-//    }
-//
-//    protected function getRepository()
-//    {
-//        return $this->getDoctrine()->getRepository('itsallagileCoreBundle:Story');
-//    }
-//
-//    protected function getStory($storyId)
-//    {
-//        $story = $this->getRepository()->find($storyId);
-//        if (!$story) {
-//            throw $this->createNotFoundException('No story found for id ' . $storyId);
-//        }
-//        return $story;
-//    }
+    /**
+     * Create a new story
+     */
+    public function postStoriesAction(Board $board, Request $request)
+    {
+        $view = View::create();
+        $story = new Story();
+        $form = $this->createForm(new StoryType(), $story);
+        $form->bind($request);  
+        
+        if ($form->isValid()) {          
+            if (!$story->getStatus()) {
+                $story->setStatus(Story::STATUS_NEW);
+            }
+            $dm = $this->get('doctrine_mongodb')->getManager();
+            $board->addStory($story);
+            $dm->persist($board);
+            $dm->flush();
+            $view->setStatusCode(201);
+            $view->setData($story);
+        } else {
+            $view->setData($form);
+        }
+        return $view;
+    }
+
+    /**
+     * Update a story
+     */
+    public function putStoryAction(Board $board, $storyId, Request $request)
+    {
+        $view = View::create();
+        $story = $this->getStory($board, $storyId);
+        $form = $this->createForm(new StoryType(true), $story);
+        $form->bind($request);
+       
+        return $story;
+        if ($form->isValid()) {
+            
+            $dm = $this->get('doctrine_mongodb')->getManager();
+            $dm->persist($story);
+            $dm->flush();
+
+            $view->setStatusCode(200);
+            $view->setData($story);
+        } else {
+            $view->setData($form);
+        }
+        return $view;
+    }
+
+    /**
+     * Delete a Story
+     * @param integer $storyId
+     * @return type
+     */
+    public function deleteStoryAction(Board $board, $storyId)
+    {
+        $view = View::create();
+        $story = $this->getStory($board, $storyId);
+
+        $dm = $this->get('doctrine_mongodb')->getManager();
+        $board->removeStory($story);
+        $dm->persist($board);
+        $dm->flush();
+        $view->setStatusCode(200);
+        return $view;
+    }
+
 }

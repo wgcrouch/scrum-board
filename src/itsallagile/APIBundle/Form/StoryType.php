@@ -2,17 +2,19 @@
 
 namespace itsallagile\APIBundle\Form;
 
-use Symfony\Component\Form\AbstractType;
+use itsallagile\APIBundle\Form\ApiForm;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use itsallagile\CoreBundle\Document\Story;
 
 /**
  * Form for stories in the API
  */
-class StoryType extends AbstractType
+class StoryType extends ApiForm
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        parent::buildForm($builder, $options);
         $builder
             ->add('content')
             ->add('points')
@@ -20,31 +22,18 @@ class StoryType extends AbstractType
             //These are not handled
             ->add('id', 'hidden', array('mapped' => false))
             ->add('tickets', 'hidden', array('mapped' => false));
-
-        $builder->add(
-            'board',
-            'entity',
-            array(
-                'class' => 'itsallagileCoreBundle:Board',
-                'property' => 'name'
-            )
-        );
         
-        $builder->add(
-            'status',
-            'entity',
-            array(
-                'class' => 'itsallagileCoreBundle:StoryStatus',
-                'property' => 'name'
-            )
-        );
+        $builder->add('status', 'choice', array(
+            'choices'   => Story::getStatuses(),
+            'required'  => false,
+        ));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'itsallagile\CoreBundle\Entity\Story',
+                'data_class' => 'itsallagile\CoreBundle\Document\Story',
                 'csrf_protection' => false
             )
         );
