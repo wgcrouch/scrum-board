@@ -3,11 +3,23 @@ language: php
 php:
   - 5.4
 
+matrix:
+  allow_failures:
+    - php: 5.4
+      env:
+        - PHPCS=1
+  include:
+    - php: 5.4
+      env:
+        - PHPCS=1
+
 before_script: 
   - cp app/config/parameters.yml.test app/config/parameters.yml
   - composer install
+  - pyrus install pear/PHP_CodeSniffer
   - php app/console doctrine:database:create --env=test
   - php app/console doctrine:schema:update --force --env=test
   - yes | php app/console doctrine:fixtures:load --env=test
 
-script: phpunit -c app
+script: 
+  - sh -c "if [ '$PHPCS' != '1' ]; then phpunit -c app; else phpcs --extensions=php,js --standard=PSR2 ./src; fi"
