@@ -31,8 +31,7 @@ itsallagile.View.StoryStatusCell = Backbone.View.extend({
         });
 
         this.tickets.forEach(function(ticket) {
-            var ticketView = new itsallagile.View.Ticket({model: ticket});
-            this.$el.append(ticketView.render().el);
+            this.renderTicket(ticket);
         }, this);
 
         return this;
@@ -97,7 +96,11 @@ itsallagile.View.StoryStatusCell = Backbone.View.extend({
      */
     addTicket: function(ticket) {
         this.tickets.add(ticket, {silent:true});
-        var ticketView = new itsallagile.View.Ticket({model: ticket});
+        this.renderTicket(ticket);
+    },
+    
+    renderTicket: function(ticket) {
+        var ticketView = new itsallagile.View.Ticket({model: ticket, story: this.story});
         this.$el.append(ticketView.render().el);
     },
 

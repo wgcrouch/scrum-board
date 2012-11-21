@@ -24,6 +24,7 @@ itsallagile.View.Ticket = Backbone.View.extend({
      * Initialize bindings to changes in the model
      */
     initialize: function(options) {
+        this.story = options.story;
         this.model.bind('change', this.refresh);
         this.model.bind('sync', this.refresh);
         this.storyView = options.storyView;
@@ -39,7 +40,7 @@ itsallagile.View.Ticket = Backbone.View.extend({
         this.$el.append(_.template(this.template, {content : this.model.get("content")}));
         $('p', this.$el).html(this.formatText($('p', this.$el).html()));
         this.$el.data('ticketId', this.model.get('id'));
-        this.$el.data('story', this.model.get('story'));
+        this.$el.data('story', this.story.get('id'));
         this.$el.data('status', this.model.get('status'));
         this.$el.draggable({revert: true});
         return this;
