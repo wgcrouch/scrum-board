@@ -2,8 +2,6 @@ itsallagileAPIBundle:
     resource: "@itsallagileAPIBundle/Resources/config/routing.yml"
     prefix:   /api
     type: rest
-    options: 
-        name_prefix: "itsallagileAPIBundle_"
 
 itsallagileScrumboardBundle:
     resource: "@itsallagileScrumboardBundle/Resources/config/routing.yml"

@@ -4,6 +4,7 @@ namespace itsallagile\CoreBundle\Document;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
+use JMS\SerializerBundle\Annotation as JMS;
 
 /** 
  * @MongoDB\EmbeddedDocument 
@@ -16,6 +17,9 @@ class Story
     const STATUS_TESTABLE = 'Testable';
     const STATUS_DONE = 'Done';
     
+    /**
+     * @JMS\Exclude
+     */
     protected $statuses = array(
         self::STATUS_NEW,
         self::STATUS_IN_PROGRESS,
@@ -189,5 +193,21 @@ class Story
     public function getStatus()
     {
         return $this->status;
+    }
+    
+    /**
+     * Get a specific ticket
+     *
+     * @param string $id
+     * @return Ticket
+     */
+    public function getTicket($id) 
+    {
+        foreach ($this->tickets as $ticket) {
+            if ($id == $ticket->getId()) {
+                return $ticket;
+            }
+        }
+        return null;
     }
 }

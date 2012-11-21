@@ -6,6 +6,9 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique as MongoDBUnique;
 use Doctrine\Common\Collections\ArrayCollection;
+use itsallagile\CoreBundle\Document\ChatMessage;
+use itsallagile\CoreBundle\Document\Story;
+use itsallagile\CoreBundle\Document\Team;
 
 /**
  * @MongoDB\Document(collection="boards", repositoryClass="itsallagile\CoreBundle\Repository\BoardRepository")
@@ -105,10 +108,10 @@ class Board
     /**
      * Set team
      *
-     * @param itsallagile\CoreBundle\Document\Team $team
+     * @param Team $team
      * @return Board
      */
-    public function setTeam(\itsallagile\CoreBundle\Document\Team $team)
+    public function setTeam(Team $team)
     {
         $this->team = $team;
         return $this;
@@ -117,7 +120,7 @@ class Board
     /**
      * Get team
      *
-     * @return itsallagile\CoreBundle\Document\Team $team
+     * @return Team $team
      */
     public function getTeam()
     {
@@ -127,9 +130,9 @@ class Board
     /**
      * Add story
      *
-     * @param itsallagile\CoreBundle\Document\Story $story
+     * @param Story $story
      */
-    public function addStory(\itsallagile\CoreBundle\Document\Story $story)
+    public function addStory(Story $story)
     {
         $this->stories[] = $story;
     }
@@ -137,7 +140,7 @@ class Board
     /**
      * Get stories
      *
-     * @return Doctrine\Common\Collections\Collection $stories
+     * @return ArrayCollection $stories
      */
     public function getStories()
     {
@@ -147,9 +150,9 @@ class Board
     /**
      * Add chatMessage
      *
-     * @param itsallagile\CoreBundle\Document\ChatMessage $chatMessage
+     * @param ChatMessage $chatMessage
      */
-    public function addChatMessage(\itsallagile\CoreBundle\Document\ChatMessage $chatMessage)
+    public function addChatMessage(ChatMessage $chatMessage)
     {
         $this->chatMessages[] = $chatMessage;
     }
@@ -157,10 +160,42 @@ class Board
     /**
      * Get chatMessages
      *
-     * @return Doctrine\Common\Collections\Collection $chatMessages
+     * @return ArrayCollection $chatMessages
      */
     public function getChatMessages()
     {
         return $this->chatMessages;
+    }
+    
+    /**
+     * Get a specific story
+     * 
+     * @param type $id
+     * @return Story
+     */
+    public function getStory($id) 
+    {
+        foreach ($this->stories as $story) {
+            if ($id == $story->getId()) {
+                return $story;
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * Get a specfic chat message
+     * 
+     * @param type $id
+     * @return ChatMessage
+     */
+    public function getChatMessage($id) 
+    {
+        foreach ($this->chatMessages as $message) {
+            if ($id == $message->getId()) {
+                return $message;
+            }
+        }
+        return null;
     }
 }

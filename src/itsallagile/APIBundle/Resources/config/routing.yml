@@ -3,19 +3,22 @@ itsallagileAPIBundle_boards:
     resource: itsallagile\APIBundle\Controller\BoardsController
     name_prefix: itsallagileAPIBundle_
 
-itsallagileAPIBundle_tickets:
-    type:     rest
-    resource: itsallagile\APIBundle\Controller\TicketsController
-    name_prefix: itsallagileAPIBundle_
-
 itsallagileAPIBundle_stories:
     type:     rest
+    parent:   itsallagileAPIBundle_boards
     resource: itsallagile\APIBundle\Controller\StoriesController
+    name_prefix: itsallagileAPIBundle_
+   
+itsallagileAPIBundle_tickets:
+    type:     rest
+    parent:   itsallagileAPIBundle_stories
+    resource: itsallagile\APIBundle\Controller\TicketsController
     name_prefix: itsallagileAPIBundle_
 
 
 itsallagileAPIBundle_messages:
     type:     rest
+    parent:   itsallagileAPIBundle_boards
     resource: itsallagile\APIBundle\Controller\MessagesController
     name_prefix: itsallagileAPIBundle_
 

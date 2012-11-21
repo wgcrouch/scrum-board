@@ -4,6 +4,7 @@ namespace itsallagile\APIBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
 use itsallagile\CoreBundle\Document\Board;
+use itsallagile\CoreBundle\Document\Story;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\View\View;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -15,9 +16,7 @@ class BoardsController extends FOSRestController
      */
     public function getBoardAction(Board $board)
     {
-        $view = View::create();
-        $view->setData($board);
-        return $view;
+        return $board;
     }
 
     /**
@@ -25,26 +24,15 @@ class BoardsController extends FOSRestController
      */
     public function getBoardsAction()
     {
-        $view = View::create();
-        $repository = $this->get()->getRepository('itsallagileCoreBundle:Board');
+        $repository = $this->get('doctrine_mongodb')->getRepository('itsallagileCoreBundle:Board');
         $data = array();
         $boards = $repository->findAll();
-
+        
         foreach ($boards as $board) {
-            $data[$board->getBoardId()] = $board->getArray();
+            $data[$board->getId()] = $board;
         }
 
-        $view->setData($data);
-        return $view;
+        return $data;
     }
 
-    protected function getBoard($boardId)
-    {
-        $board = $this->getDoctrine()->getRepository('itsallagileCoreBundle:Board')
-            ->find($boardId);
-        if (!$board) {
-            throw $this->createNotFoundException('No board found for id '. $boardId);
-        }
-        return $board;
-    }
 }

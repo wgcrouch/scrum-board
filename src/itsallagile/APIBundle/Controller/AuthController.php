@@ -13,8 +13,6 @@ class AuthController extends FOSRestController
 
     public function getAuthAction()
     {
-        $view = View::create();
-        $view->setData(array('loggedIn' => true));
-        return $view;
+        return array('loggedIn' => true);
     }
 }

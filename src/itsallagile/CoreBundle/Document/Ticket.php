@@ -5,6 +5,7 @@ namespace itsallagile\CoreBundle\Document;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Symfony\Component\Validator\Constraints as Assert;
 
+use JMS\SerializerBundle\Annotation as JMS;
 /** 
  * @MongoDB\EmbeddedDocument 
  */
@@ -14,6 +15,9 @@ class Ticket
     const STATUS_ASSIGNED = 'Assigned';
     const STATUS_DONE = 'Done';
     
+    /**
+     * @JMS\Exclude     
+     */
     protected $statuses = array(
         self::STATUS_NEW,
         self::STATUS_ASSIGNED,
