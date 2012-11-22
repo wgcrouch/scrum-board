@@ -20,6 +20,7 @@ before_script:
   - cp app/config/parameters.yml.test app/config/parameters.yml
   - composer install
   - pear install pear/PHP_CodeSniffer
+  - phpenv rehash
   - php app/console --env=test doctrine:mongodb:schema:drop
   - php app/console --env=test doctrine:mongodb:schema:create
   - php app/console --env=test doctrine:mongodb:fixtures:load
