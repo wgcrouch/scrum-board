@@ -16,10 +16,10 @@ matrix:
         - PHPCS=1
 
 before_script: 
-  - pecl -q install mongo && echo "extension=mongo.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
+  - pecl -q install mongo
   - cp app/config/parameters.yml.test app/config/parameters.yml
   - composer install
-  - pyrus install pear/PHP_CodeSniffer
+  - pear install pear/PHP_CodeSniffer
   - php app/console --env=test doctrine:mongodb:schema:drop
   - php app/console --env=test doctrine:mongodb:schema:create
   - php app/console --env=test doctrine:mongodb:fixtures:load
