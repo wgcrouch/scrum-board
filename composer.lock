@@ -226,12 +226,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/Behat/MinkExtension.git",
-                "reference": "71fed8e03d403dbeedf74c8764f5d137f7dc9ffd"
+                "reference": "880fc457e056924694f7bb396842548ef2d8b3a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Behat/MinkExtension/archive/71fed8e03d403dbeedf74c8764f5d137f7dc9ffd.zip",
-                "reference": "71fed8e03d403dbeedf74c8764f5d137f7dc9ffd",
+                "url": "https://github.com/Behat/MinkExtension/archive/880fc457e056924694f7bb396842548ef2d8b3a1.zip",
+                "reference": "880fc457e056924694f7bb396842548ef2d8b3a1",
                 "shasum": ""
             },
             "require": {
@@ -242,7 +242,7 @@
             "require-dev": {
                 "behat/mink-goutte-driver": "*"
             },
-            "time": "1352494042",
+            "time": "1353457348",
             "type": "behat-extension",
             "installation-source": "source",
             "autoload": {
@@ -275,12 +275,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/Behat/MinkSelenium2Driver.git",
-                "reference": "0055619fe60116ccaaa636ada71710c16b7e1654"
+                "reference": "e604ce91d65d01233b3f41ca58847c30138e6867"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Behat/MinkSelenium2Driver/zipball/0055619fe60116ccaaa636ada71710c16b7e1654",
-                "reference": "0055619fe60116ccaaa636ada71710c16b7e1654",
+                "url": "https://github.com/Behat/MinkSelenium2Driver/archive/e604ce91d65d01233b3f41ca58847c30138e6867.zip",
+                "reference": "e604ce91d65d01233b3f41ca58847c30138e6867",
                 "shasum": ""
             },
             "require": {
@@ -288,7 +288,7 @@
                 "instaclick/php-webdriver": "@dev",
                 "behat/mink": "1.4.*"
             },
-            "time": "1349625948",
+            "time": "1353523340",
             "type": "mink-driver",
             "installation-source": "source",
             "autoload": {
@@ -443,18 +443,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/data-fixtures.git",
-                "reference": "a95d7839a7794c7c9b22d64e859ee70658d977fe"
+                "reference": "98e059213cd8bf70f1203a3c9acc3c7e8afc2c89"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/doctrine/data-fixtures/zipball/a95d7839a7794c7c9b22d64e859ee70658d977fe",
-                "reference": "a95d7839a7794c7c9b22d64e859ee70658d977fe",
+                "url": "https://github.com/doctrine/data-fixtures/archive/98e059213cd8bf70f1203a3c9acc3c7e8afc2c89.zip",
+                "reference": "98e059213cd8bf70f1203a3c9acc3c7e8afc2c89",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2"
             },
-            "time": "1351735543",
+            "time": "1353423624",
             "type": "library",
             "installation-source": "source",
             "autoload": {
@@ -548,12 +548,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/doctrine/DoctrineBundle.git",
-                "reference": "47df202dfb4ad38e15d6aed8a53e722b30c9f9fd"
+                "reference": "ac854d9452272d43b80a9043e0f33c2b9dd2cdd5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/doctrine/DoctrineBundle/archive/47df202dfb4ad38e15d6aed8a53e722b30c9f9fd.zip",
-                "reference": "47df202dfb4ad38e15d6aed8a53e722b30c9f9fd",
+                "url": "https://github.com/doctrine/DoctrineBundle/archive/ac854d9452272d43b80a9043e0f33c2b9dd2cdd5.zip",
+                "reference": "ac854d9452272d43b80a9043e0f33c2b9dd2cdd5",
                 "shasum": ""
             },
             "require": {
@@ -561,7 +561,7 @@
                 "doctrine/dbal": ">=2.2,<2.4-dev",
                 "symfony/framework-bundle": ">=2.1,<2.3-dev",
                 "symfony/doctrine-bridge": ">=2.1,<2.3-dev",
-                "jdorn/sql-formatter": "v1.0.1"
+                "jdorn/sql-formatter": ">=1.1,<2.0"
             },
             "require-dev": {
                 "doctrine/orm": ">=2.2,<2.4-dev",
@@ -571,7 +571,7 @@
             "suggest": {
                 "doctrine/orm": "The Doctrine ORM integration is optional in the bundle."
             },
-            "time": "1353074073",
+            "time": "1353489818",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1089,12 +1089,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSRestBundle",
-                "reference": "39f1b79bd0d75c9d566baaf7a90f25756a4786e9"
+                "reference": "4f219c0c8c4ad1e661b9c849dedecf46070a596a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/FriendsOfSymfony/FOSRestBundle/archive/39f1b79bd0d75c9d566baaf7a90f25756a4786e9.zip",
-                "reference": "39f1b79bd0d75c9d566baaf7a90f25756a4786e9",
+                "url": "https://github.com/FriendsOfSymfony/FOSRestBundle/archive/4f219c0c8c4ad1e661b9c849dedecf46070a596a.zip",
+                "reference": "4f219c0c8c4ad1e661b9c849dedecf46070a596a",
                 "shasum": ""
             },
             "require": {
@@ -1112,7 +1112,7 @@
             "suggest": {
                 "sensio/framework-extra-bundle": "Add support for route annotations"
             },
-            "time": "1353159722",
+            "time": "1353503919",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1155,18 +1155,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/instaclick/php-webdriver",
-                "reference": "v1.0.8"
+                "reference": "1.0.9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/instaclick/php-webdriver/zipball/v1.0.8",
-                "reference": "v1.0.8",
+                "url": "https://github.com/instaclick/php-webdriver/archive/1.0.9.zip",
+                "reference": "1.0.9",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2"
             },
-            "time": "1351218365",
+            "time": "1353440914",
             "type": "library",
             "installation-source": "source",
             "autoload": {
@@ -1196,6 +1196,53 @@
                 "selenium",
                 "webdriver",
                 "webtest"
+            ]
+        },
+        {
+            "name": "jdorn/sql-formatter",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/jdorn/sql-formatter.git",
+                "reference": "v1.0.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/jdorn/sql-formatter/archive/v1.0.1.zip",
+                "reference": "v1.0.1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.4"
+            },
+            "time": "2012-10-04 22:10:16",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "classmap": [
+                    "lib"
+                ]
+            },
+            "license": [
+                "LGPL"
+            ],
+            "authors": [
+                {
+                    "name": "Jeremy Dorn",
+                    "email": "jeremy@jeremydorn.com",
+                    "homepage": "http://jeremydorn.com/"
+                }
+            ],
+            "description": "a PHP SQL highlighting library",
+            "homepage": "https://github.com/jdorn/sql-formatter/",
+            "keywords": [
+                "sql",
+                "highlight"
             ]
         },
         {
@@ -2005,12 +2052,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/symfony/symfony.git",
-                "reference": "0a8c0eeb5ae3abefce9ba471f32c9c29ae090103"
+                "reference": "aa124288676648f727370876ccdf6dd7f208dc46"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/symfony/archive/0a8c0eeb5ae3abefce9ba471f32c9c29ae090103.zip",
-                "reference": "0a8c0eeb5ae3abefce9ba471f32c9c29ae090103",
+                "url": "https://github.com/symfony/symfony/archive/aa124288676648f727370876ccdf6dd7f208dc46.zip",
+                "reference": "aa124288676648f727370876ccdf6dd7f208dc46",
                 "shasum": ""
             },
             "require": {
@@ -2059,7 +2106,7 @@
                 "propel/propel1": "dev-master",
                 "monolog/monolog": "1.*"
             },
-            "time": "1353359615",
+            "time": "1353512263",
             "type": "library",
             "extra": {
                 "branch-alias": {
