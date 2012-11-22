@@ -210,4 +210,9 @@ class Story
         }
         return null;
     }
+    
+    public function removeTicket(Ticket $ticket) 
+    {
+        return $this->tickets->removeElement($ticket);
+    }
 }

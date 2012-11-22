@@ -25,7 +25,8 @@ class StoriesController extends FOSRestController
         return $this->getStory($board, $storyId);
     }
     
-    protected function getStory(Board $board, $storyId) {
+    protected function getStory(Board $board, $storyId)
+    {
         $story = $board->getStory($storyId);
         if (!$story) {
             throw $this->createNotFoundException('Story ' . $storyId . ' not found');
@@ -69,7 +70,6 @@ class StoriesController extends FOSRestController
         $form = $this->createForm(new StoryType(true), $story);
         $form->bind($request);
        
-        return $story;
         if ($form->isValid()) {
             
             $dm = $this->get('doctrine_mongodb')->getManager();

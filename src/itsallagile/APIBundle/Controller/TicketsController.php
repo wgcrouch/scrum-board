@@ -29,6 +29,15 @@ class TicketsController extends FOSRestController
         return $story;
     }
     
+    protected function getTicket(Story $story, $ticketId) 
+    {
+        $ticket = $story->getTicket($ticketId);
+        if (!$ticket) {
+            throw $this->createNotFoundException('Could not find ticket' . $ticketId);
+        }
+        return $ticket;
+    }
+    
     /**
      * Get a single ticket for a story in a board
      * 
@@ -40,10 +49,7 @@ class TicketsController extends FOSRestController
     {
         $story = $this->getStory($board, $storyId);
         
-        $ticket = $story->getTicket($ticketId);
-        if (!$ticket) {
-            throw $this->createNotFoundException('Could not find ticket ' . $ticketId);
-        }
+        $ticket = $this->getTicket($story, $ticketId);
         return $ticket;
     }
 
@@ -60,79 +66,72 @@ class TicketsController extends FOSRestController
         return $story->getTickets();
     }
 
-//    /**
-//     * Create a new ticket
-//     */
-//    public function postTicketsAction(Request $request)
-//    {
-//        $view = View::create();
-//        $ticket = new Ticket();
-//        $form = $this->createForm(new TicketType(), $ticket);
-//        $form->bind($request);
-//
-//        if ($form->isValid()) {
-//            $em = $this->getDoctrine()->getEntityManager();
-//            $em->persist($ticket);
-//            $em->flush();
-//            $view->setStatusCode(201);
-//            $view->setData($ticket->getArray());
-//        } else {
-//            $view->setData($form);
-//        }
-//        return $view;
-//    }
-//
-//    /**
-//     * Update a ticket
-//     */
-//    public function putTicketAction($ticketId, Request $request)
-//    {
-//        $view = View::create();
-//        $ticket = $this->getTicket($ticketId);
-//        $form = $this->createForm(new TicketType(), $ticket);
-//        $form->bind($request);
-//
-//        if ($form->isValid()) {
-//            $em = $this->getDoctrine()->getEntityManager();
-//            $em->persist($ticket);
-//            $em->flush();
-//
-//            $view->setStatusCode(200);
-//            $view->setData($ticket->getArray());
-//        } else {
-//            $view->setData($form);
-//        }
-//        return $view;
-//    }
-//
-//    /**
-//     * Delete a ticket
-//     * @param integer $ticketId
-//     * @return type
-//     */
-//    public function deleteTicketAction($ticketId)
-//    {
-//        $view = View::create();
-//        $ticket = $this->getTicket($ticketId);
-//
-//        $em = $this->getDoctrine()->getEntityManager();
-//        $em->remove($ticket);
-//        $em->flush();
-//        $view->setStatusCode(200);
-//        return $view;
-//    }
-//
-//    protected function getRepository()
-//    {
-//        return $this->getDoctrine()->getRepository('itsallagileCoreBundle:Ticket');
-//    }
-//
-//    protected function getTicket($ticketId)
-//    {
-//        $ticket = $this->getRepository()->find($ticketId);
-//        if (!$ticket) {
-//            throw $this->createNotFoundException('No ticket found for id '. $ticketId);
-//        }
-//        return $ticket;
-//    }
+    /**
+     * Create a new ticket
+     */
+    public function postTicketsAction(Board $board, $storyId, Request $request)
+    {
+        $story = $this->getStory($board, $storyId);
+        $view = View::create();
+        $ticket = new Ticket();
+        $form = $this->createForm(new TicketType(), $ticket);
+        $form->bind($request);
+
+        if ($form->isValid()) {
+            if (!$ticket->getStatus()) {
+                $ticket->setStatus(Ticket::STATUS_NEW);
+            }
+            $dm = $this->get('doctrine_mongodb')->getManager();
+            $story->addTicket($ticket);
+            $dm->persist($story);
+            $dm->flush();
+            $view->setStatusCode(201);
+            $view->setData($ticket);
+        } else {
+            $view->setData($form);
+        }
+        return $view;
+    }
+
+    /**
+     * Update a ticket
+     */
+    public function putTicketAction(Board $board, $storyId, $ticketId, Request $request)
+    {
+        $view = View::create();
+        $story = $this->getStory($board, $storyId);
+        $ticket = $this->getTicket($story, $ticketId);
+        $form = $this->createForm(new TicketType(true), $ticket);
+        $form->bind($request);
+       
+        if ($form->isValid()) {
+            
+            $dm = $this->get('doctrine_mongodb')->getManager();
+            $dm->persist($ticket);
+            $dm->flush();
+
+            $view->setStatusCode(200);
+            $view->setData($ticket);
+        } else {
+            $view->setData($form);
+        }
+        return $view;
+    }
+
+    /**
+     * Delete a Ticket
+     */
+    public function deleteTicketAction(Board $board, $storyId, $ticketId)
+    {
+        $view = View::create();
+        $story = $this->getStory($board, $storyId);
+        $ticket = $this->getTicket($story, $ticketId);
+        $dm = $this->get('doctrine_mongodb')->getManager();
+        $story->removeTicket($ticket);
+        $dm->persist($story);
+        $dm->flush();
+        $view->setStatusCode(200);
+        return $view;
+    }
+
 }

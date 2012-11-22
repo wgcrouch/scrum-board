@@ -40,6 +40,31 @@ class MessagesController extends FOSRestController
         return $board->getChatMessages();
     }
 
+    /**
+     * Create a new message
+     */
+    public function postMessagesAction(Board $board, Request $request)
+    {
+        $view = View::create();
+        $message = new ChatMessage();
+        $form = $this->createForm(new ChatMessageType(), $message);
+        $form->bind($request);  
+        $user = $this->get('security.context')->getToken()->getUser();
+        $message->setUser($user->getEmail());
+        if ($form->isValid()) {
+            $message->setDatetime(new \DateTime());
+            $dm = $this->get('doctrine_mongodb')->getManager();
+            $board->addChatMessage($message);
+            $dm->persist($board);
+            $dm->flush();
+            $view->setStatusCode(201);
+            $view->setData($message);
+        } else {
+            $view->setData($form);
+        }
+        return $view;
+    }
+    
 //    /**
 //     * Create a new message
 //     */
@@ -62,19 +87,5 @@ class MessagesController extends FOSRestController
 //            $view->setData($form);
 //        }
 //        return $view;
-//    }
-//
-//    protected function getRepository()
-//    {
-//        return $this->getDoctrine()->getRepository('itsallagileCoreBundle:ChatMessage');
-//    }
-//
-//    protected function getChatMessage($chatMessageId)
-//    {
-//        $chatMessageId = $this->getRepository()->find($chatMessageId);
-//        if (!$chatMessageId) {
-//            throw $this->createNotFoundException('No message found for id ' . $chatMessageId);
-//        }
-//        return $chatMessageId;
 //    }
 }
