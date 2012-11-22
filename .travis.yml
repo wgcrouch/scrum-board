@@ -16,6 +16,7 @@ matrix:
         - PHPCS=1
 
 before_script: 
+  - pecl -q install mongo && echo "extension=mongo.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
   - cp app/config/parameters.yml.test app/config/parameters.yml
   - composer install
   - pyrus install pear/PHP_CodeSniffer
