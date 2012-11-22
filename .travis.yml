@@ -3,6 +3,8 @@ language: php
 php:
   - 5.4
 
+services: mongodb
+
 matrix:
   allow_failures:
     - php: 5.4
@@ -17,9 +19,9 @@ before_script:
   - cp app/config/parameters.yml.test app/config/parameters.yml
   - composer install
   - pyrus install pear/PHP_CodeSniffer
-  - php app/console doctrine:database:create --env=test
-  - php app/console doctrine:schema:update --force --env=test
-  - yes | php app/console doctrine:fixtures:load --env=test
+  - php app/console --env=test doctrine:mongodb:schema:drop
+  - php app/console --env=test doctrine:mongodb:schema:create
+  - php app/console --env=test doctrine:mongodb:fixtures:load
 
 script: 
   - sh -c "if [ '$PHPCS' != '1' ]; then phpunit -c app; else phpcs --extensions=php,js --standard=PSR2 ./src; fi"
