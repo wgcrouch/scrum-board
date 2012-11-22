@@ -26,4 +26,4 @@ before_script:
   - php app/console --env=test doctrine:mongodb:fixtures:load
 
 script: 
-  - sh -c "if [ '$PHPCS' != '1' ]; then phpunit -c app; else phpcs --extensions=php,js --standard=PSR2 ./src; fi"
+  - sh -c "if [ '$PHPCS' != '1' ]; then phpunit -c app; else phpcs --extensions=php --standard=PSR2 ./src; fi"
