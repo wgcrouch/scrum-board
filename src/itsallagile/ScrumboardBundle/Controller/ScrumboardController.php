@@ -27,11 +27,20 @@ class ScrumboardController extends Controller
         
         $serializer = $this->get('serializer');
              
+        $ticketStatuses = array();
+        foreach (Ticket::getStatuses() as $id => $status) {
+            $ticketStatuses[] = array('id' => $id, 'status'=> $status);
+        }
+        
+        $storyStatuses = array();
+        foreach (Story::getStatuses() as $id => $status) {
+            $storyStatuses[] = array('id' => $id, 'status'=> $status);
+        }
         $viewData = array(
             'board' => $board,
             'boardJson' => $serializer->serialize($board, 'json'),
-            'ticketStatuses' => Ticket::getStatuses(),
-            'storyStatuses' => Story::getStatuses()
+            'ticketStatuses' => $ticketStatuses,
+            'storyStatuses' => $storyStatuses
         );
 
         return $this->render('itsallagileScrumboardBundle:Board:index.html.twig', $viewData);

@@ -24,7 +24,7 @@ itsallagile.View.StoryStatusCell = Backbone.View.extend({
      */
     render: function() {
         this.$el.html('');
-        this.$el.addClass('story-status-' + this.status);
+        this.$el.addClass('story-status-' + this.status.id);
         this.$el.droppable({
             hoverClass: 'drop-hover',
             activeClass: 'drop-active'
@@ -55,13 +55,13 @@ itsallagile.View.StoryStatusCell = Backbone.View.extend({
             var status = ui.draggable.data('status');
             var ticketId = ui.draggable.data('ticketId');
             //if nothing has changed then do nothing
-            if (storyId == this.story.get('id') &&  status == this.status) {
+            if (storyId == this.story.get('id') &&  status == this.status.id) {
                 return false;
             }
             ui.draggable.remove();
             event.stopPropagation();
 
-            this.trigger('moveTicket', ticketId, storyId, this.status);
+            this.trigger('moveTicket', ticketId, storyId, this.status.id);
         }
         return;
     },
@@ -71,7 +71,7 @@ itsallagile.View.StoryStatusCell = Backbone.View.extend({
      */
     createTicket: function(type) {
         var data = {
-            status: this.status,
+            status: this.status.id,
             type: type,
             story: this.story.get('id')
         }

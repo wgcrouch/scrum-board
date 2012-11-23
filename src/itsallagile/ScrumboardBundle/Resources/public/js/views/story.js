@@ -73,23 +73,23 @@ itsallagile.View.Story = Backbone.View.extend({
             var statusView = new itsallagile.View.StoryStatusCell(
                 {status: status, story: this.model, tickets: statusTickets});
             statusView.on('moveTicket', this.onMoveTicket, this);
-            this.statusViews[status] = statusView;
+            this.statusViews[status.id] = statusView;
             this.$el.append(statusView.render().el);
         }
 
         //Assign tickets to the appropriate status view
         var tickets = this.model.get('tickets');
         tickets.forEach(function(ticket) {
-            var status = ticket.get('status');
+            var ticketStatus = ticket.get('status');
             if (typeof status !== 'undefined') {
-                this.statusViews[status].addTicket(ticket);
+                this.statusViews[ticketStatus].addTicket(ticket);
             }
         }, this);
 
-        for (var i = 0; i < this.storyStatuses.length; i++) {
-            var status = this.storyStatuses[i];
-            if ( status == this.model.get('status')) {
-                this.setStatusClass(status);
+        for (var j = 0; j < this.storyStatuses.length; j++) {
+            var storyStatus = this.storyStatuses[j];
+            if ( storyStatus.id == this.model.get('status')) {
+                this.setStatusClass(storyStatus.id);
             }
         }
 
