@@ -141,12 +141,11 @@ itsallagile.View.Board = Backbone.View.extend({
     /**
      * Handle ticket created by a different user
      */
-    onRemoteTicketCreate: function(ticketData) {
-        var ticket = new itsallagile.Model.Ticket(ticketData);
-        var storyId = ticketData.story;
-
+    onRemoteTicketCreate: function(params) {
+        var ticket = new itsallagile.Model.Ticket(params.ticket);
+        
         var stories = this.model.get('stories');
-        var story = stories.get(storyId);
+        var story = stories.get(params.storyId);
         story.get('tickets').add(ticket);
     },
 

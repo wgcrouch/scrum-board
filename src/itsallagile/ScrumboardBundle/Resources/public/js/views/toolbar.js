@@ -33,7 +33,6 @@ itsallagile.View.Toolbar = Backbone.View.extend({
         var newStory = tickets.create(
             {}, 
             {
-                wait:true, 
                 success: function(story) {                
                     if (typeof itsallagile.socket !== 'undefined') {
                         itsallagile.socket.emit('boardEvent', itsallagile.roomId, 'story:add', story);

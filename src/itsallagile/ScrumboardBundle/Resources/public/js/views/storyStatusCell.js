@@ -9,10 +9,9 @@ itsallagile.View.StoryStatusCell = Backbone.View.extend({
         this.status = options.status;
         this.story = options.story;
         this.tickets = options.tickets;
-        this.tickets.bind('add', this.render, this);
-        this.tickets.bind('remove', this.render, this);
-        this.tickets.bind('change', this.render, this);
-        this.tickets.bind('reset', this.render, this);
+        this.tickets.bind('add', this.renderTicket, this);
+        this.tickets.bind('remove', this.renderTicket, this);
+        _.bindAll(this);
     },
 
     events: {
@@ -70,15 +69,16 @@ itsallagile.View.StoryStatusCell = Backbone.View.extend({
      * Event handler for creating a ticket from a template
      */
     createTicket: function(type) {
-        var data = {
+        var ticketData = {
             status: this.status.id,
             type: type
         }
-        var ticket = new itsallagile.Model.Ticket(data);
 
-        this.story.get('tickets').add(ticket, {silent: true});
-        ticket.save(null, {success: this.onCreateSuccess, silent:true});
-        this.addTicket(ticket);
+        var tickets = this.story.get('tickets');        
+        var newTicket = tickets.create(
+            ticketData,
+            {success: this.onCreateSuccess}
+        );
     },
 
     /**
@@ -86,7 +86,12 @@ itsallagile.View.StoryStatusCell = Backbone.View.extend({
      */
     onCreateSuccess: function(model, response) {
         if (typeof itsallagile.socket !== 'undefined') {
-            itsallagile.socket.emit('boardEvent', itsallagile.roomId, 'ticket:create', response);
+            itsallagile.socket.emit(
+                'boardEvent', 
+                itsallagile.roomId, 
+                'ticket:create', 
+                {ticket: response, storyId: this.story.get('id')}
+            );
         }
     },
 
