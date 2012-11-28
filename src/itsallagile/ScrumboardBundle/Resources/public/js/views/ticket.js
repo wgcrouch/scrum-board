@@ -24,9 +24,11 @@ itsallagile.View.Ticket = Backbone.View.extend({
      * Initialize bindings to changes in the model
      */
     initialize: function(options) {
+        _.bindAll(this);
         this.story = options.story;
         this.storyView = options.storyView;
-        _.bindAll(this);
+        this.model.bind('change', this.render, this);
+
     },
 
     /**
@@ -35,7 +37,7 @@ itsallagile.View.Ticket = Backbone.View.extend({
     render: function() {
         this.id = this.model.get('id');
         this.$el.addClass(this.model.get('type'));
-        this.$el.append(_.template(this.template, {content : this.model.get("content")}));
+        this.$el.html(_.template(this.template, {content : this.model.get("content")}));
         $('p', this.$el).html(this.formatText($('p', this.$el).html()));
         this.$el.data('ticketId', this.model.get('id'));
         this.$el.data('story', this.story.get('id'));
@@ -43,7 +45,7 @@ itsallagile.View.Ticket = Backbone.View.extend({
         this.$el.draggable({revert: true});
         return this;
     },
-
+    
     /**
      * Show the edit box when ticket is double clicked
      */
@@ -64,8 +66,7 @@ itsallagile.View.Ticket = Backbone.View.extend({
         p.html(this.formatText(text.val()));
         text.hide();
         p.show();
-        this.model.set('content', text.val());
-        this.model.save(null, {success: this.changeSuccess});
+        this.model.save('content', text.val(), {silent: true, success: this.changeSuccess});
         if (this.$el.hasClass('zoomed')) {
             this.zoomToggle();
         }
@@ -76,7 +77,15 @@ itsallagile.View.Ticket = Backbone.View.extend({
      */
     changeSuccess: function(model, response) {
         if (typeof itsallagile.socket !== 'undefined') {
-            itsallagile.socket.emit('boardEvent', itsallagile.roomId, 'ticket:change', response);
+            itsallagile.socket.emit(
+                'boardEvent', 
+                itsallagile.roomId, 
+                'ticket:change', 
+                {
+                    ticket: response,
+                    storyId: this.story.get('id')
+                }
+            );
         }
     },
 
