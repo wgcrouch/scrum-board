@@ -25,8 +25,6 @@ itsallagile.View.Ticket = Backbone.View.extend({
      */
     initialize: function(options) {
         this.story = options.story;
-        this.model.bind('change', this.refresh);
-        this.model.bind('sync', this.refresh);
         this.storyView = options.storyView;
         _.bindAll(this);
     },
@@ -110,21 +108,34 @@ itsallagile.View.Ticket = Backbone.View.extend({
      */
     deleteConfirm: function(event) {
         if (confirm('Are you sure you want to delete this ticket?')) {
-            this.model.destroy({silent: true});
+            this.model.destroy({silent: true, success: this.onDeleteSuccess});
             this.$el.fadeOut();
-            if (typeof itsallagile.socket !== 'undefined') {
-                itsallagile.socket.emit('boardEvent', itsallagile.roomId, 'ticket:delete', this.model.toJSON());
-            }
-
-            var notification = new itsallagile.View.Notification({
-                message: 'Ticket deleted successfully',
-                type: 'success'
-            });
-            notification.render();
         } else {
             event.preventDefault();
             event.stopPropagation();
         }
+    },
+    
+    /**
+     * Send the delete event and show a notification when a ticket is successfully deleted
+     */
+    onDeleteSuccess: function(ticket) {
+        if (typeof itsallagile.socket !== 'undefined') {
+            itsallagile.socket.emit(
+                'boardEvent', 
+                itsallagile.roomId, 
+                'ticket:delete', 
+                { 
+                    ticket: ticket.toJSON(),
+                    storyId: this.story.get('id')
+                }
+            );
+        }
+        var notification = new itsallagile.View.Notification({
+            message: 'Ticket deleted successfully',
+            type: 'success'
+        });
+        notification.render();
     },
 
     /**

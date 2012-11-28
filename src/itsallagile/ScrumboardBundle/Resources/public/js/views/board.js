@@ -152,14 +152,14 @@ itsallagile.View.Board = Backbone.View.extend({
     /**
      * Handle ticket deleted by a different user
      */
-    onRemoteTicketDelete: function(ticketData) {
-        var ticketId = ticketData.id;
-        var storyId = ticketData.story;
+    onRemoteTicketDelete: function(params) {
+        var ticketId = params.ticket.id;
+        var storyId = params.storyId;
 
         var stories = this.model.get('stories');
         var story = stories.get(storyId);
         var ticket = story.get('tickets').get(ticketId);
-        ticket.destroy();
+        story.get('tickets').remove(ticket);
     },
 
     /**

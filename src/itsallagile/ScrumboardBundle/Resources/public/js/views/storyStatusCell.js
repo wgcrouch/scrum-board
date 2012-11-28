@@ -10,7 +10,7 @@ itsallagile.View.StoryStatusCell = Backbone.View.extend({
         this.story = options.story;
         this.tickets = options.tickets;
         this.tickets.bind('add', this.renderTicket, this);
-        this.tickets.bind('remove', this.renderTicket, this);
+        this.tickets.bind('remove', this.render, this);
         _.bindAll(this);
     },
 

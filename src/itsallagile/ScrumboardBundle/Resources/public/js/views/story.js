@@ -224,7 +224,7 @@ itsallagile.View.Story = Backbone.View.extend({
     },
 
     /**
-     * Remove a ticket from this story and the approriate status view
+     * Remove a ticket from this story and the appropriate status view
      */
     removeTicket: function(ticket) {
         this.statusViews[ticket.get('status')].removeTicket(ticket);
