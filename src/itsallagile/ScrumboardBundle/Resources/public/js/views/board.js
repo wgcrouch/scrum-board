@@ -80,24 +80,40 @@ itsallagile.View.Board = Backbone.View.extend({
     },
 
     /**
-     * Handle moving a ticket between stories
-     * Looks at bit hacky, but I couldnt find an easier way
-     * of moving an object between collections
+     * Move a ticket between stories
+     * Need to create a new ticket so that a post is used instead of a put
      */
     onMoveTicket: function(ticketId, originStoryId, status, newStoryId) {
         var stories = this.model.get('stories');
         var originStory = stories.get(originStoryId);
         var newStory = stories.get(newStoryId);
-        var ticket = originStory.get('tickets').get(ticketId);
+        var ticket = originStory.get('tickets').get(ticketId);  
+        var ticketData = ticket.toJSON();
+        ticketData.status = status;
+        var oldTicketId = ticketData.id;
+        delete(ticketData.id);
+        ticket.destroy();
 
-        originStory.get('tickets').remove(ticket);
-        ticket.save({status: status}, {silent:true});
-        newStory.get('tickets').add(ticket);
-
-        if (typeof itsallagile.socket !== 'undefined') {
-            itsallagile.socket.emit('boardEvent', itsallagile.roomId, 'ticket:move',
-                {ticket: ticket, originStoryId: originStoryId});
-        }
+        var newTicket = newStory.get('tickets').create(
+            ticketData, 
+            {
+                success: function(ticket) {
+                    if (typeof itsallagile.socket !== 'undefined') {
+                        itsallagile.socket.emit(
+                            'boardEvent', 
+                            itsallagile.roomId, 
+                            'ticket:move',
+                            {
+                                ticket: newTicket, 
+                                originStoryId: originStoryId,
+                                newStoryId: newStoryId,
+                                oldTicketId: oldTicketId
+                            }
+                        );
+                    }
+                }
+            }
+        );        
     },
 
     //REMOTE EVENTS
@@ -108,19 +124,30 @@ itsallagile.View.Board = Backbone.View.extend({
      */
     onRemoteTicketMove: function(params) {
         var ticketData = params.ticket;
-        var originStoryId = params.originStoryId;
 
         var stories = this.model.get('stories');
-        var originStory = stories.get(originStoryId);
-        var newStory = stories.get(ticketData.story);
+        var originStory = stories.get(params.originStoryId);
+        var newStory = stories.get(params.newStoryId);
+        var oldTicketId, oldTicket, newTicket, interStory = false;
+        
+        if (typeof params.oldTicketId === 'undefined') {            
+            oldTicketId = ticketData.id;
+        } else {
+            interStory = true;
+            oldTicketId = params.oldTicketId;
+        }
+        
+        oldTicket = originStory.get('tickets').get(oldTicketId);
+        originStory.get('tickets').remove(oldTicket);
 
-        var ticket = originStory.get('tickets').get(ticketData.id);
-        originStory.get('tickets').remove(ticket);
-
-        ticket.set('story', newStory.id);
-        ticket.set('status', ticketData.status);
-
-        newStory.get('tickets').add(ticket);
+        if (!interStory) { 
+            newTicket = oldTicket;
+            newTicket.set('status', ticketData.status);
+            
+        } else {            
+            newTicket = new itsallagile.Model.Ticket(ticketData);
+        }
+        newStory.get('tickets').add(newTicket);
 
 
     },

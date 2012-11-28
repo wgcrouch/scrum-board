@@ -111,12 +111,21 @@ itsallagile.View.Story = Backbone.View.extend({
         this.statusViews[ticket.get('status')].tickets.remove(ticket, {silent:true});
         ticket.save(
             {status: status},
-            {silent:true});
+            {silent:true}
+        );
         this.statusViews[status].addTicket(ticket);
 
         if (typeof itsallagile.socket !== 'undefined') {
-            itsallagile.socket.emit('boardEvent', itsallagile.roomId, 'ticket:move',
-                {ticket: ticket, originStoryId: originStoryId});
+            itsallagile.socket.emit(
+                'boardEvent', 
+                itsallagile.roomId, 
+                'ticket:move',
+                {
+                    ticket: ticket, 
+                    originStoryId: originStoryId,
+                    newStoryId: this.model.get('id')
+                }
+            );
         }
     },
 

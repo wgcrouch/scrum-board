@@ -41,6 +41,7 @@ itsallagile.View.StoryStatusCell = Backbone.View.extend({
      */
     drop: function(event, ui) {
 
+        //If this is a new ticket create it
         if (ui.draggable.hasClass('template')) {
             var type = ui.helper.data('type');
             this.createTicket(type);
