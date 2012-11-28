@@ -91,7 +91,7 @@ itsallagile.View.Board = Backbone.View.extend({
         var ticket = originStory.get('tickets').get(ticketId);
 
         originStory.get('tickets').remove(ticket);
-        ticket.save({story: newStoryId, status: status}, {silent:true});
+        ticket.save({status: status}, {silent:true});
         newStory.get('tickets').add(ticket);
 
         if (typeof itsallagile.socket !== 'undefined') {

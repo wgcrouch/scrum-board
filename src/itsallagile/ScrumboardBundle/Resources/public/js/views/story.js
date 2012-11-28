@@ -110,7 +110,7 @@ itsallagile.View.Story = Backbone.View.extend({
         var ticket = this.model.get('tickets').get(ticketId);
         this.statusViews[ticket.get('status')].tickets.remove(ticket, {silent:true});
         ticket.save(
-            {story: this.model.get('id'), status: status},
+            {status: status},
             {silent:true});
         this.statusViews[status].addTicket(ticket);
 

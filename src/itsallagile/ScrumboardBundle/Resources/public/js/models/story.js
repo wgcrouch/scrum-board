@@ -2,7 +2,6 @@
  * Story Model
  */
 itsallagile.Model.Story = Backbone.Model.extend({
-    urlRoot: '/api/stories',
 
     defaults: function() {
         return {
@@ -17,6 +16,7 @@ itsallagile.Model.Story = Backbone.Model.extend({
      */
     parse: function(response) {
         response.tickets = this.get('tickets').reset(response.tickets);
+        response.tickets.url = this.url() + '/tickets';
         return response;
     }
 

@@ -72,8 +72,7 @@ itsallagile.View.StoryStatusCell = Backbone.View.extend({
     createTicket: function(type) {
         var data = {
             status: this.status.id,
-            type: type,
-            story: this.story.get('id')
+            type: type
         }
         var ticket = new itsallagile.Model.Ticket(data);
 
