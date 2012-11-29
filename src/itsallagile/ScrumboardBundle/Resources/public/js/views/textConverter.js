@@ -3,7 +3,7 @@
  */
 itsallagile.View.TextConverter = {};
 (function(conv) {
-    var converter = new Showdown.converter();
+    var converter = new Showdown.converter({extensions: ['cos', 'table', 'github', 'dtrac', ]});
     
     conv.convert = function(text) {
         var html = converter.makeHtml(text);
