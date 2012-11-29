@@ -28,12 +28,14 @@ itsallagile.View.Toolbar = Backbone.View.extend({
      * Event handler for the new story button
      */
     onClickAddStory: function() {
-        var tickets = this.model.get('stories');
+        var stories = this.model.get('stories');
         
-        var newStory = tickets.create(
+        var newStory = stories.create(
             {}, 
             {
-                success: function(story) {                
+                wait: true, 
+                success: function(story) {    
+                    story.get('tickets').url = story.url() + '/tickets';
                     if (typeof itsallagile.socket !== 'undefined') {
                         itsallagile.socket.emit('boardEvent', itsallagile.roomId, 'story:add', story);
                     }
