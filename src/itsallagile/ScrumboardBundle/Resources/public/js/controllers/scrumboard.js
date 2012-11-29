@@ -27,7 +27,7 @@ itsallagile.Controller.Scrumboard = itsallagile.baseObject.extend({
 
         this.connectedUsersView = new itsallagile.View.ConnectedUsers();
 
-        this.messagesView = new itsallagile.View.ChatBox({messages: this.board.get('chatMessages'), board: this.board});
+        this.messagesView = new itsallagile.View.ChatBox({messages: this.board.get('chat_messages'), board: this.board});
         this.boardView = new itsallagile.View.Board({
             model: this.board,
             ticketStatuses: this.ticketStatuses,

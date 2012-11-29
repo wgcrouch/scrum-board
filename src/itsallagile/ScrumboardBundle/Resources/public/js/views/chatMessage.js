@@ -3,7 +3,7 @@
  */
 itsallagile.View.ChatMessage = Backbone.View.extend({
     tagName: 'div',
-    template: '<label class="message-head" title="<%= datetime %>"><%= user.email %>:</label><p class="message-content"><%= content %></p>',
+    template: '<label class="message-head" title="<%= datetime %>"><%= user %>:</label><p class="message-content"><%= content %></p><hr/>',
     className: 'chat-message',
 
     initialize: function(options) {
@@ -13,7 +13,9 @@ itsallagile.View.ChatMessage = Backbone.View.extend({
      * Render a singe chat message
      */
     render: function() {
-        this.$el.html(_.template(this.template, this.model.toJSON()));
+        var data = this.model.toJSON();
+        data.content = itsallagile.View.TextConverter.convert(data.content);
+        this.$el.html(_.template(this.template, data));
         return this;
     }
 });

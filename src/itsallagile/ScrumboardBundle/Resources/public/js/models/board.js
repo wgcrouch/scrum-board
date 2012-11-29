@@ -6,7 +6,7 @@ itsallagile.Model.Board = Backbone.Model.extend({
 
     defaults: {
         stories: null,
-        chatMessages: null
+        chat_messages: null
     },
 
     initialize: function(options) {
@@ -26,8 +26,8 @@ itsallagile.Model.Board = Backbone.Model.extend({
             story.get('tickets').url = response.stories.url + '/' + story.get('id') + '/tickets';
         });
 
-        response.chatMessages = new itsallagile.Collection.ChatMessages(response.chatMessages);
-        response.chatMessages.url = this.urlRoot + '/' + response.id + '/messages';
+        response.chat_messages = new itsallagile.Collection.ChatMessages(response.chat_messages);
+        response.chat_messages.url = this.urlRoot + '/' + response.id + '/messages';
         return response;
     }
 });

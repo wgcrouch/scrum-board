@@ -218,11 +218,10 @@ itsallagile.View.Story = Backbone.View.extend({
     },
 
     /**
-     * Hacky formatting for text in stories, currently only does nl2br
+     * Formatting for text in stories
      */
     formatText: function(text) {
-        var breakTag = '<br/>';
-        return (text + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
+        return itsallagile.View.TextConverter.convert(text);
     },
 
     /**

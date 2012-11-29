@@ -23,13 +23,14 @@
     <script>var WEB_SOCKET_SWF_LOCATION = '/js/socket.io/WebSocketMain.swf';</script>
     {{ parent() }}
     {% javascripts
+        '@itsallagileScrumboardBundle/Resources/public/js/showdown.js'
         '@itsallagileScrumboardBundle/Resources/public/js/models/*.js'
         '@itsallagileScrumboardBundle/Resources/public/js/collections/*.js'
         '@itsallagileScrumboardBundle/Resources/public/js/views/*.js'
+        '@itsallagileScrumboardBundle/Resources/public/js/controllers/scrumboard.js'        
     %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
-    <script src="/bundles/itsallagilescrumboard/js/controllers/scrumboard.js"></script>
     <!-- PrePopulate Data -->
     <script>
         {% autoescape false %}

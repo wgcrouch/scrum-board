@@ -78,12 +78,16 @@ itsallagile.View.ChatBox = Backbone.View.extend({
         event.stopPropagation();
         var textbox = $('#message-input', this.$el);
         if (textbox.val() != '') {
-            var message = new itsallagile.Model.ChatMessage({
-                content: textbox.val(),
-                board: this.board.get('id')
-            });
-            message.save(null, {silent:true, success: _.bind(this.onCreateSuccess, this)});
-            this.messages.add(message, {silent: true});
+            var messages = this.board.get('chat_messages');
+            var message = messages.create(
+                {
+                    content: textbox.val()
+                },
+                {
+                    wait: true,
+                    success: _.bind(this.onCreateSuccess, this)
+                }
+            );
             textbox.val('');
         }
     },
@@ -92,7 +96,6 @@ itsallagile.View.ChatBox = Backbone.View.extend({
     * Send a socket message when a new ticket is created
     */
     onCreateSuccess: function(message) {
-        this.renderNewMessage(message);
         if (typeof itsallagile.socket !== 'undefined') {
             itsallagile.socket.emit('boardEvent', itsallagile.roomId, 'chatMessage:create', {message: message});
         }
