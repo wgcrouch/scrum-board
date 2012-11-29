@@ -67,9 +67,15 @@ class Story
      */
     protected $status;
     
+    /**
+     * @MongoDB\Field(type="date")
+     */
+    protected $created;
+    
     public function __construct()
     {
         $this->tickets = new ArrayCollection();
+        $this->created = new \DateTime;
     }
 
     public function __toString()
@@ -77,6 +83,26 @@ class Story
         return (string)$this->id;
     }
 
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     */
+    public function setCreated(\DateTime $created)
+    {
+        $this->created = $created;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+    
     /**
      * Get id
      *

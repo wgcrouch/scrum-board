@@ -133,14 +133,4 @@ class Team
     {
         return $this->owner;
     }
-
-    /**
-     * Add users
-     *
-     * @param itsallagile\CoreBundle\Document\User $users
-     */
-    public function addUsers(\itsallagile\CoreBundle\Document\User $users)
-    {
-        $this->users[] = $users;
-    }
 }

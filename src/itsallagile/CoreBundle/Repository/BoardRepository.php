@@ -8,14 +8,13 @@ class BoardRepository extends DocumentRepository
     
     public function findAllByTeams($teams)
     {
-        $boards = array();
         $ids = array();
         foreach($teams as $team) {
             $ids[] = new \MongoId($team->getId());
         }
         $boards = $this->createQueryBuilder()
             ->field('team.$id')->in($ids)
-            ->sort('name', 'ASC')
+            ->sort('created', 'DESC')
             ->getQuery()
             ->execute();
         return $boards;

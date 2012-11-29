@@ -48,11 +48,17 @@ class Board
      * @MongoDB\EmbedMany(targetDocument="ChatMessage")
      */
     protected $chatMessages;
+    
+    /**
+     * @MongoDB\Field(type="date")
+     */
+    protected $created;
 
     public function __construct()
     {
         $this->stories = new ArrayCollection();
         $this->chatMessages = new ArrayCollection();
+        $this->created = new \DateTime();
     }
 
     /**
@@ -83,6 +89,26 @@ class Board
     public function getName()
     {
         return $this->name;
+    }
+    
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     */
+    public function setCreated(\DateTime $created)
+    {
+        $this->created = $created;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return $this->created;
     }
 
     /**

@@ -33,6 +33,11 @@ class Ticket
         return self::$statuses;
     }
     
+    public function __construct()
+    {
+        $this->created = new \DateTime();
+    }
+    
     /**
      * @MongoDB\Id
      */
@@ -54,6 +59,11 @@ class Ticket
      * @MongoDB\Field(type="string")
      */
     protected $status;
+    
+    /**
+     * @MongoDB\Field(type="date")
+     */
+    protected $created;
 
     /**
      * Get id
@@ -129,5 +139,25 @@ class Ticket
     public function getStatus()
     {
         return $this->status;
+    }
+    
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     */
+    public function setCreated(\DateTime $created)
+    {
+        $this->created = $created;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return $this->created;
     }
 }

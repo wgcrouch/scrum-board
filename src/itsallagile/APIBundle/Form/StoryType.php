@@ -21,6 +21,7 @@ class StoryType extends ApiForm
             ->add('sort')
             //These are not handled
             ->add('id', 'hidden', array('mapped' => false))
+            ->add('created', 'hidden', array('mapped' => false))
             ->add('tickets', 'hidden', array('mapped' => false));
         
         $builder->add('status', 'choice', array(
