@@ -5,6 +5,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique as MongoDBUnique;
 use Symfony\Component\Security\Core\User\UserInterface;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @MongoDB\Document(collection="users")
@@ -27,6 +28,7 @@ class User implements UserInterface
     /**
      * @MongoDB\Field(type="string")
      * @Assert\NotBlank()
+     * @JMS\Exclude     
      */
     protected $password;
 
@@ -38,6 +40,7 @@ class User implements UserInterface
 
     /**
      * @MongoDB\Field(type="string")
+     * @JMS\Exclude
      */
     protected $salt;
 

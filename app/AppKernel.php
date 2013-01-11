@@ -24,7 +24,7 @@ class AppKernel extends Kernel
             new itsallagile\ScrumboardBundle\itsallagileScrumboardBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
-            new JMS\SerializerBundle\JMSSerializerBundle($this),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
             new FOS\RestBundle\FOSRestBundle(),
             new itsallagile\APIBundle\itsallagileAPIBundle(),
             new Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle()
