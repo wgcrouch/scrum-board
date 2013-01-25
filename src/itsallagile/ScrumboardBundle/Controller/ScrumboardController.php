@@ -21,17 +21,17 @@ class ScrumboardController extends Controller
     {
         $user = $this->get('security.context')->getToken()->getUser();
 
-//        if (!$user->hasTeam($board->getTeam())) {
-//            throw new AccessDeniedHttpException('You do not have access to this board');
-//        }
-        
+        // if (!$user->hasTeam($board->getTeam())) {
+        //     throw new AccessDeniedHttpException('You do not have access to this board');
+        // }
+
         $serializer = $this->get('serializer');
-             
+
         $ticketStatuses = array();
         foreach (Ticket::getStatuses() as $id => $status) {
             $ticketStatuses[] = array('id' => $id, 'status'=> $status);
         }
-        
+
         $storyStatuses = array();
         foreach (Story::getStatuses() as $id => $status) {
             $storyStatuses[] = array('id' => $id, 'status'=> $status);

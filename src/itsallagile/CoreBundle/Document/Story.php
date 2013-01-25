@@ -11,12 +11,12 @@ use JMS\Serializer\Annotation as JMS;
  */
 class Story
 {
-    
+
     const STATUS_NEW = 'new';
     const STATUS_IN_PROGRESS = 'in_progress';
     const STATUS_TESTABLE = 'testable';
     const STATUS_DONE = 'done';
-    
+
     /**
      * @JMS\Exclude
      */
@@ -26,7 +26,7 @@ class Story
         self::STATUS_TESTABLE => 'Testable',
         self::STATUS_DONE => 'Done'
     );
-    
+
     /**
      * Get the possible statuses for a story
      * 
@@ -36,7 +36,7 @@ class Story
     {
         return self::$statuses;
     }
-    
+
     /**
      * @MongoDB\Id
      */
@@ -66,12 +66,12 @@ class Story
      * @MongoDB\Field(type="string")
      */
     protected $status;
-    
+
     /**
      * @MongoDB\Field(type="date")
      */
     protected $created;
-    
+
     public function __construct()
     {
         $this->tickets = new ArrayCollection();
@@ -102,7 +102,7 @@ class Story
     {
         return $this->created;
     }
-    
+
     /**
      * Get id
      *
@@ -220,14 +220,14 @@ class Story
     {
         return $this->status;
     }
-    
+
     /**
      * Get a specific ticket
      *
      * @param string $id
      * @return Ticket
      */
-    public function getTicket($id) 
+    public function getTicket($id)
     {
         foreach ($this->tickets as $ticket) {
             if ($id == $ticket->getId()) {
@@ -236,8 +236,8 @@ class Story
         }
         return null;
     }
-    
-    public function removeTicket(Ticket $ticket) 
+
+    public function removeTicket(Ticket $ticket)
     {
         return $this->tickets->removeElement($ticket);
     }

@@ -53,7 +53,8 @@ class SecurityController extends Controller
                 $dm->persist($user);
                 $dm->flush();
 
-                //creates a token and assigns it, effectively logging the user in with the credentials they just registered
+                //creates a token and assigns it, effectively logging the
+                //user in with the credentials they just registered
                 //$token = new UsernamePasswordToken($user, null, 'main');
                 //$this->get('security.context')->setToken($token);
 

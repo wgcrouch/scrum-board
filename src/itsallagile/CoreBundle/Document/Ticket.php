@@ -6,6 +6,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Symfony\Component\Validator\Constraints as Assert;
 
 use JMS\Serializer\Annotation as JMS;
+
 /** 
  * @MongoDB\EmbeddedDocument 
  */
@@ -14,7 +15,7 @@ class Ticket
     const STATUS_NEW = 'new';
     const STATUS_ASSIGNED = 'assigned';
     const STATUS_DONE = 'done';
-    
+
     /**
      * @JMS\Exclude     
      */
@@ -23,7 +24,7 @@ class Ticket
         self::STATUS_ASSIGNED => 'Assigned',
         self::STATUS_DONE => 'Done'
     );
-    
+
     /**
      * Get the possible statuses for a ticket
      * @return array
@@ -32,12 +33,12 @@ class Ticket
     {
         return self::$statuses;
     }
-    
+
     public function __construct()
     {
         $this->created = new \DateTime();
     }
-    
+
     /**
      * @MongoDB\Id
      */
@@ -59,7 +60,7 @@ class Ticket
      * @MongoDB\Field(type="string")
      */
     protected $status;
-    
+
     /**
      * @MongoDB\Field(type="date")
      */
@@ -140,7 +141,7 @@ class Ticket
     {
         return $this->status;
     }
-    
+
     /**
      * Set created
      *

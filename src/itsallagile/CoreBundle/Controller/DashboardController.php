@@ -12,15 +12,15 @@ class DashboardController extends Controller
     {
         $user = $this->get('security.context')->getToken()->getUser();
         $dm = $this->get('doctrine_mongodb')->getManager();
-        
+
         $teams = $dm->getRepository('itsallagileCoreBundle:Team')
             ->findAllByUser($user);
-        
+
         $boards = $dm->getRepository('itsallagileCoreBundle:Board')
             ->findAllByTeams($teams);
 
         return $this->render(
-            'itsallagileCoreBundle:Dashboard:index.html.twig', 
+            'itsallagileCoreBundle:Dashboard:index.html.twig',
             array('boards' => $boards, 'teams' => $teams)
         );
     }

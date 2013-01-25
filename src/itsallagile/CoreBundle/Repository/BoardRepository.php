@@ -5,11 +5,11 @@ use Doctrine\ODM\MongoDB\DocumentRepository;
 
 class BoardRepository extends DocumentRepository
 {
-    
+
     public function findAllByTeams($teams)
     {
         $ids = array();
-        foreach($teams as $team) {
+        foreach ($teams as $team) {
             $ids[] = new \MongoId($team->getId());
         }
         $boards = $this->createQueryBuilder()
@@ -19,6 +19,4 @@ class BoardRepository extends DocumentRepository
             ->execute();
         return $boards;
     }
-    
 }
-

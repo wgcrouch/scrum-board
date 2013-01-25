@@ -20,10 +20,14 @@ class TicketType extends ApiForm
             ->add('created', 'hidden', array('mapped' => false))
             ->add('id', 'hidden', array('mapped' => false));
 
-        $builder->add('status', 'choice', array(
-            'choices'   => Ticket::getStatuses(),
-            'required'  => false
-        ));
+        $builder->add(
+            'status',
+            'choice',
+            array(
+                'choices'   => Ticket::getStatuses(),
+                'required'  => false
+            )
+        );
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

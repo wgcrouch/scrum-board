@@ -1,5 +1,6 @@
 <?php
 namespace itsallagile\APIBundle\Tests;
+
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase AS WTC;
 
 /**
@@ -7,18 +8,17 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase AS WTC;
  */
 class ApiTestCase extends WTC
 {
-    
+
     protected $userAuth = array(
             'PHP_AUTH_USER' => 'init@example.com',
             'PHP_AUTH_PW'   => 'password',
     );
-    
+
     protected $adminAuth = array(
             'PHP_AUTH_USER' => 'admin@example.com',
             'PHP_AUTH_PW'   => 'password',
     );
-    
-    
+
     /**
      * Check if the response is json, and check the response code
      * 
@@ -28,7 +28,8 @@ class ApiTestCase extends WTC
     protected function assertJsonResponse($response, $statusCode = 200)
     {
         $this->assertEquals(
-            $statusCode, $response->getStatusCode(),
+            $statusCode,
+            $response->getStatusCode(),
             $response->getContent()
         );
         $this->assertTrue(
@@ -37,4 +38,3 @@ class ApiTestCase extends WTC
         );
     }
 }
-

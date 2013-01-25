@@ -16,14 +16,14 @@ class LoadBoards extends AbstractFixture implements OrderedFixtureInterface
         $board->setName('Example Board');
         $board->setSlug('example');
         $board->setTeam($manager->merge($this->getReference('init-team')));
-        
+
         $story = new Story();
         $story->setContent('Example Story');
         $story->setSort(0);
-        $story->setPoints(5);  
+        $story->setPoints(5);
         $story->setStatus(Story::STATUS_NEW);
         $board->addStory($story);
-        
+
         $ticket = new Ticket();
         $ticket->setStatus(Ticket::STATUS_NEW);
         $ticket->setContent('New Ticket');
@@ -42,7 +42,7 @@ class LoadBoards extends AbstractFixture implements OrderedFixtureInterface
         $story2->setPoints(3);
         $story2->setStatus(Story::STATUS_NEW);
         $board->addStory($story2);
-        
+
         $ticket3 = new Ticket();
         $ticket3->setStatus(Ticket::STATUS_DONE);
         $ticket3->setContent('Done Ticket');
@@ -55,7 +55,6 @@ class LoadBoards extends AbstractFixture implements OrderedFixtureInterface
         $ticket4->setType('bug');
         $story2->addTicket($ticket4);
 
-        
         $manager->persist($board);
 
         $this->addReference('init-board', $board);

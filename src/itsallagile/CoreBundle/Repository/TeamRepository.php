@@ -6,7 +6,7 @@ use itsallagile\CoreBundle\Document\User;
 
 class TeamRepository extends DocumentRepository
 {
-    
+
     public function findAllByUser(User $user)
     {
         $teams = $this->getFindAllByUserQueryBuilder($user)
@@ -14,7 +14,7 @@ class TeamRepository extends DocumentRepository
             ->execute();
         return $teams;
     }
-    
+
     public function getFindAllByUserQueryBuilder(User $user)
     {
         $query = $this->createQueryBuilder()
@@ -23,6 +23,4 @@ class TeamRepository extends DocumentRepository
 
         return $query;
     }
-    
 }
-

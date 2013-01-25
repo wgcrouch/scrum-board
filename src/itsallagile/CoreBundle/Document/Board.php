@@ -43,12 +43,12 @@ class Board
      * @Assert\NotBlank()
      */
     protected $team;
-    
+
     /**
      * @MongoDB\EmbedMany(targetDocument="ChatMessage")
      */
     protected $chatMessages;
-    
+
     /**
      * @MongoDB\Field(type="date")
      */
@@ -90,7 +90,7 @@ class Board
     {
         return $this->name;
     }
-    
+
     /**
      * Set created
      *
@@ -192,14 +192,14 @@ class Board
     {
         return $this->chatMessages;
     }
-    
+
     /**
      * Get a specific story
      * 
      * @param type $id
      * @return Story
      */
-    public function getStory($id) 
+    public function getStory($id)
     {
         foreach ($this->stories as $story) {
             if ($id == $story->getId()) {
@@ -208,14 +208,14 @@ class Board
         }
         return false;
     }
-    
+
     /**
      * Get a specfic chat message
      * 
      * @param type $id
      * @return ChatMessage
      */
-    public function getChatMessage($id) 
+    public function getChatMessage($id)
     {
         foreach ($this->chatMessages as $message) {
             if ($id == $message->getId()) {
@@ -224,8 +224,8 @@ class Board
         }
         return null;
     }
-    
-    public function removeStory(Story $story) 
+
+    public function removeStory(Story $story)
     {
         return $this->stories->removeElement($story);
     }

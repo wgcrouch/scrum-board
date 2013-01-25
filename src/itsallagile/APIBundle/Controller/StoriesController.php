@@ -14,17 +14,17 @@ use itsallagile\CoreBundle\Document\Board;
  */
 class StoriesController extends FOSRestController
 {
-    
-    public function getStoriesAction(Board $board) 
+
+    public function getStoriesAction(Board $board)
     {
         return $board->getStories();
     }
-    
-    public function getStoryAction(Board $board, $storyId) 
+
+    public function getStoryAction(Board $board, $storyId)
     {
         return $this->getStory($board, $storyId);
     }
-    
+
     protected function getStory(Board $board, $storyId)
     {
         $story = $board->getStory($storyId);
@@ -42,9 +42,9 @@ class StoriesController extends FOSRestController
         $view = View::create();
         $story = new Story();
         $form = $this->createForm(new StoryType(), $story);
-        $form->bind($request);  
-        
-        if ($form->isValid()) {          
+        $form->bind($request);
+
+        if ($form->isValid()) {
             if (!$story->getStatus()) {
                 $story->setStatus(Story::STATUS_NEW);
             }
@@ -69,9 +69,9 @@ class StoriesController extends FOSRestController
         $story = $this->getStory($board, $storyId);
         $form = $this->createForm(new StoryType(true), $story);
         $form->bind($request);
-       
+
         if ($form->isValid()) {
-            
+
             $dm = $this->get('doctrine_mongodb')->getManager();
             $dm->persist($story);
             $dm->flush();
@@ -101,5 +101,4 @@ class StoriesController extends FOSRestController
         $view->setStatusCode(200);
         return $view;
     }
-
 }

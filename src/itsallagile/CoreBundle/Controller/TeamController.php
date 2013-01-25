@@ -59,7 +59,7 @@ class TeamController extends Controller
      *
      */
     public function editAction(Team $team)
-    {        
+    {
         $this->checkAdmin($team);
 
         return $this->render('itsallagileCoreBundle:Team:edit.html.twig', array('team' => $team));

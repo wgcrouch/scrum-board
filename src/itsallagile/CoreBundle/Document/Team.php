@@ -110,7 +110,7 @@ class Team
     {
         $this->users->removeElement($user);
     }
-    
+
     /**
      * Set owner
      *

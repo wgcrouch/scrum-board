@@ -27,12 +27,11 @@ class BoardsController extends FOSRestController
         $repository = $this->get('doctrine_mongodb')->getRepository('itsallagileCoreBundle:Board');
         $data = array();
         $boards = $repository->findAll();
-        
+
         foreach ($boards as $board) {
             $data[] = $board;
         }
 
         return $data;
     }
-
 }

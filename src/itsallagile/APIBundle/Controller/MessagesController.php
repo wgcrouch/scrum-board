@@ -24,11 +24,11 @@ class MessagesController extends FOSRestController
     {
         $message = $board->getChatMessage($chatMessageId);
         if (!$message) {
-           throw $this->createNotFoundException('Could not find message ' . $chatMessageId);
+            throw $this->createNotFoundException('Could not find message ' . $chatMessageId);
         }
         return $message;
     }
-    
+
     /**
      * Get all messages for a board
      * 
@@ -48,7 +48,7 @@ class MessagesController extends FOSRestController
         $view = View::create();
         $message = new ChatMessage();
         $form = $this->createForm(new ChatMessageType(), $message);
-        $form->bind($request);  
+        $form->bind($request);
         $user = $this->get('security.context')->getToken()->getUser();
         $message->setUser($user->getEmail());
         if ($form->isValid()) {
@@ -64,28 +64,4 @@ class MessagesController extends FOSRestController
         }
         return $view;
     }
-    
-//    /**
-//     * Create a new message
-//     */
-//    public function postMessagesAction(Request $request)
-//    {
-//        $view = View::create();
-//        $chatMessage = new ChatMessage();
-//        $form = $this->createForm(new ChatMessageType(), $chatMessage);
-//        $form->bind($request);
-//        $user = $this->get('security.context')->getToken()->getUser();
-//        $chatMessage->setUser($user);
-//        if ($form->isValid()) {
-//            $chatMessage->setDatetime(new \DateTime());
-//            $em = $this->getDoctrine()->getEntityManager();
-//            $em->persist($chatMessage);
-//            $em->flush();
-//            $view->setStatusCode(201);
-//            $view->setData($chatMessage->getArray());
-//        } else {
-//            $view->setData($form);
-//        }
-//        return $view;
-//    }
 }

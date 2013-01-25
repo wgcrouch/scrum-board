@@ -20,7 +20,7 @@ class TicketsController extends FOSRestController
      * @param Board $board
      * @param string $storyId
      */
-    protected function getStory(Board $board, $storyId) 
+    protected function getStory(Board $board, $storyId)
     {
         $story = $board->getStory($storyId);
         if (!$story) {
@@ -28,8 +28,8 @@ class TicketsController extends FOSRestController
         }
         return $story;
     }
-    
-    protected function getTicket(Story $story, $ticketId) 
+
+    protected function getTicket(Story $story, $ticketId)
     {
         $ticket = $story->getTicket($ticketId);
         if (!$ticket) {
@@ -37,7 +37,7 @@ class TicketsController extends FOSRestController
         }
         return $ticket;
     }
-    
+
     /**
      * Get a single ticket for a story in a board
      * 
@@ -48,7 +48,7 @@ class TicketsController extends FOSRestController
     public function getTicketAction(Board $board, $storyId, $ticketId)
     {
         $story = $this->getStory($board, $storyId);
-        
+
         $ticket = $this->getTicket($story, $ticketId);
         return $ticket;
     }
@@ -103,9 +103,9 @@ class TicketsController extends FOSRestController
         $ticket = $this->getTicket($story, $ticketId);
         $form = $this->createForm(new TicketType(true), $ticket);
         $form->bind($request);
-       
+
         if ($form->isValid()) {
-            
+
             $dm = $this->get('doctrine_mongodb')->getManager();
             $dm->persist($ticket);
             $dm->flush();
@@ -133,5 +133,4 @@ class TicketsController extends FOSRestController
         $view->setStatusCode(200);
         return $view;
     }
-
 }

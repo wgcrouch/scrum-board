@@ -23,11 +23,15 @@ class StoryType extends ApiForm
             ->add('id', 'hidden', array('mapped' => false))
             ->add('created', 'hidden', array('mapped' => false))
             ->add('tickets', 'hidden', array('mapped' => false));
-        
-        $builder->add('status', 'choice', array(
-            'choices'   => Story::getStatuses(),
-            'required'  => false,
-        ));
+
+        $builder->add(
+            'status',
+            'choice',
+            array(
+                'choices'   => Story::getStatuses(),
+                'required'  => false,
+            )
+        );
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
