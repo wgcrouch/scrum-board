@@ -19,6 +19,7 @@ before_script:
   - pecl -q install mongo
   - cp app/config/parameters.yml.test app/config/parameters.yml
   - composer install
+  - composer self-update
   - pear install pear/PHP_CodeSniffer
   - phpenv rehash
   - php app/console --env=test doctrine:mongodb:schema:drop
