@@ -11,7 +11,7 @@
         "twig/extensions": "1.0.*@dev",
         "symfony/assetic-bundle": "2.1.*",
         "symfony/swiftmailer-bundle": "2.1.*",
-        "symfony/monolog-bundle": "2.1.*",
+        "symfony/monolog-bundle": "2.2.*",
         "sensio/distribution-bundle": "2.1.*",
         "sensio/framework-extra-bundle": "2.1.*",
         "sensio/generator-bundle": "2.1.*",
@@ -32,7 +32,8 @@
         "vipsoft/doctrine-data-fixtures-extension": "*",
         
         "friendsofsymfony/rest-bundle" : "dev-master",
-        "jms/serializer-bundle": "1.0.*"
+        "jms/serializer-bundle": "1.0.*",
+        "liuggio/statsd-php-client" : "1.0.*"
     },
     "scripts": {
         "post-install-cmd": [

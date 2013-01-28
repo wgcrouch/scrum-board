@@ -85,3 +85,14 @@ doctrine_mongodb:
     document_managers:
         default:
             auto_mapping: true
+
+liuggio_stats_d_client:
+  connection:
+    host: localhost
+    port: 8125
+  enable_collector: true
+  collectors:
+    liuggio_stats_d_client.collector.user: 'tvision.user'
+    liuggio_stats_d_client.collector.exception: 'tvision.exception'
+  monolog:
+    enable: false
