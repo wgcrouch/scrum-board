@@ -89,6 +89,7 @@ class TicketsController extends FOSRestController implements ApiController
             $dm->flush();
             $view->setStatusCode(201);
             $view->setData($ticket);
+            $this->get('event_dispatcher')->dispatch(Events::TICKET_CREATE, new GenericEvent($ticket));
         } else {
             $view->setData($form);
         }
@@ -129,6 +130,7 @@ class TicketsController extends FOSRestController implements ApiController
         $story = $this->getStory($board, $storyId);
         $ticket = $this->getTicket($story, $ticketId);
         $dm = $this->get('doctrine_mongodb')->getManager();
+        $this->get('event_dispatcher')->dispatch(Events::TICKET_DELETE, new GenericEvent($ticket));
         $story->removeTicket($ticket);
         $dm->persist($story);
         $dm->flush();

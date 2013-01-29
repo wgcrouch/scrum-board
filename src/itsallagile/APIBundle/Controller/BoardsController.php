@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\View\View;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
-class BoardsController extends FOSRestController
+class BoardsController extends FOSRestController implements ApiController
 {
     /**
      * Get a single Board

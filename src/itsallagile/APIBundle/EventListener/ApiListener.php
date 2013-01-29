@@ -19,13 +19,15 @@ class ApiListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            Events::TICKET_UPDATE => 'onTicketUpdate',
+            Events::TICKET_UPDATE => 'onTicketEvent',
+            Events::TICKET_CREATE => 'onTicketEvent',
+            Events::TICKET_DELETE => 'onTicketEvent',
         );
     }
 
-    public function onTicketUpdate(GenericEvent $event)
+    public function onTicketEvent(GenericEvent $event)
     {
-        $this->statsd->increment('scrum_board.api.ticket_update');
+        $this->statsd->increment($event->getName());
     }
 
 
@@ -42,7 +44,7 @@ class ApiListener implements EventSubscriberInterface
         }
 
         if ($controller[0] instanceof ApiController) {
-            $this->statsd->increment('scrum_board.api.api_calls');
+            $this->statsd->increment('itsallagileapibundle.calls');
         }
     }
 }

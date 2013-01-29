@@ -12,7 +12,7 @@ use itsallagile\CoreBundle\Document\Board;
 /**
  * Rest controller for stories
  */
-class StoriesController extends FOSRestController
+class StoriesController extends FOSRestController implements ApiController
 {
 
     public function getStoriesAction(Board $board)

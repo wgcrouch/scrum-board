@@ -8,7 +8,7 @@ use FOS\RestBundle\View\View;
 /**
  * Used to check if a user is logged in from JS
  */
-class AuthController extends FOSRestController
+class AuthController extends FOSRestController implements ApiController
 {
 
     public function getAuthAction()

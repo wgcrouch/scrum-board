@@ -12,7 +12,7 @@ use itsallagile\APIBundle\Form\ChatMessageType;
 /**
  * Rest controller for stories
  */
-class MessagesController extends FOSRestController
+class MessagesController extends FOSRestController implements ApiController
 {
     /**
      * Get a single message from this boards messages
