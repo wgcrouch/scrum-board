@@ -3,8 +3,11 @@ namespace itsallagile\APIBundle\EventListener;
 
 use itsallagile\APIBundle\Controller\ApiController;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
+use itsallagile\APIBundle\Events;
 
-class ApiListener
+class ApiListener implements EventSubscriberInterface
 {
     protected $statsd = null;
 
@@ -12,6 +15,19 @@ class ApiListener
     {
         $this->statsd = $statsd;
     }
+
+    public static function getSubscribedEvents()
+    {
+        return array(
+            Events::TICKET_UPDATE => 'onTicketUpdate',
+        );
+    }
+
+    public function onTicketUpdate(GenericEvent $event)
+    {
+        $this->statsd->increment('scrum_board.api.ticket_update');
+    }
+
 
     public function onKernelController(FilterControllerEvent $event)
     {

@@ -6,4 +6,5 @@ services:
         class: itsallagile\APIBundle\EventListener\ApiListener
         arguments: [ @statsd ]
         tags:
-            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
+            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController}
+            - { name: kernel.event_subscriber}

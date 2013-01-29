@@ -1,7 +1,7 @@
 <?php 
 namespace itsallagile\APIBundle;
 
-class Events 
+class Events
 {
-	const API_CALL = 'itsallagileapibundle.apicall';
+    const TICKET_UPDATE = 'itsallagileapibundle.ticket.update';
 }

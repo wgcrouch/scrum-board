@@ -9,6 +9,8 @@ use itsallagile\CoreBundle\Document\Story;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\View\View;
 use itsallagile\APIBundle\Form\TicketType;
+use itsallagile\APIBundle\Events;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * Rest controller for tickets
@@ -105,13 +107,13 @@ class TicketsController extends FOSRestController implements ApiController
         $form->bind($request);
 
         if ($form->isValid()) {
-
             $dm = $this->get('doctrine_mongodb')->getManager();
             $dm->persist($ticket);
             $dm->flush();
 
             $view->setStatusCode(200);
             $view->setData($ticket);
+            $this->get('event_dispatcher')->dispatch(Events::TICKET_UPDATE, new GenericEvent($ticket));
         } else {
             $view->setData($form);
         }
