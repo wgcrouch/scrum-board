@@ -1,0 +1,10 @@
+parameters:
+    statsd.port : 8125
+    statsd.host : localhost
+    statsd.class: Waynec\Bundle\StatsdBundle\StatsD
+
+
+services:
+    statsd:
+        class: %statsd.class%
+        arguments: [%statsd.host%, %statsd.port%]

@@ -2,6 +2,8 @@ parameters:
 #    itsallagile_api.example.class: itsallagile\APIBundle\Example
 
 services:
-#    itsallagile_api.example:
-#        class: %itsallagile_api.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    itsallagile_api.listener:
+        class: itsallagile\APIBundle\EventListener\ApiListener
+        arguments: [ @statsd ]
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }

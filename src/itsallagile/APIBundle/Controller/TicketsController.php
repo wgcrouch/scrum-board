@@ -13,7 +13,7 @@ use itsallagile\APIBundle\Form\TicketType;
 /**
  * Rest controller for tickets
  */
-class TicketsController extends FOSRestController
+class TicketsController extends FOSRestController implements ApiController
 {
     /**
      * Get a story from the board and storyId and check that it was successful
