@@ -8,7 +8,9 @@ Online scrum/agile application with javascript scrumboard.
 Requirements
 ------------
 PHP > 5.4
+
 NodeJs
+
 MongoDb
 
 Setup instructions:
