@@ -5,39 +5,37 @@ ItsAllAgile
 
 Online scrum/agile application with javascript scrumboard. 
 
+Requirements
+------------
+PHP > 5.4
+NodeJs
+MongoDb
 
 Setup instructions:
 -------------------
 
-Clone
+Clone into a directory
 
 Copy app/config/parameters.yml.dist to app/config/parameters.yml
 
-Create an empty database
-
-Update parameters.yml with your database config
+Update parameters.yml with your mongo config
 
 From the root folder run "php bin/composer.phar install" to pull in all deps
 
-Then run "php app/console doctrine:migrations:migrate"
+Then run "php app/console doctrine:mongodb:schema:create" and "php app/console doctrine:mongodb:fixtures:load" to setup the mongo database with some initial data
 
-Then run "php app/console assets:install --symlink web" to symlink the css and js for all bundles into the web folder
+Then run 
+"php app/console assetic:dump" and
+"php app/console assets:install --symlink web" to symlink the css and js for all bundles into the web folder
 
 Set up a vhost if ncessary
 
-
-
 Node Setup for web socket stuff:
 -----------
-Install nodejs (Fedora version here http://nodejs.tchol.org/)
+
+Install nodejs
 
 In the root folder of the app run "npm install socket.io"
 
-To start the socket server run "nodejs node-server/server.js"
-
-Optionally install supervisord to keep the server running and add this to /etc/supervisord.conf
-
-    [program:scrum-node]
-    command=/usr/bin/nodejs /home/wcrouch/web/scrum-board/node-server/server.js  #Update with your apps location
-    user=apache #The user you want to run it as
+To start the socket server run "node node-server/server.js"
 
