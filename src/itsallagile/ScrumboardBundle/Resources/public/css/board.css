@@ -1,8 +1,8 @@
 .board {
-    min-width: 1280px;
     border: none;
     float: left;
     margin-left: 114px;
+    min-width: 84%;
 }
 
 #board-container {
@@ -23,6 +23,10 @@
     box-shadow: 5px 5px 5px  rgba(0,0,200,0.5);
 }
 
+#templates {
+    list-style: none;
+    margin: 0;
+}
 .template {
     width:70px;
     height:70px;
@@ -224,14 +228,11 @@
 .status-header {
     padding-left:1px;
     clear: both;
-    height:40px;
-    vertical-align: central;
 }
 
 .status-header-cell {
     padding: 15px 5px;
     text-align: center;
-    min-width: 310px;
     font-size: 2em;
     color: #FFFFFF;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
@@ -248,11 +249,6 @@
     border: 1px solid #888888;
     border-bottom: none;
 }
-
-.status-header-undefined {
-    width:250px;
-}
-
 
 /* STORY ELEMENT */
 
@@ -320,7 +316,7 @@
     height:100%;
     position:relative;
     border: 1px solid #888888;
-    min-width: 365px;
+    width: 32%;
 }
 
 .story-status-cell {
@@ -386,6 +382,7 @@
     -o-transform: rotate(2deg);
     transform: rotate(2deg);
 }
+
 .testable {
     background: hsl(219, 79%, 90%);
 }
