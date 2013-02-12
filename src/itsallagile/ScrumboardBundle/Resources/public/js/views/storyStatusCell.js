@@ -26,7 +26,8 @@ itsallagile.View.StoryStatusCell = Backbone.View.extend({
         this.$el.addClass('story-status-' + this.status.id);
         this.$el.droppable({
             hoverClass: 'drop-hover',
-            activeClass: 'drop-active'
+            activeClass: 'drop-active',
+            accept: '.ticket'
         });
 
         this.tickets.forEach(function(ticket) {

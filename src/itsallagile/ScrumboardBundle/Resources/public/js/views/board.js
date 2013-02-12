@@ -77,6 +77,32 @@ itsallagile.View.Board = Backbone.View.extend({
         storyView.on('deleteStory', this.onDeleteStory, this);
         this.storyViews[story.get('id')] = storyView;
         this.$el.append(storyView.render().el);
+        this.$el.find('tbody').sortable({
+            helper: this.sortHelper,
+            axis: "y",
+            containment : '.board',
+            cursor: "move",
+            handle: ".move-story",
+            update : this.storySort
+        });
+    },
+
+    storySort: function(event, u) {
+        var order = this.$el.find('tbody').sortable('toArray'); 
+        var stories = this.model.get('stories');
+        _.forEach(order, function(id, index) {
+            var storyId = id.replace('story-', '');
+            var story = stories.get(storyId);
+            story.set('sort', index);
+            story.save(null, {silent: true});
+        }, this);
+    },
+
+    sortHelper : function(e, ui) {
+        ui.children().each(function() {
+            $(this).width($(this).width());
+        });
+        return ui;
     },
 
     /**

@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use itsallagile\CoreBundle\Document\ChatMessage;
 use itsallagile\CoreBundle\Document\Story;
 use itsallagile\CoreBundle\Document\Team;
+use JMS\Serializer\Annotation\Accessor;
 
 /**
  * @MongoDB\Document(collection="boards", repositoryClass="itsallagile\CoreBundle\Repository\BoardRepository")
@@ -35,6 +36,7 @@ class Board
 
     /** 
      * @MongoDB\EmbedMany(targetDocument="Story") 
+     * @Accessor(getter="getStoriesSorted")
      */
     protected $stories;
 
@@ -171,6 +173,26 @@ class Board
     public function getStories()
     {
         return $this->stories;
+    }
+    
+    /**
+     * Get stories in sort order
+     *
+     * @return Array
+     */
+    public function getStoriesSorted()
+    {
+        $stories = $this->stories->toArray();
+        
+        usort($stories, function ($first, $second) {
+            if ($first->getSort() === $second->getSort()) {
+                return 0;
+            }
+
+            return $first->getSort() < $second->getSort() ? -1 : 1;
+        });
+        
+        return $stories;
     }
 
     /**

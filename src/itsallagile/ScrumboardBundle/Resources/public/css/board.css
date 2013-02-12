@@ -296,6 +296,15 @@
     right: 5px;
     cursor: pointer;
 }
+
+.move-story {
+    display: none;
+    position: absolute;
+    top: 7px;
+    left: 5px;
+    cursor: pointer;
+}
+
 .story-status-show {
     display: none;
     position: absolute;

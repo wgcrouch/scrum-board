@@ -20,6 +20,7 @@ itsallagile.View.Story = Backbone.View.extend({
         '</div>' +
         '</div>' +
         '<a class="story-status-show">Set Status</a>' +
+        '<i class="icon-move move-story"></i>' +
         '<i class="icon-remove delete-story"></i></td>' +
         '</div>',
 
@@ -32,7 +33,7 @@ itsallagile.View.Story = Backbone.View.extend({
         "blur .story-points-input": "endEditPoints",
         'hover .story-detail-cell' : 'toggleShowActions',
         'mouseOut .story-detail-cell' : 'toggleShowActions',
-        'click .delete-story' : 'deleteConfirm',
+        'click .move-story' : 'deleteConfirm',
         'click .story-status-show' : 'showStatusModal',
         'click .story-status-save' : 'saveStatus'
     },
@@ -175,7 +176,7 @@ itsallagile.View.Story = Backbone.View.extend({
      * Show/hide the delete icon
      */
     toggleShowActions: function() {
-        $('.delete-story, .story-status-show', this.$el).fadeToggle('fast');
+        $('.delete-story, .story-status-show, .move-story', this.$el).fadeToggle('fast');
     },
 
     /**

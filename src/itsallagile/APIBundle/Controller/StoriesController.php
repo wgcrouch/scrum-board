@@ -17,7 +17,8 @@ class StoriesController extends FOSRestController implements ApiController
 
     public function getStoriesAction(Board $board)
     {
-        return $board->getStories();
+        $stories = $board->getStoriesSorted();
+        return $stories;
     }
 
     public function getStoryAction(Board $board, $storyId)
