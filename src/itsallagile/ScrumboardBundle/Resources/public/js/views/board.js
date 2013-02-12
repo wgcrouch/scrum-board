@@ -45,6 +45,7 @@ itsallagile.View.Board = Backbone.View.extend({
             socket.on('story:add', this.onRemoteStoryAdd);
             socket.on('story:delete', this.onRemoteStoryDelete);
             socket.on('story:update', this.onRemoteStoryUpdate);
+            socket.on('story:sort', this.onRemoteStorySort);
         }
     },
 
@@ -90,12 +91,23 @@ itsallagile.View.Board = Backbone.View.extend({
     storySort: function(event, u) {
         var order = this.$el.find('tbody').sortable('toArray'); 
         var stories = this.model.get('stories');
+        var newOrder = [];
         _.forEach(order, function(id, index) {
             var storyId = id.replace('story-', '');
             var story = stories.get(storyId);
             story.set('sort', index);
             story.save(null, {silent: true});
+            newOrder.push(storyId);
         }, this);
+
+        if (typeof itsallagile.socket !== 'undefined') {
+            itsallagile.socket.emit(
+                'boardEvent', 
+                itsallagile.roomId, 
+                'story:sort',
+                newOrder
+            );
+        }
     },
 
     sortHelper : function(e, ui) {
@@ -238,8 +250,23 @@ itsallagile.View.Board = Backbone.View.extend({
             'points': storyDetails.points,
             'status': storyDetails.status
         });
-    }
+    },
 
+    onRemoteStorySort: function(newOrder) {
+        var stories = [];
+        _.forEach(newOrder, function(storyId) {
+            var storyEl = this.$el.find('#story-' + storyId);
+            stories.push(storyEl);
+        }, this);
+
+        var tbody = this.$el.find('tbody');
+
+        _.forEach(stories, function(story) {
+            story.fadeOut("slow", function() {
+                $(this).appendTo(tbody).fadeIn('slow');
+            });            
+        }, this);
+    }
 });
 
 

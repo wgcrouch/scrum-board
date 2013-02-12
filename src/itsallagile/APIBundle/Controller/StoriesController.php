@@ -49,6 +49,8 @@ class StoriesController extends FOSRestController implements ApiController
             if (!$story->getStatus()) {
                 $story->setStatus(Story::STATUS_NEW);
             }
+            $sort = $board->getStories()->count();
+            $story->setSort($sort);
             $dm = $this->get('doctrine_mongodb')->getManager();
             $board->addStory($story);
             $dm->persist($board);
