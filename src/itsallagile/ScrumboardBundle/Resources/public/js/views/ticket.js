@@ -14,7 +14,6 @@ itsallagile.View.Ticket = Backbone.View.extend({
         "dblclick": "startEdit",
         "blur textarea": "endEdit",
         'hover' : 'toggleShowIcons',
-        'mouseOut' : 'toggleShowIcons',
         'click .delete-ticket' : 'deleteConfirm',
         'click .zoom-ticket' : 'zoomToggle'
     },
@@ -93,7 +92,7 @@ itsallagile.View.Ticket = Backbone.View.extend({
      * Show the delete icon when hovering over a ticket
      */
     toggleShowIcons: function() {
-        $('.ticket-actions', this.$el).fadeToggle('fast');
+        $('.ticket-actions', this.$el).stop(true).fadeToggle('fast');
     },
 
     /**
