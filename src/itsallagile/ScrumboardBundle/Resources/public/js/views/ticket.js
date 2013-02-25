@@ -6,7 +6,7 @@ itsallagile.View.Ticket = Backbone.View.extend({
     className: 'ticket',
     template: '<p class="ticket-content">' +
         '<%= content %></p><textarea class="ticket-input"><%= content %></textarea>' +
-        '<div class="ticket-age"><%= age %></div>' +
+        '<div class="ticket-age <%= ageClass %>"><%= age %></div>' +
         '<div class="ticket-actions">' +
         '<i class="icon-zoom-in zoom-ticket ticket-action"></i>' +
         '<i class="icon-remove delete-ticket ticket-action"></i>' +
@@ -36,7 +36,17 @@ itsallagile.View.Ticket = Backbone.View.extend({
     render: function() {
         this.id = this.model.get('id');
         this.$el.addClass(this.model.get('type'));
-        this.$el.html(_.template(this.template, {content : this.model.get("content"), age: this.model.getAge()}));
+        var age = '';
+        var ageClass = 'age-ok';
+        if (this.model.get('status') === 'assigned') {
+            var age = this.model.getAge();
+            var ageClass = age >= 1 ? 'age-old' : 'age-ok';
+        }
+        this.$el.html(_.template(this.template, {
+            content : this.model.get("content"), 
+            age: age,
+            ageClass: ageClass
+        }));
         $('p', this.$el).html(this.formatText($('p', this.$el).html()));
         this.$el.data('ticketId', this.model.get('id'));
         this.$el.data('story', this.story.get('id'));

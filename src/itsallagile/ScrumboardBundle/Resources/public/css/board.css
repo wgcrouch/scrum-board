@@ -209,6 +209,14 @@
     min-width: 15px;      
 }   
 
+.age-ok {
+    
+}
+
+.age-old {
+    color: red;
+    font-weight: bold;
+}
 .task {
     background-color: #FFFF84;
 }
