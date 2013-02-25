@@ -202,6 +202,13 @@
     display: none;
 }
 
+.ticket-age {
+    position: absolute;
+    bottom: 2px;
+    right: 0;
+    min-width: 15px;      
+}   
+
 .task {
     background-color: #FFFF84;
 }

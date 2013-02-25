@@ -172,10 +172,15 @@ itsallagile.View.Story = Backbone.View.extend({
     },
 
     /**
-     * Show/hide the delete icon
+     * Show/hide the icons
      */
-    toggleShowActions: function() {
-        $('.delete-story, .story-status-show, .move-story', this.$el).stop(true).fadeToggle('fast');
+    toggleShowActions: function(e) {
+        var div = $('.delete-story, .story-status-show, .move-story', this.$el).stop(true);
+        if (e.type === 'mouseenter') {
+            div.fadeIn('fast');
+        } else {
+            div.fadeOut('fast');
+        }       
     },
 
     /**

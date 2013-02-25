@@ -6,6 +6,7 @@ itsallagile.View.Ticket = Backbone.View.extend({
     className: 'ticket',
     template: '<p class="ticket-content">' +
         '<%= content %></p><textarea class="ticket-input"><%= content %></textarea>' +
+        '<div class="ticket-age"><%= age %></div>' +
         '<div class="ticket-actions">' +
         '<i class="icon-zoom-in zoom-ticket ticket-action"></i>' +
         '<i class="icon-remove delete-ticket ticket-action"></i>' +
@@ -27,7 +28,6 @@ itsallagile.View.Ticket = Backbone.View.extend({
         this.story = options.story;
         this.storyView = options.storyView;
         this.model.bind('change', this.render, this);
-
     },
 
     /**
@@ -36,7 +36,7 @@ itsallagile.View.Ticket = Backbone.View.extend({
     render: function() {
         this.id = this.model.get('id');
         this.$el.addClass(this.model.get('type'));
-        this.$el.html(_.template(this.template, {content : this.model.get("content")}));
+        this.$el.html(_.template(this.template, {content : this.model.get("content"), age: this.model.getAge()}));
         $('p', this.$el).html(this.formatText($('p', this.$el).html()));
         this.$el.data('ticketId', this.model.get('id'));
         this.$el.data('story', this.story.get('id'));
@@ -65,7 +65,9 @@ itsallagile.View.Ticket = Backbone.View.extend({
         p.html(this.formatText(text.val()));
         text.hide();
         p.show();
-        this.model.save('content', text.val(), {silent: true, success: this.changeSuccess});
+        if (this.model.get('content') !== text.val()) {
+            this.model.save('content', text.val(), {silent: true, success: this.changeSuccess});
+        }
         if (this.$el.hasClass('zoomed')) {
             this.zoomToggle();
         }
@@ -91,8 +93,13 @@ itsallagile.View.Ticket = Backbone.View.extend({
     /**
      * Show the delete icon when hovering over a ticket
      */
-    toggleShowIcons: function() {
-        $('.ticket-actions', this.$el).stop(true).fadeToggle('fast');
+    toggleShowIcons: function(e) {
+        var div = $('.ticket-actions', this.$el).stop(true);
+        if (e.type === 'mouseenter') {
+            div.fadeIn('fast');
+        } else {
+            div.fadeOut('fast');
+        }
     },
 
     /**
