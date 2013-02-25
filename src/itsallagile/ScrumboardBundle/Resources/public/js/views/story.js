@@ -32,7 +32,7 @@ itsallagile.View.Story = Backbone.View.extend({
         "click .story-points": "startEditPoints",
         "blur .story-points-input": "endEditPoints",
         'hover .story-detail-cell' : 'toggleShowActions',
-        'click .move-story' : 'deleteConfirm',
+        'click .delete-story' : 'deleteConfirm',
         'click .story-status-show' : 'showStatusModal',
         'click .story-status-save' : 'saveStatus'
     },
