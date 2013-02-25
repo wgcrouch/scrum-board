@@ -108,6 +108,7 @@ class TicketsController extends FOSRestController implements ApiController
         $form->bind($request);
 
         if ($form->isValid()) {
+            $ticket->setModified(new \DateTime());
             $dm = $this->get('doctrine_mongodb')->getManager();
             $dm->persist($ticket);
             $dm->flush();

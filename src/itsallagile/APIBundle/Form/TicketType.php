@@ -18,6 +18,7 @@ class TicketType extends ApiForm
             ->add('content')
             ->add('type')
             ->add('created', 'hidden', array('mapped' => false))
+            ->add('modified', 'hidden', array('mapped' => false))
             ->add('id', 'hidden', array('mapped' => false));
 
         $builder->add(

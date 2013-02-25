@@ -37,6 +37,7 @@ class Ticket
     public function __construct()
     {
         $this->created = new \DateTime();
+        $this->modified = new \DateTime();
     }
 
     /**
@@ -65,6 +66,11 @@ class Ticket
      * @MongoDB\Field(type="date")
      */
     protected $created;
+
+    /**
+     * @MongoDB\Field(type="date")
+     */
+    protected $modified;
 
     /**
      * Get id
@@ -160,5 +166,25 @@ class Ticket
     public function getCreated()
     {
         return $this->created;
+    }
+
+    /**
+     * Set modified
+     *
+     * @param \DateTime $modified
+     */
+    public function setModified(\DateTime $modified)
+    {
+        $this->modified = $modified;
+    }
+
+    /**
+     * Get modified
+     *
+     * @return \DateTime
+     */
+    public function getModified()
+    {
+        return $this->modified;
     }
 }
