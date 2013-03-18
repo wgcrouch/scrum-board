@@ -9,9 +9,10 @@ Requirements
 ------------
 PHP > 5.4
 
-NodeJs
+NodeJs (With less and socket.io modules installed)
 
 MongoDb
+
 
 Setup instructions:
 -------------------
@@ -20,7 +21,7 @@ Clone into a directory
 
 Copy app/config/parameters.yml.dist to app/config/parameters.yml
 
-Update parameters.yml with your mongo config
+Update parameters.yml with your mongo config and less paths
 
 From the root folder run "php bin/composer.phar install" to pull in all deps
 
