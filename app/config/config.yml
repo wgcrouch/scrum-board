@@ -32,6 +32,10 @@ assetic:
     # java: /usr/bin/java
     filters:
         cssrewrite: ~
+        less: 
+            node: %node_bin%
+            node_paths: %node_path%
+            apply_to: "\.less$"
 
 # Doctrine Configuration
 doctrine:
