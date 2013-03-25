@@ -47,7 +47,8 @@ class AppKernel extends Kernel
             new Sonata\AdminBundle\SonataAdminBundle(),
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
             new Sonata\DoctrineMongoDBAdminBundle\SonataDoctrineMongoDBAdminBundle()
-
+,
+            new itsallagile\UserBundle\itsallagileUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
