@@ -9,7 +9,6 @@ use JMS\Serializer\Annotation as JMS;
 
 use FOS\UserBundle\Document\User as BaseUser;
 
-
 /**
  * @MongoDB\Document(collection="users")
  */
