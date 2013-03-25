@@ -7,23 +7,18 @@ use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique as MongoDBUnique;
 use Symfony\Component\Security\Core\User\UserInterface;
 use JMS\Serializer\Annotation as JMS;
 
+use FOS\UserBundle\Document\User as BaseUser;
+
+
 /**
  * @MongoDB\Document(collection="users")
- * @MongoDBUnique(fields="email")
  */
-class User implements UserInterface
+class User extends BaseUser
 {
     /**
      * @MongoDB\Id
      */
     protected $id;
-
-    /**
-     * @MongoDB\Field(type="string")
-     * @Assert\NotBlank()
-     * @Assert\Email()
-     */
-    protected $email;
 
     /**
      * @MongoDB\Field(type="string")
@@ -44,68 +39,9 @@ class User implements UserInterface
      */
     protected $salt;
 
-    public function __construct()
-    {
-        $this->salt = md5(uniqid(null, true));
-    }
-
-    public function setSalt($salt)
-    {
-        $this->salt = $salt;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getSalt()
-    {
-        return $this->salt;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getRoles()
-    {
-        return array('ROLE_USER');
-    }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * Set fullName
-     *
-     * @param string $fullName
-     */
     public function setFullName($fullName)
     {
         $this->fullName = $fullName;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getUsername()
-    {
-        return $this->email;
     }
 
     /**
@@ -116,50 +52,5 @@ class User implements UserInterface
     public function getFullName()
     {
         return $this->fullName;
-    }
-
-    /**
-     * Set password
-     *
-     * @param string $password
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-    }
-
-    /**
-     * Get password
-     *
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function eraseCredentials()
-    {
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function isEqualTo(UserInterface $user)
-    {
-        return $this->getUsername() === $user->getUsername();
-    }
-
-    /**
-     * Get id
-     *
-     * @return id $id
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 }

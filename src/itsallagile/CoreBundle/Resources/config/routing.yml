@@ -1,14 +1,7 @@
 homepage:
     pattern:  /
     defaults: { _controller: itsallagileCoreBundle:Dashboard:index }
-login:
-    pattern: /login
-    defaults: { _controller: itsallagileCoreBundle:Security:login }
-login_check:
-    pattern: /login_check
-core_register:
-    pattern: /register
-    defaults: {_controller: itsallagileCoreBundle:Security:register}
+
 core_dashboard:
     pattern: /dashboard
     defaults: { _controller: itsallagileCoreBundle:Dashboard:index }

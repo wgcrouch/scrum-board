@@ -22,6 +22,6 @@ doctrine_mongodb:
 
 security:
     firewalls:
-        secured_area:
+        main:
             http_basic: true
 

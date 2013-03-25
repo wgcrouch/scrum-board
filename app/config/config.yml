@@ -93,3 +93,30 @@ doctrine_mongodb:
 waynec_statsd: 
     host: localhost
     port: 8125
+
+sonata_cache:
+    caches:
+        memcached:
+            prefix: agile
+            servers:
+                - {host: 127.0.0.1, port: 11211, weight: 0}
+
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts:   [admin]
+
+        sonata.block.service.text: ~
+        sonata.block.service.rss: ~
+
+sonata_admin:
+    title:      itsallagile Admin
+    security:
+        handler: sonata.admin.security.handler.role
+    persist_filters: true
+
+fos_user:
+    db_driver: mongodb
+    firewall_name: main
+    user_class: itsallagile\CoreBundle\Document\User

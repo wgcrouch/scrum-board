@@ -12,12 +12,14 @@ class LoadUsers extends AbstractFixture implements OrderedFixtureInterface
     {
 
         $adminUser = new User();
+        $adminUser->setUsername('admin');
         $adminUser->setFullName('Admin User');
         $adminUser->setEmail('admin@example.com');
-        $adminUser->setPassword(
-            'zhLPQlgtaCavojVYaftfVLlHfSg+jO/KDhTrQiO3j89pz+1PvO9jcgGAEZAUsySWq27My/ILFFKFhpUm3Wtjxg=='
+        $adminUser->setEnabled('true');
+        $adminUser->setPlainPassword(
+            'password'
         );
-        $adminUser->setSalt('bf75305d07a38087ddaf8195b2ac000e');
+        $adminUser->setSuperAdmin(true);
 
         $manager->persist($adminUser);
         $manager->flush();
@@ -25,12 +27,13 @@ class LoadUsers extends AbstractFixture implements OrderedFixtureInterface
         $this->addReference('admin-user', $adminUser);
 
         $user = new User();
+        $user->setUsername('user');
         $user->setFullName('Normal User');
         $user->setEmail('init@example.com');
-        $user->setPassword(
-            'zhLPQlgtaCavojVYaftfVLlHfSg+jO/KDhTrQiO3j89pz+1PvO9jcgGAEZAUsySWq27My/ILFFKFhpUm3Wtjxg=='
+        $user->setEnabled('true');
+        $user->setPlainPassword(
+            'password'
         );
-        $user->setSalt('bf75305d07a38087ddaf8195b2ac000e');
 
         $manager->persist($user);
         $manager->flush();

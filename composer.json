@@ -32,7 +32,19 @@
         "vipsoft/doctrine-data-fixtures-extension": "0.9.*",
         
         "friendsofsymfony/rest-bundle" : "0.11.*",
-        "jms/serializer-bundle": "0.11.*"
+        "jms/serializer-bundle": "0.11.*",
+
+        "sonata-project/cache-bundle": "dev-master",
+        "sonata-project/block-bundle": "2.2.*",
+        "sonata-project/jquery-bundle": "1.8.*",
+        "knplabs/knp-menu-bundle": "1.1.*",
+        "sonata-project/exporter": "1.2.*",
+
+        "sonata-project/admin-bundle": "dev-master",
+        "sonata-project/doctrine-orm-admin-bundle": "dev-master",
+        "sonata-project/doctrine-mongodb-admin-bundle": "dev-master",
+        "sonata-project/intl-bundle": "dev-master",
+        "sonata-project/user-bundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [
