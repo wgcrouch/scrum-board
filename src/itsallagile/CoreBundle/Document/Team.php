@@ -32,9 +32,14 @@ class Team
     protected $velocity;
 
     /**
-     * @MongoDB\ReferenceMany(targetDocument="User")
+     * @MongoDB\ReferenceMany(targetDocument="User", inversedBy="teams")
      */
     protected $users = array();
+
+    public function __toString()
+    {
+        return (string) $this->name;
+    }
 
     public function __construct()
     {

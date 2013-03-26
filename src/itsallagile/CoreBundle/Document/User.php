@@ -6,6 +6,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique as MongoDBUnique;
 use Symfony\Component\Security\Core\User\UserInterface;
 use JMS\Serializer\Annotation as JMS;
+use Doctrine\Common\Collections\ArrayCollection;
 
 use FOS\UserBundle\Document\User as BaseUser;
 
@@ -37,6 +38,7 @@ class User extends BaseUser
      * @JMS\Exclude
      */
     protected $salt;
+
 
     public function setFullName($fullName)
     {
