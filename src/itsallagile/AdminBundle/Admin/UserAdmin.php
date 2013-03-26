@@ -55,7 +55,8 @@ class UserAdmin extends Admin
             ->add('email')
             ->add('fullName')
             ->add('enabled', null, array('editable' => true))
-            ->add('locked', null, array('editable' => true));
+            ->add('locked', null, array('editable' => true))
+            ->add('roles');
     }
 
     /**
