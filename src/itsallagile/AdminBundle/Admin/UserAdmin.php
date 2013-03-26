@@ -12,12 +12,29 @@ class UserAdmin extends Admin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
+
+        $roles = $this->getConfigurationPool()->getContainer()->getParameter('security.role_hierarchy.roles');
         $formMapper
             ->add('username')
             ->add('email')
             ->add('fullName')
             ->add('enabled')
-            ->add('plainPassword', 'text', array('required' => false));
+            ->add('plainPassword', 'text', array('required' => false))
+            ->add('roles','choice',array('choices'=>$this->refactorRoles($roles),'multiple'=>true ));
+    }
+
+
+    private function refactorRoles($originRoles)
+    {
+        $roles = array();
+
+        foreach ($originRoles as $parent => $children) {
+            $roles[$parent] = $parent;
+            foreach ($children as $key => $value) {
+                $roles[$value] = $value;
+            }
+        }
+        return $roles;
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
