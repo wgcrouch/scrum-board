@@ -15,3 +15,11 @@ services:
         calls:
             - [ setTranslationDomain, [itsallagileAdminBundle]]
             - [ setUserManager, [ @fos_user.user_manager]]
+
+    itsallagile.admin.board:
+        class: itsallagile\AdminBundle\Admin\BoardAdmin
+        tags:
+            - { name: sonata.admin, manager_type: doctrine_mongodb, group: "Scrumboard", label: Boards }
+        arguments: [null, itsallagile\CoreBundle\Document\Board, SonataAdminBundle:CRUD]
+        calls:
+            - [ setTranslationDomain, [itsallagileAdminBundle]]
