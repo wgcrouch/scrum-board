@@ -45,6 +45,12 @@
               <li><a href="/boards/add">Add Scrumboard</a></li>
               <li><a href="/teams/add">Add Team</a></li>
             </ul>
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <p class="navbar-text pull-right">
+              Logged in as {{app.user.fullName}}
+              | <a href="{{ path('fos_user_security_logout') }}">Logout</a>
+            </p>
+            {% endif %}
           </div><!--/.nav-collapse -->
         </div>
       </div>
