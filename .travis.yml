@@ -3,7 +3,9 @@ language: php
 php:
   - 5.4
 
-services: mongodb
+services: 
+  - mongodb
+  - memcached
 
 matrix:
   allow_failures:
@@ -17,6 +19,7 @@ matrix:
 
 before_script: 
   - pecl -q install mongo
+  - pecl -q install memcached
   - cp app/config/parameters.yml.test app/config/parameters.yml
   - composer install
   - composer self-update
