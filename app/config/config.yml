@@ -120,3 +120,6 @@ fos_user:
     db_driver: mongodb
     firewall_name: main
     user_class: itsallagile\CoreBundle\Document\User
+    registration:
+        form:
+            type: itsallagile_user_registration

@@ -22,7 +22,6 @@ class User extends BaseUser
 
     /**
      * @MongoDB\Field(type="string")
-     * @Assert\NotBlank()
      * @JMS\Exclude     
      */
     protected $password;
