@@ -13,8 +13,9 @@ itsallagile.View.Ticket = Backbone.View.extend({
         '</div>',
     events: {
         "dblclick": "startEdit",
-        "blur textarea": "endEdit",
-        'hover' : 'toggleShowIcons',
+        "blur textarea": "endEdit",        
+        'mouseenter' : 'toggleShowIcons',
+        'mouseleave' : 'toggleShowIcons',
         'click .delete-ticket' : 'deleteConfirm',
         'click .zoom-ticket' : 'zoomToggle'
     },
