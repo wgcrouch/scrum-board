@@ -160,9 +160,9 @@ class Story
     /**
      * Add tickets
      *
-     * @param itsallagile\CoreBundle\Document\Ticket $ticket
+     * @param Itsallagile\CoreBundle\Document\Ticket $ticket
      */
-    public function addTicket(\itsallagile\CoreBundle\Document\Ticket $ticket)
+    public function addTicket(\Itsallagile\CoreBundle\Document\Ticket $ticket)
     {
         $this->tickets[] = $ticket;
     }
