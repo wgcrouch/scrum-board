@@ -56,6 +56,7 @@ itsallagile.View.Board = Backbone.View.extend({
     render: function() {
         this.$el.html('');
         this.$el.append($('<thead>').append(this.statusHeaderView.render().el));
+
         var stories = this.model.get('stories');
         if (stories !== null) {
             stories.forEach(this.renderStory, this);

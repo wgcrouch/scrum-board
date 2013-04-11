@@ -38,9 +38,10 @@ itsallagile.View.ConnectedUsers = Backbone.View.extend({
     render: function() {
         this.$el.html(_.template(this.template, {connectedCount : this.users.length}));
         var list = $('ul', this.$el);
+
         _.forEach(this.users, function(user) {
             list.append($('<li>').html(user));
-        })
+        });
         return this;
     },
 

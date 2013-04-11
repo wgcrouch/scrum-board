@@ -33,12 +33,14 @@ itsallagile.View.ChatBox = Backbone.View.extend({
 
         var messageList = $('#chat-messages', this.$el);
         messageList.html('');
+        var fragment = document.createDocumentFragment();
         if (typeof this.messages !== 'undefined') {
             this.messages.forEach(function(message) {
                 var template = new itsallagile.View.ChatMessage({model: message});
-                messageList.append(template.render().el);
+                fragment.appendChild(template.render().el);
             });
         }
+        messageList.append(fragment);
         return this;
     },
 

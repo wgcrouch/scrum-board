@@ -66,7 +66,7 @@ itsallagile.View.Story = Backbone.View.extend({
             status: this.model.get("status")
         });
         $('.modal-body', this.$el).html(storyStatusView.render().el);
-
+        var fragment = document.createDocumentFragment();
         this.statusViews = {};
         for (var i = 0; i < this.ticketStatuses.length; i++) {
             var status = this.ticketStatuses[i];
@@ -75,7 +75,7 @@ itsallagile.View.Story = Backbone.View.extend({
                 {status: status, story: this.model, tickets: statusTickets});
             statusView.on('moveTicket', this.onMoveTicket, this);
             this.statusViews[status.id] = statusView;
-            this.$el.append(statusView.render().el);
+            fragment.appendChild(statusView.render().el);
         }
 
         //Assign tickets to the appropriate status view
@@ -93,7 +93,7 @@ itsallagile.View.Story = Backbone.View.extend({
                 this.setStatusClass(storyStatus.id);
             }
         }
-
+        this.$el.append(fragment);
         return this;
     },
 
