@@ -1,7 +1,7 @@
 <?php
 namespace itsallagile\APIBundle\Tests;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase AS WTC;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase as WTC;
 
 /**
  * Base test case for functional testing of the api

@@ -184,13 +184,15 @@ class Board
     {
         $stories = $this->stories->toArray();
         
-        usort($stories, function ($first, $second) {
-            if ($first->getSort() === $second->getSort()) {
-                return 0;
+        usort(
+            $stories, 
+            function ($first, $second) {
+                if ($first->getSort() === $second->getSort()) {
+                    return 0;
+                }
+                return $first->getSort() < $second->getSort() ? -1 : 1;
             }
-
-            return $first->getSort() < $second->getSort() ? -1 : 1;
-        });
+        );
         
         return $stories;
     }

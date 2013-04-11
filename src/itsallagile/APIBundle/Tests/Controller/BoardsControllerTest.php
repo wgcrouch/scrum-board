@@ -5,7 +5,7 @@ namespace itsallagile\ApiBundle\Tests\Controller;
 use itsallagile\APIBundle\Tests\ApiTestCase;
 
 class BoardsControllerTest extends ApiTestCase
-{    
+{
     public function testGetAll()
     {
         $client = static::createClient();
@@ -30,8 +30,9 @@ class BoardsControllerTest extends ApiTestCase
         $client = static::createClient();
 
         $client->request(
-            'GET', '/api/boards/' . $id, 
-            array(), 
+            'GET',
+            '/api/boards/' . $id,
+            array(),
             array(), 
             $this->userAuth
         );
@@ -57,6 +58,6 @@ class BoardsControllerTest extends ApiTestCase
         
         $response = $client->getResponse();
         $this->assertJsonResponse($response, 404);
-                
+
     }        
 }

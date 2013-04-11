@@ -20,7 +20,7 @@ class UserAdmin extends Admin
             ->add('fullName')
             ->add('enabled')
             ->add('plainPassword', 'text', array('required' => false))
-            ->add('roles','choice',array('choices'=>$this->refactorRoles($roles),'multiple'=>true ));
+            ->add('roles', 'choice', array('choices' => $this->refactorRoles($roles), 'multiple'=>true));
     }
 
 
@@ -51,7 +51,7 @@ class UserAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('username')            
+            ->addIdentifier('username')
             ->add('email')
             ->add('fullName')
             ->add('enabled', null, array('editable' => true))
