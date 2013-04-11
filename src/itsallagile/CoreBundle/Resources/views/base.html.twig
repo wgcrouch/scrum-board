@@ -6,11 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     {% block styles %}
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
         <!-- Le styles -->
         {% stylesheets filter='cssrewrite'
-            'bundles/itsallagilebootstrap/css/bootstrap.css'
-            'bundles/itsallagilebootstrap/css/responsive-bootstrap.css'
-            'bundles/itsallagilebootstrap/css/itsallagile.less'
+            '@itsallagileCoreBundle/Resources/public/less/itsallagile.less'
         %}
         <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
@@ -23,9 +22,6 @@
 
     <!-- Le fav and touch icons -->
     <link rel="shortcut icon" href="../assets/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
   </head>
 
   <body>
@@ -61,19 +57,19 @@
 
     </div> <!-- /container -->
 
-    {% block endscript %}
+    {% block endscript %}        
         {% javascripts
-            '@itsallagileBootstrapBundle/Resources/public/js/jquery.min.js'
-            '@itsallagileBootstrapBundle/Resources/public/js/jquery-ui.min.js'
-            '@itsallagileBootstrapBundle/Resources/public/js/jquery.ui.touch-punch.js'
-            '@itsallagileBootstrapBundle/Resources/public/js/bootstrap.js'
-            '@itsallagileBootstrapBundle/Resources/public/js/json2.js'
-            '@itsallagileBootstrapBundle/Resources/public/js/underscore.js'
-            '@itsallagileBootstrapBundle/Resources/public/js/backbone.js'
-            '@itsallagileBootstrapBundle/Resources/public/js/base.js'
+            '@itsallagileCoreBundle/Resources/public/js/jquery.js'
+            '@itsallagileCoreBundle/Resources/public/js/jquery-ui.js'
+            '@itsallagileCoreBundle/Resources/public/js/jquery.ui.touch-punch.js'
+            '@itsallagileCoreBundle/Resources/public/js/json2.js'
+            '@itsallagileCoreBundle/Resources/public/js/underscore.js'
+            '@itsallagileCoreBundle/Resources/public/js/backbone.js'
+            '@itsallagileCoreBundle/Resources/public/js/base.js'
         %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
+        <script type="text/javascript" src="{{ asset_url }}"></script>        
         {% endjavascripts %}
+        <script src="{{ asset('js/bootstrap.js') }}"></script>
     {% endblock %}
   </body>
 

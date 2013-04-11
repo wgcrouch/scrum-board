@@ -1,9 +1,9 @@
-{% extends 'itsallagileBootstrapBundle::base.html.twig' %}
+{% extends 'itsallagileCoreBundle::base.html.twig' %}
 
 {% block styles %}
     {{ parent() }}
     {% stylesheets
-        '@itsallagileScrumboardBundle/Resources/public/css/board.less'
+        '@itsallagileScrumboardBundle/Resources/public/less/board.less'
     %}
     <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}

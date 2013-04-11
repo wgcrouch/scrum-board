@@ -33,10 +33,14 @@ class AppKernel extends Kernel
 
             //itsallagile stuff
             new itsallagile\CoreBundle\itsallagileCoreBundle(),
-            new itsallagile\BootstrapBundle\itsallagileBootstrapBundle(),
             new itsallagile\ScrumboardBundle\itsallagileScrumboardBundle(),
             new Waynec\Bundle\StatsdBundle\WaynecStatsdBundle(),
             new itsallagile\APIBundle\itsallagileAPIBundle(),
+            new itsallagile\UserBundle\itsallagileUserBundle(),
+            new itsallagile\AdminBundle\itsallagileAdminBundle(),
+
+            //Bootstrap
+            new Braincrafted\BootstrapBundle\BraincraftedBootstrapBundle(),
 
             //Sonata Stuff
             new Sonata\IntlBundle\SonataIntlBundle(),
@@ -46,10 +50,8 @@ class AppKernel extends Kernel
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Sonata\AdminBundle\SonataAdminBundle(),
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
-            new Sonata\DoctrineMongoDBAdminBundle\SonataDoctrineMongoDBAdminBundle()
-,
-            new itsallagile\UserBundle\itsallagileUserBundle(),
-            new itsallagile\AdminBundle\itsallagileAdminBundle(),
+            new Sonata\DoctrineMongoDBAdminBundle\SonataDoctrineMongoDBAdminBundle(),
+
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

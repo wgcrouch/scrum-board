@@ -28,7 +28,7 @@ twig:
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles: [ itsallagileBootstrapBundle, itsallagileScrumboardBundle, itsallagileScrumboardBundle ]
+    bundles: [ itsallagileCoreBundle, itsallagileScrumboardBundle, itsallagileScrumboardBundle ]
     # java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -36,6 +36,35 @@ assetic:
             node: %node_bin%
             node_paths: %node_path%
             apply_to: "\.less$"
+    assets:
+        bootstrap_css:
+            inputs:
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/less/bootstrap.less
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/less/responsive.less
+            filters:
+                - less
+                - cssrewrite
+            output: css/bootstrap.css
+        bootstrap_js:
+            inputs:
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-transition.js
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-alert.js
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-button.js
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-carousel.js
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-collapse.js
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-dropdown.js
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-modal.js
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-tooltip.js
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-popover.js
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-scrollspy.js
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-tab.js
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-typeahead.js
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-affix.js
+            output: js/bootstrap.js
+        jquery:
+            inputs:
+                - %kernel.root_dir%/../vendor/jquery/jquery/jquery-1.9.1.js
+            output: js/jquery.js
 
 # Doctrine Configuration
 doctrine:
