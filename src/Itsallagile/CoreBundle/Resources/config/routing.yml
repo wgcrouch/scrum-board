@@ -1,0 +1,24 @@
+homepage:
+    pattern:  /
+    defaults: { _controller: ItsallagileCoreBundle:Dashboard:index }
+
+core_dashboard:
+    pattern: /dashboard
+    defaults: { _controller: ItsallagileCoreBundle:Dashboard:index }
+core_teams:
+    pattern: /teams
+    defaults: { _controller: ItsallagileCoreBundle:Team:index }
+core_teams_add:
+    pattern: /teams/add
+    defaults: { _controller: ItsallagileCoreBundle:Team:add }
+core_teams_edit:
+    pattern: /teams/edit/{id}
+    defaults: { _controller: ItsallagileCoreBundle:Team:edit }
+
+core_teams_removeUser:
+    pattern: /teams/remove-user/team/{id_team}/user/{id_user}
+    defaults: { _controller: ItsallagileCoreBundle:Team:removeUser }
+
+core_boards_add:
+    pattern: /boards/add
+    defaults: { _controller: ItsallagileCoreBundle:Board:add }

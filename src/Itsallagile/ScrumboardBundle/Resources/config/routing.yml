@@ -1,0 +1,3 @@
+ItsallagileScrumboardBundle_viewboard:
+    pattern:  /scrumboard/{slug}
+    defaults: { _controller: ItsallagileScrumboardBundle:Scrumboard:index }

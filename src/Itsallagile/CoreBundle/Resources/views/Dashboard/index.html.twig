@@ -1,0 +1,64 @@
+{% extends 'ItsallagileCoreBundle::base.html.twig' %}
+
+{% block body %}
+	<h1>Dashboard</h1>
+
+    <div class="span8">
+    <h2>Teams</h2>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Velocity</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if teams.count == 0 %}
+                <tr>
+                    <td colspan="2">No teams at the minute, why not <a href="{{ path('core_teams_add') }}">add one</a>?</td>
+                </tr>
+            {% else %}
+                {% for team in teams %}
+                    <tr>
+                        <td>{{ team.name }}</td>
+                        <td>{{ team.velocity }}</td>
+                        <td>
+                        {% if app.user == team.owner %}
+                            <a href="{{path('core_teams_edit', {'id':team.id})}}">
+                            <i class="icon-pencil" title="Manage Team"></i>
+                            </a>
+                        {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+
+        </tbody>
+    </table>
+    <h2>Available Boards</h2>
+     <p><a href="{{ path('core_boards_add') }}">Add Board</a></p>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Team</th>
+                    <th>Name</th>
+                    <th>Slug</th>
+                    <th>Stories</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for board in boards %}
+                <tr>
+                    <td>{{ board.team.name }}</td>
+                    <td>{{ board.name }}</td>
+                    <td>{{ board.slug }}</td>
+                    <td>{{ board.stories.count }}</td>
+                    <td><a href="{{ path('ItsallagileScrumboardBundle_viewboard', { 'slug': board.slug }) }}">View</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    <div>
+{% endblock %}

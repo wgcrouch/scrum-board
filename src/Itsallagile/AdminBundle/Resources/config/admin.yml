@@ -1,0 +1,25 @@
+services:
+    itsallagile.admin.team:
+        class: Itsallagile\AdminBundle\Admin\TeamAdmin
+        tags:
+            - { name: sonata.admin, manager_type: doctrine_mongodb, group: "Users", label: Teams }
+        arguments: [null, Itsallagile\CoreBundle\Document\Team, SonataAdminBundle:CRUD]
+        calls:
+            - [ setTranslationDomain, [ItsallagileAdminBundle]]
+
+    itsallagile.admin.user:
+        class: Itsallagile\AdminBundle\Admin\UserAdmin
+        tags:
+            - { name: sonata.admin, manager_type: doctrine_mongodb, group: "Users", label: Users }
+        arguments: [null, Itsallagile\CoreBundle\Document\User, SonataAdminBundle:CRUD]
+        calls:
+            - [ setTranslationDomain, [ItsallagileAdminBundle]]
+            - [ setUserManager, [ @fos_user.user_manager]]
+
+    itsallagile.admin.board:
+        class: Itsallagile\AdminBundle\Admin\BoardAdmin
+        tags:
+            - { name: sonata.admin, manager_type: doctrine_mongodb, group: "Scrumboard", label: Boards }
+        arguments: [null, Itsallagile\CoreBundle\Document\Board, SonataAdminBundle:CRUD]
+        calls:
+            - [ setTranslationDomain, [ItsallagileAdminBundle]]

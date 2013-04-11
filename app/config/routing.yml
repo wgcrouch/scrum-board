@@ -1,14 +1,14 @@
-itsallagileAPIBundle:
-    resource: "@itsallagileAPIBundle/Resources/config/routing.yml"
+ItsallagileAPIBundle:
+    resource: "@ItsallagileAPIBundle/Resources/config/routing.yml"
     prefix:   /api
     type: rest
 
-itsallagileScrumboardBundle:
-    resource: "@itsallagileScrumboardBundle/Resources/config/routing.yml"
+ItsallagileScrumboardBundle:
+    resource: "@ItsallagileScrumboardBundle/Resources/config/routing.yml"
     prefix:   /
 
-itsallagileCoreBundle:
-    resource: "@itsallagileCoreBundle/Resources/config/routing.yml"
+ItsallagileCoreBundle:
+    resource: "@ItsallagileCoreBundle/Resources/config/routing.yml"
     prefix:   /
 
 sonata_page_cache:

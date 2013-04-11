@@ -1,6 +1,0 @@
-services:
-    itsallagile_user.registration.form.type:
-        class: itsallagile\UserBundle\Form\Type\RegistrationFormType
-        arguments: [%fos_user.model.user.class%]
-        tags:
-            - { name: form.type, alias: itsallagile_user_registration }

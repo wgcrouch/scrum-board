@@ -32,12 +32,12 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
 
             //itsallagile stuff
-            new itsallagile\CoreBundle\itsallagileCoreBundle(),
-            new itsallagile\ScrumboardBundle\itsallagileScrumboardBundle(),
+            new Itsallagile\CoreBundle\ItsallagileCoreBundle(),
+            new Itsallagile\ScrumboardBundle\ItsallagileScrumboardBundle(),
             new Waynec\Bundle\StatsdBundle\WaynecStatsdBundle(),
-            new itsallagile\APIBundle\itsallagileAPIBundle(),
-            new itsallagile\UserBundle\itsallagileUserBundle(),
-            new itsallagile\AdminBundle\itsallagileAdminBundle(),
+            new Itsallagile\APIBundle\ItsallagileAPIBundle(),
+            new Itsallagile\UserBundle\ItsallagileUserBundle(),
+            new Itsallagile\AdminBundle\ItsallagileAdminBundle(),
 
             //Bootstrap
             new Braincrafted\BootstrapBundle\BraincraftedBootstrapBundle(),

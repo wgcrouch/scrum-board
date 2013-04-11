@@ -1,0 +1,10 @@
+parameters:
+#    itsallagile_api.example.class: itsallagile\APIBundle\Example
+
+services:
+    itsallagile_api.listener:
+        class: Itsallagile\APIBundle\EventListener\ApiListener
+        arguments: [ @statsd ]
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController}
+            - { name: kernel.event_subscriber}

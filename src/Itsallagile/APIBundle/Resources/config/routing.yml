@@ -1,0 +1,30 @@
+ItsallagileAPIBundle_boards:
+    type:     rest
+    resource: Itsallagile\APIBundle\Controller\BoardsController
+    name_prefix: ItsallagileAPIBundle_
+
+ItsallagileAPIBundle_stories:
+    type:     rest
+    parent:   ItsallagileAPIBundle_boards
+    resource: Itsallagile\APIBundle\Controller\StoriesController
+    name_prefix: ItsallagileAPIBundle_
+   
+ItsallagileAPIBundle_tickets:
+    type:     rest
+    parent:   ItsallagileAPIBundle_stories
+    resource: Itsallagile\APIBundle\Controller\TicketsController
+    name_prefix: ItsallagileAPIBundle_
+
+
+ItsallagileAPIBundle_messages:
+    type:     rest
+    parent:   ItsallagileAPIBundle_boards
+    resource: Itsallagile\APIBundle\Controller\MessagesController
+    name_prefix: ItsallagileAPIBundle_
+
+
+ItsallagileAPIBundle_auth:
+    type:     rest
+    resource: Itsallagile\APIBundle\Controller\AuthController
+    name_prefix: ItsallagileAPIBundle_
+

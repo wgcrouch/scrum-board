@@ -28,7 +28,7 @@ twig:
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles: [ itsallagileCoreBundle, itsallagileScrumboardBundle, itsallagileScrumboardBundle ]
+    bundles: [ ItsallagileCoreBundle, ItsallagileScrumboardBundle, ItsallagileScrumboardBundle ]
     # java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -148,7 +148,7 @@ sonata_admin:
 fos_user:
     db_driver: mongodb
     firewall_name: main
-    user_class: itsallagile\CoreBundle\Document\User
+    user_class: Itsallagile\CoreBundle\Document\User
     registration:
         form:
             type: itsallagile_user_registration
