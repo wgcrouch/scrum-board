@@ -101,7 +101,7 @@ class StoriesController extends FOSRestController implements ApiController
         $board->removeStory($story);
         $dm->persist($board);
         $dm->flush();
-        $view->setStatusCode(200);
+        $view->setStatusCode(204);
         return $view;
     }
 }

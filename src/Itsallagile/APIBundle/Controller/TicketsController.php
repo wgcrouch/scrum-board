@@ -135,7 +135,7 @@ class TicketsController extends FOSRestController implements ApiController
         $story->removeTicket($ticket);
         $dm->persist($story);
         $dm->flush();
-        $view->setStatusCode(200);
+        $view->setStatusCode(204);
         return $view;
     }
 }
