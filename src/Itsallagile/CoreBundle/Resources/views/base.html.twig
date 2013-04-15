@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" {% block htmlTag %}{% endblock %}>
   <head>
     <meta charset="utf-8">
     <title>{% block title %}Scrumboard{% endblock %}</title>
@@ -24,7 +24,7 @@
     <link rel="shortcut icon" href="../assets/ico/favicon.ico">
   </head>
 
-  <body>
+  <body {% block bodyTag %}{% endblock %}>
 
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
@@ -64,7 +64,6 @@
             '@ItsallagileCoreBundle/Resources/public/js/jquery.ui.touch-punch.js'
             '@ItsallagileCoreBundle/Resources/public/js/json2.js'
             '@ItsallagileCoreBundle/Resources/public/js/underscore.js'
-            '@ItsallagileCoreBundle/Resources/public/js/backbone.js'
             '@ItsallagileCoreBundle/Resources/public/js/base.js'
         %}
         <script type="text/javascript" src="{{ asset_url }}"></script>        

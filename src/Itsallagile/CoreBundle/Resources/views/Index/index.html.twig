@@ -1,0 +1,25 @@
+{% extends 'ItsallagileCoreBundle::base.html.twig' %}
+
+{% block htmlTag %}ng-app="itsallagile"{% endblock %}
+
+{% block body %}{% verbatim %}
+    <div ng-view></div>
+
+{% endverbatim %}{% endblock %}
+
+{% block endscript %}  
+    {{ parent() }}
+    <script>
+        {% autoescape false %}
+        itsallagile.currentUser = {{ user | serialize | raw }};
+        {% endautoescape %}
+    </script>
+    {% javascripts  
+        '@ItsallagileCoreBundle/Resources/public/js/angular.js'
+        '@ItsallagileCoreBundle/Resources/public/js/app.js'  
+        '@ItsallagileCoreBundle/Resources/public/js/controllers/*'
+        '@ItsallagileCoreBundle/Resources/public/js/services/*'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

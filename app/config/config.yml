@@ -152,3 +152,11 @@ fos_user:
     registration:
         form:
             type: itsallagile_user_registration
+
+jms_serializer:
+  metadata:
+    auto_detection: true
+    directories:
+      FOSUserBundle:
+        namespace_prefix: "FOS\\UserBundle"
+        path: "@ItsallagileUserBundle/Resources/config/serializer"

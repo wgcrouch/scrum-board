@@ -3,6 +3,11 @@ ItsallagileAPIBundle_boards:
     resource: Itsallagile\APIBundle\Controller\BoardsController
     name_prefix: ItsallagileAPIBundle_
 
+ItsallagileAPIBundle_teams:
+    type:     rest
+    resource: Itsallagile\APIBundle\Controller\TeamsController
+    name_prefix: ItsallagileAPIBundle_
+
 ItsallagileAPIBundle_stories:
     type:     rest
     parent:   ItsallagileAPIBundle_boards

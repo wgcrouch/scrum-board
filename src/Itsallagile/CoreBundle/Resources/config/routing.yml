@@ -2,6 +2,10 @@ homepage:
     pattern:  /
     defaults: { _controller: ItsallagileCoreBundle:Dashboard:index }
 
+angular:
+    pattern:  /angular
+    defaults: { _controller: ItsallagileCoreBundle:Index:index }
+
 core_dashboard:
     pattern: /dashboard
     defaults: { _controller: ItsallagileCoreBundle:Dashboard:index }

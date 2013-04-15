@@ -1,0 +1,50 @@
+<h1>Dashboard</h1>
+<div class="span8">
+    <h2>Teams</h2>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Velocity</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-show="!teams.length">
+                <td colspan="3">No teams at the minute, why not <a href="/teams/add">add one</a>?</td>                
+            </tr>
+            <tr ng-repeat="team in teams">
+                <td>{{ team.name }}</td>
+                <td>{{ team.velocity }}</td>
+                <td>
+                    <a ng-show='team.owner.id = currentUser.id' href="/teams/edit/{{team.id}}">
+                        <i class="icon-pencil" title="Manage Team"></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Available Boards</h2>
+    <p><a href="">Add Board</a></p>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Team</th>
+                <th>Name</th>
+                <th>Slug</th>
+                <th>Stories</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="board in boards">
+                <td>{{ board.team.name }}</td>
+                <td>{{ board.name }}</td>
+                <td>{{ board.slug }}</td>
+                <td>{{ board.stories.count }}</td>
+                <td><a href="/scrumboard/{{board.slug}}">View</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

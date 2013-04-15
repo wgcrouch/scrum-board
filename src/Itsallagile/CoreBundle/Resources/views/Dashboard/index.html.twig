@@ -62,3 +62,13 @@
         </table>
     <div>
 {% endblock %}
+
+
+{% block endscript %}    
+    {{ parent() }}
+    {% javascripts
+        '@ItsallagileCoreBundle/Resources/public/js/backbone.js'     
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

@@ -13,6 +13,7 @@ class AuthController extends FOSRestController implements ApiController
 
     public function getAuthAction()
     {
-        return array('loggedIn' => true);
+        $user = $this->get('security.context')->getToken()->getUser();
+        return $user;
     }
 }

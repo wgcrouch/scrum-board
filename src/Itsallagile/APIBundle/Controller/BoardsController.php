@@ -24,9 +24,13 @@ class BoardsController extends FOSRestController implements ApiController
      */
     public function getBoardsAction()
     {
-        $repository = $this->get('doctrine_mongodb')->getRepository('ItsallagileCoreBundle:Board');
+        $user = $this->get('security.context')->getToken()->getUser();
+        $dm = $this->get('doctrine_mongodb');
         $data = array();
-        $boards = $repository->findAll();
+        $teams = $dm->getRepository('ItsallagileCoreBundle:Team')
+            ->findAllByUser($user);
+        $boards = $dm->getRepository('ItsallagileCoreBundle:Board')
+            ->findAllByTeams($teams);
 
         foreach ($boards as $board) {
             $data[] = $board;
