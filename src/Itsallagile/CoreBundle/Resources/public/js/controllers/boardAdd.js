@@ -1,12 +1,9 @@
-function BoardAddCtrl($scope, $http) {
-    $http.get('/api/teams').success(function(data) {
-        $scope.teams = data;
-    });
-    $scope.board = {};
-    $scope.master = {};
+function BoardAddCtrl($scope, Team, Board) {
+    $scope.teams = Team.query();
+    $scope.board = new Board();
 
     $scope.save = function(board) {
-        $http.post('/api/boards', $scope.board).success(function(newBoard) {
+        board.$save(function(newBoard) {
             window.location = '/scrumboard/' + newBoard.slug;
         });
     };

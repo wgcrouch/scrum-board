@@ -1,4 +1,4 @@
-itsallagile.application = angular.module('itsallagile', []);
+itsallagile.application = angular.module('itsallagile', ['ngResource']);
 
 
 itsallagile.application.config(['$routeProvider', function($routeProvider) {
