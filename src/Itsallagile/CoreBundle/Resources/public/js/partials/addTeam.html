@@ -1,0 +1,18 @@
+<div class="span6">
+    <div class="page-header">
+        <h1>Add a team</h1>
+    </div>
+    <form class="well" name="addTeam" novalidate>
+        <div>
+            <label>Name: </label>
+            <input type="text" name="tName" ng-model="team.name"  required/>
+            <span class="valid" ng-show="addTeam.tName.$valid">&#10004;</span>
+            <div ng-show="addTeam.tName.$dirty && addTeam.tName.$invalid">
+                <span ng-show="addTeam.tName.$error.required">Please give the team a name.</span>
+            </div>
+        </div>
+        <button 
+            ng-disabled="addTeam.$invalid || isUnchanged(team)" 
+            ng-click="save(team)" type="submit" class="btn">Add</button>  
+    </form>
+</div>
