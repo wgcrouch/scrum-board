@@ -4,8 +4,8 @@ namespace Itsallagile\APIBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
 use Itsallagile\CoreBundle\Document\Board;
-use Itsallagile\CoreBundle\Document\Story;
 use Symfony\Component\HttpFoundation\Request;
+use Itsallagile\APIBundle\Form\BoardType;
 use FOS\RestBundle\View\View;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
@@ -37,5 +37,29 @@ class BoardsController extends FOSRestController implements ApiController
         }
 
         return $data;
+    }
+
+    /**
+     * Add a new Board
+     * @param  Request $request
+     */
+    public function postBoardsAction(Request $request)
+    {
+        $view = View::create();
+        $board = new Board();
+        $user = $this->get('security.context')->getToken()->getUser();
+        $form = $this->createForm(new BoardType($user), $board);
+        $form->bind($request);
+
+        if ($form->isValid()) {
+            $dm = $this->get('doctrine_mongodb')->getManager();
+            $dm->persist($board);
+            $dm->flush();
+            $view->setStatusCode(201);
+            $view->setData($board);
+        } else {
+            $view->setData($form);
+        }
+        return $view;
     }
 }

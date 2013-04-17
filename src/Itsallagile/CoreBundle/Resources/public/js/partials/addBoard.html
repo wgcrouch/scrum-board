@@ -1,0 +1,35 @@
+<div class="span6">
+    <div class="page-header">
+        <h1>Add a board</h1>
+    </div>
+    <form class="well" name="addBoard" novalidate>
+        <div>
+            <label>Name: </label>
+            <input type="text" name="bName" ng-model="board.name"  required/>
+            <span class="valid" ng-show="addBoard.bName.$valid">&#10004;</span>
+            <div ng-show="addBoard.bName.$dirty && addBoard.bName.$invalid">
+                <span ng-show="addBoard.bName.$error.required">Please give the board a name.</span>
+            </div>
+        </div>
+        <div>
+            <label>Slug: </label>
+            <input type="text" name="bSlug" ng-model="board.slug"  required/>
+            <span class="valid" ng-show="addBoard.bSlug.$valid">&#10004;</span>
+            <div ng-show="addBoard.bSlug.$dirty && addBoard.bSlug.$invalid">
+                <span ng-show="addBoard.bSlug.$error.required">The board needs a slug for urls.</span>
+            </div>
+        </div>
+        <div>
+            <label>Team:</label>
+            <select name="bTeam" ng-model="board.team" 
+            ng-options="team.id as team.name for team in teams" required></select>
+            <span class="valid" ng-show="addBoard.bTeam.$valid">&#10004;</span>
+            <div ng-show="addBoard.bTeam.$dirty && addBoard.bTeam.$invalid">
+                <span ng-show="addBoard.bTeam.$error.required">Please select a team.</span>
+            </div>
+        </div>
+        <button 
+            ng-disabled="addBoard.$invalid || isUnchanged(board)" 
+            ng-click="save(board)" type="submit" class="btn">Add</button>  
+    </form>
+</div>
