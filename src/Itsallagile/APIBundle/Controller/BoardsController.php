@@ -7,16 +7,22 @@ use Itsallagile\CoreBundle\Document\Board;
 use Symfony\Component\HttpFoundation\Request;
 use Itsallagile\APIBundle\Form\BoardType;
 use FOS\RestBundle\View\View;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class BoardsController extends FOSRestController implements ApiController
 {
     /**
      * Get a single Board
      */
-    public function getBoardAction(Board $board)
+    public function getBoardAction($board)
     {
-        return $board;
+        $dm = $this->get('doctrine_mongodb');
+        $board = $dm->getRepository('ItsallagileCoreBundle:Board')->findByIdOrSlug($board);
+        if ($board) {
+            return $board;
+        }
+
+        throw new NotFoundHttpException('Board not found');
     }
 
     /**

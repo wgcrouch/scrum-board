@@ -13,10 +13,11 @@
         </div>
         <div>
             <label>Slug: </label>
-            <input type="text" name="bSlug" ng-model="board.slug"  required/>
+            <input type="text" name="bSlug" ng-model="board.slug"  required unique-slug/>
             <span class="valid" ng-show="addBoard.bSlug.$valid">&#10004;</span>
             <div ng-show="addBoard.bSlug.$dirty && addBoard.bSlug.$invalid">
                 <span ng-show="addBoard.bSlug.$error.required">The board needs a slug for urls.</span>
+                <span ng-show="addBoard.bSlug.$error.uniqueSlug">That slug is already in use.</span>
             </div>
         </div>
         <div>
