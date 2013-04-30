@@ -27,11 +27,16 @@
     </table>
 
     <h2>Available Boards</h2>
-    <p><a href="#/new-board">Add Board</a></p>
+    <p><a href="#/new-board">Add Board</a></p>    
+    <div>
+        <label>Filter by team: </label>
+        <select ng-model="teamFilter" 
+            ng-options="team.id as team.name for team in teams" required></select>
+    </div>
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>Team</th>
+                <th>Team<br/></th>
                 <th>Name</th>
                 <th>Slug</th>
                 <th>Stories</th>
@@ -39,11 +44,11 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="board in boards">
+            <tr ng-repeat="board in boards | filter:teamFilter">
                 <td>{{ board.team.name }}</td>
                 <td>{{ board.name }}</td>
                 <td>{{ board.slug }}</td>
-                <td>{{ board.stories.count }}</td>
+                <td>{{ board.stories.length }}</td>
                 <td><a href="/scrumboard/{{board.slug}}">View</a></td>
             </tr>
         </tbody>
