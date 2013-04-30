@@ -1,0 +1,28 @@
+<div class="page-header">
+        <h1>{{ board.name }}</h1>
+</div>
+
+<div id="board-container">
+    <table class="board">
+        <thead>
+            <tr id="status-header" class="status-header">
+                <td ng-repeat="ticketStatus in ticketStatuses" class="status-header-cell status-header-{{ ticketStatus.id}}">{{ ticketStatus.status}}</td>
+            </tr>
+            <tr class="story" ng-repeat="story in board.stories" id="story-{{story.id}}">
+                <td class="story-detail-cell">
+                    <div class="notepaper">
+                        <p class="story-content">{{ story.content}}</p><textarea class="story-input">{{ story.content}}</textarea>
+                        <div class="story-points">{{story.points}}</p><textarea class="story-points-input">{{ story.points}}</textarea>
+                    </div>
+                </td>
+                <td class="story-status-cell story-status-new">
+                    <div class="ticket {{ticket.type}}" ng-repeat="ticket in story.tickets">
+                        <p class="ticket-content">{{ticket.content}}</p>
+                        <textarea class="ticket-input">{{ticket.content}}</textarea>
+                        <div class="ticket-age"></div>
+                    </div>
+                </td>
+            </tr>
+        </thead>
+    </table>
+</div>

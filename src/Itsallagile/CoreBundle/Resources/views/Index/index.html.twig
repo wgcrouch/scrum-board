@@ -1,5 +1,14 @@
 {% extends 'ItsallagileCoreBundle::base.html.twig' %}
 
+{% block styles %}
+    {{ parent() }}
+    {% stylesheets
+        '@ItsallagileScrumboardBundle/Resources/public/less/board.less'
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
 {% block htmlTag %}ng-app="itsallagile"{% endblock %}
 
 {% block body %}{% verbatim %}

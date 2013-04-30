@@ -8,5 +8,6 @@ itsallagile.application.config(['$routeProvider', function($routeProvider) {
         when('/dashboard', {templateUrl: basePath + 'partials/dashboard.html',   controller: DashboardCtrl}).
         when('/new-board', {templateUrl: basePath + 'partials/addBoard.html',   controller: BoardAddCtrl}).
         when('/new-team', {templateUrl: basePath + 'partials/addTeam.html',   controller: TeamAddCtrl}).
+        when('/board/:slug', {templateUrl: basePath + 'partials/scrumboard.html',   controller: ScrumBoardCtrl}).
         otherwise({redirectTo: '/dashboard'});
 }]);
