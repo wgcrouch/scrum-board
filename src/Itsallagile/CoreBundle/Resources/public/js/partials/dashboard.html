@@ -30,7 +30,7 @@
     <p><a href="#/new-board">Add Board</a></p>    
     <div>
         <label>Filter by team: </label>
-        <select ng-model="teamFilter" 
+        <select ng-model="teamQuery" 
             ng-options="team.id as team.name for team in teams" required></select>
     </div>
     <table class="table table-bordered table-striped">
@@ -49,7 +49,7 @@
                 <td>{{ board.name }}</td>
                 <td>{{ board.slug }}</td>
                 <td>{{ board.stories.length }}</td>
-                <td><a href="/scrumboard/{{board.slug}}">View</a></td>
+                <td><a href="#/board/{{board.slug}}">View</a></td>
             </tr>
         </tbody>
     </table>
