@@ -14,6 +14,6 @@ function ScrumBoardCtrl($scope, $routeParams, Board, Story, Ticket) {
             }
         }
     });
-    
-    $scope.ticketStatuses = [{id: 'story', status: 'Story'}, {"id":"new","status":"New"},{"id":"assigned","status":"Assigned"},{"id":"done","status":"Done"}];
+
+    $scope.ticketStatuses = [{"id":"new","status":"New"},{"id":"assigned","status":"Assigned"},{"id":"done","status":"Done"}];
 }

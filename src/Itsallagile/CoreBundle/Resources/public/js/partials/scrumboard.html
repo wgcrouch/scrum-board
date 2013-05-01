@@ -6,22 +6,23 @@
     <table class="board">
         <thead>
             <tr id="status-header" class="status-header">
+                <td class="status-header-cell status-header-story">Story</td>
                 <td ng-repeat="ticketStatus in ticketStatuses" class="status-header-cell status-header-{{ ticketStatus.id}}">{{ ticketStatus.status}}</td>
             </tr>
             <tr class="story" ng-repeat="story in board.stories" id="story-{{story.id}}">
                 <td class="story-detail-cell">
                     <div class="notepaper">
                         <p class="story-content">{{ story.content}}</p><textarea class="story-input">{{ story.content}}</textarea>
-                        <div class="story-points">{{story.points}}</p><textarea class="story-points-input">{{ story.points}}</textarea>
+                        <div class="story-points"><p>{{story.points}}</p><textarea class="story-points-input">{{ story.points}}</textarea>
                     </div>
                 </td>
-                <td class="story-status-cell story-status-new">
-                    <div class="ticket {{ticket.type}}" ng-repeat="ticket in story.tickets">
+                <td class="story-status-cell story-status-{{ticketStatus.id}}" ng-repeat="ticketStatus in ticketStatuses">                    
+                    <div class="ticket {{ticket.type}}" ng-repeat="ticket in story.tickets | filter: {status:ticketStatus.id}">
                         <p class="ticket-content">{{ticket.content}}</p>
                         <textarea class="ticket-input">{{ticket.content}}</textarea>
                         <div class="ticket-age"></div>
                     </div>
-                </td>
+                </td>                
             </tr>
         </thead>
     </table>
