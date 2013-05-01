@@ -3,6 +3,13 @@
 </div>
 
 <div id="board-container">
+    <div id='toolbar'>
+        <button id='addStory' class='btn'>New Story</button>
+        <ul id='templates'>
+            <li class="template {{ type }}" id="template-{{type}}" ng-repeat="type in ticketTypes"></li>
+        </ul>
+    </div>
+
     <table class="board">
         <thead>
             <tr id="status-header" class="status-header">

@@ -15,5 +15,6 @@ function ScrumBoardCtrl($scope, $routeParams, Board, Story, Ticket) {
         }
     });
 
+    $scope.ticketTypes = ['task', 'test', 'bug', 'defect', 'design'];
     $scope.ticketStatuses = [{"id":"new","status":"New"},{"id":"assigned","status":"Assigned"},{"id":"done","status":"Done"}];
 }
