@@ -4,7 +4,7 @@
 
 <div id="board-container">
     <div id='toolbar'>
-        <button id='addStory' class='btn'>New Story</button>
+        <button id='addStory' ng-click="addStory()">New Story</button>
         <ul id='templates'>
             <li class="template {{ type }}" id="template-{{type}}" ng-repeat="type in ticketTypes"></li>
         </ul>

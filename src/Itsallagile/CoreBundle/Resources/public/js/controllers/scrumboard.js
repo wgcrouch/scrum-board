@@ -1,5 +1,4 @@
 function ScrumBoardCtrl($scope, $routeParams, Board, Story, Ticket) {
-    $scope.stories = [];
     $scope.board = Board.get({slug: $routeParams.slug}, function(board) {
         //Make new resources for the sub resources
         for (var storyId in board.stories) {
@@ -14,6 +13,14 @@ function ScrumBoardCtrl($scope, $routeParams, Board, Story, Ticket) {
             }
         }
     });
+
+    $scope.addStory = function() {
+        var story = new Story({boardId: $scope.board.id});
+        story.$save(function(story) {
+            story.boardId = $scope.board.id;
+            $scope.board.stories.push(story);
+        });        
+    }
 
     $scope.ticketTypes = ['task', 'test', 'bug', 'defect', 'design'];
     $scope.ticketStatuses = [{"id":"new","status":"New"},{"id":"assigned","status":"Assigned"},{"id":"done","status":"Done"}];
