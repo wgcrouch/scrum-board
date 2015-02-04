@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+{% endblock %}
+
+{% block endscript %}  
+<script src="/static/build/scripts/App.js"></script>
+<script>
+    var app = new Scrum.App({}, {});
+    app.render(document.body);
+</script>
+{% endblock %}

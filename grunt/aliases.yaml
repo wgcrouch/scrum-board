@@ -1,0 +1,26 @@
+#Dev task, uses watch and newer to speed up build times
+dev:
+  - 'env:dev'
+  - 'newer:jshint'
+  - 'browserify:dev'
+  - 'less:dev'
+  - 'autoprefixer:dev'
+  - 'newer:copy'
+  - 'watch'
+
+
+#Production build task, includes minification for js and css
+prod:
+  - 'env:prod'
+  - 'clean'
+  - 'jshint'
+  - 'browserify:prod'
+  - 'uglify'
+  - 'less:prod'
+  - 'autoprefixer:prod'
+  - 'csso'
+  - 'copy'  
+
+default:
+  - 'dev'
+     

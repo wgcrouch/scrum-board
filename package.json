@@ -1,0 +1,60 @@
+{
+  "name": "scrum",
+  "version": "0.0.1",
+  "description": "Scrum",
+  "main": "index.js",
+  "scripts": {},
+  "author": "",
+  "license": "BSD-2-Clause",
+  "dependencies": {},
+  "scripts": {
+    "test": "./node_modules/.bin/jest app/static/src/scripts",
+    "start": "grunt clean dev"
+  },
+  "jest": {
+    "testPathDirs": ["app/static/src/scripts"],
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "scriptPreprocessor": "./app/static/src/scripts/preprocessor.js",
+    "unmockedModulePathPatterns": [
+      "lodash",
+      "immutable",
+      "bluebird",
+      "./node_modules/react-tools",
+      "./node_modules/react"
+    ]
+  },
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "load-grunt-config": "~0.16.0",
+    "grunt-contrib-clean": "~0.6.0",
+    "grunt-contrib-copy": "~0.7.0",
+    "grunt-env": "~0.4.2",
+    "grunt-newer": "~1.1.0",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-notify": "~0.4.1",
+    "grunt-contrib-uglify": "~0.7.0",
+    "grunt-contrib-jshint": "~0.11.0",
+    "grunt-browserify": "~3.3.0",
+    "grunt-autoprefixer": "~2.2.0",
+    "grunt-contrib-less": "~1.0.0",
+    "debowerify": "~1.2.0",
+    "flux": "~2.0.1",
+    "reactify": "~1.0.0",
+    "velocity-animate": "~1.2.1",
+    "underscore.string": "~3.0.2",
+    "immutable": "~3.6.2",
+    "bluebird": "~2.9.6",
+    "superagent": "~0.21.0",
+    "jquery": "~2.1.3",
+    "lodash": "~3.1.0",
+    "envify": "~3.2.0",
+    "react": "~0.12.2",
+    "grunt-csso": "~0.7.0",
+    "react-tools": "~0.12.2",
+    "bower": "~1.3.12",
+    "jest-cli": "~0.2.2"
+  }
+}
