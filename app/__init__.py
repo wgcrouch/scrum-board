@@ -14,6 +14,7 @@ csrf = CsrfProtect()
 
 mail = Mail()
 
+
 def create_app(config=None):
     """Application factory, allows the config to be injected"""
     app = Flask(__name__)
@@ -30,7 +31,9 @@ def create_app(config=None):
 
     # Load routes from blueprints
     from .site import site_routes
+    from .api import api_routes
 
     app.register_blueprint(site_routes)
+    app.register_blueprint(api_routes, url_prefix='/api')
 
     return app

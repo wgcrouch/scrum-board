@@ -19,7 +19,11 @@ var AppComponent = React.createClass({
     render: function() {
         /* jshint ignore:start */
         return (
-            <div className="board">
+            <div className="board-container">
+                <h2>Board</h2>
+                <div className="toolbar">Tools</div>
+                <table className="board">
+                </table>
             </div>
         );
         /* jshint ignore:end */

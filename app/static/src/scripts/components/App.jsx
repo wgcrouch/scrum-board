@@ -1,7 +1,8 @@
 'use strict';
 
 var React = require('react/addons'),
-    PureRenderMixin = React.addons.PureRenderMixin;
+    PureRenderMixin = React.addons.PureRenderMixin,
+    Board = require('components/Board.jsx');
 
 var AppComponent = React.createClass({
     mixins: [PureRenderMixin],
@@ -19,7 +20,8 @@ var AppComponent = React.createClass({
     render: function() {
         /* jshint ignore:start */
         return (
-            <div>App
+            <div>
+                <Board />
             </div>
         );
         /* jshint ignore:end */
