@@ -1,0 +1,23 @@
+{
+  "name": "scrum2",
+  "version": "0.0.0",
+  "authors": [
+    "Wayne Crouch <wgcrouch@gmail.com>"
+  ],
+  "moduleType": [
+    "globals",
+    "node"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.2"
+  }
+}

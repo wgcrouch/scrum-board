@@ -1,8 +1,6 @@
 'use strict';
 /**
- * Very simple i18n wrapper for now, to ensure we dont put strings in code
- * should be extended to support multiple languages, or use another system
- * later
+ * Very simple i18n wrapper for now
  */
 var _ = require('lodash'),
     _s = require('underscore.string');

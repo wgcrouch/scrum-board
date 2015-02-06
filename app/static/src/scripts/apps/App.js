@@ -17,12 +17,22 @@ Scrum.App =  function(config, initialData) {
 };
 
 Scrum.App.prototype.render = function(element) {
-    var app = React.render(
-        /* jshint ignore:start */
-        <AppComponent />, element
-        /* jshint ignore:end */ 
-    );
-    return app;
+    var context = {
+        executeAction: function(navigateAction, payload) {
+            console.log(payload);
+        },
+        makePath : function(routeName, routeParams) {
+            console.log(routeName, routeParams);
+        }
+    };
+    React.withContext(context, function() {
+        React.render(
+            /* jshint ignore:start */
+            <AppComponent />, element
+            /* jshint ignore:end */ 
+        );
+    });
+    
 };
 
 window.Scrum = Scrum;

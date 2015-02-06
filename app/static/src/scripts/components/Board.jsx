@@ -1,28 +1,53 @@
 'use strict';
 
 var React = require('react/addons'),
-    PureRenderMixin = React.addons.PureRenderMixin;
+    PureRenderMixin = React.addons.PureRenderMixin, 
+    NavLink = require('components/NavLink.jsx'), 
+    BoardStore = require('stores/Board'),
+    BoardHeader = require('components/Board/Header.jsx'),
+    BoardBody = require('components/Board/Body.jsx');
 
-var AppComponent = React.createClass({
+var Board = React.createClass({
     mixins: [PureRenderMixin],
 
-    propTypes: {
-
+    propTypes: {    
+        boardId: React.PropTypes.string,        
     },
 
-    getDefaultProps: function() {
+    getStateFromStores: function() {
         return {
-            
+            board: BoardStore.get(this.props.boardId)
         };
+    },
+
+    getInitialState: function () {
+        return this.getStateFromStores();
+    },
+
+    componentDidMount: function () {
+        BoardStore.addChangeListener(this._onChange);
+    },
+
+    componentWillUnmount: function () {
+        BoardStore.removeChangeListener(this._onChange);
+    },
+
+    _onChange: function () {
+        this.setState({
+            board: BoardStore.get(this.props.boardId)
+        });
     },
 
     render: function() {
         /* jshint ignore:start */
         return (
             <div className="board-container">
-                <h2>Board</h2>
+                <NavLink>Back to List</NavLink>
+                <h2>{this.state.board.title}</h2>
                 <div className="toolbar">Tools</div>
-                <table className="board">
+                <table className="board">   
+                    <BoardHeader columns={this.state.board.columns}/>                 
+                    <BoardBody board={this.state.board}/>  
                 </table>
             </div>
         );
@@ -31,4 +56,4 @@ var AppComponent = React.createClass({
 
 });
 
-module.exports = AppComponent;
+module.exports = Board;

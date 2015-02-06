@@ -48,7 +48,13 @@ board_fields = {
 class Board(Resource):
     def get(self, id):
         board = models.Board.query.get_or_404(id)
-        return marshal(board, board_fields)
+        return marshal(board, board_fields, envelope='board')
+
+
+class BoardList(Resource):
+    def get(self):
+        boards = models.Board.query.all()
+        return marshal(boards, board_fields, envelope='boards')
 
 
 class BoardStories(Resource):
@@ -56,6 +62,7 @@ class BoardStories(Resource):
         board = models.Board.query.get_or_404(board_id)
         stories = board.stories
         return marshal(stories, story_fields)
+
 
 class BoardColumns(Resource):
     def get(self, board_id):
