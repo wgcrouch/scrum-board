@@ -3,7 +3,8 @@
 var React = require('react/addons'),
     PureRenderMixin = React.addons.PureRenderMixin, 
     _ = require('lodash'), 
-    Board = require('stores/Records').Board;
+    Board = require('stores/Records').Board,
+    Story = require('components/Board/Story.jsx');
 
 var Body = React.createClass({
     mixins: [PureRenderMixin],
@@ -19,15 +20,12 @@ var Body = React.createClass({
     },
 
     renderStories: function() { 
-        return _.map(this.props.board.stories, function(story) {
+        var board = this.props.board;
+        return _.map(board.stories, function(story) {
             /* jshint ignore:start */
-            return (
-                <tr key={story.id}>
-                    <th><p>{story.title}</p><p>{story.content}</p></th>
-                </tr>
-            );
+            return <Story key={story.id} story={story} columns={board.columns} />
             /* jshint ignore:end */
-        });
+        }, this);
     },
 
     render: function() {

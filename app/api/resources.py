@@ -24,15 +24,15 @@ story_fields = {
     'status': fields.String,
     'order': fields.Integer,
     'created': fields.DateTime(dt_format='iso8601'),
-    'updated': fields.DateTime(dt_format='iso8601'),
-    'tickets': fields.Nested(ticket_fields)
+    'updated': fields.DateTime(dt_format='iso8601')
 }
 
 column_fields = {
     'id': fields.Integer,
     'title': fields.String,
     'order': fields.Integer,
-    'board_id': fields.Integer
+    'board_id': fields.Integer,
+    'tickets': fields.Nested(ticket_fields)
 }
 
 board_fields = {

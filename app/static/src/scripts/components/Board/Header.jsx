@@ -29,7 +29,7 @@ var Header = React.createClass({
         /* jshint ignore:start */
         return (
             <thead>
-                <tr><th></th>{this.renderColumnCells()}</tr>
+                <tr><th/>{this.renderColumnCells()}</tr>
             </thead>
         );
         /* jshint ignore:end */
