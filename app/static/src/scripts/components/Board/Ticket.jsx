@@ -17,7 +17,7 @@ var Ticket = React.createClass({
 
         /* jshint ignore:start */
         return (
-            <div>{ticket.content}</div>
+            <div className="ticket">{ticket.content}</div>
         );
         /* jshint ignore:end */
     }

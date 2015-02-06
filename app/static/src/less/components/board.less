@@ -1,0 +1,147 @@
+@border-color: #888888;
+
+
+.board-container {
+    position:relative;
+    overflow: hidden; /* To clear floats */
+}
+
+.board {
+    border: none;
+    float: left;
+    margin-left: 114px;
+    min-width: 84%;
+}
+
+.toolbar {
+    border: 1px solid @border-color;
+    float: left;
+    vertical-align: middle;
+    padding: 10px 5px;
+    position: fixed;
+}
+
+
+.ticket {
+    width:90px;
+    height:90px;
+    padding: 5px;
+    margin: 0 5px 10px;
+    border: 1px solid @border-color;
+    float:left;
+    overflow: hidden;
+    border-radius: 3px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background-image: -webkit-radial-gradient(center, cover, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.1) 90%);
+    background-image: -moz-radial-gradient(center, cover, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.1) 90%);
+    background-image: -o-radial-gradient(center, cover, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.1) 90%);
+    background-color: #FFFF84;
+}
+
+
+/* STATUS HEADERS */
+.column-headers {
+    padding-left:1px;
+    clear: both;
+}
+
+.column-header-cell {
+    padding: 15px 5px;
+    text-align: center;
+    font-size: 2em;
+    color: #FFFFFF;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+    background: #AAAAAA;
+    background: -webkit-linear-gradient(top, #CCCCCC 0%, #AAAAAA 100%);
+    background: -moz-linear-gradient(top,  #CCCCCC 0%, #AAAAAA 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#CCCCCC), color-stop(100%,#AAAAAA)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #CCCCCC 0%,#AAAAAA 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #CCCCCC 0%,#AAAAAA 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #CCCCCC 0%,#AAAAAA 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #CCCCCC 0%,#AAAAAA 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#CCCCCC', endColorstr='#AAAAAA',GradientType=0 ); /* IE6-9 */
+    box-shadow: inset 0 1px 0 0 white;
+    border: 1px solid @border-color;
+    border-bottom: none;
+}
+
+/* STORY ELEMENT */
+
+.story {
+    width:100%;
+    clear:both;
+    vertical-align: top;
+}
+
+.story-content {
+    min-height: 100px;
+    font-size: 14px;
+    line-height: 30px;
+}
+
+
+.story-detail-cell {
+    padding: 20px 10px;
+    height:100%;
+    position:relative;
+    border: 1px solid @border-color;
+    width: 32%;
+}
+
+.story-status-cell {
+    vertical-align: top;
+    padding: 20px 5px;
+    height:100%;
+    min-height:130px;
+    border: 1px solid @border-color;
+}
+
+
+.notepaper {
+    position: relative;
+    margin: 0 auto;
+    padding: 29px 20px 20px 45px;
+    line-height: 30px;
+    color: #6a5f49;
+    text-shadow: 0 1px 1px white;
+    background-color: #f2f6c1;
+    background-image: -webkit-radial-gradient(center, cover, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.1) 90%), -webkit-repeating-linear-gradient(top, transparent 0%, transparent 29px, rgba(239, 207, 173, 0.7) 29px, rgba(239, 207, 173, 0.7) 30px);
+    background-image: -moz-radial-gradient(center, cover, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.1) 90%), -moz-repeating-linear-gradient(top, transparent 0%, transparent 29px, rgba(239, 207, 173, 0.7) 29px, rgba(239, 207, 173, 0.7) 30px);
+    background-image: -o-radial-gradient(center, cover, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.1) 90%), -o-repeating-linear-gradient(top, transparent 0%, transparent 29px, rgba(239, 207, 173, 0.7) 29px, rgba(239, 207, 173, 0.7) 30px);
+    border: 1px solid #c3baaa;
+    /* IE 8 */
+    border-color: rgba(195, 186, 170, 0.9);
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), inset 0 0 5px #d8e071, 0 0 1px rgba(0, 0, 0, 0.1), 0 2px rgba(0, 0, 0, 0.02);
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), inset 0 0 5px #d8e071, 0 0 1px rgba(0, 0, 0, 0.1), 0 2px rgba(0, 0, 0, 0.02);
+}
+.notepaper:before, .notepaper:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+}
+.notepaper:before {
+    left: 28px;
+    width: 2px;
+    border: solid #efcfad;
+    /* IE 8 */
+    border-color: rgba(239, 207, 173, 0.9);
+    border-width: 0 1px;
+}
+.notepaper:after {
+    z-index: -1;
+    left: 0;
+    right: 0;
+    background: #f2f6c1;
+    border: 1px solid rgba(170, 157, 134, 0.7);
+    -webkit-transform: rotate(2deg);
+    -moz-transform: rotate(2deg);
+    -ms-transform: rotate(2deg);
+    -o-transform: rotate(2deg);
+    transform: rotate(2deg);
+}

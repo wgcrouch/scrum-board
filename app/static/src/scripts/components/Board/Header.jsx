@@ -20,7 +20,7 @@ var Header = React.createClass({
     renderColumnCells: function() {
         return _.map(this.props.columns, function(column) {
             /* jshint ignore:start */
-            return <th key={column.id}>{column.title}</th>
+            return <th className="column-header-cell" key={column.id}>{column.title}</th>
             /* jshint ignore:end */
         });
     },
@@ -29,7 +29,7 @@ var Header = React.createClass({
         /* jshint ignore:start */
         return (
             <thead>
-                <tr><th/>{this.renderColumnCells()}</tr>
+                <tr className="column-headers"><th className="column-header-cell"/>{this.renderColumnCells()}</tr>
             </thead>
         );
         /* jshint ignore:end */

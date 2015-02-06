@@ -32,7 +32,7 @@ var StoryCell = React.createClass({
         var story = this.props.story;
         /* jshint ignore:start */
         return (
-            <td>{this.renderTickets()}</td>
+            <td className="story-status-cell">{this.renderTickets()}</td>
         );
         /* jshint ignore:end */
     }

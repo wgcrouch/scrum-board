@@ -45,7 +45,7 @@ var Board = React.createClass({
                 <NavLink>Back to List</NavLink>
                 <h2>{this.state.board.title}</h2>
                 <div className="toolbar">Tools</div>
-                <table styles={{border:'1px solid black'}}className="board">   
+                <table className="board">   
                     <BoardHeader columns={this.state.board.columns}/>                 
                     <BoardBody board={this.state.board}/>  
                 </table>

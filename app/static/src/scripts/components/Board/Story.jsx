@@ -26,8 +26,13 @@ var Story = React.createClass({
         var story = this.props.story;
         /* jshint ignore:start */
         return (
-            <tr key={story.id}>
-                <th><p>{story.title}</p><p>{story.content}</p></th>
+            <tr className="story" key={story.id}>
+                <td className="story-detail-cell">
+                    <div className="notepaper">
+                        <p className="story-title">{story.title}</p>
+                        <p className="story-content">{story.content}</p>
+                    </div>
+                </td>
                 {this.renderStoryCells()}
             </tr>
         );
